@@ -55,7 +55,7 @@
     <Compile Include="DataObjects\DataObjectTest.cs" />
     <Compile Include="PageObjects\PageObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestCases\BinhTest.cs" />
+    <Compile Include="TestCases\DemoTestCase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestFoler\" />

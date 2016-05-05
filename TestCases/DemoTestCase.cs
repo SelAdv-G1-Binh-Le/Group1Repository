@@ -9,9 +9,9 @@ namespace Group1Project.TestCases
     /// Summary description for BinhTest
     /// </summary>
     [TestClass]
-    public class BinhTest
+    public class DemoTestCase
     {
-        public BinhTest()
+        public DemoTestCase()
         {
             //
             // TODO: Add constructor logic here
