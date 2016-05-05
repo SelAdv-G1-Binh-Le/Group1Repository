@@ -50,14 +50,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BaseMethods\BaseMethodTest.cs" />
+    <Compile Include="Common\CommonTest.cs" />
+    <Compile Include="DataObjects\DataObjectTest.cs" />
+    <Compile Include="PageObjects\PageObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCases\BinhTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BaseMethods\" />
-    <Folder Include="Common\" />
-    <Folder Include="DataObjects\" />
-    <Folder Include="PageObjects\" />
     <Folder Include="TestFoler\" />
   </ItemGroup>
   <Choose>
