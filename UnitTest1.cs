@@ -10,6 +10,7 @@ namespace BinhProject
         public void TestMethod1()
         {
             int i = 1;
+            Console.WriteLine(i);
 
 
         }
