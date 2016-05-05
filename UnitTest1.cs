@@ -9,7 +9,7 @@ namespace BinhProject
         [TestMethod]
         public void TestMethod1()
         {
-
+            int i = 1;
 
 
         }
