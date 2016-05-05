@@ -58,6 +58,7 @@
     <Folder Include="DataObjects\" />
     <Folder Include="PageObjects\" />
     <Folder Include="TestCases\" />
+    <Folder Include="Test\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
