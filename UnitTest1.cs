@@ -12,6 +12,10 @@ namespace BinhProject
             int i = 1;
             Console.WriteLine(i);
 
+            // new line 1
+
+            // new line 2
+
 
         }
     }
