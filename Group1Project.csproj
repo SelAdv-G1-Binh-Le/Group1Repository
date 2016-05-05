@@ -56,10 +56,9 @@
     <Compile Include="PageObjects\PageObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCases\DemoTestCase.cs" />
+    <Compile Include="TestFoler\Class1.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TestFoler\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
