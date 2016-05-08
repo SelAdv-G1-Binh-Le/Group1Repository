@@ -8,6 +8,8 @@ namespace Group1Project.Common
 {
     public static class CommonMethods
     {
+        public static IWebDriver WebDriver;
+        public static bool acceptNextAlert = true;
 
         public static string CreateRandomString(int length)
         {
@@ -65,8 +67,41 @@ namespace Group1Project.Common
         {
             SelectElement SelectedCbo = new SelectElement(combobox);
             return SelectedCbo.SelectedOption.Text;
-        }  
+        }
 
+        public static bool IsAlertPresent()
+        {
+            try
+            {
+                WebDriver.SwitchTo().Alert();
+                return true;
+            }
+            catch (NoAlertPresentException)
+            {
+                return false;
+            }
+        }
 
+        public static string CloseAlertAndGetItsText()
+        {
+            try
+            {
+                IAlert alert = WebDriver.SwitchTo().Alert();
+                string alertText = alert.Text;
+                if (acceptNextAlert)
+                {
+                    alert.Accept();
+                }
+                else
+                {
+                    alert.Dismiss();
+                }
+                return alertText;
+            }
+            finally
+            {
+                acceptNextAlert = true;
+            }
+        }
     }
 }

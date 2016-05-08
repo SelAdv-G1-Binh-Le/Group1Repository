@@ -13,7 +13,7 @@ namespace Group1Project.PageObjects
         static readonly By _txtUsername = By.XPath("//input[@id='username']");
         static readonly By _txtPassword = By.XPath("//input[@id='password']");
         static readonly By _btnLogin = By.XPath("//div[@class='btn-login']");
-                       
+
         #endregion
 
         #region Elements
@@ -52,12 +52,17 @@ namespace Group1Project.PageObjects
 
             SelectElement CboRepository = new SelectElement(this.CboRepository);
             CboRepository.SelectByText(repository);
-                                  
+
             Console.WriteLine("Enter username '{0}'", username);
             TxtUsername.SendKeys(username);
 
             Console.WriteLine("Enter password '{0}'", password);
             TxtPassword.SendKeys(password);
+
+            if (password == "")
+            {
+                TxtPassword.Clear();
+            }
 
             Console.WriteLine("Click Login button");
             BtnLogin.Click();

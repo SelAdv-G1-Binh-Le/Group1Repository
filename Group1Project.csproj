@@ -61,7 +61,6 @@
     <Compile Include="Common\CommonMethods.cs" />
     <Compile Include="Common\Constant.cs" />
     <Compile Include="Common\VP.cs" />
-    <Compile Include="DataObjects\DataObjectTest.cs" />
     <Compile Include="PageObjects\GeneralPage.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="PageObjects\LoginPage.cs" />
@@ -80,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BaseMethods\" />
+    <Folder Include="DataObjects\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

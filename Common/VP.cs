@@ -1,5 +1,4 @@
-﻿using Group1Project.DataObjects;
-using Group1Project.PageObjects;
+﻿using Group1Project.PageObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using System;
