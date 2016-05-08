@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 using Group1Project.Common;
+using OpenQA.Selenium.Support.UI;
 
 namespace Group1Project.PageObjects
 {
@@ -12,8 +13,7 @@ namespace Group1Project.PageObjects
         static readonly By _txtUsername = By.XPath("//input[@id='username']");
         static readonly By _txtPassword = By.XPath("//input[@id='password']");
         static readonly By _btnLogin = By.XPath("//div[@class='btn-login']");
-
-               
+                       
         #endregion
 
         #region Elements
@@ -40,7 +40,31 @@ namespace Group1Project.PageObjects
         #endregion
 
         #region Methods
+        public LoginPage Open()
+        {
+            Constant.WebDriver.Navigate().GoToUrl(Constant.LoginPageURL);
+            return this;
+        }
 
+        public HomePage Login(string username, string password, string repository)
+        {
+            Console.WriteLine("Select Repository '{0}'", repository);
+
+            SelectElement CboRepository = new SelectElement(this.CboRepository);
+            CboRepository.SelectByText(repository);
+                                  
+            Console.WriteLine("Enter username '{0}'", username);
+            TxtUsername.SendKeys(username);
+
+            Console.WriteLine("Enter password '{0}'", password);
+            TxtPassword.SendKeys(password);
+
+            Console.WriteLine("Click Login button");
+            BtnLogin.Click();
+
+            //Land on Home Page
+            return new HomePage();
+        }
 
         #endregion
     }
