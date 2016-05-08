@@ -46,7 +46,7 @@ namespace Group1Project.PageObjects
             return this;
         }
 
-        public HomePage Login(string username, string password, string repository)
+        public MainPage Login(string username, string password, string repository)
         {
             Console.WriteLine("Select Repository '{0}'", repository);
 
@@ -68,7 +68,7 @@ namespace Group1Project.PageObjects
             BtnLogin.Click();
 
             //Land on Home Page
-            return new HomePage();
+            return new MainPage();
         }
 
         #endregion

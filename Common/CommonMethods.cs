@@ -70,7 +70,7 @@ namespace Group1Project.Common
         }
 
         public static bool IsAlertPresent()
-        {
+        {   
             try
             {
                 WebDriver.SwitchTo().Alert();

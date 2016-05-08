@@ -67,16 +67,96 @@ namespace Group1Project.TestCases
             lp.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             //4		Click on "Logout" button
 
-            HomePage hp = new HomePage();
+            MainPage hp = new MainPage();
             hp.Logout();
 
             //5		Select a different repository
             //6		Enter valid username and password of this repository
 
             lp.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.Repository2);
-            
+
             //7		Verify that Dashboard Mainpage appears
             VP.VerifyUserShouldBeLogged(Constant.DefaultUsername);
+        }
+
+        [TestMethod]
+        public void TC05()
+        {
+            Console.WriteLine("TC05 - Verify that there is no Login dialog when switching between 2 repositories with the same account");
+
+            //1	Step	Navigate to Dashboard login page
+            //2	Step	Login with valid account for the first repository
+            LoginPage lp = new LoginPage().Open();
+            MainPage hp = lp.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            //3	Step	Choose another repository in Repository list
+            hp.ChangeRepository(Constant.Repository2);
+
+            //4	VP	Observe the current page - There is no Login Repository dialog
+            //5	VP	Observe the current page - The Repository menu displays name of switched repository
+            VP.CheckCurrentRepository(Constant.Repository2);
+            VP.CheckControlNotExist(By.XPath("//div[@class='btn-login']"));
+
+        }
+
+        [TestMethod]
+        public void TC06()
+        {
+            Console.WriteLine("TC06 - Verify that \"Password\" input is case sensitive");
+
+            //1	Step	Navigate to Dashboard login page		
+            //2	Step	Login with the account has uppercase password	test / TEST	
+            //3	VP	Observe the current page - Main page is displayed
+            //4	Step	Logout TA Dashboard		
+            //5	Step	Login with the above account but enter lowercase password	test / test	
+            //6	VP	Observe the current page - Dashboard Error message "Username or password is invalid" appears
+        }
+
+        [TestMethod]
+        public void TC07()
+        {
+            Console.WriteLine("TC07 - Verify that \"Username\" is not case sensitive");
+
+            //1	Step	Navigate to Dashboard login page		
+            //2	Step	Login with the account has uppercase username	UPPERCASEUSERNAME / uppercaseusername	
+            //3	VP	Observe the current page - Main page is displayed
+            //4	Step	Logout TA Dashboard		
+            //5	Step	Login with the above account but enter lowercase username -	uppercaseusername / uppercaseusername	
+            //6	VP	Observe the current page - Main page is displayed
+
+        }
+
+        [TestMethod]
+        public void TC08()
+        {
+            Console.WriteLine("TC08 - Verify that password with special characters is working correctly");
+
+            //1	Step	Navigate to Dashboard login page		
+            //2	Step	Login with account that has special characters password	specialCharsPassword / `!@^&*(+_=[{;'",./<?	
+            //3	VP	Observe the current page - Main page is displayed
+
+
+        }
+
+        [TestMethod]
+        public void TC09()
+        {
+            Console.WriteLine("TC09 - Verify that username with special characters is working correctly");
+
+            //1	Step	Navigate to Dashboard login page		
+            //2	Step	Login with account that has special characters username 	`~!@$^&()',. / specialCharsUser	
+            //3	VP	Observe the current page - Main page is displayed
+
+        }
+
+        [TestMethod]
+        public void TC10()
+        {
+            Console.WriteLine("TC10 - Verify that the page works correctly for the case when no input entered to Password and Username field");
+
+            //1	Step	Navigate to Dashboard login page		
+            //2	Step	Click Login button without entering data into Username and Password field		
+            //3	VP	Observe the current page - There is a message "Please enter username"
+
         }
     }
 }
