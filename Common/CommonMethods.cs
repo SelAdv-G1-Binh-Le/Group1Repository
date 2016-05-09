@@ -103,5 +103,15 @@ namespace Group1Project.Common
                 acceptNextAlert = true;
             }
         }
+
+        public static void DiepTest()
+        {
+            //WebDriver.SwitchTo().Alert().Accept();
+            string st = WebDriver.CurrentWindowHandle;
+            string stt = WebDriver.WindowHandles.ToString();
+            Console.WriteLine(st);
+            Console.WriteLine(stt);
+
+        }
     }
 }
