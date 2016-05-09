@@ -158,5 +158,15 @@ namespace Group1Project.TestCases
             //3	VP	Observe the current page - There is a message "Please enter username"
 
         }
+
+
+        [TestMethod]
+        public void zSandbox()
+        {
+            Console.WriteLine("sSandbox test case");
+
+        
+
+        }
     }
 }
