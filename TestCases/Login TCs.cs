@@ -89,7 +89,7 @@ namespace Group1Project.TestCases
             LoginPage lp = new LoginPage().Open();
             MainPage hp = lp.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             //3	Step	Choose another repository in Repository list
-            hp.ChangeRepository(Constant.Repository2);
+            //hp.ChangeRepository(Constant.Repository2);
 
             //4	VP	Observe the current page - There is no Login Repository dialog
             //5	VP	Observe the current page - The Repository menu displays name of switched repository
