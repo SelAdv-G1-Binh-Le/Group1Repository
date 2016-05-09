@@ -164,9 +164,8 @@ namespace Group1Project.TestCases
         public void zSandbox()
         {
             Console.WriteLine("sSandbox test case");
-
-        
-
+            LoginPage lp = new LoginPage().Open();
+            lp.CboRepository.Blink();
         }
     }
 }

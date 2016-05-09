@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Common\CommonMethods.cs" />
     <Compile Include="Common\Constant.cs" />
+    <Compile Include="Common\IWebElementExtension.cs" />
     <Compile Include="Common\VP.cs" />
     <Compile Include="PageObjects\GeneralPage.cs" />
     <Compile Include="PageObjects\LoginPage.cs" />

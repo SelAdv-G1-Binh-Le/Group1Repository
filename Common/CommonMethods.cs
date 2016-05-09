@@ -4,9 +4,6 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Linq;
 using System.Threading;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
 
 
 namespace Group1Project.Common
@@ -16,7 +13,7 @@ namespace Group1Project.Common
         public static IWebDriver WebDriver;
         public static bool acceptNextAlert = true;
 
-        public static string CreateRandomString(int length)
+              public static string CreateRandomString(int length)
         {
             Thread.Sleep(1000);
             const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -108,19 +105,7 @@ namespace Group1Project.Common
                 acceptNextAlert = true;
             }
         }
-        public static void Highlight(this  IWebElement context)
-        {
-            var rc = (RemoteWebElement)context;
-            var driver = (IJavaScriptExecutor)rc.WrappedDriver;
-            var script = @"arguments[0].style.cssText = ""border-width: 2px; border-style: solid; border-color: red""; ";
-            driver.ExecuteScript(script, rc);
-
-            Thread.Sleep(3000);
-
-            var clear = @"arguments[0].style.cssText = ""border-width: 0px; border-style: solid; border-color: red""; ";
-            driver.ExecuteScript(clear, rc);
-
-        }
+      
 
     }
 }
