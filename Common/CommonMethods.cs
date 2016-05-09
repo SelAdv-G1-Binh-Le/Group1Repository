@@ -1,8 +1,13 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Linq;
 using System.Threading;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
+
 
 namespace Group1Project.Common
 {
@@ -62,7 +67,7 @@ namespace Group1Project.Common
             return dt;
         }
 
-       
+
         public static string GetComboboxSelectedValue(IWebElement combobox)
         {
             SelectElement SelectedCbo = new SelectElement(combobox);
@@ -70,7 +75,7 @@ namespace Group1Project.Common
         }
 
         public static bool IsAlertPresent()
-        {   
+        {
             try
             {
                 WebDriver.SwitchTo().Alert();
@@ -103,15 +108,19 @@ namespace Group1Project.Common
                 acceptNextAlert = true;
             }
         }
-
-        public static void DiepTest()
+        public static void Highlight(this  IWebElement context)
         {
-            //WebDriver.SwitchTo().Alert().Accept();
-            string st = WebDriver.CurrentWindowHandle;
-            string stt = WebDriver.WindowHandles.ToString();
-            Console.WriteLine(st);
-            Console.WriteLine(stt);
+            var rc = (RemoteWebElement)context;
+            var driver = (IJavaScriptExecutor)rc.WrappedDriver;
+            var script = @"arguments[0].style.cssText = ""border-width: 2px; border-style: solid; border-color: red""; ";
+            driver.ExecuteScript(script, rc);
+
+            Thread.Sleep(3000);
+
+            var clear = @"arguments[0].style.cssText = ""border-width: 0px; border-style: solid; border-color: red""; ";
+            driver.ExecuteScript(clear, rc);
 
         }
+
     }
 }
