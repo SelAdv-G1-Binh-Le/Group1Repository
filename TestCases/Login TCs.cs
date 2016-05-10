@@ -106,9 +106,15 @@ namespace Group1Project.TestCases
             //1	Step	Navigate to Dashboard login page		
             //2	Step	Login with the account has uppercase password	test / TEST	
             //3	VP	Observe the current page - Main page is displayed
+            LoginPage loginpage = new LoginPage().Open();
+            MainPage mainpage = loginpage.Login("test", "TEST", Constant.DefaultRepository);
+            VP.VerifyUserShouldBeLogged("TEST");
+
             //4	Step	Logout TA Dashboard		
             //5	Step	Login with the above account but enter lowercase password	test / test	
             //6	VP	Observe the current page - Dashboard Error message "Username or password is invalid" appears
+            mainpage.Logout().Login("test", "test", Constant.DefaultRepository);
+            //TDB;
         }
 
         [TestMethod]
@@ -119,6 +125,12 @@ namespace Group1Project.TestCases
             //1	Step	Navigate to Dashboard login page		
             //2	Step	Login with the account has uppercase username	UPPERCASEUSERNAME / uppercaseusername	
             //3	VP	Observe the current page - Main page is displayed
+            LoginPage loginpage = new LoginPage().Open();
+            MainPage mainpage = loginpage.Login("UPPERCASEUSERNAME", "uppercaseusername", Constant.DefaultRepository);
+            VP.VerifyUserShouldBeLogged("UPPERCASEUSERNAME");
+
+
+
             //4	Step	Logout TA Dashboard		
             //5	Step	Login with the above account but enter lowercase username -	uppercaseusername / uppercaseusername	
             //6	VP	Observe the current page - Main page is displayed
