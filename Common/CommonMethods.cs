@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -10,10 +9,11 @@ using System.Threading;
 namespace Group1Project.Common
 {
     public static class CommonMethods
-    {       
+    {
+        public static IWebDriver WebDriver;
         public static bool acceptNextAlert = true;
 
-        public static string CreateRandomString(int length)
+              public static string CreateRandomString(int length)
         {
             Thread.Sleep(1000);
             const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -71,7 +71,7 @@ namespace Group1Project.Common
             return SelectedCbo.SelectedOption.Text;
         }
 
-        public static bool IsAlertPresent(IWebDriver WebDriver)
+        public static bool IsAlertPresent()
         {
             try
             {
@@ -84,7 +84,7 @@ namespace Group1Project.Common
             }
         }
 
-        public static string CloseAlertAndGetItsText(IWebDriver WebDriver)
+        public static string CloseAlertAndGetItsText()
         {
             try
             {
@@ -105,6 +105,13 @@ namespace Group1Project.Common
                 acceptNextAlert = true;
             }
         }
-       
+
+        public static string RandomString()
+        {
+            string Random = DateTime.Now.ToString("ddMMMyyHHmmssfff");
+            return Random;
+        }
+      
+
     }
 }
