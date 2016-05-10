@@ -3,6 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Group1Project.Common;
 using Group1Project.PageObjects;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Support;
+
+
 
 namespace Group1Project.TestCases
 {
@@ -28,15 +32,23 @@ namespace Group1Project.TestCases
         public void TC02()
         {
             Console.WriteLine("TC02 - Verify that user fails to login specific repository successfully via Dashboard login page with incorrect credentials");
-            //1		Navigate to Dashboard login page
+            //1 Navigate to Dashboard login page
             LoginPage lp = new LoginPage().Open();
 
-            //2		Enter invalid username and password
-            //3		Click on "Login" button
+            //2	Enter invalid username and password
+            //3	Click on "Login" button
             lp.Login(Constant.InvalidUsername, Constant.InvalidPassword, Constant.DefaultRepository);
 
-            //4		Verify that Dashboard Error message "Username or password is invalid" appears
-            //TDB;
+            //VP. Verify that Dashboard Error message "Username or password is invalid" appears
+            WebDriverWait wait = new WebDriverWait(Constant.WebDriver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            IAlert errorMsg = Constant.WebDriver.SwitchTo().Alert();
+            string ExpectedMsg = "Username or password is invalid";
+            string ActualMsg = errorMsg.Text;
+            Assert.AreEqual(ExpectedMsg, ActualMsg,"Error Message displays incorrect text: \"" + ActualMsg + "\"");
+            //Close the Alert and switch back the web
+            errorMsg.Accept();
+            Constant.WebDriver.SwitchTo().DefaultContent();
         }
 
 
@@ -52,7 +64,15 @@ namespace Group1Project.TestCases
             lp.Login(Constant.DefaultUsername, Constant.InvalidPassword, Constant.DefaultRepository);
 
             //4		Verify that Dashboard Error message "Username or password is invalid" appears
-            //TDB;
+            WebDriverWait wait = new WebDriverWait(Constant.WebDriver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            IAlert errorMsg = Constant.WebDriver.SwitchTo().Alert();
+            string ExpectedMsg = "Username or password is invalid";
+            string ActualMsg = errorMsg.Text;
+            Assert.AreEqual(ExpectedMsg, ActualMsg, "Error Message displays incorrect text: \"" + ActualMsg + "\"");
+            //Close the Alert and switch back the web
+            errorMsg.Accept();
+            Constant.WebDriver.SwitchTo().DefaultContent();
         }
 
         [TestMethod]

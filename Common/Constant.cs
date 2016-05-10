@@ -3,7 +3,7 @@ using System;
 
 namespace Group1Project.Common
 {
-    class Constant
+    public class Constant
     {
          //Diep Logigear: http://192.168.170.37:54001/TADashboard/login.jsp
          //Diep Home: http://192.168.1.2/TADashboard/login.jsp

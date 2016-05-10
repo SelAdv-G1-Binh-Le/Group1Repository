@@ -31,7 +31,7 @@ namespace Group1Project.TestCases
             Console.WriteLine("Run Test Cleanup");
 
             //Close browser
-            //Constant.WebDriver.Quit();
+            Constant.WebDriver.Quit();
 
         }
     }
