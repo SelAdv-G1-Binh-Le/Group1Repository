@@ -105,6 +105,12 @@ namespace Group1Project.Common
                 acceptNextAlert = true;
             }
         }
+
+        public static string RandomString()
+        {
+            string Random = DateTime.Now.ToString("ddMMMyyHHmmssfff");
+            return Random;
+        }
       
 
     }
