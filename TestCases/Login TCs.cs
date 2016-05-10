@@ -39,9 +39,7 @@ namespace Group1Project.TestCases
 
             //4		Verify that Dashboard Error message "Username or password is invalid" appears
             string alerttext = CommonMethods.CloseAlertAndGetItsText(Constant.WebDriver);
-            VP.CheckText(Constant.LoginFailMessage1,alerttext);
-
-
+            VP.CheckText(Constant.LoginFailMessage1, alerttext);
         }
 
 
@@ -57,15 +55,8 @@ namespace Group1Project.TestCases
             lp.Login(Constant.DefaultUsername, Constant.InvalidPassword, Constant.DefaultRepository);
 
             //4		Verify that Dashboard Error message "Username or password is invalid" appears
-            WebDriverWait wait = new WebDriverWait(Constant.WebDriver, TimeSpan.FromSeconds(5));
-            wait.Until(ExpectedConditions.AlertIsPresent());
-            IAlert errorMsg = Constant.WebDriver.SwitchTo().Alert();
-            string ExpectedMsg = "Username or password is invalid";
-            string ActualMsg = errorMsg.Text;
-            Assert.AreEqual(ExpectedMsg, ActualMsg, "Error Message displays incorrect text: \"" + ActualMsg + "\"");
-            //Close the Alert and switch back the web
-            errorMsg.Accept();
-            Constant.WebDriver.SwitchTo().DefaultContent();
+            string alerttext = CommonMethods.CloseAlertAndGetItsText(Constant.WebDriver);
+            VP.CheckText(Constant.LoginFailMessage1, alerttext);
         }
 
         [TestMethod]
@@ -127,7 +118,8 @@ namespace Group1Project.TestCases
             //5	Step	Login with the above account but enter lowercase password	test / test	
             //6	VP	Observe the current page - Dashboard Error message "Username or password is invalid" appears
             mainpage.Logout().Login("test", "test", Constant.DefaultRepository);
-            //TDB;
+            string alerttext = CommonMethods.CloseAlertAndGetItsText(Constant.WebDriver);
+            VP.CheckText(Constant.LoginFailMessage1, alerttext);
         }
 
         [TestMethod]
@@ -145,7 +137,6 @@ namespace Group1Project.TestCases
             //4	Step	Logout TA Dashboard		
             //5	Step	Login with the above account but enter lowercase username -	uppercaseusername / uppercaseusername	
             //6	VP	Observe the current page - Main page is displayed
-
             mainpage.Logout().Login("uppercaseusername", "uppercaseusername", Constant.DefaultRepository);
             VP.VerifyUserShouldBeLogged("uppercaseusername");
         }
@@ -189,7 +180,8 @@ namespace Group1Project.TestCases
 
             LoginPage loginpage = new LoginPage().Open();
             MainPage mainpage = loginpage.Login("", "", Constant.DefaultRepository);
-            //TBD
+            string alerttext = CommonMethods.CloseAlertAndGetItsText(Constant.WebDriver);
+            VP.CheckText(Constant.LoginFailMessage2, alerttext);
         }
 
 
@@ -199,10 +191,7 @@ namespace Group1Project.TestCases
             Console.WriteLine("sSandbox test case");
             LoginPage loginpage = new LoginPage().Open();
             MainPage mainpage = loginpage.Login("", "", Constant.DefaultRepository);
-            Thread.Sleep(5000);
-            string ia = CommonMethods.CloseAlertAndGetItsText(Constant.WebDriver);
 
-            Console.WriteLine(ia);
 
             //loginpage.CboRepository.Blink();
 
