@@ -24,14 +24,12 @@ namespace Group1Project.Common
             var driver = (IJavaScriptExecutor)rc.WrappedDriver;
             var script1 = @"arguments[0].style.cssText = ""border-width: 2px; border-style: solid; border-color: #ff0000""; ";
             var script2 = @"arguments[0].style.cssText = ""border-width: 2px; border-style: solid; border-color: #00ff00""; ";
-            var clear = @"arguments[0].style.cssText = ""border-width: 0px; border-style: solid; border-color: #00ff00""; ";
             do
             {
-                driver.ExecuteScript(script1, rc);
-                Thread.Sleep(250);
                 driver.ExecuteScript(script2, rc);
                 Thread.Sleep(250);
-                driver.ExecuteScript(clear, rc);
+                driver.ExecuteScript(script1, rc);
+                Thread.Sleep(250);
 
                 loop++;
             } while (loop < times);

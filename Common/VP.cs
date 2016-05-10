@@ -41,6 +41,14 @@ namespace Group1Project.Common
             Assert.IsTrue(CommonMethods.IsElementPresent(by), "Control " + by + " NOT Exist");
         }
 
+        public static void CheckText(string expected, string actual)
+        {
+            Console.WriteLine("Check text:");
+            Console.WriteLine("Expected: "+ expected);
+            Console.WriteLine("Recorded: " + actual);            
+            Assert.AreEqual(expected, actual,"Fail");
+        }
+
         #endregion
     }
 }

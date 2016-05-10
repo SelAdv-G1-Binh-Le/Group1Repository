@@ -46,7 +46,7 @@ namespace Group1Project.PageObjects
             return this;
         }
 
-        public MainPage Login(string username, string password, string repository)
+        public MainPage Login(string username, string password, string repository = Constant.DefaultRepository)
         {
             Console.WriteLine("Select Repository '{0}'", repository);
 
