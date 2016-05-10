@@ -108,7 +108,7 @@ namespace Group1Project.TestCases
             //3	VP	Observe the current page - Main page is displayed
             LoginPage loginpage = new LoginPage().Open();
             MainPage mainpage = loginpage.Login("test", "TEST", Constant.DefaultRepository);
-            VP.VerifyUserShouldBeLogged("TEST");
+            VP.VerifyUserShouldBeLogged("test");
 
             //4	Step	Logout TA Dashboard		
             //5	Step	Login with the above account but enter lowercase password	test / test	
@@ -127,14 +127,14 @@ namespace Group1Project.TestCases
             //3	VP	Observe the current page - Main page is displayed
             LoginPage loginpage = new LoginPage().Open();
             MainPage mainpage = loginpage.Login("UPPERCASEUSERNAME", "uppercaseusername", Constant.DefaultRepository);
-            VP.VerifyUserShouldBeLogged("UPPERCASEUSERNAME");
-
-
-
+            VP.VerifyUserShouldBeLogged("uppercaseusername");
+            
             //4	Step	Logout TA Dashboard		
             //5	Step	Login with the above account but enter lowercase username -	uppercaseusername / uppercaseusername	
             //6	VP	Observe the current page - Main page is displayed
 
+            mainpage.Logout().Login("uppercaseusername", "uppercaseusername", Constant.DefaultRepository);
+            VP.VerifyUserShouldBeLogged("uppercaseusername");
         }
 
         [TestMethod]
@@ -145,7 +145,9 @@ namespace Group1Project.TestCases
             //1	Step	Navigate to Dashboard login page		
             //2	Step	Login with account that has special characters password	specialCharsPassword / `!@^&*(+_=[{;'",./<?	
             //3	VP	Observe the current page - Main page is displayed
-
+            LoginPage loginpage = new LoginPage().Open();
+            MainPage mainpage = loginpage.Login("specialCharsPassword", "`!@^&*(+_=[{;'\",./<?", Constant.DefaultRepository);
+            VP.VerifyUserShouldBeLogged("specialCharsPassword");
 
         }
 
@@ -158,6 +160,9 @@ namespace Group1Project.TestCases
             //2	Step	Login with account that has special characters username 	`~!@$^&()',. / specialCharsUser	
             //3	VP	Observe the current page - Main page is displayed
 
+            LoginPage loginpage = new LoginPage().Open();
+            MainPage mainpage = loginpage.Login("`~!@$^&()',.", "specialCharsUser", Constant.DefaultRepository);
+            VP.VerifyUserShouldBeLogged("`~!@$^&()',.");
         }
 
         [TestMethod]
@@ -169,6 +174,9 @@ namespace Group1Project.TestCases
             //2	Step	Click Login button without entering data into Username and Password field		
             //3	VP	Observe the current page - There is a message "Please enter username"
 
+            LoginPage loginpage = new LoginPage().Open();
+            MainPage mainpage = loginpage.Login("", "", Constant.DefaultRepository);
+            //TBD
         }
 
 
