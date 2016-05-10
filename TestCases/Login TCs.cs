@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Group1Project.Common;
 using Group1Project.PageObjects;
 using OpenQA.Selenium;
+using System.Threading;
 
 namespace Group1Project.TestCases
 {
@@ -36,7 +37,10 @@ namespace Group1Project.TestCases
             lp.Login(Constant.InvalidUsername, Constant.InvalidPassword, Constant.DefaultRepository);
 
             //4		Verify that Dashboard Error message "Username or password is invalid" appears
-            //TDB;
+            string alerttext = CommonMethods.CloseAlertAndGetItsText(Constant.WebDriver);
+            VP.CheckText(Constant.LoginFailMessage1,alerttext);
+
+
         }
 
 
@@ -184,8 +188,18 @@ namespace Group1Project.TestCases
         public void zSandbox()
         {
             Console.WriteLine("sSandbox test case");
-            LoginPage lp = new LoginPage().Open();
-            lp.CboRepository.Blink();
+            LoginPage loginpage = new LoginPage().Open();
+            MainPage mainpage = loginpage.Login("", "", Constant.DefaultRepository);
+            Thread.Sleep(5000);
+            string ia = CommonMethods.CloseAlertAndGetItsText(Constant.WebDriver);
+
+            Console.WriteLine(ia);
+
+            //loginpage.CboRepository.Blink();
+
+
+
+
         }
     }
 }

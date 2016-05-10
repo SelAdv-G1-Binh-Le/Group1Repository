@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 using System;
 
 namespace Group1Project.Common
@@ -18,6 +19,7 @@ namespace Group1Project.Common
         public const string InvalidPassword = "abc";
         public const string DefaultRepository = "SampleRepository";
         public const string Repository2 = "TestRepository";
+                public const string LoginFailMessage1 = "Username or password is invalid";
 
               
     }
