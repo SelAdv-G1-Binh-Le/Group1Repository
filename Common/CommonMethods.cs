@@ -71,7 +71,7 @@ namespace Group1Project.Common
             return SelectedCbo.SelectedOption.Text;
         }
 
-        public static bool IsAlertPresent()
+        public static bool IsAlertPresent(IWebDriver WebDriver)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace Group1Project.Common
             }
         }
 
-        public static string CloseAlertAndGetItsText()
+        public static string CloseAlertAndGetItsText(IWebDriver WebDriver)
         {
             try
             {

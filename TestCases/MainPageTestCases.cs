@@ -24,6 +24,7 @@ namespace Group1Project.TestCases
             //Step3	Go to Global Setting -> Add page
             mainPage.ClickDropdownMenu(mainPage.MnGlobalSetting, "Add Page");
 
+
             //Step4	Try to go to Global Setting -> Add page again
             //mainPage.ClickDropdownMenu(mainPage.MnGlobalSetting, "Add Page");
 
