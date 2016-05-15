@@ -11,7 +11,7 @@ namespace Group1Project.Common
         //Binh Home: http://192.168.1.2/TADashboard/login.jsp
         //Global home page: http://groupba.dyndns.org:54000/TADashboard/login.jsp
 
-        public const bool DebugMode = true;
+        public const bool DebugMode = false;
         public const string LoginPageURL = "http://192.168.1.2/TADashboard/login.jsp";
         public const string DefaultUsername = "administrator";
         public const string DefaultPassword = "";
