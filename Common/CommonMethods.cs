@@ -44,8 +44,7 @@ namespace Group1Project.Common
             WebDriverWait wait = new WebDriverWait(TestCases.Testbase.WebDriver, TimeSpan.FromSeconds(timeout));
             wait.Until(d => d.FindElement(by));
         }
-
-
+        
         public static bool WaitForControlEnable(By by, int timeout)
         {
             WebDriverWait wait = new WebDriverWait(TestCases.Testbase.WebDriver, TimeSpan.FromSeconds(timeout));

@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Remote;
 using System.Threading;
 using Group1Project.TestCases;
+using OpenQA.Selenium.Support.UI;
 
 namespace Group1Project.Common
 {
@@ -20,7 +21,7 @@ namespace Group1Project.Common
             driver.ExecuteScript(clear, rc);
         }
 
-        public static void Blink(this IWebElement context, int times = 2)
+        public static void Blink(this IWebElement context, int times = 1)
         {
             int loop = 0;
             var rc = (RemoteWebElement)context;
@@ -44,7 +45,6 @@ namespace Group1Project.Common
             element.SendKeys(value);
         }
 
-
         public static IWebElement FindElement(By by)
         {                       
             try
@@ -59,6 +59,7 @@ namespace Group1Project.Common
                 throw;
             }
         }
-
+               
+        
     }
 }

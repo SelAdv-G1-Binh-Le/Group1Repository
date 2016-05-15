@@ -10,12 +10,12 @@ namespace Group1Project.TestCases
     public class Testbase
     {
         public static IWebDriver WebDriver;
-        
+
         [TestInitialize]
 
         public void TestInitializeMethod()
         {
-            Console.WriteLine("Run Test Initialize");            
+            Console.WriteLine("Run Test Initialize");
 
             //Start Firefox browser and maximize window
             WebDriver = new FirefoxDriver(new FirefoxBinary(), new FirefoxProfile(), TimeSpan.FromSeconds(180));
@@ -30,11 +30,9 @@ namespace Group1Project.TestCases
         [TestCleanup]
         public void TestCleanupMethod()
         {
-
             Console.WriteLine("Run Test Cleanup");
-
             //Close browser
-            WebDriver.Quit();
+            //WebDriver.Quit();
 
         }
     }

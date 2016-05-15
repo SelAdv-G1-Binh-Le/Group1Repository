@@ -4,8 +4,6 @@ using Group1Project.Common;
 using Group1Project.PageObjects;
 using OpenQA.Selenium;
 
-
-
 namespace Group1Project.TestCases
 {
     [TestClass]
@@ -16,11 +14,11 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("TC01 - Verify that user can login specific repository successfully via Dashboard login page with correct credentials");
             //1		Navigate to Dashboard login page
-            LoginPage lp = new LoginPage().Open();
+            LoginPage loginpage = new LoginPage().Open();
 
             //2		Enter valid username and password
             //3		Click on "Login" button
-            lp.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
             //4		Verify that Dashboard Mainpage appears
             VP.VerifyUserShouldBeLogged(Constant.DefaultUsername);
