@@ -45,7 +45,7 @@ namespace Group1Project.PageObjects
             TestCases.Testbase.WebDriver.Navigate().GoToUrl(Constant.LoginPageURL);
             return this;
         }
-
+        
         public MainPage Login(string username, string password, string repository = Constant.DefaultRepository)
         {
             Console.WriteLine("Select Repository '{0}'", repository);

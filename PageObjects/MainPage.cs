@@ -22,10 +22,22 @@ namespace Group1Project.PageObjects
         static readonly By _txtPageName = By.XPath("//input[@id='name']");
         static readonly By _btnPopupOk = By.XPath("//input[@id='OK']");
         static readonly By _mnMainBar = By.XPath("//div[@id='main-menu']");
+        static readonly By _lnkAddPage = By.XPath("//a[contains(@href,'openAddPageForm')]");
+        static readonly By _lnkAddPanel = By.XPath("//a[contains(@onclick,'openAddPanel')]");
 
         #endregion
 
         #region Elements
+
+        public IWebElement LnkAddPanel
+        {
+            get { return IWebElementExtension.FindElement(_lnkAddPanel); }
+        }
+        public IWebElement LnkAddPage
+        {
+            get { return IWebElementExtension.FindElement(_lnkAddPage); }
+        }
+
         public IWebElement MnMainBar
         {
             get { return IWebElementExtension.FindElement(_mnMainBar); }
@@ -78,7 +90,7 @@ namespace Group1Project.PageObjects
             return this;
         }
 
-        public void ClickDropdownMenu(MenuList.MainMenuEnum main , MenuList.ChildMenuEnum child)
+        public void ClickDropdownMenu(MenuList.MainMenuEnum main, MenuList.ChildMenuEnum child)
         {
             WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(20));
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main)))));
@@ -145,6 +157,16 @@ namespace Group1Project.PageObjects
             IAlert alert = Testbase.WebDriver.SwitchTo().Alert();
             alert.Accept();
             Testbase.WebDriver.SwitchTo().DefaultContent();
+        }
+
+
+
+        public Dialog ClickAddPage()
+        {
+            Dialog dialog = new Dialog();
+            this.MnGlobalSetting.Click();
+            this.LnkAddPage.Click();
+            return dialog;
         }
 
 

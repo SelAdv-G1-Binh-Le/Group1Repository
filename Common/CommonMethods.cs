@@ -43,14 +43,12 @@ namespace Group1Project.Common
         public static void WaitForControl(By by, int timeout)
         {
             WebDriverWait wait = new WebDriverWait(TestCases.Testbase.WebDriver, TimeSpan.FromSeconds(timeout));
-            wait.Until(d => d.FindElement(by));
+            wait.Until(d => IWebElementExtension.FindElement(by));
         }
-
-
         public static bool WaitForControlEnable(By by, int timeout)
         {
             WebDriverWait wait = new WebDriverWait(TestCases.Testbase.WebDriver, TimeSpan.FromSeconds(timeout));
-            return wait.Until(d => d.FindElement(by).Enabled);
+            return wait.Until(d => IWebElementExtension.FindElement(by).Enabled);
         }
 
         public static string ConvertDateTimeToString(DateTime dt)

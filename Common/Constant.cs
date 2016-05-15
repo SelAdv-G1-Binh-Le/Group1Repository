@@ -23,7 +23,7 @@ namespace Group1Project.Common
         public const string Repository2 = "TestRepository";
         public const string LoginFailMessage1 = "Username or password is invalid";
         public const string LoginFailMessage2 = "Please enter username";
-
+        public const int DefaultTimeout = 10;
 
     }
 }
