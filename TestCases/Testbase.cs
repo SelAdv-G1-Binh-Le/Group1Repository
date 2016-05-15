@@ -2,25 +2,28 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Group1Project.Common;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium;
 
 namespace Group1Project.TestCases
 {
     [TestClass]
     public class Testbase
     {
+        public static IWebDriver WebDriver;
+        
         [TestInitialize]
 
         public void TestInitializeMethod()
         {
-            Console.WriteLine("Run Test Initialize");
+            Console.WriteLine("Run Test Initialize");            
 
             //Start Firefox browser and maximize window
-            Constant.WebDriver = new FirefoxDriver(new FirefoxBinary(), new FirefoxProfile(), TimeSpan.FromSeconds(180));
-            Constant.WebDriver.Manage().Window.Maximize();
-            Constant.WebDriver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
+            WebDriver = new FirefoxDriver(new FirefoxBinary(), new FirefoxProfile(), TimeSpan.FromSeconds(180));
+            WebDriver.Manage().Window.Maximize();
+            WebDriver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
 
             //Navigate to Dashboard's homepage
-            Constant.WebDriver.Navigate().GoToUrl(Constant.LoginPageURL);
+            WebDriver.Navigate().GoToUrl(Constant.LoginPageURL);
         }
 
 
@@ -31,7 +34,7 @@ namespace Group1Project.TestCases
             Console.WriteLine("Run Test Cleanup");
 
             //Close browser
-            Constant.WebDriver.Quit();
+            WebDriver.Quit();
 
         }
     }
