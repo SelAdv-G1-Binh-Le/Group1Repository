@@ -62,6 +62,7 @@
     <Compile Include="Common\Constant.cs" />
     <Compile Include="Common\IWebElementExtension.cs" />
     <Compile Include="Common\VP.cs" />
+    <Compile Include="DataObjects\MenuList.cs" />
     <Compile Include="PageObjects\GeneralPage.cs" />
     <Compile Include="PageObjects\LoginPage.cs" />
     <Compile Include="PageObjects\MainPage.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="TestCases\Login TCs.cs" />
     <Compile Include="TestCases\MainPageTestCases.cs" />
     <Compile Include="TestCases\Testbase.cs" />
-    <Compile Include="TestFoler\Class1.cs" />
+    <Compile Include="TestFoler\UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -80,7 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BaseMethods\" />
-    <Folder Include="DataObjects\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

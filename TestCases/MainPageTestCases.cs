@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Group1Project.DataObjects;
 using Group1Project.PageObjects;
 using Group1Project.Common;
 
@@ -22,7 +23,7 @@ namespace Group1Project.TestCases
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername,Constant.DefaultPassword,Constant.DefaultRepository);
 
             //Step3	Go to Global Setting -> Add page
-            mainPage.ClickDropdownMenu(mainPage.MnGlobalSetting, "Add Page");
+            mainPage.ClickDropdownMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
 
 
             //Step4	Try to go to Global Setting -> Add page again
@@ -48,7 +49,7 @@ namespace Group1Project.TestCases
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
             //Step3	Go to Global Setting -> Add page
-            mainPage.ClickDropdownMenu(mainPage.MnGlobalSetting, "Add Page");
+            mainPage.ClickDropdownMenu(MenuList.MainMenuEnum.GlobalSetting,MenuList.ChildMenuEnum.AddPage);
 
             //Step4	Enter Page Name field
             string randomStr = CommonMethods.RandomString();
@@ -76,7 +77,7 @@ namespace Group1Project.TestCases
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
             //Step3	Go to Global Setting -> Add page
-            mainPage.ClickDropdownMenu(mainPage.MnGlobalSetting, "Add Page");
+            mainPage.ClickDropdownMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
 
             //Step4	Enter Page Name field
             string randomStr1 = CommonMethods.RandomString();
@@ -87,7 +88,7 @@ namespace Group1Project.TestCases
             mainPage.BtnPopupOk.Click();
 
             //Step6	Go to Global Setting -> Add page
-            mainPage.ClickDropdownMenu(mainPage.MnGlobalSetting, "Add Page");
+            mainPage.ClickDropdownMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
 
             //Step7	Enter Page Name field
             string randomStr2 = CommonMethods.RandomString();
@@ -104,7 +105,7 @@ namespace Group1Project.TestCases
             //VP. Check "Test" page is displayed besides "Overview" page
             //New page is displayed besides "Overview" page
             string menuBarText = mainPage.MnMainBar.Text;
-            string ActualStatus = menuBarText.Contains("Overview\n\r" + pageName).ToString();
+            string ActualStatus = menuBarText.Contains("Overview\n\r" + pageName2).ToString();
             Assert.AreEqual("True", ActualStatus);
         }
     }

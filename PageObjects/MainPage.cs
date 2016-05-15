@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 using Group1Project.Common;
+using Group1Project.DataObjects;
 
 namespace Group1Project.PageObjects
 {
@@ -74,14 +75,15 @@ namespace Group1Project.PageObjects
             return this;
         }
 
-        public void ClickDropdownMenu(IWebElement parentControl, string childMenu)
+        public void ClickDropdownMenu(MenuList.MainMenuEnum main , MenuList.ChildMenuEnum child)
         {
-            parentControl.Click();
-            IWebElement ChildLink = Constant.WebDriver.FindElement(By.LinkText(childMenu));
+            IWebElement MainMenu = Constant.WebDriver.FindElement(By.XPath(String.Format("//{0}",MenuList.returnMainMenu(main))));
+            Console.WriteLine(MainMenu.Text);
+            MainMenu.Click();
+            IWebElement ChildLink = Constant.WebDriver.FindElement(By.XPath(String.Format("//a[.='{0}']",MenuList.returnChildMenu(child))));
+            Console.WriteLine(ChildLink.Text);
             ChildLink.Click();
         }
-
-
         #endregion
 
     }
