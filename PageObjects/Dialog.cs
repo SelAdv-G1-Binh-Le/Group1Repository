@@ -36,11 +36,7 @@ namespace Group1Project.PageObjects
         public void AddPage(string pagename, string button = "OK")
         {            
             IWebElementExtension.Set(this.TxtPageName, pagename, true);
-            this.BtnOK.Click();
-            CommonMethods.WaitForControl(By.XPath("//a[contains(.,'" + pagename + "')]"), Constant.DefaultTimeout);        
-        
-
-
+            this.BtnOK.Click();            
         }
 
         #endregion

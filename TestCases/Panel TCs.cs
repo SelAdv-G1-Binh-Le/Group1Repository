@@ -21,14 +21,11 @@ namespace Group1Project.TestCases
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
            
             //3	Step	Go to Global Setting -> Add page
-                      //4	Step	Enter page name to Page Name field.	Page 1
+            //4	Step	Enter page name to Page Name field.	Page 1
             //5	Step	Click OK button	           
-            mainpage.ClickAddPage().AddPage("Page 1");
-
-            IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Page 1')]"));
-            CommonMethods.WaitForControl(By.XPath("//a[contains(.,'Page 1')]"), Constant.DefaultTimeout);        
             
-            
+            string pagename = "Page 1";
+            mainpage.ClickAddPage().AddPage(pagename);
             
             //6	Step	Go to Global Setting -> Create Panel
             mainpage.MnGlobalSetting.Click();
