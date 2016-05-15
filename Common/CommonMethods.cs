@@ -14,7 +14,7 @@ namespace Group1Project.Common
         public static IWebDriver WebDriver;
         public static bool acceptNextAlert = true;
 
-              public static string CreateRandomString(int length)
+        public static string CreateRandomString(int length)
         {
             Thread.Sleep(1000);
             const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -114,8 +114,8 @@ namespace Group1Project.Common
         public static void WaitAndClickControl(string type, string property, string value, string selectvalue)
         {
             WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(20));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(string.Format("//{0}[{1}='{2}']",type,property,value))));
-            if(type=="select")
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(string.Format("//{0}[{1}='{2}']", type, property, value))));
+            if (type == "select")
             {
                 SelectElement box = new SelectElement(Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[{1}='{2}']", type, property, value))));
                 box.SelectByText(selectvalue);
@@ -124,10 +124,19 @@ namespace Group1Project.Common
             {
                 Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[{1}='{2}']", type, property, value))).Click();
             }
-     
+
         }
 
-      
-
+        public static string XPathContainGenerate(string tagname, string str)
+        {
+            //Use it while the xPath has space characters 
+            string xPath = "//" + tagname;
+            string[] words = str.Split(' ');
+            foreach (string word in words)
+            {
+                xPath = xPath + "[contains(.,'" + word + "')]";
+            }
+            return xPath;
+        }
     }
 }

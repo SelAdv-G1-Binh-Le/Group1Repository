@@ -12,7 +12,7 @@ namespace Group1Project.Common
         //Global home page: http://groupba.dyndns.org:54000/TADashboard/login.jsp
 
         public const bool DebugMode = false;
-        public const string LoginPageURL = "http://groupba.dyndns.org:54000/TADashboard/login.jsp";
+        public const string LoginPageURL = "http://192.168.1.2/TADashboard/login.jsp";
         public const string DefaultUsername = "administrator";
         public const string DefaultPassword = "";
         public const string InvalidUsername = "abc";
@@ -24,6 +24,5 @@ namespace Group1Project.Common
         public const string LoginFailMessage1 = "Username or password is invalid";
         public const string LoginFailMessage2 = "Please enter username";
         public const int DefaultTimeout = 10;
-
     }
 }

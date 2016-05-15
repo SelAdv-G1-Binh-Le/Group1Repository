@@ -26,7 +26,7 @@ namespace Group1Project.TestCases
             WebDriver.Navigate().GoToUrl(Constant.LoginPageURL);
         }
 
-
+        
         [TestCleanup]
         public void TestCleanupMethod()
         {

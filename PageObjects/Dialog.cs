@@ -36,8 +36,10 @@ namespace Group1Project.PageObjects
         public void AddPage(string pagename, string button = "OK")
         {            
             IWebElementExtension.Set(this.TxtPageName, pagename, true);
-            this.BtnOK.Click();            
+            this.BtnOK.Click();
+            CommonMethods.WaitForControl(By.XPath(CommonMethods.XPathContainGenerate("a", pagename)),10);
         }
+
 
         #endregion
     }

@@ -26,9 +26,9 @@ namespace Group1Project.Common
             int loop = 0;
             var rc = (RemoteWebElement)context;
             var driver = (IJavaScriptExecutor)rc.WrappedDriver;
-           string script1 = @"arguments[0].style.cssText = ""border-width: 2px; border-style: solid; border-color: #ff0000""; ";
-           string script2 = @"arguments[0].style.cssText = ""border-width: 2px; border-style: solid; border-color: #00ff00""; ";
-           string clear = @"arguments[0].style.cssText = ""border-width: 0px; border-style: solid; border-color: #ff0000""; ";
+            string script1 = @"arguments[0].style.cssText = ""border-width: 2px; border-style: solid; border-color: #ff0000""; ";
+            string script2 = @"arguments[0].style.cssText = ""border-width: 2px; border-style: solid; border-color: #00ff00""; ";
+            string clear = @"arguments[0].style.cssText = ""border-width: 0px; border-style: solid; border-color: #ff0000""; ";
             do
             {
                 driver.ExecuteScript(script2, rc);
@@ -46,20 +46,9 @@ namespace Group1Project.Common
         }
 
         public static IWebElement FindElement(By by)
-        {                       
-            try
-            {
-                iwebelement = TestCases.Testbase.WebDriver.FindElement(by);
-                if (Constant.DebugMode)
-                    iwebelement.Blink();
-                return iwebelement;
-            }
-            catch (System.Exception)
-           {
-                throw;
-            }
+        {
+            return TestCases.Testbase.WebDriver.FindElement(by);
         }
-               
         
     }
 }
