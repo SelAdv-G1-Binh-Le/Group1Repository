@@ -19,22 +19,22 @@ namespace Group1Project.PageObjects
         #region Elements
         public IWebElement CboRepository
         {
-            get { return Constant.WebDriver.FindElement(_cboRepository); }
+            get { return IWebElementExtension.FindElement(_cboRepository); }
         }
 
         public IWebElement TxtUsername
         {
-            get { return Constant.WebDriver.FindElement(_txtUsername); }
+            get { return IWebElementExtension.FindElement(_txtUsername); }
         }
 
         public IWebElement TxtPassword
         {
-            get { return Constant.WebDriver.FindElement(_txtPassword); }
+            get { return IWebElementExtension.FindElement(_txtPassword); }
         }
 
         public IWebElement BtnLogin
         {
-            get { return Constant.WebDriver.FindElement(_btnLogin); }
+            get { return IWebElementExtension.FindElement(_btnLogin); }
         }
 
         #endregion
@@ -42,7 +42,7 @@ namespace Group1Project.PageObjects
         #region Methods
         public LoginPage Open()
         {
-            Constant.WebDriver.Navigate().GoToUrl(Constant.LoginPageURL);
+            TestCases.Testbase.WebDriver.Navigate().GoToUrl(Constant.LoginPageURL);
             return this;
         }
 

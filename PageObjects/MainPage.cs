@@ -25,34 +25,34 @@ namespace Group1Project.PageObjects
         #region Elements
         public IWebElement MnMainBar
         {
-            get { return Constant.WebDriver.FindElement(_mnMainBar); }
+            get { return IWebElementExtension.FindElement(_mnMainBar); }
         }
         public IWebElement TxtPageName
         {
-            get { return Constant.WebDriver.FindElement(_txtPageName); }
+            get { return IWebElementExtension.FindElement(_txtPageName); }
         }
         public IWebElement BtnPopupOk
         {
-            get { return Constant.WebDriver.FindElement(_btnPopupOk); }
+            get { return IWebElementExtension.FindElement(_btnPopupOk); }
         }
         public IWebElement MnGlobalSetting
         {
-            get { return Constant.WebDriver.FindElement(_mnGlobalSetting); }
+            get { return IWebElementExtension.FindElement(_mnGlobalSetting); }
         }
         public IWebElement LblWelcome
         {
-            get { return Constant.WebDriver.FindElement(_lblWelcome); }
+            get { return IWebElementExtension.FindElement(_lblWelcome); }
         }
 
         public IWebElement LnkLogout
         {
-            get { return Constant.WebDriver.FindElement(_lnkLogout); }
+            get { return IWebElementExtension.FindElement(_lnkLogout); }
         }
 
 
         public IWebElement LblRepository
         {
-            get { return Constant.WebDriver.FindElement(_lblRepository); }
+            get { return IWebElementExtension.FindElement(_lblRepository); }
         }
 
 
@@ -70,17 +70,17 @@ namespace Group1Project.PageObjects
         public MainPage ChangeRepository(string repository)
         {
             this.LblRepository.Click();
-            IWebElement DynamiclblRepository = Constant.WebDriver.FindElement(By.XPath("//ul[@id='ulListRepositories']//a[contains(.,'" + repository + "')]"));
+            IWebElement DynamiclblRepository = IWebElementExtension.FindElement(By.XPath("//ul[@id='ulListRepositories']//a[contains(.,'" + repository + "')]"));
             DynamiclblRepository.Click();
             return this;
         }
 
         public void ClickDropdownMenu(MenuList.MainMenuEnum main , MenuList.ChildMenuEnum child)
         {
-            IWebElement MainMenu = Constant.WebDriver.FindElement(By.XPath(String.Format("//{0}",MenuList.returnMainMenu(main))));
+            IWebElement MainMenu = IWebElementExtension.FindElement(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main))));
             Console.WriteLine(MainMenu.Text);
             MainMenu.Click();
-            IWebElement ChildLink = Constant.WebDriver.FindElement(By.XPath(String.Format("//a[.='{0}']",MenuList.returnChildMenu(child))));
+            IWebElement ChildLink = IWebElementExtension.FindElement(By.XPath(String.Format("//a[.='{0}']", MenuList.returnChildMenu(child))));
             Console.WriteLine(ChildLink.Text);
             ChildLink.Click();
         }

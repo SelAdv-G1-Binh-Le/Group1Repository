@@ -38,7 +38,7 @@ namespace Group1Project.TestCases
             lp.Login(Constant.InvalidUsername, Constant.InvalidPassword, Constant.DefaultRepository);
 
             //4		Verify that Dashboard Error message "Username or password is invalid" appears
-            string alerttext = CommonMethods.CloseAlertAndGetItsText(Constant.WebDriver);
+            string alerttext = CommonMethods.CloseAlertAndGetItsText(TestCases.Testbase.WebDriver);
             VP.CheckText(Constant.LoginFailMessage1, alerttext);
         }
 
@@ -55,7 +55,7 @@ namespace Group1Project.TestCases
             lp.Login(Constant.DefaultUsername, Constant.InvalidPassword, Constant.DefaultRepository);
 
             //4		Verify that Dashboard Error message "Username or password is invalid" appears
-            string alerttext = CommonMethods.CloseAlertAndGetItsText(Constant.WebDriver);
+            string alerttext = CommonMethods.CloseAlertAndGetItsText(TestCases.Testbase.WebDriver);
             VP.CheckText(Constant.LoginFailMessage1, alerttext);
         }
 
@@ -118,7 +118,7 @@ namespace Group1Project.TestCases
             //5	Step	Login with the above account but enter lowercase password	test / test	
             //6	VP	Observe the current page - Dashboard Error message "Username or password is invalid" appears
             mainpage.Logout().Login("test", "test", Constant.DefaultRepository);
-            string alerttext = CommonMethods.CloseAlertAndGetItsText(Constant.WebDriver);
+            string alerttext = CommonMethods.CloseAlertAndGetItsText(TestCases.Testbase.WebDriver);
             VP.CheckText(Constant.LoginFailMessage1, alerttext);
         }
 
@@ -180,7 +180,7 @@ namespace Group1Project.TestCases
 
             LoginPage loginpage = new LoginPage().Open();
             MainPage mainpage = loginpage.Login("", "", Constant.DefaultRepository);
-            string alerttext = CommonMethods.CloseAlertAndGetItsText(Constant.WebDriver);
+            string alerttext = CommonMethods.CloseAlertAndGetItsText(TestCases.Testbase.WebDriver);
             VP.CheckText(Constant.LoginFailMessage2, alerttext);
         }
 

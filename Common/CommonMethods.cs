@@ -30,7 +30,7 @@ namespace Group1Project.Common
         {
             try
             {
-                Constant.WebDriver.FindElement(by);
+                IWebElementExtension.FindElement(by);
                 return true;
             }
             catch (NoSuchElementException)
@@ -41,14 +41,14 @@ namespace Group1Project.Common
 
         public static void WaitForControl(By by, int timeout)
         {
-            WebDriverWait wait = new WebDriverWait(Constant.WebDriver, TimeSpan.FromSeconds(timeout));
+            WebDriverWait wait = new WebDriverWait(TestCases.Testbase.WebDriver, TimeSpan.FromSeconds(timeout));
             wait.Until(d => d.FindElement(by));
         }
 
 
         public static bool WaitForControlEnable(By by, int timeout)
         {
-            WebDriverWait wait = new WebDriverWait(Constant.WebDriver, TimeSpan.FromSeconds(timeout));
+            WebDriverWait wait = new WebDriverWait(TestCases.Testbase.WebDriver, TimeSpan.FromSeconds(timeout));
             return wait.Until(d => d.FindElement(by).Enabled);
         }
 
