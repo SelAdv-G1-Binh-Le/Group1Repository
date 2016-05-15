@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using Group1Project.Common;
 using Group1Project.DataObjects;
+using Group1Project.TestCases;
 
 namespace Group1Project.PageObjects
 {
@@ -77,13 +80,74 @@ namespace Group1Project.PageObjects
 
         public void ClickDropdownMenu(MenuList.MainMenuEnum main , MenuList.ChildMenuEnum child)
         {
-            IWebElement MainMenu = IWebElementExtension.FindElement(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main))));
-            Console.WriteLine(MainMenu.Text);
-            MainMenu.Click();
-            IWebElement ChildLink = IWebElementExtension.FindElement(By.XPath(String.Format("//a[.='{0}']", MenuList.returnChildMenu(child))));
-            Console.WriteLine(ChildLink.Text);
+            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(20));
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main)))));
+            IWebElement ParentLink =  Testbase.WebDriver.FindElement(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main))));
+            ParentLink.Click();
+            IWebElement ChildLink = Testbase.WebDriver.FindElement(By.XPath(String.Format("//a[.='{0}']", MenuList.returnChildMenu(child))));
             ChildLink.Click();
         }
+        public int GetTabIndex(string tabname)
+        {
+            string xpath = string.Format("//div[@id='main-menu']//a[.='{0}']/../preceding-sibling::li", tabname);
+            int tabindex = Testbase.WebDriver.FindElements(By.XPath(xpath)).Count();
+            return tabindex+1;
+        }
+
+        public void AddNewPage(string name, string parent, string column, string after, bool status, string clickbutton)
+        {
+            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//li[@class='mn-setting']")));
+            this.ClickDropdownMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
+            IWebElement namebox = Testbase.WebDriver.FindElement(By.XPath("//input[@id='name']"));
+            namebox.SendKeys(name);
+            if (parent != "")
+            {
+                CommonMethods.WaitAndClickControl("select", "@id", "parent", parent);
+            }
+            if (column != "")
+            {
+                CommonMethods.WaitAndClickControl("select", "@id", "columnnumber", column);
+            }
+            if (after != "")
+            {
+                CommonMethods.WaitAndClickControl("select", "@id", "afterpage", after);
+            }
+            if (status != false)
+            {
+                CommonMethods.WaitAndClickControl("input", "@id", "ispublic","");
+            }
+            if (clickbutton != "")
+            {
+                CommonMethods.WaitAndClickControl("input", "@id", clickbutton,"");
+            }
+        }
+        public void DeletePage(string pagename)
+        {
+            IWebElement pagetab = Testbase.WebDriver.FindElement(By.XPath("//a[.='"+pagename+"']"));
+            pagetab.Click();
+            this.ClickDropdownMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
+            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            IAlert alert = Testbase.WebDriver.SwitchTo().Alert();
+            alert.Accept();
+            Testbase.WebDriver.SwitchTo().DefaultContent();
+        }
+        public void DeletePage(string parentpage, string childpage)
+        {
+            IWebElement pagetab = Testbase.WebDriver.FindElement(By.XPath("//a[.='" + parentpage + "']"));
+            pagetab.Click();
+            IWebElement child = Testbase.WebDriver.FindElement(By.XPath("//a[.='" + childpage + "']"));
+            child.Click();
+            this.ClickDropdownMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
+            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            IAlert alert = Testbase.WebDriver.SwitchTo().Alert();
+            alert.Accept();
+            Testbase.WebDriver.SwitchTo().DefaultContent();
+        }
+
+
         #endregion
 
     }

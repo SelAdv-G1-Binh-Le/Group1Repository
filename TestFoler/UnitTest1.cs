@@ -21,7 +21,7 @@ namespace Group1Project.TestFoler
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
             //Step3	Go to Global Setting -> Add page
-            mainPage.ClickDropdownMenu(MenuList.MainMenuEnum.UserName,MenuList.ChildMenuEnum.Logout);
+            Console.WriteLine(mainPage.GetTabIndex("Overview"));
         }
     }
 }

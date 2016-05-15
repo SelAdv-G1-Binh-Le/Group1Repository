@@ -11,12 +11,14 @@ namespace Group1Project.Common
         //Binh Home: http://192.168.1.2/TADashboard/login.jsp
         //Global home page: http://groupba.dyndns.org:54000/TADashboard/login.jsp
 
-        public const bool DebugMode = true;
+        public const bool DebugMode = false;
         public const string LoginPageURL = "http://groupba.dyndns.org:54000/TADashboard/login.jsp";
         public const string DefaultUsername = "administrator";
         public const string DefaultPassword = "";
         public const string InvalidUsername = "abc";
         public const string InvalidPassword = "abc";
+        public const string UserName2 = "test";
+        public const string PassWord2 = "admin";
         public const string DefaultRepository = "SampleRepository";
         public const string Repository2 = "TestRepository";
         public const string LoginFailMessage1 = "Username or password is invalid";

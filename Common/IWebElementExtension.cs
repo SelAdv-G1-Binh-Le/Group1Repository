@@ -55,7 +55,7 @@ namespace Group1Project.Common
                 return iwebelement;
             }
             catch (System.Exception)
-            {
+           {
                 throw;
             }
         }

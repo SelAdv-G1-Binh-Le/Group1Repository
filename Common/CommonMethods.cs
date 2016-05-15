@@ -4,6 +4,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Linq;
 using System.Threading;
+using Group1Project.TestCases;
 
 
 namespace Group1Project.Common
@@ -111,6 +112,23 @@ namespace Group1Project.Common
             string Random = DateTime.Now.ToString("ddMMMyyHHmmssfff");
             return Random;
         }
+
+        public static void WaitAndClickControl(string type, string property, string value, string selectvalue)
+        {
+            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(20));
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(string.Format("//{0}[{1}='{2}']",type,property,value))));
+            if(type=="select")
+            {
+                SelectElement box = new SelectElement(Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[{1}='{2}']", type, property, value))));
+                box.SelectByText(selectvalue);
+            }
+            else
+            {
+                Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[{1}='{2}']", type, property, value))).Click();
+            }
+     
+        }
+
       
 
     }
