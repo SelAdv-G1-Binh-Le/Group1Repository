@@ -187,10 +187,11 @@ namespace Group1Project.TestCases
         public void zSandbox()
         {
             Console.WriteLine("sSandbox test case");
-            LoginPage loginpage = new LoginPage().Open();
-            MainPage mainpage = loginpage.Login("", "", Constant.DefaultRepository);
+            TestCases.Testbase.WebDriver.Navigate().GoToUrl("http://lgvn13410.logigear.com/cms2.testarchitect.com/contact-us.html");
 
-
+            IWebElement control = IWebElementExtension.FindElement(By.XPath("//textarea[@id='ContactUs_comment']"));
+            control.Highlight(5);
+                        
             //loginpage.CboRepository.Blink();
 
 
