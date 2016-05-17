@@ -23,7 +23,7 @@ namespace Group1Project.TestCases
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername,Constant.DefaultPassword,Constant.DefaultRepository);
 
             //Step3	Go to Global Setting -> Add page
-            mainPage.ClickDropdownMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
 
 
             //Step4	Try to go to Global Setting -> Add page again
@@ -49,7 +49,7 @@ namespace Group1Project.TestCases
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
             //Step3	Go to Global Setting -> Add page
-            mainPage.ClickDropdownMenu(MenuList.MainMenuEnum.GlobalSetting,MenuList.ChildMenuEnum.AddPage);
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting,MenuList.ChildMenuEnum.AddPage);
 
             //Step4	Enter Page Name field
             //Step5 Click OK button
@@ -127,7 +127,7 @@ namespace Group1Project.TestCases
             //Step8	Log in with another valid account
             MainPage mainpage2 = loginPage.Login(Constant.UserName2, Constant.PassWord2, Constant.DefaultRepository);
             //VP Check newly added page is visibled
-            bool ExpectedResult = CommonMethods.IsElementPresent(OpenQA.Selenium.By.XPath("//a[.='"+pageName+"']"));
+            bool ExpectedResult = mainpage2.CheckTabExist(pageName);
             Assert.AreEqual(ExpectedResult, true);
 
             //Post-Condition: Log in  as creator page account and delete newly added page
@@ -173,14 +173,15 @@ namespace Group1Project.TestCases
             MainPage mainpage2 = loginPage.Login(Constant.UserName2, Constant.PassWord2, Constant.DefaultRepository);
 
             //VP Check children is invisibled
-            bool ExpectedResult = CommonMethods.IsElementPresent(OpenQA.Selenium.By.XPath("//a[.='" + pageName2 + "']"));
-            Assert.AreEqual(ExpectedResult, false);
+            bool ActualResult = mainpage2.CheckTabExist(pageName2);
+            Assert.AreEqual(false, ActualResult);
 
             //Post-Condition: Log in  as creator page account and delete newly added page and its parent page
             //Close TA Dashboard Main Page
             mainpage2.Logout();
             MainPage mainpage3 = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             mainpage3.DeletePage(pageName1,pageName2);
+            mainpage3.DeletePage(pageName1);
         }
     }
 }

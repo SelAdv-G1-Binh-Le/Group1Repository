@@ -31,8 +31,8 @@ namespace Group1Project.TestCases
         public void TestCleanupMethod()
         {
             Console.WriteLine("Run Test Cleanup");
-            //Close browser
-            //WebDriver.Quit();
+            // CLose browser
+            WebDriver.Quit();
 
         }
     }

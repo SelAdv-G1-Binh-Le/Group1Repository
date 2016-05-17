@@ -5,6 +5,7 @@ using OpenQA.Selenium.Support.UI;
 using Group1Project.Common;
 using Group1Project.DataObjects;
 using Group1Project.TestCases;
+using System.Threading;
 
 namespace Group1Project.PageObjects
 {
@@ -90,7 +91,7 @@ namespace Group1Project.PageObjects
             return this;
         }
 
-        public void ClickDropdownMenu(MenuList.MainMenuEnum main, MenuList.ChildMenuEnum child)
+        public void SelectChildMenu(MenuList.MainMenuEnum main, MenuList.ChildMenuEnum child)
         {
             WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(20));
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main)))));
@@ -110,12 +111,13 @@ namespace Group1Project.PageObjects
         {
             WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//li[@class='mn-setting']")));
-            this.ClickDropdownMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
+            this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
             IWebElement namebox = Testbase.WebDriver.FindElement(By.XPath("//input[@id='name']"));
             namebox.SendKeys(name);
             if (parent != "")
             {
                 CommonMethods.WaitAndClickControl("select", "@id", "parent", parent);
+                Thread.Sleep(500);
             }
             if (column != "")
             {
@@ -138,7 +140,7 @@ namespace Group1Project.PageObjects
         {
             IWebElement pagetab = Testbase.WebDriver.FindElement(By.XPath("//a[.='"+pagename+"']"));
             pagetab.Click();
-            this.ClickDropdownMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
+            this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
             WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.AlertIsPresent());
             IAlert alert = Testbase.WebDriver.SwitchTo().Alert();
@@ -147,19 +149,21 @@ namespace Group1Project.PageObjects
         }
         public void DeletePage(string parentpage, string childpage)
         {
-            IWebElement pagetab = Testbase.WebDriver.FindElement(By.XPath("//a[.='" + parentpage + "']"));
-            pagetab.Click();
-            IWebElement child = Testbase.WebDriver.FindElement(By.XPath("//a[.='" + childpage + "']"));
-            child.Click();
-            this.ClickDropdownMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
+            CommonMethods.WaitAndClickControl("a", "text()", parentpage,"");
+            CommonMethods.WaitAndClickControl("a", "text()", childpage, "");
+            this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
             WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.AlertIsPresent());
             IAlert alert = Testbase.WebDriver.SwitchTo().Alert();
             alert.Accept();
             Testbase.WebDriver.SwitchTo().DefaultContent();
+            Thread.Sleep(500);
         }
 
-
+        public bool CheckTabExist(string tabname)
+        {
+            return CommonMethods.IsElementPresent(OpenQA.Selenium.By.XPath("//a[.='" + tabname + "']"));
+        }
 
         public Dialog ClickAddPage()
         {
