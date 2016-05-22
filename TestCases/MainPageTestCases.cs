@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Text;
+using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Group1Project.DataObjects;
 using Group1Project.PageObjects;
 using Group1Project.Common;
+using OpenQA.Selenium;
 
 namespace Group1Project.TestCases
 {
@@ -262,7 +264,7 @@ namespace Group1Project.TestCases
         [TestMethod]
         public void TC17()
         {
-            Console.WriteLine("Verify that user can remove any main parent page except \Overview\ page successfully and the order of pages stays persistent as long as there is not children page under it");
+            Console.WriteLine("Verify that user can remove any main parent page except \"Overview\" page successfully and the order of pages stays persistent as long as there is not children page under it");
             //Step1	    Navigate to Dashboard login page
             LoginPage loginPage = new LoginPage().Open();
 
@@ -276,7 +278,7 @@ namespace Group1Project.TestCases
 
             //Step4	    Add a children page of newly added page
             string randomStr2 = CommonMethods.RandomString();
-            string pageName2 = "test1" + randomStr1;
+            string pageName2 = "test2" + randomStr2;
             mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
 
             //Step5	    Click on parent page
@@ -284,108 +286,335 @@ namespace Group1Project.TestCases
 
             //Step6	    Click "Delete" link
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting,MenuList.ChildMenuEnum.Delete);
+            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            IAlert alert = Testbase.WebDriver.SwitchTo().Alert();
+            string ActualResult = alert.Text;
+            string ExpectedResult1 = "Are you sure you want to remove this page?";
 
             //VP	    Check confirm message "Are you sure you want to remove this page?" appears
-
+            Assert.AreEqual(true,ActualResult.Contains(ExpectedResult1),"The error message is not displayed correctly");
 
             //Step7	    Click OK button
-            //VP	    Check warning message "Can not delete page 'Test' since it has children page(s)" appears
-            //Step8	    Click OK button
-            //Step9	    Click on  children page
-            //Step10	Click "Delete" link
-            //VP	    Check confirm message "Are you sure you want to remove this page?" appears
-            //Step11	Click OK button
-            //VP	    Check children page is deleted
-            //Step12	Click on  parent page
-            //Step13	Click "Delete" link
-            //VP	    Check confirm message "Are you sure you want to remove this page?" appears
-            //Step14	Click OK button
-            //VP	    Check parent page is deleted
-            //Step15	Click on "Overview" page
-            //VP	    Check "Delete" link disappears
+            alert.Accept();
+            string ActualResult2 = alert.Text;
+            string ExpectedResult2 = "Cannot delete page '" + pageName1+"' since it has child page(s).";
 
+            //VP	    Check warning message "Can not delete page 'Test' since it has children page(s)" appears
+            Assert.AreEqual(true,ActualResult2.Contains(ExpectedResult2), "The error message for children page is not displayed correctly");
+
+            //Step8	    Click OK button
+            alert.Accept();
+            Testbase.WebDriver.SwitchTo().DefaultContent();
+
+            //Step9	    Click on  children page
+            IWebElement tab1 = IWebElementExtension.FindElement(By.XPath("//a[.='" + pageName1 + "']"));
+            tab1.MoveMouse();
+            mainPage.ClickTab(pageName2);
+
+            //Step10	Click "Delete" link
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting,MenuList.ChildMenuEnum.Delete);
+            WebDriverWait wait2 = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
+            wait2.Until(ExpectedConditions.AlertIsPresent());
+            IAlert alert2 = Testbase.WebDriver.SwitchTo().Alert();
+            string ActualResult3 = alert2.Text;
+
+            //VP	    Check confirm message "Are you sure you want to remove this page?" appears
+            Assert.AreEqual(true,ActualResult3.Contains(ExpectedResult1));
+
+            //Step11	Click OK button
+            alert2.Accept();
+            Testbase.WebDriver.SwitchTo().DefaultContent();
+            CommonMethods.WaitUntilControlDisappear("a", "text()", pageName2);
+            bool ActualResult4 = mainPage.IsTabVisible(pageName2);
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            //Step1	Navigate to Dashboard login page
+            //VP	    Check children page is deleted
+            Assert.AreEqual(false,ActualResult4,"child page "+pageName2+" is still displayed");
+
+            //Step12	Click on  parent page
+            mainPage.ClickTab(pageName1);
+
+            //Step13	Click "Delete" link
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting,MenuList.ChildMenuEnum.Delete);
+            WebDriverWait wait3 = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
+            wait2.Until(ExpectedConditions.AlertIsPresent());
+            IAlert alert3 = Testbase.WebDriver.SwitchTo().Alert();
+            string ActualResult5 = alert3.Text;
+
+            //VP	    Check confirm message "Are you sure you want to remove this page?" appears
+            Assert.AreEqual(true,ActualResult5.Contains(ExpectedResult1), "The error message is not displayed correctly");
+
+            //Step14	Click OK button
+            alert3.Accept();
+            Testbase.WebDriver.SwitchTo().DefaultContent();
+            CommonMethods.WaitUntilControlDisappear("a", "text()", pageName1);
+            bool ActualResult6 = mainPage.IsTabVisible(pageName1);
+
+            //VP	    Check parent page is deleted
+            Assert.AreEqual(false,ActualResult6, "The Parent school " +pageName1+"is still displayed");
+
+            //Step15	Click on "Overview" page
+            mainPage.ClickTab("Overview");
+            CommonMethods.WaitAndClickControl("li","@class","mn-setting","");
+            bool ActualResult7 = CommonMethods.IsElementPresent(By.XPath("//a[.='Delete']"));
+
+            //VP	    Check "Delete" link disappears
+            Assert.AreEqual(false,ActualResult7, "The 'Delete' link is still displayed");
+        }
+       
+        [TestMethod]
+        public void TC18()
+        {
+            Console.WriteLine("Verify that user is able to add additional sibbling pages to the parent page successfully");
+            //Step1	    Navigate to Dashboard login page
             LoginPage loginPage = new LoginPage().Open();
 
-            //Step2	Log in specific repository with valid account
+            //Step2	    Log in specific repository with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
-            //Step3	Go to Global Setting -> Add page
-            //Step4	Enter Page Name
-            //Step5	Click OK button
+            //Step3	    Go to Global Setting -> Add page
+            //Step4	    Enter Page Name
+            //Step5	    Click OK button
             string randomStr1 = CommonMethods.RandomString();
             string pageName1 = "test1" + randomStr1;
             mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
 
-            //Step6	Go to Global Setting -> Add page
-            //Step7	Enter Page Name
-            //Step8	Check Public checkbox
-            //Step9	Click OK button
+            //Step6	    Go to Global Setting -> Add page
+            //Step7	    Enter Page Name
+            //Step8	    Click on  Parent Page dropdown list
+            //Step9	    Select a parent page
+            //Step10	Click OK button
             string randomStr2 = CommonMethods.RandomString();
             string pageName2 = "test2" + randomStr2;
-            mainPage.AddOrEditPage(pageName2, "", "", "", true, "OK");
+            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
 
-            //Step10	Click on "Test" page
-            mainPage.ClickTab(pageName1);
+            //Step11	Go to Global Setting -> Add page
+            //Step12	Enter Page Name
+            //Step13	Click on  Parent Page dropdown list
+            //Step14	Select a parent page
+            //Step15	Click OK button
+            string randomStr3 = CommonMethods.RandomString();
+            string pageName3 = "test3" + randomStr3;
+            mainPage.AddOrEditPage(pageName3, pageName1, "", "", true, "OK");
+            bool ActualResult = mainPage.IsTabVisible(pageName3);
 
-            //Step11	Click on "Edit" link
-            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
+            //VP	Check "Test Child 2" is added successfully
+            Assert.AreEqual(true, ActualResult, "Second child page is not added");
 
-            //VP	Check "Edit Page" pop up window is displayed
-            bool ActualResult1 = CommonMethods.IsElementPresent(OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
-            Assert.AreEqual(true, ActualResult1, "Edit Page is not displayed");
-
-            //Step12	Check Public checkbox
-            //Step13	Click OK button
-            mainPage.AddOrEditPage("", "", "", "", true, "OK");
-
-            //Step14	Click on "Another Test" page
-            mainPage.ClickTab(pageName2);
-
-            //Step15	Click on "Edit" link
-            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
-
-            //VP	Check "Edit Page" pop up window is displayed
-            bool ActualResult2 = CommonMethods.IsElementPresent(OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
-            Assert.AreEqual(true, ActualResult2, "Edit Page is not displayed");
-
-            //Step16	Uncheck Public checkbox
-            //Step17	Click OK button
-            mainPage.AddOrEditPage("", "", "", "", false, "OK");
-
-            //Step18	Click Log out link
-            mainPage.Logout();
-
-            //Step19	Log in with another valid account
-            MainPage mainpage2 = loginPage.Login(Constant.UserName2, Constant.PassWord2, Constant.DefaultRepository);
-            bool ActualReuslt3 = mainpage2.IsTabVisible(pageName1);
-            bool ActualReuslt4 = mainpage2.IsTabVisible(pageName2);
-
-            //VP	Check "Test" Page is visible and can be accessed
-            Assert.AreEqual(true, ActualReuslt3, pageName1 + " tab is not visible");
-
-            //VP	Check "Another Test" page is invisible
-            Assert.AreEqual(false, ActualReuslt4, pageName2 + " tab is visible");
-
-            //Post-Condition: Log in  as creator page account and delete newly added page and its parent page
+            //Post-Condition Log in  as creator page account and delete newly added page, its sibling page and parent page
             //Close TA Dashboard Main Page
-            mainpage2.Logout();
-            MainPage mainpage3 = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-            mainpage3.DeletePage(pageName1);
-            mainpage3.DeletePage(pageName2);
+            mainPage.DeletePage(pageName1, pageName3);
+            mainPage.DeletePage(pageName1, pageName2);
+            mainPage.DeletePage(pageName1);
         }
 
+        [TestMethod]
+        public void TC19()
+        {
+            Console.WriteLine("Verify that user is able to add additional sibbling page levels to the parent page successfully.");
+            //Step1  	Navigate to Dashboard login page
+            LoginPage loginPage = new LoginPage().Open();
+
+            //Step2  	Login with valid account
+            MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+
+            //Step3  	Go to Global Setting -> Add page
+            //Step4	    Enter info into all required fields on New Page dialog: Page name: Page 1, Parent page: Overview
+            string randomStr = CommonMethods.RandomString();
+            string pageName = "test" + randomStr;
+            mainPage.AddOrEditPage(pageName, "Overview", "", "", true, "OK");
+            string ActualResult = mainPage.GetParentPage(pageName);
+            string ExpectedResult = "Overview";
+
+            //VP	    Observe the current page: User is able to add additional sibbling page levels to parent page successfully. 
+            //          In this case: Overview is parent page of page 1
+            Assert.AreEqual(ExpectedResult, ActualResult,"Parent page is '"+ActualResult+"', it is not 'Overview' ");
+
+            //Post-Condition delete newly added page
+            //Close TA Dashboard Main Page
+            mainPage.DeletePage("Overview", pageName);
+        }
+
+        [TestMethod]
+        public void TC20()
+        {
+            Console.WriteLine("Verify that user is able to delete sibbling page as long as that page has not children page under it");
+            //Step1	        Navigate to Dashboard login page
+            LoginPage loginPage = new LoginPage().Open();
+
+            //Step2	        Login with valid account
+            MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+
+            //Step3	        Go to Global Setting -> Add page
+            //Step4	        Enter info into all required fields on New Page dialog: Page name: Page 1, Parent page: Overview
+            string randomStr1 = CommonMethods.RandomString();
+            string pageName1 = "test1" + randomStr1;
+            mainPage.AddOrEditPage(pageName1, "Overview", "", "", true, "OK");
+
+            //Step5	        Go to Global Setting -> Add page
+            //Step6	        Enter info into all required fields on New Page dialog: Page name: Page 2, Parent page: Page 1
+            string randomStr2 = CommonMethods.RandomString();
+            string pageName2 = "test2" + randomStr2;
+            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+
+            //Step7	        Go to the first created page: Page 1
+            //Step8	        Click Delete link
+            //Step9	        Click Ok button on Confirmation Delete page
+            mainPage.DeletePage("Overview", pageName1);
+            string ActualResult = mainPage.GetAlertMessage();
+            string ExpectedResult = "Cannot delete page '" + pageName1 + "' since it has child page(s).";
+            bool temp = ActualResult.Contains(ExpectedResult);
+
+            //VP	        Observe the current page: There is a message "Can't delete page "page 1" since it has children page"
+            Assert.AreEqual(true, true, "the message is not correct. Expected: "+ExpectedResult+" Current message: " +ActualResult);
+
+            //Step10	    Close confirmation dialog
+            //Step11	    Go to the second page
+            //Step12	    Click Delete link
+            //Step13	    Click Ok button on Confirmation Delete page
+            mainPage.DeletePage("Overview", pageName1, pageName2);
+            bool ActualResult2 = mainPage.IsTabVisible(pageName2);
+
+            //VP	        Observe the current page: Page 2 is deleted successfully
+            Assert.AreEqual(false, ActualResult2, "The second page "+pageName2+" is still displayed");
+
+            //Post-Condition delete newly added page
+            //Close TA Dashboard Main Page
+            mainPage.DeletePage("Overview", pageName1);
+        }
+        [TestMethod]
+        public void TC21()
+        {
+            Console.WriteLine("Verify that user is able to edit the name of the page (Parent/Sibbling) successfully");
+            //Step1	    Navigate to Dashboard login page
+            LoginPage loginPage = new LoginPage().Open();
+
+            //Step2	    Login with valid account
+            MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+
+            //Step3	    Go to Global Setting -> Add page
+            //Step4	    Enter info into all required fields on New Page dialog: Page name: Page 1, Parent page: Overview
+            string randomStr = CommonMethods.RandomString();
+            string pageName1 = "test1" + randomStr;
+            string pageName2 = "test2" + randomStr;
+            string pageName3 = "test3" + randomStr;
+            string pageName4 = "test4" + randomStr;
+            mainPage.AddOrEditPage(pageName1, "Overview", "", "", true, "OK");
+
+            //Step5	    Go to Global Setting -> Add page
+            //Step6	    Enter info into all required fields on New Page dialog: Page name: Page 2, Parent page: Page 1
+            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+
+            //Step7	    Go to the first created page: Page 1
+            mainPage.SelectChildPage("Overview", pageName1);
+
+            //Step8	    Click Edit link
+            //Step9	    Enter another name into Page Name field: Page name: Page 3
+            //Step10    Click Ok button on Edit Page dialog
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
+            mainPage.AddOrEditPage(pageName3, "", "", "", true, "OK");
+            bool ActualResult1 = mainPage.IsTabVisible(pageName3);
+
+            //VP	    Observe the current page: User is able to edit the name of parent page successfully
+            Assert.AreEqual(true, ActualResult1,"New Parent name is not changed successfully");
+
+            //Step11    Go to the second created page
+            //Step12    Click Edit link: Page 2
+            //Step13    Enter another name into Page Name field
+            //Step14    Click Ok button on Edit Page dialog: Page name: Page 4
+            mainPage.SelectChildPage("Overview", pageName3, pageName2);
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
+            mainPage.AddOrEditPage(pageName4, "", "", "", true, "OK");
+            bool ActualResult2 = mainPage.IsTabVisible(pageName4);
+
+            //VP	    Observe the current page: User is able to edit the name of sibbling page successfully
+            Assert.AreEqual(true, ActualResult2, "New child name is not changed successfully");
+
+            //Post-Condition delete newly added page
+            //Close TA Dashboard Main Page
+            mainPage.DeletePage("Overview", pageName3, pageName4);
+            mainPage.DeletePage("Overview", pageName3);
+        }
+
+        [TestMethod]
+        public void TC22()
+        {
+            Console.WriteLine("Verify that user is unable to duplicate the name of sibbling page under the same parent page");
+            //Step1	Navigate to Dashboard login page	
+            LoginPage loginPage = new LoginPage().Open();
+
+            //Step2	Log in specific repository with valid account	
+            MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+
+            //Step3	Add a new page:	Test
+            string randomStr = CommonMethods.RandomString();
+            string pageName1 = "test1" + randomStr;
+            string pageName2 = "test2" + randomStr;
+            mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
+
+            //Step4	Add a sibling page of new page:	Test Child 1
+            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+
+            //Step5	Go to Global Setting -> Add page	
+            //Step6	Enter Page Name:	Test Child 1
+            //Step7	Click on  Parent Page dropdown list	
+            //Step8	Select a parent page:	Test
+            //Step9	Click OK button	
+            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+            string ActualResult = mainPage.GetAlertMessage();
+            string ExpectedResult = pageName2 + " already exists. Please enter a different name.";
+
+            //VP	Check warning message "Test child already exist. Please enter a diffrerent name" appears
+            Assert.AreEqual(ExpectedResult, ActualResult,"The error message is not correct");
+
+            //Post-Condition delete newly added page
+            //Close TA Dashboard Main Page
+            AddPageDialog dialog = new AddPageDialog();
+            dialog.BtnCancel.Click();
+            mainPage.DeletePage(pageName1, pageName2);
+            mainPage.DeletePage(pageName1);
+        }
+
+        [TestMethod]
+        public void TC23()
+        {
+            Console.WriteLine("Verify that user is able to edit the parent page of the sibbling page successfully");
+            //Step	Navigate to Dashboard login page	
+            LoginPage loginPage = new LoginPage().Open();
+
+            //Step	Login with valid account
+            MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+
+            //Step	Go to Global Setting -> Add page		
+            //Step	Enter info into all required fields on New Page dialog	"Page name: Page 1,Parent page: Overview"	
+            string randomStr = CommonMethods.RandomString();
+            string pageName1 = "test1" + randomStr;
+            string pageName2 = "test2" + randomStr;
+            string pageName3 = "test3" + randomStr;
+            mainPage.AddOrEditPage(pageName1, "Overview", "", "", true, "OK");
+
+            //Step	Go to Global Setting -> Add page		
+            //Step	Enter info into all required fields on New Page dialog	"Page name: Page 2,Parent page: Page 1"	
+            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+
+            //Step	Go to the first created page:	Page 1	
+            mainPage.SelectChildPage("Overview", pageName1);
+
+            //Step	Click Edit link		
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
+
+            //Step	Enter another name into Page Name field	Page name: Page 3	
+            //Step	Click Ok button on Edit Page dialog		
+            mainPage.AddOrEditPage(pageName3, "", "", "", true, "OK");
+            bool ActualResult = mainPage.IsTabVisible(pageName3);
+
+            //VP	Observe the current page: User is able to edit the parent page of the sibbling page successfully
+            Assert.AreEqual(true, ActualResult,"Parent page name is not changed");
+
+            //Post-Condition delete newly added page
+            //Close TA Dashboard Main Page
+            mainPage.DeletePage("Overview", pageName3,pageName2);
+            mainPage.DeletePage("Overview", pageName3);
+        }
     }
 }

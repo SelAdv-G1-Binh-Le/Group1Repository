@@ -9,6 +9,10 @@ namespace Group1Project.PageObjects
         #region Locators
 
         static readonly By _txtPageName = By.XPath("//input[@id='name']");
+        static readonly By _cmbParentPage = By.XPath("//select[@id='parent']");
+        static readonly By _cmbNumberColumn = By.XPath("//select[@id='columnnumber']");
+        static readonly By _cmbDisplayAfter = By.XPath("//select[@id='afterpage']");
+        static readonly By _chbPublic = By.XPath("//input[@id='ispublic']");
         static readonly By _btnOK = By.XPath("//input[@id='OK']");
         static readonly By _btnCancel = By.XPath("//input[@id='Cancel']");
 
@@ -16,6 +20,22 @@ namespace Group1Project.PageObjects
 
         #region Elements
 
+        public IWebElement CmbParentPage
+        {
+            get { return IWebElementExtension.FindElement(_cmbParentPage); }
+        }
+        public IWebElement CmbNumberColumn
+        {
+            get { return IWebElementExtension.FindElement(_cmbNumberColumn); }
+        }
+        public IWebElement CmbDisplayAfter
+        {
+            get { return IWebElementExtension.FindElement(_cmbDisplayAfter); }
+        }
+        public IWebElement ChbPublic
+        {
+            get { return IWebElementExtension.FindElement(_chbPublic); }
+        }
         public IWebElement BtnCancel
         {
             get { return IWebElementExtension.FindElement(_btnCancel); }

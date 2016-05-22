@@ -3,6 +3,7 @@ using OpenQA.Selenium.Remote;
 using System.Threading;
 using Group1Project.TestCases;
 using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Interactions;
 
 namespace Group1Project.Common
 {
@@ -48,6 +49,12 @@ namespace Group1Project.Common
         public static IWebElement FindElement(By by)
         {
             return TestCases.Testbase.WebDriver.FindElement(by);
+        }
+
+        public static void MoveMouse(this IWebElement element)
+        {
+            Actions action = new Actions(Testbase.WebDriver);
+            action.MoveToElement(element).Perform();
         }
         
     }

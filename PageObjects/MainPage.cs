@@ -6,6 +6,7 @@ using Group1Project.Common;
 using Group1Project.DataObjects;
 using Group1Project.TestCases;
 using System.Threading;
+using OpenQA.Selenium.Interactions;
 
 namespace Group1Project.PageObjects
 {
@@ -93,11 +94,34 @@ namespace Group1Project.PageObjects
 
         public void SelectChildMenu(MenuList.MainMenuEnum main, MenuList.ChildMenuEnum child)
         {
-            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(20));
+            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main)))));
             IWebElement ParentLink =  Testbase.WebDriver.FindElement(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main))));
-            ParentLink.Click();
+            Actions action = new Actions(Testbase.WebDriver);
+            action.MoveToElement(ParentLink).Perform();
             IWebElement ChildLink = Testbase.WebDriver.FindElement(By.XPath(String.Format("//a[.='{0}']", MenuList.returnChildMenu(child))));
+            ChildLink.Click();
+        }
+        public void SelectChildPage(string parent, string child)
+        {
+            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//a[contains(.,'" + parent + "')]")));
+            IWebElement ParentLink = IWebElementExtension.FindElement(By.XPath("//a[contains(.,'" + parent + "')]"));
+            Actions action = new Actions(Testbase.WebDriver);
+            action.MoveToElement(ParentLink).Perform();
+            IWebElement ChildLink = Testbase.WebDriver.FindElement(By.XPath("//a[contains(.,'" + child + "')]"));
+            ChildLink.Click();
+        }
+        public void SelectChildPage(string parent, string mid, string child)
+        {
+            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//a[contains(.,'"+parent+"')]")));
+            IWebElement ParentLink = IWebElementExtension.FindElement(By.XPath("//a[contains(.,'" + parent + "')]"));
+            Actions action = new Actions(Testbase.WebDriver);
+            action.MoveToElement(ParentLink).Perform();
+            IWebElement MidLink = IWebElementExtension.FindElement(By.XPath("//a[contains(.,'" + mid + "')]"));
+            action.MoveToElement(MidLink).Perform();
+            IWebElement ChildLink = Testbase.WebDriver.FindElement(By.XPath("//a[contains(.,'" + child + "')]"));
             ChildLink.Click();
         }
         public int GetTabIndex(string tabname)
@@ -117,10 +141,17 @@ namespace Group1Project.PageObjects
                 this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
             }
             IWebElement namebox = Testbase.WebDriver.FindElement(By.XPath("//input[@id='name']"));
-            namebox.SendKeys(name);
+            if(name!="")
+            {
+                namebox.Clear();
+                namebox.SendKeys(name);
+            }
+
+            
             if (parent != "")
             {
-                CommonMethods.WaitAndClickControl("select", "@id", "parent", parent);
+                //CommonMethods.WaitAndClickControl("select", "@id", "parent", parent);
+                CommonMethods.WaitAndClickControl("option", ".", parent, "");
                 Thread.Sleep(500);
             }
             if (column != "")
@@ -160,8 +191,18 @@ namespace Group1Project.PageObjects
         }
         public void DeletePage(string parentpage, string childpage)
         {
-            CommonMethods.WaitAndClickControl("a", "text()", parentpage,"");
-            CommonMethods.WaitAndClickControl("a", "text()", childpage, "");
+            this.SelectChildPage(parentpage, childpage);
+            this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
+            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            IAlert alert = Testbase.WebDriver.SwitchTo().Alert();
+            alert.Accept();
+            Testbase.WebDriver.SwitchTo().DefaultContent();
+            Thread.Sleep(500);
+        }
+        public void DeletePage(string parentpage, string midpage, string childpage)
+        {
+            this.SelectChildPage(parentpage, midpage, childpage);
             this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
             WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.AlertIsPresent());
@@ -179,8 +220,6 @@ namespace Group1Project.PageObjects
         {
             CommonMethods.WaitAndClickControl("a", "text()", tabname, "");
         }
-
-
         public AddPageDialog ClickAddPage()
         {
             AddPageDialog dialog = new AddPageDialog();
@@ -188,6 +227,23 @@ namespace Group1Project.PageObjects
             this.LnkAddPage.Click();
             return dialog;
         }
+        public string GetAlertMessage()
+        {
+            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            IAlert alert = Testbase.WebDriver.SwitchTo().Alert();
+            string alerttext = alert.Text;
+            alert.Accept();
+            Testbase.WebDriver.SwitchTo().DefaultContent();
+            return alerttext;
+        }
+
+        public string GetParentPage(string childpage)
+        {
+            IWebElement element = Testbase.WebDriver.FindElement(By.XPath("//a[.='"+childpage+"']/ancestor::li/a[contains(@class,'haschild')]"));
+            return element.Text;
+        }
+
 
 
         #endregion

@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using Group1Project.TestCases;
+using OpenQA.Selenium.Support;
 
 
 namespace Group1Project.Common
@@ -114,17 +115,19 @@ namespace Group1Project.Common
         public static void WaitAndClickControl(string type, string property, string value, string selectvalue)
         {
             WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(20));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(string.Format("//{0}[{1}='{2}']", type, property, value))));
-            if (type == "select")
-            {
-                SelectElement box = new SelectElement(Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[{1}='{2}']", type, property, value))));
-                box.SelectByText(selectvalue);
-            }
-            else
-            {
-                Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[{1}='{2}']", type, property, value))).Click();
-            }
-
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))));
+            //if (type == "select")
+            //{
+            //    //SelectElement box = new SelectElement(Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[{1}='{2}']", type, property, value))));
+            //    //box.SelectByText(selectvalue);
+            //    IWebElement box = Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value)));
+            //    box.Click();
+            //}
+            //else
+            //{
+            //    Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))).Click();
+            //}
+            Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))).Click();
         }
 
         public static string XPathContainGenerate(string tagname, string str)
@@ -138,5 +141,14 @@ namespace Group1Project.Common
             }
             return xPath;
         }
+        public static void WaitUntilControlDisappear(string tag, string property, string value)
+        {
+            bool check = CommonMethods.IsElementPresent(By.XPath("//" + tag + "[" + property + "='" + value + "']"));
+            if(check == true)
+            {
+                Thread.Sleep(1000);
+            }
+        }
+
     }
 }
