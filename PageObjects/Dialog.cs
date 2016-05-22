@@ -3,7 +3,7 @@ using Group1Project.Common;
 
 namespace Group1Project.PageObjects
 {
-    class Dialog : GeneralPage
+    class AddPageDialog : GeneralPage
     {
 
         #region Locators

@@ -107,11 +107,15 @@ namespace Group1Project.PageObjects
             return tabindex+1;
         }
 
-        public void AddNewPage(string name, string parent, string column, string after, bool status, string clickbutton)
+        public void AddOrEditPage(string name, string parent, string column, string after, bool status, string clickbutton)
         {
-            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//li[@class='mn-setting']")));
-            this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
+            bool checkpopupexist = CommonMethods.IsElementPresent(By.XPath("//input[@id='name']"));
+            if (checkpopupexist!=true)
+            {
+                WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(2));
+                wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//li[@class='mn-setting']")));
+                this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
+            }
             IWebElement namebox = Testbase.WebDriver.FindElement(By.XPath("//input[@id='name']"));
             namebox.SendKeys(name);
             if (parent != "")
@@ -127,19 +131,26 @@ namespace Group1Project.PageObjects
             {
                 CommonMethods.WaitAndClickControl("select", "@id", "afterpage", after);
             }
-            if (status != false)
+            if (status.ToString() != "")
             {
-                CommonMethods.WaitAndClickControl("input", "@id", "ispublic","");
+                IWebElement checkbox = Testbase.WebDriver.FindElement(By.XPath("//input[@id='ispublic']"));
+                if(status==true & checkbox.Selected==false)
+                {
+                    checkbox.Click();
+                }
+                if(status==false & checkbox.Selected==true)
+                {
+                    checkbox.Click();
+                }
             }
-            if (clickbutton != "")
             {
                 CommonMethods.WaitAndClickControl("input", "@id", clickbutton,"");
             }
+            Thread.Sleep(500);
         }
         public void DeletePage(string pagename)
         {
-            IWebElement pagetab = Testbase.WebDriver.FindElement(By.XPath("//a[.='"+pagename+"']"));
-            pagetab.Click();
+            CommonMethods.WaitAndClickControl("a", "text()", pagename, "");
             this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
             WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.AlertIsPresent());
@@ -160,14 +171,19 @@ namespace Group1Project.PageObjects
             Thread.Sleep(500);
         }
 
-        public bool CheckTabExist(string tabname)
+        public bool IsTabVisible(string tabname)
         {
             return CommonMethods.IsElementPresent(OpenQA.Selenium.By.XPath("//a[.='" + tabname + "']"));
         }
-
-        public Dialog ClickAddPage()
+        public void ClickTab(string tabname)
         {
-            Dialog dialog = new Dialog();
+            CommonMethods.WaitAndClickControl("a", "text()", tabname, "");
+        }
+
+
+        public AddPageDialog ClickAddPage()
+        {
+            AddPageDialog dialog = new AddPageDialog();
             this.MnGlobalSetting.Click();
             this.LnkAddPage.Click();
             return dialog;

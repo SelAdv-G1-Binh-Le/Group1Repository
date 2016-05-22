@@ -55,7 +55,7 @@ namespace Group1Project.TestCases
             //Step5 Click OK button
             string randomStr = CommonMethods.RandomString();
             string pageName = "test" + randomStr;
-            mainPage.AddNewPage(pageName, "", "", "Overview", false,"OK");
+            mainPage.AddOrEditPage(pageName, "", "", "Overview", false,"OK");
 
             //VP. Check "Test" page is displayed besides "Overview" page
             //New page is displayed besides "Overview" page
@@ -82,7 +82,7 @@ namespace Group1Project.TestCases
             //Step5 Click OK button
             string randomStr1 = CommonMethods.RandomString();
             string pageName1 = "test" + randomStr1;
-            mainPage.AddNewPage(pageName1, "", "", "", false, "OK");
+            mainPage.AddOrEditPage(pageName1, "", "", "", false, "OK");
 
             //Step6	Go to Global Setting -> Add page
             //Step7	Enter Page Name field
@@ -91,7 +91,7 @@ namespace Group1Project.TestCases
             //Step10 Click OK button
             string randomStr2 = CommonMethods.RandomString();
             string pageName2 = "test" + randomStr2;
-            mainPage.AddNewPage(pageName2, "", "", pageName1, false, "OK");
+            mainPage.AddOrEditPage(pageName2, "", "", pageName1, false, "OK");
 
             //VP. Page 1 is positioned besides the Page 2
             int position1 = mainPage.GetTabIndex(pageName1);
@@ -119,7 +119,7 @@ namespace Group1Project.TestCases
             //Step6 Click OK button
             string randomStr = CommonMethods.RandomString();
             string pageName = "test" + randomStr;
-            mainPage.AddNewPage(pageName, "", "", "", true, "OK");
+            mainPage.AddOrEditPage(pageName, "", "", "", true, "OK");
 
             //Step7	Click on Log out link
             mainPage.Logout();
@@ -127,7 +127,7 @@ namespace Group1Project.TestCases
             //Step8	Log in with another valid account
             MainPage mainpage2 = loginPage.Login(Constant.UserName2, Constant.PassWord2, Constant.DefaultRepository);
             //VP Check newly added page is visibled
-            bool ExpectedResult = mainpage2.CheckTabExist(pageName);
+            bool ExpectedResult = mainpage2.IsTabVisible(pageName);
             Assert.AreEqual(ExpectedResult, true);
 
             //Post-Condition: Log in  as creator page account and delete newly added page
@@ -154,7 +154,7 @@ namespace Group1Project.TestCases
             //Step6 Click OK button
             string randomStr1 = CommonMethods.RandomString();
             string pageName1 = "test" + randomStr1;
-            mainPage.AddNewPage(pageName1, "", "", "", true, "OK");
+            mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
 
 
             //Step7	Go to Global Setting -> Add page
@@ -164,7 +164,7 @@ namespace Group1Project.TestCases
             //Step11 Click OK button
             string randomStr2 = CommonMethods.RandomString();
             string pageName2 = "test" + randomStr2;
-            mainPage.AddNewPage(pageName2, pageName1, "", "", false, "OK");
+            mainPage.AddOrEditPage(pageName2, pageName1, "", "", false, "OK");
 
             //Step12 Click on Log out link
             mainPage.Logout();
@@ -173,7 +173,7 @@ namespace Group1Project.TestCases
             MainPage mainpage2 = loginPage.Login(Constant.UserName2, Constant.PassWord2, Constant.DefaultRepository);
 
             //VP Check children is invisibled
-            bool ActualResult = mainpage2.CheckTabExist(pageName2);
+            bool ActualResult = mainpage2.IsTabVisible(pageName2);
             Assert.AreEqual(false, ActualResult);
 
             //Post-Condition: Log in  as creator page account and delete newly added page and its parent page
@@ -183,5 +183,209 @@ namespace Group1Project.TestCases
             mainpage3.DeletePage(pageName1,pageName2);
             mainpage3.DeletePage(pageName1);
         }
+
+        [TestMethod]
+        public void TC16()
+        {
+            Console.WriteLine("Verify that user is able to edit the \"Public\" setting of any page successfully");
+            //Step1	Navigate to Dashboard login page
+            LoginPage loginPage = new LoginPage().Open();
+
+            //Step2	Log in specific repository with valid account
+            MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+
+            //Step3	Go to Global Setting -> Add page
+            //Step4	Enter Page Name
+            //Step5	Click OK button
+            string randomStr1 = CommonMethods.RandomString();
+            string pageName1 = "test1" + randomStr1;
+            mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
+
+            //Step6	Go to Global Setting -> Add page
+            //Step7	Enter Page Name
+            //Step8	Check Public checkbox
+            //Step9	Click OK button
+            string randomStr2 = CommonMethods.RandomString();
+            string pageName2 = "test2" + randomStr2;
+            mainPage.AddOrEditPage(pageName2, "", "", "", true, "OK");
+
+            //Step10	Click on "Test" page
+            mainPage.ClickTab(pageName1);
+
+            //Step11	Click on "Edit" link
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
+
+            //VP	Check "Edit Page" pop up window is displayed
+            bool ActualResult1 = CommonMethods.IsElementPresent(OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
+            Assert.AreEqual(true, ActualResult1,"Edit Page is not displayed");
+
+            //Step12	Check Public checkbox
+            //Step13	Click OK button
+            mainPage.AddOrEditPage("", "", "", "", true, "OK");
+
+            //Step14	Click on "Another Test" page
+            mainPage.ClickTab(pageName2);
+
+            //Step15	Click on "Edit" link
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
+
+            //VP	Check "Edit Page" pop up window is displayed
+            bool ActualResult2 = CommonMethods.IsElementPresent(OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
+            Assert.AreEqual(true, ActualResult2,"Edit Page is not displayed");
+
+            //Step16	Uncheck Public checkbox
+            //Step17	Click OK button
+            mainPage.AddOrEditPage("", "", "", "", false, "OK");
+            
+            //Step18	Click Log out link
+            mainPage.Logout();
+
+            //Step19	Log in with another valid account
+            MainPage mainpage2 = loginPage.Login(Constant.UserName2, Constant.PassWord2, Constant.DefaultRepository);
+            bool ActualReuslt3 = mainpage2.IsTabVisible(pageName1);
+            bool ActualReuslt4 = mainpage2.IsTabVisible(pageName2);
+
+            //VP	Check "Test" Page is visible and can be accessed
+            Assert.AreEqual(true, ActualReuslt3,pageName1 + " tab is not visible");
+
+            //VP	Check "Another Test" page is invisible
+            Assert.AreEqual(false, ActualReuslt4, pageName2 + " tab is visible");
+
+            //Post-Condition: Log in  as creator page account and delete newly added page and its parent page
+            //Close TA Dashboard Main Page
+            mainpage2.Logout();
+            MainPage mainpage3 = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            mainpage3.DeletePage(pageName1);
+            mainpage3.DeletePage(pageName2);
+        }
+
+        [TestMethod]
+        public void TC17()
+        {
+            Console.WriteLine("Verify that user can remove any main parent page except \Overview\ page successfully and the order of pages stays persistent as long as there is not children page under it");
+            //Step1	    Navigate to Dashboard login page
+            LoginPage loginPage = new LoginPage().Open();
+
+            //Step2	    Log in specific repository with valid account
+            MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+
+            //Step3	    Add a new parent page
+            string randomStr1 = CommonMethods.RandomString();
+            string pageName1 = "test1" + randomStr1;
+            mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
+
+            //Step4	    Add a children page of newly added page
+            string randomStr2 = CommonMethods.RandomString();
+            string pageName2 = "test1" + randomStr1;
+            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+
+            //Step5	    Click on parent page
+            mainPage.ClickTab(pageName1);
+
+            //Step6	    Click "Delete" link
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting,MenuList.ChildMenuEnum.Delete);
+
+            //VP	    Check confirm message "Are you sure you want to remove this page?" appears
+
+
+            //Step7	    Click OK button
+            //VP	    Check warning message "Can not delete page 'Test' since it has children page(s)" appears
+            //Step8	    Click OK button
+            //Step9	    Click on  children page
+            //Step10	Click "Delete" link
+            //VP	    Check confirm message "Are you sure you want to remove this page?" appears
+            //Step11	Click OK button
+            //VP	    Check children page is deleted
+            //Step12	Click on  parent page
+            //Step13	Click "Delete" link
+            //VP	    Check confirm message "Are you sure you want to remove this page?" appears
+            //Step14	Click OK button
+            //VP	    Check parent page is deleted
+            //Step15	Click on "Overview" page
+            //VP	    Check "Delete" link disappears
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            //Step1	Navigate to Dashboard login page
+            LoginPage loginPage = new LoginPage().Open();
+
+            //Step2	Log in specific repository with valid account
+            MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+
+            //Step3	Go to Global Setting -> Add page
+            //Step4	Enter Page Name
+            //Step5	Click OK button
+            string randomStr1 = CommonMethods.RandomString();
+            string pageName1 = "test1" + randomStr1;
+            mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
+
+            //Step6	Go to Global Setting -> Add page
+            //Step7	Enter Page Name
+            //Step8	Check Public checkbox
+            //Step9	Click OK button
+            string randomStr2 = CommonMethods.RandomString();
+            string pageName2 = "test2" + randomStr2;
+            mainPage.AddOrEditPage(pageName2, "", "", "", true, "OK");
+
+            //Step10	Click on "Test" page
+            mainPage.ClickTab(pageName1);
+
+            //Step11	Click on "Edit" link
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
+
+            //VP	Check "Edit Page" pop up window is displayed
+            bool ActualResult1 = CommonMethods.IsElementPresent(OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
+            Assert.AreEqual(true, ActualResult1, "Edit Page is not displayed");
+
+            //Step12	Check Public checkbox
+            //Step13	Click OK button
+            mainPage.AddOrEditPage("", "", "", "", true, "OK");
+
+            //Step14	Click on "Another Test" page
+            mainPage.ClickTab(pageName2);
+
+            //Step15	Click on "Edit" link
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
+
+            //VP	Check "Edit Page" pop up window is displayed
+            bool ActualResult2 = CommonMethods.IsElementPresent(OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
+            Assert.AreEqual(true, ActualResult2, "Edit Page is not displayed");
+
+            //Step16	Uncheck Public checkbox
+            //Step17	Click OK button
+            mainPage.AddOrEditPage("", "", "", "", false, "OK");
+
+            //Step18	Click Log out link
+            mainPage.Logout();
+
+            //Step19	Log in with another valid account
+            MainPage mainpage2 = loginPage.Login(Constant.UserName2, Constant.PassWord2, Constant.DefaultRepository);
+            bool ActualReuslt3 = mainpage2.IsTabVisible(pageName1);
+            bool ActualReuslt4 = mainpage2.IsTabVisible(pageName2);
+
+            //VP	Check "Test" Page is visible and can be accessed
+            Assert.AreEqual(true, ActualReuslt3, pageName1 + " tab is not visible");
+
+            //VP	Check "Another Test" page is invisible
+            Assert.AreEqual(false, ActualReuslt4, pageName2 + " tab is visible");
+
+            //Post-Condition: Log in  as creator page account and delete newly added page and its parent page
+            //Close TA Dashboard Main Page
+            mainpage2.Logout();
+            MainPage mainpage3 = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            mainpage3.DeletePage(pageName1);
+            mainpage3.DeletePage(pageName2);
+        }
+
     }
 }
