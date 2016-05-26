@@ -19,7 +19,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that user is unable open more than 1 \"New Page\" dialog");
             //Step1	Navigate to Dashboard login page
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2 Login with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername,Constant.DefaultPassword,Constant.DefaultRepository);
@@ -45,7 +45,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that user is able to add additional pages besides \"Overview\" page successfully");
             //Step1	Navigate to Dashboard login page
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2 Login with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
@@ -74,7 +74,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that the newly added main parent page is positioned at the location specified as set with \"Displayed After\" field of \"New Page\" form on the main page bar/\"Parent Page\" dropped down menu");
             //Step1	Navigate to Dashboard login page
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2 Log in specific repository with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
@@ -110,7 +110,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that \"Public\" pages can be visible and accessed by all users of working repository");
             //Step1	Navigate to Dashboard login page
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2 Log in specific repository with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
@@ -145,7 +145,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that non \"Public\" pages can only be accessed and visible to their creators with condition that all parent pages above it are \"Public\"");
             //Step1	Navigate to Dashboard login page
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2 Log in specific repository with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
@@ -191,7 +191,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that user is able to edit the \"Public\" setting of any page successfully");
             //Step1	Navigate to Dashboard login page
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2	Log in specific repository with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
@@ -266,7 +266,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that user can remove any main parent page except \"Overview\" page successfully and the order of pages stays persistent as long as there is not children page under it");
             //Step1	    Navigate to Dashboard login page
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2	    Log in specific repository with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
@@ -367,7 +367,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that user is able to add additional sibbling pages to the parent page successfully");
             //Step1	    Navigate to Dashboard login page
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2	    Log in specific repository with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
@@ -413,7 +413,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that user is able to add additional sibbling page levels to the parent page successfully.");
             //Step1  	Navigate to Dashboard login page
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2  	Login with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
@@ -440,7 +440,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that user is able to delete sibbling page as long as that page has not children page under it");
             //Step1	        Navigate to Dashboard login page
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2	        Login with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
@@ -487,7 +487,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that user is able to edit the name of the page (Parent/Sibbling) successfully");
             //Step1	    Navigate to Dashboard login page
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2	    Login with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
@@ -541,7 +541,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that user is unable to duplicate the name of sibbling page under the same parent page");
             //Step1	Navigate to Dashboard login page	
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2	Log in specific repository with valid account	
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
@@ -569,7 +569,7 @@ namespace Group1Project.TestCases
 
             //Post-Condition delete newly added page
             //Close TA Dashboard Main Page
-            AddPageDialog dialog = new AddPageDialog();
+            AddPageDialog dialog = new AddPageDialog(webDriver);
             dialog.BtnCancel.Click();
             mainPage.DeletePage(pageName1, pageName2);
             mainPage.DeletePage(pageName1);
@@ -580,7 +580,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Verify that user is able to edit the parent page of the sibbling page successfully");
             //Step	Navigate to Dashboard login page	
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step	Login with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);

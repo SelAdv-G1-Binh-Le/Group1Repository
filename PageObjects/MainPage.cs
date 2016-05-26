@@ -85,16 +85,12 @@ namespace Group1Project.PageObjects
                         
         }
 
-          public MainPage()
-          {
-             
-          }
-
+        
         public LoginPage Logout()
         {
             this.LblWelcome.Click();
             this.LnkLogout.Click();
-            return new LoginPage();
+            return new LoginPage(webDriver);
         }
 
         public MainPage ChangeRepository(string repository)

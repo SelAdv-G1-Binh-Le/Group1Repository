@@ -11,8 +11,7 @@ namespace Group1Project.TestCases
     {
 
         public IWebDriver webDriver;
-        
-        
+                
         [TestInitialize]
                 public void TestInitializeMethod()
         {
@@ -24,14 +23,13 @@ namespace Group1Project.TestCases
             webDriver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
                       
         }
-
-        
+                
         [TestCleanup]
         public void TestCleanupMethod()
         {
             Console.WriteLine("Run Test Cleanup");
             // CLose browser
-            //webDriver.Quit();
+            webDriver.Quit();
 
         }
     }

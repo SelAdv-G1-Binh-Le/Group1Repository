@@ -15,7 +15,7 @@ namespace Group1Project.TestFoler
         [TestMethod]
         public void TestMethod1()
         {
-            LoginPage loginPage = new LoginPage().Open();
+            LoginPage loginPage = new LoginPage(webDriver).Open();
 
             //Step2 Login with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);

@@ -17,7 +17,7 @@ namespace Group1Project.TestCases
 
             //1	Step	Navigate to Dashboard login page	
             //2	Step	Login with valid account	test / test
-            LoginPage loginpage = new LoginPage().Open();
+            LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
             //3	Step	Go to Global Setting -> Add page
@@ -42,7 +42,7 @@ namespace Group1Project.TestCases
 
             //1	Step	Navigate to Dashboard login page
             //2	Step	Login with valid account
-            LoginPage loginpage = new LoginPage().Open();
+            LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             //3	Step	Click Administer link
             //4	Step	Click Panel link
@@ -67,7 +67,7 @@ namespace Group1Project.TestCases
             //3	Step	Enter valid username and password
             //4	Step	Click on Login button
 
-            LoginPage loginpage = new LoginPage().Open();
+            LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
             //5	Step	Click on Administer/Panels link
@@ -94,7 +94,7 @@ namespace Group1Project.TestCases
             //3	Step	Click Administer link
             //4	Step	Click Panel link
             //5	Step	Click Add New link
-            LoginPage loginpage = new LoginPage().Open();
+            LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
          //   IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Administer')]")).Click();
          //   IWebElementExtension.FindElement(By.XPath("//a[@href='panels.jsp']")).Click();

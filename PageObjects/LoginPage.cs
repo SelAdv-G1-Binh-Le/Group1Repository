@@ -43,7 +43,7 @@ namespace Group1Project.PageObjects
 
         #region Methods
 
-        public LoginPage() { }
+      
 
         public LoginPage(IWebDriver webDriver)
         {

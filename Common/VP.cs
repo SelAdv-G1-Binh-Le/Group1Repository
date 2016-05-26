@@ -10,33 +10,20 @@ namespace Group1Project.Common
     {
         #region Verify Methods
 
-        public static void VerifyUserShouldBeLogged(string username)
+        public static void CheckCurrentRepository(IWebDriver webDriver, string repository)
         {
-            MainPage hp = new MainPage();
-            string actual = hp.LblWelcome.Text;
-            Console.WriteLine("Check User Logged: " + username);
-            Assert.AreEqual(username, actual);
-        }
-
-        public static void VerifyUserShouldNotBeLogged(string errormessage)
-        {
-
-        }
-
-        public static void CheckCurrentRepository(string repository)
-        {
-            MainPage hp = new MainPage();
+            MainPage hp = new MainPage(webDriver);
             string actual = hp.LblRepository.GetAttribute("text");
             Console.WriteLine("Check Current Repository: " + repository);
             Assert.AreEqual("Repository: " + repository, actual);
         }
 
-        public static void CheckControlNotExist(By by)
+        public static void CheckControlNotExist(IWebDriver webDriver,By by)
         {
             //Assert.IsFalse(CommonMethods.IsElementPresent(by), "Control " + by + " Exists");
         }
 
-        public static void CheckControlExist(By by)
+        public static void CheckControlExist(IWebDriver webDriver,By by)
         {
             //Assert.IsTrue(CommonMethods.IsElementPresent(by), "Control " + by + " NOT Exist");
         }
@@ -44,11 +31,11 @@ namespace Group1Project.Common
         public static void CheckText(string expected, string actual)
         {
             Console.WriteLine("Check text:");
-            Console.WriteLine("Expected: "+ expected);
-            Console.WriteLine("Recorded: " + actual);            
-            Assert.AreEqual(expected, actual,"Fail");
+            Console.WriteLine("Expected: " + expected);
+            Console.WriteLine("Recorded: " + actual);
+            Assert.AreEqual(expected, actual, "Fail");
         }
 
-                #endregion
+        #endregion
     }
 }

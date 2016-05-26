@@ -61,12 +61,7 @@ namespace Group1Project.PageObjects
                         
         }
 
-        public AddPageDialog()
-        {
-            
-
-        }
-
+     
         public void AddPage(string pagename, string button = "OK")
         {            
             IWebElementExtension.Set(this.TxtPageName, pagename, true);
