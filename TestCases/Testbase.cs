@@ -9,21 +9,20 @@ namespace Group1Project.TestCases
     [TestClass]
     public class Testbase
     {
-        public static IWebDriver WebDriver;
 
+        public IWebDriver webDriver;
+        
+        
         [TestInitialize]
-
-        public void TestInitializeMethod()
+                public void TestInitializeMethod()
         {
-            Console.WriteLine("Run Test Initialize");
+            Console.WriteLine("Run Test Initialize");                     
 
             //Start Firefox browser and maximize window
-            WebDriver = new FirefoxDriver(new FirefoxBinary(), new FirefoxProfile(), TimeSpan.FromSeconds(180));
-            WebDriver.Manage().Window.Maximize();
-            WebDriver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
-
-            //Navigate to Dashboard's homepage
-            WebDriver.Navigate().GoToUrl(Constant.LoginPageURL);
+            webDriver = new FirefoxDriver(new FirefoxBinary(), new FirefoxProfile(), TimeSpan.FromSeconds(180));
+            webDriver.Manage().Window.Maximize();
+            webDriver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
+                      
         }
 
         
@@ -32,7 +31,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Run Test Cleanup");
             // CLose browser
-            WebDriver.Quit();
+            //webDriver.Quit();
 
         }
     }

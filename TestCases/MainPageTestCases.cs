@@ -218,7 +218,7 @@ namespace Group1Project.TestCases
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
 
             //VP	Check "Edit Page" pop up window is displayed
-            bool ActualResult1 = CommonMethods.IsElementPresent(OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
+            bool ActualResult1 = CommonMethods.IsElementPresent(mainPage.webDriver,OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
             Assert.AreEqual(true, ActualResult1,"Edit Page is not displayed");
 
             //Step12	Check Public checkbox
@@ -232,7 +232,7 @@ namespace Group1Project.TestCases
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
 
             //VP	Check "Edit Page" pop up window is displayed
-            bool ActualResult2 = CommonMethods.IsElementPresent(OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
+            bool ActualResult2 = CommonMethods.IsElementPresent(mainPage.webDriver, OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
             Assert.AreEqual(true, ActualResult2,"Edit Page is not displayed");
 
             //Step16	Uncheck Public checkbox
@@ -286,9 +286,9 @@ namespace Group1Project.TestCases
 
             //Step6	    Click "Delete" link
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting,MenuList.ChildMenuEnum.Delete);
-            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait = new WebDriverWait(mainPage.webDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.AlertIsPresent());
-            IAlert alert = Testbase.WebDriver.SwitchTo().Alert();
+            IAlert alert = mainPage.webDriver.SwitchTo().Alert();
             string ActualResult = alert.Text;
             string ExpectedResult1 = "Are you sure you want to remove this page?";
 
@@ -305,18 +305,18 @@ namespace Group1Project.TestCases
 
             //Step8	    Click OK button
             alert.Accept();
-            Testbase.WebDriver.SwitchTo().DefaultContent();
+            mainPage.webDriver.SwitchTo().DefaultContent();
 
             //Step9	    Click on  children page
-            IWebElement tab1 = IWebElementExtension.FindElement(By.XPath("//a[.='" + pageName1 + "']"));
-            tab1.MoveMouse();
+            IWebElement tab1 = mainPage.webDriver.FindElement(By.XPath("//a[.='" + pageName1 + "']"));
+            tab1.MoveMouse(mainPage.webDriver);
             mainPage.ClickTab(pageName2);
 
             //Step10	Click "Delete" link
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting,MenuList.ChildMenuEnum.Delete);
-            WebDriverWait wait2 = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait2 = new WebDriverWait(mainPage.webDriver, TimeSpan.FromSeconds(5));
             wait2.Until(ExpectedConditions.AlertIsPresent());
-            IAlert alert2 = Testbase.WebDriver.SwitchTo().Alert();
+            IAlert alert2 = mainPage.webDriver.SwitchTo().Alert();
             string ActualResult3 = alert2.Text;
 
             //VP	    Check confirm message "Are you sure you want to remove this page?" appears
@@ -324,8 +324,8 @@ namespace Group1Project.TestCases
 
             //Step11	Click OK button
             alert2.Accept();
-            Testbase.WebDriver.SwitchTo().DefaultContent();
-            CommonMethods.WaitUntilControlDisappear("a", "text()", pageName2);
+            mainPage.webDriver.SwitchTo().DefaultContent();
+            CommonMethods.WaitUntilControlDisappear(mainPage.webDriver, "a", "text()", pageName2);
             bool ActualResult4 = mainPage.IsTabVisible(pageName2);
             
             //VP	    Check children page is deleted
@@ -336,9 +336,9 @@ namespace Group1Project.TestCases
 
             //Step13	Click "Delete" link
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting,MenuList.ChildMenuEnum.Delete);
-            WebDriverWait wait3 = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait3 = new WebDriverWait(mainPage.webDriver, TimeSpan.FromSeconds(5));
             wait2.Until(ExpectedConditions.AlertIsPresent());
-            IAlert alert3 = Testbase.WebDriver.SwitchTo().Alert();
+            IAlert alert3 = mainPage.webDriver.SwitchTo().Alert();
             string ActualResult5 = alert3.Text;
 
             //VP	    Check confirm message "Are you sure you want to remove this page?" appears
@@ -346,8 +346,8 @@ namespace Group1Project.TestCases
 
             //Step14	Click OK button
             alert3.Accept();
-            Testbase.WebDriver.SwitchTo().DefaultContent();
-            CommonMethods.WaitUntilControlDisappear("a", "text()", pageName1);
+            mainPage.webDriver.SwitchTo().DefaultContent();
+            CommonMethods.WaitUntilControlDisappear(mainPage.webDriver, "a", "text()", pageName1);
             bool ActualResult6 = mainPage.IsTabVisible(pageName1);
 
             //VP	    Check parent page is deleted
@@ -355,8 +355,8 @@ namespace Group1Project.TestCases
 
             //Step15	Click on "Overview" page
             mainPage.ClickTab("Overview");
-            CommonMethods.WaitAndClickControl("li","@class","mn-setting","");
-            bool ActualResult7 = CommonMethods.IsElementPresent(By.XPath("//a[.='Delete']"));
+            CommonMethods.WaitAndClickControl(mainPage.webDriver, "li", "@class", "mn-setting", "");
+            bool ActualResult7 = CommonMethods.IsElementPresent(mainPage.webDriver, By.XPath("//a[.='Delete']"));
 
             //VP	    Check "Delete" link disappears
             Assert.AreEqual(false,ActualResult7, "The 'Delete' link is still displayed");

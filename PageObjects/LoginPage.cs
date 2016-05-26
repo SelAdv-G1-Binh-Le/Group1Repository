@@ -7,6 +7,8 @@ namespace Group1Project.PageObjects
 {
     class LoginPage : GeneralPage
     {
+        public IWebDriver webDriver;
+        
         #region Locators
 
         static readonly By _cboRepository = By.XPath("//select[@id='repository']");
@@ -19,30 +21,40 @@ namespace Group1Project.PageObjects
         #region Elements
         public IWebElement CboRepository
         {
-            get { return IWebElementExtension.FindElement(_cboRepository); }
+            get { return webDriver.FindElement(_cboRepository); }
         }
 
         public IWebElement TxtUsername
         {
-            get { return IWebElementExtension.FindElement(_txtUsername); }
+            get { return webDriver.FindElement(_txtUsername); }
         }
 
         public IWebElement TxtPassword
         {
-            get { return IWebElementExtension.FindElement(_txtPassword); }
+            get { return webDriver.FindElement(_txtPassword); }
         }
 
         public IWebElement BtnLogin
         {
-            get { return IWebElementExtension.FindElement(_btnLogin); }
+            get { return webDriver.FindElement(_btnLogin); }
         }
 
         #endregion
 
         #region Methods
+
+        public LoginPage() { }
+
+        public LoginPage(IWebDriver webDriver)
+        {
+            this.webDriver = webDriver;
+                        
+        }
+        
+
         public LoginPage Open()
         {
-            TestCases.Testbase.WebDriver.Navigate().GoToUrl(Constant.LoginPageURL);
+            webDriver.Navigate().GoToUrl(Constant.LoginPageURL);
             return this;
         }
         
@@ -68,7 +80,7 @@ namespace Group1Project.PageObjects
             BtnLogin.Click();
 
             //Land on Home Page
-            return new MainPage();
+            return new MainPage(this.webDriver);
         }
 
         #endregion

@@ -46,14 +46,14 @@ namespace Group1Project.Common
             element.SendKeys(value);
         }
 
-        public static IWebElement FindElement(By by)
+        public static IWebElement FindElement(By by, IWebDriver webDriver)
         {
-            return TestCases.Testbase.WebDriver.FindElement(by);
+            return webDriver.FindElement(by);
         }
 
-        public static void MoveMouse(this IWebElement element)
+        public static void MoveMouse(this IWebElement element, IWebDriver webDriver)
         {
-            Actions action = new Actions(Testbase.WebDriver);
+            Actions action = new Actions(webDriver);
             action.MoveToElement(element).Perform();
         }
         

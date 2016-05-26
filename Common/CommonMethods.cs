@@ -28,11 +28,11 @@ namespace Group1Project.Common
             return CreateRandomString(15) + "@" + emaildomain;
         }
 
-        public static bool IsElementPresent(By by)
+        public static bool IsElementPresent(IWebDriver webDriver, By by)
         {
             try
             {
-                IWebElementExtension.FindElement(by);
+                webDriver.FindElement(by);
                 return true;
             }
             catch (NoSuchElementException)
@@ -41,15 +41,15 @@ namespace Group1Project.Common
             }
         }
 
-        public static void WaitForControl(By by, int timeout)
+        public static void WaitForControl(IWebDriver webDriver, By by, int timeout)
         {
-            WebDriverWait wait = new WebDriverWait(TestCases.Testbase.WebDriver, TimeSpan.FromSeconds(timeout));
-            wait.Until(d => IWebElementExtension.FindElement(by));
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+            wait.Until(d => webDriver.FindElement(by));
         }
-        public static bool WaitForControlEnable(By by, int timeout)
+        public static bool WaitForControlEnable(IWebDriver webDriver, By by, int timeout)
         {
-            WebDriverWait wait = new WebDriverWait(TestCases.Testbase.WebDriver, TimeSpan.FromSeconds(timeout));
-            return wait.Until(d => IWebElementExtension.FindElement(by).Enabled);
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+            return wait.Until(d => webDriver.FindElement(by).Enabled);
         }
 
         public static string ConvertDateTimeToString(DateTime dt)
@@ -84,11 +84,11 @@ namespace Group1Project.Common
             }
         }
 
-        public static string CloseAlertAndGetItsText(IWebDriver WebDriver)
+        public static string CloseAlertAndGetItsText(IWebDriver webDriver)
         {
             try
             {
-                IAlert alert = WebDriver.SwitchTo().Alert();
+                IAlert alert = webDriver.SwitchTo().Alert();
                 string alertText = alert.Text;
                 if (acceptNextAlert)
                 {
@@ -112,9 +112,9 @@ namespace Group1Project.Common
             return Random;
         }
 
-        public static void WaitAndClickControl(string type, string property, string value, string selectvalue)
+        public static void WaitAndClickControl(IWebDriver webDriver ,string type, string property, string value, string selectvalue)
         {
-            WebDriverWait wait = new WebDriverWait(Testbase.WebDriver, TimeSpan.FromSeconds(20));
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(20));
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))));
             //if (type == "select")
             //{
@@ -127,7 +127,7 @@ namespace Group1Project.Common
             //{
             //    Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))).Click();
             //}
-            Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))).Click();
+            webDriver.FindElement(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))).Click();
         }
 
         public static string XPathContainGenerate(string tagname, string str)
@@ -141,9 +141,9 @@ namespace Group1Project.Common
             }
             return xPath;
         }
-        public static void WaitUntilControlDisappear(string tag, string property, string value)
+        public static void WaitUntilControlDisappear(IWebDriver webDriver, string tag, string property, string value)
         {
-            bool check = CommonMethods.IsElementPresent(By.XPath("//" + tag + "[" + property + "='" + value + "']"));
+            bool check = CommonMethods.IsElementPresent(webDriver,By.XPath("//" + tag + "[" + property + "='" + value + "']"));
             if(check == true)
             {
                 Thread.Sleep(1000);

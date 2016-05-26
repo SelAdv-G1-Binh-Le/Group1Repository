@@ -6,6 +6,7 @@ namespace Group1Project.PageObjects
 {
     class GeneralPage 
     {
+       
         #region Locators
 
         
@@ -20,7 +21,7 @@ namespace Group1Project.PageObjects
         #endregion
 
         #region Methods
-
+        
 
         #endregion
     }

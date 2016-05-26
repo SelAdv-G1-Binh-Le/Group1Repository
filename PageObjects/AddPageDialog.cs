@@ -6,6 +6,8 @@ namespace Group1Project.PageObjects
     class AddPageDialog : GeneralPage
     {
 
+        public IWebDriver webDriver;
+
         #region Locators
 
         static readonly By _txtPageName = By.XPath("//input[@id='name']");
@@ -22,42 +24,54 @@ namespace Group1Project.PageObjects
 
         public IWebElement CmbParentPage
         {
-            get { return IWebElementExtension.FindElement(_cmbParentPage); }
+            get { return webDriver.FindElement(_cmbParentPage); }
         }
         public IWebElement CmbNumberColumn
         {
-            get { return IWebElementExtension.FindElement(_cmbNumberColumn); }
+            get { return webDriver.FindElement(_cmbNumberColumn); }
         }
         public IWebElement CmbDisplayAfter
         {
-            get { return IWebElementExtension.FindElement(_cmbDisplayAfter); }
+            get { return webDriver.FindElement(_cmbDisplayAfter); }
         }
         public IWebElement ChbPublic
         {
-            get { return IWebElementExtension.FindElement(_chbPublic); }
+            get { return webDriver.FindElement(_chbPublic); }
         }
         public IWebElement BtnCancel
         {
-            get { return IWebElementExtension.FindElement(_btnCancel); }
+            get { return webDriver.FindElement(_btnCancel); }
         }
         public IWebElement TxtPageName
         {
-            get { return IWebElementExtension.FindElement(_txtPageName); }
+            get { return webDriver.FindElement(_txtPageName); }
         }
         public IWebElement BtnOK
         {
-            get { return IWebElementExtension.FindElement(_btnOK); }
+            get { return webDriver.FindElement(_btnOK); }
         }
 
         #endregion
 
         #region Methods
 
+        public AddPageDialog(IWebDriver webDriver)
+        {
+            this.webDriver = webDriver;
+                        
+        }
+
+        public AddPageDialog()
+        {
+            
+
+        }
+
         public void AddPage(string pagename, string button = "OK")
         {            
             IWebElementExtension.Set(this.TxtPageName, pagename, true);
             this.BtnOK.Click();
-            CommonMethods.WaitForControl(By.XPath(CommonMethods.XPathContainGenerate("a", pagename)),10);
+            CommonMethods.WaitForControl(webDriver,By.XPath(CommonMethods.XPathContainGenerate("a", pagename)), 10);
         }
 
 

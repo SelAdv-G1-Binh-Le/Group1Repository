@@ -12,7 +12,7 @@ namespace Group1Project.Common
         //Global home page: http://groupba.dyndns.org:54000/TADashboard/login.jsp
 
         public const bool DebugMode = false;
-        public const string LoginPageURL = "http://groupba.dyndns.org:54000/TADashboard/login.jsp";
+        public const string LoginPageURL = "http://192.168.170.37/TADashboard/login.jsp";
         public const string DefaultUsername = "administrator";
         public const string DefaultPassword = "";
         public const string InvalidUsername = "abc";
