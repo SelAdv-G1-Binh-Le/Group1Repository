@@ -68,9 +68,9 @@
     <Compile Include="PageObjects\LoginPage.cs" />
     <Compile Include="PageObjects\MainPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestCases\Login TCs.cs" />
+    <Compile Include="TestCases\LoginTestCases.cs" />
     <Compile Include="TestCases\MainPageTestCases.cs" />
-    <Compile Include="TestCases\Panel TCs.cs" />
+    <Compile Include="TestCases\PanelTestCases.cs" />
     <Compile Include="TestCases\Testbase.cs" />
     <Compile Include="TestFoler\UnitTest1.cs" />
   </ItemGroup>
