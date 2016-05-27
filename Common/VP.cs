@@ -18,9 +18,9 @@ namespace Group1Project.Common
             Assert.AreEqual("Repository: " + repository, actual);
         }
 
-        public static void CheckControlNotExist(IWebDriver webDriver,By by)
-        {
-            //Assert.IsFalse(CommonMethods.IsElementPresent(by), "Control " + by + " Exists");
+        public static void CheckControlNotExist(IWebDriver webDriver, By by)
+        {     
+            Assert.IsFalse(CommonMethods.IsElementPresent(webDriver , by), "Control " + by + " Exists");
         }
 
         public static void CheckControlExist(IWebDriver webDriver,By by)

@@ -78,14 +78,14 @@ namespace Group1Project.TestCases
             //5		Select a different repository
             //6		Enter valid username and password of this repository                        
 
-           mainpage =  loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.Repository2);
+            mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.Repository2);
 
             //7		Verify that Dashboard Mainpage appears
             //VP.VerifyUserShouldBeLogged(Constant.DefaultUsername);
-           string actual = mainpage.LblWelcome.Text;
+            string actual = mainpage.LblWelcome.Text;
             Console.WriteLine("Check User Logged: " + Constant.DefaultUsername);
             Assert.AreEqual(Constant.DefaultUsername, actual);
-            
+
         }
 
         [TestMethod]
@@ -108,8 +108,9 @@ namespace Group1Project.TestCases
             Console.WriteLine("Check Current Repository: " + Constant.Repository2);
             Assert.AreEqual("Repository: " + Constant.Repository2, actual);
 
+            string xPath = "//div[@class='form']//div[@class='ltext']";
 
-            VP.CheckControlNotExist(webDriver,By.XPath("//div[@class='btn-login']"));
+            VP.CheckControlNotExist(webDriver, By.XPath(xPath));
 
         }
 
@@ -125,12 +126,16 @@ namespace Group1Project.TestCases
             MainPage mainpage = loginpage.Login("test", "TEST", Constant.DefaultRepository);
             //VP.VerifyUserShouldBeLogged("test");
 
+            string actual = mainpage.LblWelcome.Text;
+            Console.WriteLine("Check User Logged: test");
+            Assert.AreEqual("test", actual);
+
             //4	Step	Logout TA Dashboard		
             //5	Step	Login with the above account but enter lowercase password	test / test	
             //6	VP	Observe the current page - Dashboard Error message "Username or password is invalid" appears
             mainpage.Logout().Login("test", "test", Constant.DefaultRepository);
-            //string alerttext = CommonMethods.CloseAlertAndGetItsText();
-            //VP.CheckText(Constant.LoginFailMessage1, alerttext);
+            string alerttext = CommonMethods.CloseAlertAndGetItsText(webDriver);
+            VP.CheckText(Constant.LoginFailMessage1, alerttext);
         }
 
         [TestMethod]
@@ -145,11 +150,20 @@ namespace Group1Project.TestCases
             MainPage mainpage = loginpage.Login("UPPERCASEUSERNAME", "uppercaseusername", Constant.DefaultRepository);
             //VP.VerifyUserShouldBeLogged("uppercaseusername");
 
+            string actual = mainpage.LblWelcome.Text;
+            Console.WriteLine("Check User Logged: uppercaseusername");
+            Assert.AreEqual("uppercaseusername", actual);
+
             //4	Step	Logout TA Dashboard		
             //5	Step	Login with the above account but enter lowercase username -	uppercaseusername / uppercaseusername	
             //6	VP	Observe the current page - Main page is displayed
             mainpage.Logout().Login("uppercaseusername", "uppercaseusername", Constant.DefaultRepository);
             //VP.VerifyUserShouldBeLogged("uppercaseusername");
+
+            actual = mainpage.LblWelcome.Text;
+            Console.WriteLine("Check User Logged: uppercaseusername");
+            Assert.AreEqual("uppercaseusername", actual);
+
         }
 
         [TestMethod]
@@ -163,7 +177,9 @@ namespace Group1Project.TestCases
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login("specialCharsPassword", "`!@^&*(+_=[{;'\",./<?", Constant.DefaultRepository);
             //VP.VerifyUserShouldBeLogged("specialCharsPassword");
-
+            string actual = mainpage.LblWelcome.Text;
+            Console.WriteLine("Check User Logged: specialCharsPassword");
+            Assert.AreEqual("specialCharsPassword", actual);
         }
 
         [TestMethod]
@@ -178,6 +194,9 @@ namespace Group1Project.TestCases
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login("`~!@$^&()',.", "specialCharsUser", Constant.DefaultRepository);
             //VP.VerifyUserShouldBeLogged("`~!@$^&()',.");
+            string actual = mainpage.LblWelcome.Text;
+            Console.WriteLine("Check User Logged: `~!@$^&()',.");
+            Assert.AreEqual("`~!@$^&()',.", actual);
         }
 
         [TestMethod]
@@ -191,8 +210,8 @@ namespace Group1Project.TestCases
 
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login("", "", Constant.DefaultRepository);
-            //string alerttext = CommonMethods.CloseAlertAndGetItsText(TestCases.Testbase.WebDriver);
-            // VP.CheckText(Constant.LoginFailMessage2, alerttext);
+            string alerttext = CommonMethods.CloseAlertAndGetItsText(webDriver);
+            VP.CheckText(Constant.LoginFailMessage2, alerttext);
         }
 
 
