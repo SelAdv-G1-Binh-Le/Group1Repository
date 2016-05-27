@@ -46,10 +46,23 @@ namespace Group1Project.Common
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
             wait.Until(d => webDriver.FindElement(by));
         }
+
+        public static void WaitForControlDisappear(IWebDriver webDriver, By by, int timeout)
+        {
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+            wait.Until(d => !d.FindElement(by).Displayed);
+        }
+
         public static bool WaitForControlEnable(IWebDriver webDriver, By by, int timeout)
         {
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
             return wait.Until(d => webDriver.FindElement(by).Enabled);
+        }
+
+        public static void WaitForControlEnable(IWebDriver webDriver, IWebElement webelement, int timeout)
+        {
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+            wait.Until(d => webelement.Enabled);
         }
 
         public static string ConvertDateTimeToString(DateTime dt)

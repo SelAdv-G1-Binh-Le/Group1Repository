@@ -28,11 +28,21 @@ namespace Group1Project.PageObjects
         static readonly By _mnMainBar = By.XPath("//div[@id='main-menu']");
         static readonly By _lnkAddPage = By.XPath("//a[contains(@href,'openAddPageForm')]");
         static readonly By _lnkAddPanel = By.XPath("//a[contains(@onclick,'openAddPanel')]");
-
-        #endregion
+        static readonly By _btnChoosepanel = By.XPath("//a[@id='btnChoosepanel']");
+        static readonly By _dlgOverlay = By.XPath("//div[@class='ui-dialog-overlay custom-overlay']");
+               
+                #endregion
 
         #region Elements
+        public IWebElement DlgOverlay
+        {
+            get { return webDriver.FindElement(_dlgOverlay); }
+        }
 
+        public IWebElement BtnChoosepanel
+        {
+            get { return webDriver.FindElement(_btnChoosepanel); }
+        }
         public IWebElement LnkAddPanel
         {
             get { return webDriver.FindElement(_lnkAddPanel); }
@@ -258,7 +268,15 @@ namespace Group1Project.PageObjects
             return element.Text;
         }
 
+        public void WaitForOverlayDisappear(int timeout)
+        {
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
+            wait.Until((d) =>
+            {
+                return d.FindElements(By.XPath("//div[@class='ui-dialog-overlay custom-overlay']")).Count == 0;
+            });
 
+        }
 
         #endregion
 

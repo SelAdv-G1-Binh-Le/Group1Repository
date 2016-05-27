@@ -14,10 +14,9 @@ namespace Group1Project.PageObjects
         static By _radTypeChart = By.XPath("//input[@id='radPanelType0']");
         static By _txtDisplayName = By.XPath("//input[@id='txtDisplayName']");
         static By _cbbSeriesField = By.XPath("//select[@id='cbbSeriesField']");
-
         static By _btnOK = By.XPath("//input[@id='OK']");
-
-
+        static By _btnOKPanelConfiguration = By.XPath("//div[@id='div_panelConfigurationDlg']//input[@id='OK']");
+        
         #endregion
 
         #region Elements
@@ -25,6 +24,11 @@ namespace Group1Project.PageObjects
         public IWebElement BtnOK
         {
             get { return webDriver.FindElement(_btnOK); }
+        }
+
+        public IWebElement BtnOKPanelConfiguration
+        {
+            get { return webDriver.FindElement(_btnOKPanelConfiguration); }
         }
 
         public IWebElement RadTypeChart
@@ -67,12 +71,8 @@ namespace Group1Project.PageObjects
             SelectElement SelectedCbo = new SelectElement(CbbSeriesField);
             SelectedCbo.SelectByValue(series);
             BtnOK.Click();
-
-            CommonMethods.WaitForControl(webDriver, By.XPath("//select[@id='cbbPages']"), 5);
-            
-            
-            
-            BtnOK.Click();
+                        CommonMethods.WaitForControl(webDriver, By.XPath("//select[@id='cbbPages']"), 5);
+                        BtnOKPanelConfiguration.Click();
 
             //CommonMethods.WaitForControl(webDriver, By.XPath(CommonMethods.XPathContainGenerate("a", pagename)), 10);
         }

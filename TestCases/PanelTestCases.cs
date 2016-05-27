@@ -34,6 +34,9 @@ namespace Group1Project.TestCases
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
             addpaneldialog.AddChartPanel("zbox", "name");
 
+            mainpage.WaitForOverlayDisappear(5);
+
+            mainpage.BtnChoosepanel.Click();
 
             //7	VP	Verify that all pre-set panels are populated and sorted correctly	
 
@@ -78,13 +81,13 @@ namespace Group1Project.TestCases
             //6	Step	Click on "Add new" link
             //7	Step	Click on OK button
 
-          //  IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Administer')]")).Click();
-         //   IWebElementExtension.FindElement(By.XPath("//a[@href='panels.jsp']")).Click();
-        //    IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Add New')]")).Click();
-         //   IWebElementExtension.FindElement(By.XPath("//input[@id='OK']")).Click();
+            //  IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Administer')]")).Click();
+            //   IWebElementExtension.FindElement(By.XPath("//a[@href='panels.jsp']")).Click();
+            //    IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Add New')]")).Click();
+            //   IWebElementExtension.FindElement(By.XPath("//input[@id='OK']")).Click();
 
             //8	VP	Check warning message show up.
-         //   string alerttext = CommonMethods.CloseAlertAndGetItsText(TestCases.Testbase.WebDriver);
+            //   string alerttext = CommonMethods.CloseAlertAndGetItsText(TestCases.Testbase.WebDriver);
             //VP.CheckText("Display Name is a required field.", alerttext);
 
         }
@@ -100,28 +103,28 @@ namespace Group1Project.TestCases
             //5	Step	Click Add New link
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-         //   IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Administer')]")).Click();
-         //   IWebElementExtension.FindElement(By.XPath("//a[@href='panels.jsp']")).Click();
-         //   IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Add New')]")).Click();
+            //   IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Administer')]")).Click();
+            //   IWebElementExtension.FindElement(By.XPath("//a[@href='panels.jsp']")).Click();
+            //   IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Add New')]")).Click();
 
             //6	Step	Enter value into Display Name field with special characters except "@"
             //7	Step	Click Ok button
-        //    IWebElementExtension.FindElement(By.XPath("//input[@id='txtDisplayName']")).SendKeys("Logigear#$%");
-        //    IWebElementExtension.FindElement(By.XPath("//input[@id='OK']")).Click();
+            //    IWebElementExtension.FindElement(By.XPath("//input[@id='txtDisplayName']")).SendKeys("Logigear#$%");
+            //    IWebElementExtension.FindElement(By.XPath("//input[@id='OK']")).Click();
 
             //8	VP	Observe the current page
             //9	Step	Close Warning Message box
-         //   string alerttext = CommonMethods.CloseAlertAndGetItsText(TestCases.Testbase.WebDriver);
+            //   string alerttext = CommonMethods.CloseAlertAndGetItsText(TestCases.Testbase.WebDriver);
             //VP.CheckText("Invalid display name. The name can't contain high ASCII characters or any of following characters: /:*?<>|\"#{[]{};", alerttext);
             Thread.Sleep(3000);
-        //    IWebElementExtension.FindElement(By.XPath(" //input[@id='Cancel']")).Click();
+            //    IWebElementExtension.FindElement(By.XPath(" //input[@id='Cancel']")).Click();
 
             //10	Step	Click Add New link
             //11	Step	Enter value into Display Name field with special character is @
             //12	VP	Observe the current page
-        //    IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Add New')]")).Click();
-         //   IWebElementExtension.FindElement(By.XPath("//input[@id='txtDisplayName']")).SendKeys("Logigear@");
-           // IWebElementExtension.FindElement(By.XPath("//input[@id='OK']")).Click();
+            //    IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Add New')]")).Click();
+            //   IWebElementExtension.FindElement(By.XPath("//input[@id='txtDisplayName']")).SendKeys("Logigear@");
+            // IWebElementExtension.FindElement(By.XPath("//input[@id='OK']")).Click();
         }
 
 
