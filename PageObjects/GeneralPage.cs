@@ -4,24 +4,24 @@ using Group1Project.Common;
 
 namespace Group1Project.PageObjects
 {
-    class GeneralPage 
+    class GeneralPage
     {
-       
+
         #region Locators
 
-        
+
 
         #endregion
 
         #region Elements
-     
 
-    
+
+
 
         #endregion
 
         #region Methods
-        
+
 
         #endregion
     }

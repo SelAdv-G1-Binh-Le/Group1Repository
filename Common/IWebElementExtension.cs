@@ -56,6 +56,6 @@ namespace Group1Project.Common
             Actions action = new Actions(webDriver);
             action.MoveToElement(element).Perform();
         }
-        
+
     }
 }

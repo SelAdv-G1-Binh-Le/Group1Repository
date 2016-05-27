@@ -58,15 +58,15 @@ namespace Group1Project.PageObjects
         public AddPageDialog(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
-                        
+
         }
 
-     
+
         public void AddPage(string pagename, string button = "OK")
-        {            
+        {
             IWebElementExtension.Set(this.TxtPageName, pagename, true);
             this.BtnOK.Click();
-            CommonMethods.WaitForControl(webDriver,By.XPath(CommonMethods.XPathContainGenerate("a", pagename)), 10);
+            CommonMethods.WaitForControl(webDriver, By.XPath(CommonMethods.XPathContainGenerate("a", pagename)), 10);
         }
 
 

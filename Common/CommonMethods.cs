@@ -112,7 +112,7 @@ namespace Group1Project.Common
             return Random;
         }
 
-        public static void WaitAndClickControl(IWebDriver webDriver ,string type, string property, string value, string selectvalue)
+        public static void WaitAndClickControl(IWebDriver webDriver, string type, string property, string value, string selectvalue)
         {
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(20));
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))));
@@ -143,8 +143,8 @@ namespace Group1Project.Common
         }
         public static void WaitUntilControlDisappear(IWebDriver webDriver, string tag, string property, string value)
         {
-            bool check = CommonMethods.IsElementPresent(webDriver,By.XPath("//" + tag + "[" + property + "='" + value + "']"));
-            if(check == true)
+            bool check = CommonMethods.IsElementPresent(webDriver, By.XPath("//" + tag + "[" + property + "='" + value + "']"));
+            if (check == true)
             {
                 Thread.Sleep(1000);
             }

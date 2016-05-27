@@ -66,22 +66,26 @@ namespace Group1Project.TestCases
             Console.WriteLine("TC04 - Verify that user is able to log in different repositories successfully after logging out current repository");
 
             //1		Navigate to Dashboard login page
-            LoginPage lp = new LoginPage(webDriver).Open();
+            LoginPage loginpage = new LoginPage(webDriver).Open();
             //2		Enter valid username and password of default repository
             //3		Click on "Login" button
-            lp.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             //4		Click on "Logout" button
 
-            MainPage hp = new MainPage(webDriver);
-            hp.Logout();
+            MainPage mainpage = new MainPage(webDriver);
+            loginpage = mainpage.Logout();
 
             //5		Select a different repository
-            //6		Enter valid username and password of this repository
+            //6		Enter valid username and password of this repository                        
 
-            lp.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.Repository2);
+           mainpage =  loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.Repository2);
 
             //7		Verify that Dashboard Mainpage appears
             //VP.VerifyUserShouldBeLogged(Constant.DefaultUsername);
+           string actual = mainpage.LblWelcome.Text;
+            Console.WriteLine("Check User Logged: " + Constant.DefaultUsername);
+            Assert.AreEqual(Constant.DefaultUsername, actual);
+            
         }
 
         [TestMethod]
@@ -91,14 +95,20 @@ namespace Group1Project.TestCases
 
             //1	Step	Navigate to Dashboard login page
             //2	Step	Login with valid account for the first repository
-            LoginPage lp = new LoginPage(webDriver).Open();
-            MainPage hp = lp.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             //3	Step	Choose another repository in Repository list
-            hp.ChangeRepository(Constant.Repository2);
+            mainpage.ChangeRepository(Constant.Repository2);
 
             //4	VP	Observe the current page - There is no Login Repository dialog
             //5	VP	Observe the current page - The Repository menu displays name of switched repository
-            VP.CheckCurrentRepository(webDriver, Constant.Repository2);
+            //VP.CheckCurrentRepository(webDriver, Constant.Repository2);
+
+            string actual = mainpage.LblRepository.GetAttribute("text");
+            Console.WriteLine("Check Current Repository: " + Constant.Repository2);
+            Assert.AreEqual("Repository: " + Constant.Repository2, actual);
+
+
             VP.CheckControlNotExist(webDriver,By.XPath("//div[@class='btn-login']"));
 
         }

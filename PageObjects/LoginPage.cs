@@ -8,7 +8,7 @@ namespace Group1Project.PageObjects
     class LoginPage : GeneralPage
     {
         public IWebDriver webDriver;
-        
+
         #region Locators
 
         static readonly By _cboRepository = By.XPath("//select[@id='repository']");
@@ -43,21 +43,20 @@ namespace Group1Project.PageObjects
 
         #region Methods
 
-      
+
 
         public LoginPage(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
-                        
         }
-        
+
 
         public LoginPage Open()
         {
             webDriver.Navigate().GoToUrl(Constant.LoginPageURL);
             return this;
         }
-        
+
         public MainPage Login(string username, string password, string repository = Constant.DefaultRepository)
         {
             Console.WriteLine("Select Repository '{0}'", repository);

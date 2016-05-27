@@ -84,9 +84,9 @@ namespace Group1Project.PageObjects
             this.webDriver = webDriver;
                         
         }
+                
 
-        
-        public LoginPage Logout()
+          public LoginPage Logout()
         {
             this.LblWelcome.Click();
             this.LnkLogout.Click();
@@ -95,9 +95,14 @@ namespace Group1Project.PageObjects
 
         public MainPage ChangeRepository(string repository)
         {
+            Console.WriteLine("ChangeRepository " + repository);
             this.LblRepository.Click();
-            IWebElement DynamiclblRepository = this.webDriver.FindElement(By.XPath("//ul[@id='ulListRepositories']//a[contains(.,'" + repository + "')]"));
+            IWebElement DynamiclblRepository = webDriver.FindElement(By.XPath("//ul[@id='ulListRepositories']//a[contains(.,'" + repository + "')]"));
             DynamiclblRepository.Click();
+
+            CommonMethods.WaitForControl(webDriver, By.XPath("//span[contains(.,'" + repository + "')]"), 5);
+
+
             return this;
         }
 
