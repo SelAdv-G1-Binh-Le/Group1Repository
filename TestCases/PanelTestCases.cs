@@ -31,6 +31,10 @@ namespace Group1Project.TestCases
             mainpage.MnGlobalSetting.Click();
             mainpage.LnkAddPanel.Click();
 
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
+            addpaneldialog.AddChartPanel("zbox", "name");
+
+
             //7	VP	Verify that all pre-set panels are populated and sorted correctly	
 
         }

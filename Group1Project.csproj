@@ -64,6 +64,7 @@
     <Compile Include="Common\VP.cs" />
     <Compile Include="DataObjects\MenuList.cs" />
     <Compile Include="PageObjects\AddPageDialog.cs" />
+    <Compile Include="PageObjects\AddPanelDialog.cs" />
     <Compile Include="PageObjects\GeneralPage.cs" />
     <Compile Include="PageObjects\LoginPage.cs" />
     <Compile Include="PageObjects\MainPage.cs" />
