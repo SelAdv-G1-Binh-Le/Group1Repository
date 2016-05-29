@@ -29,7 +29,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("Run Test Cleanup");
             // CLose browser
-            //webDriver.Quit();
+            webDriver.Quit();
 
         }
     }

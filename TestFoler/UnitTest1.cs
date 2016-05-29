@@ -6,6 +6,7 @@ using Group1Project.DataObjects;
 using Group1Project.PageObjects;
 using Group1Project.Common;
 using Group1Project.TestCases;
+using OpenQA.Selenium;
 
 namespace Group1Project.TestFoler
 {
@@ -21,7 +22,12 @@ namespace Group1Project.TestFoler
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
             //Step3	Go to Global Setting -> Add page
-            Console.WriteLine(mainPage.GetTabIndex("Overview"));
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.Administer, MenuList.ChildMenuEnum.DataProfiles);
+            //string keke = mainPage.ConvertBlankCharacter("Test Module Execution");
+            string abc = mainPage.GetAllValueOfColumn(1);
+            Console.WriteLine("String get ra duoc la: " + abc);
+
+
         }
     }
 }
