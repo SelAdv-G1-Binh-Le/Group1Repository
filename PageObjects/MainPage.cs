@@ -247,7 +247,7 @@ namespace Group1Project.PageObjects
         /// <param name="pagename">The pagename.</param>
         public void DeletePage(string pagename)
         {
-            CommonMethods.WaitAndClickControl(webDriver, "a", "text()", pagename, "");
+            CommonMethods.WaitAndClickControl(webDriver, "a", "text()", this.ConvertBlankCharacter(pagename), "");
             this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.AlertIsPresent());
@@ -262,7 +262,7 @@ namespace Group1Project.PageObjects
         /// <param name="childpage">The childpage.</param>
         public void DeletePage(string parentpage, string childpage)
         {
-            this.SelectChildPage(parentpage, childpage);
+            this.SelectChildPage(this.ConvertBlankCharacter(parentpage), this.ConvertBlankCharacter(childpage));
             this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.AlertIsPresent());
@@ -296,7 +296,7 @@ namespace Group1Project.PageObjects
         /// <returns></returns>
         public bool IsTabVisible(string tabname)
         {
-            return CommonMethods.IsElementPresent(webDriver, OpenQA.Selenium.By.XPath("//a[.='" + tabname + "']"));
+            return CommonMethods.IsElementPresent(webDriver, OpenQA.Selenium.By.XPath("//a[.='" + this.ConvertBlankCharacter(tabname) + "']"));
         }
         /// <summary>
         /// Clicks the tab.
@@ -304,7 +304,7 @@ namespace Group1Project.PageObjects
         /// <param name="tabname">The tabname.</param>
         public void ClickTab(string tabname)
         {
-            CommonMethods.WaitAndClickControl(webDriver, "a", "text()", tabname, "");
+            CommonMethods.WaitAndClickControl(webDriver, "a", "text()", this.ConvertBlankCharacter(tabname), "");
         }
         /// <summary>
         /// Clicks the add page.

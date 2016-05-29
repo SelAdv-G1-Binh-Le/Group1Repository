@@ -376,7 +376,7 @@ namespace Group1Project.TestCases
             //Step4	    Enter Page Name
             //Step5	    Click OK button
             string randomStr1 = CommonMethods.RandomString();
-            string pageName1 = "test1" + randomStr1;
+            string pageName1 = "test 1" + randomStr1;
             mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
 
             //Step6	    Go to Global Setting -> Add page
@@ -385,7 +385,7 @@ namespace Group1Project.TestCases
             //Step9	    Select a parent page
             //Step10	Click OK button
             string randomStr2 = CommonMethods.RandomString();
-            string pageName2 = "test2" + randomStr2;
+            string pageName2 = "test 2" + randomStr2;
             mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
 
             //Step11	Go to Global Setting -> Add page
@@ -394,7 +394,7 @@ namespace Group1Project.TestCases
             //Step14	Select a parent page
             //Step15	Click OK button
             string randomStr3 = CommonMethods.RandomString();
-            string pageName3 = "test3" + randomStr3;
+            string pageName3 = "test 3" + randomStr3;
             mainPage.AddOrEditPage(pageName3, pageName1, "", "", true, "OK");
             bool ActualResult = mainPage.IsTabVisible(pageName3);
 
