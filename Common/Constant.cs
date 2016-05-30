@@ -25,6 +25,7 @@ namespace Group1Project.Common
         public const string LoginFailMessage2 = "Please enter username";
         public const int DefaultTimeout = 10;
         public const string panelTC33 = "giang - panel";
+
     }
 
 
