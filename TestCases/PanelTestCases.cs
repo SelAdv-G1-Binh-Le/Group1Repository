@@ -4,6 +4,7 @@ using Group1Project.Common;
 using Group1Project.PageObjects;
 using System.Threading;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace Group1Project.TestCases
 {
@@ -127,6 +128,111 @@ namespace Group1Project.TestCases
             // IWebElementExtension.FindElement(By.XPath("//input[@id='OK']")).Click();
         }
 
+        [TestMethod]
+        public void TC31()
+        {
+            Console.WriteLine("TC31 - Verify that correct panel setting form is displayed with corresponding panel type selected");
+
+            //1	Step	Navigate to Dashboard login page
+            //2	Step	Login with valid account
+            //3	Step	Click on Administer/Panels link
+            //4	Step	Click on Add new link
+            //5	VP	Verify that chart panel setting form is displayed with corresponding panel type selected
+
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+
+            IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
+            mainpage.LnkPanels.Click();
+
+            PanelsPage panelspage = new PanelsPage(webDriver);
+            panelspage.LnkAddNew.Click();
+
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
+
+            Console.WriteLine("Verify Chart panel setting form is displayed \"Chart setting\" under Display Name field");
+            Assert.IsNotNull(addpaneldialog.LgdChartSettings, "Chart panel setting form is NOT displayed");
+
+            //6	Step	Select Indicator type
+            //7	VP	Verify that indicator panel setting form is displayed with corresponding panel type selected
+
+            addpaneldialog.RadIndicatorType.Click();
+            Console.WriteLine("Verify Indicator panel setting form is displayed \"Indicator setting\" under Display Name field");
+            Assert.IsNotNull(addpaneldialog.LgdIndicatorSettings, "Indicator panel setting form is NOT displayed");
+
+            //8	Step	Select Report type
+            //9	VP	Verify that report panel setting form is displayed with corresponding panel type selected
+
+            addpaneldialog.RadReportType.Click();
+
+        }
+
+        [TestMethod]
+        public void TC32()
+        {
+            Console.WriteLine("TC32 - Verify that user is not allowed to create panel with duplicated \"Display Name\"  ");
+
+            //1	Step	Navigate to Dashboard login page
+            //2	Step	Login with valid account
+            //3	Step	Click on Administer/Panels link
+            //4	Step	Click on Add new link
+            //5	Step	Enter display name to "Display name" field.
+            //6	Step	Click on OK button
+            //7	Step	Click on Add new link again.
+            //8	Step	Enter display name same with previous display name to "display name" field. 
+            //9	Step	Click on OK button
+            //10	VP	Check warning message show up
+
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
+            mainpage.LnkPanels.Click();
+            PanelsPage panelspage = new PanelsPage(webDriver);
+            panelspage.LnkAddNew.Click();
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
+            addpaneldialog.AddChartPanel("Duplicated panel", "name");
+            panelspage.LnkAddNew.Click();
+            SelectElement SelectedCbo = new SelectElement(addpaneldialog.CbbSeriesField);
+            SelectedCbo.SelectByValue("name");
+            addpaneldialog.TxtDisplayName.SendKeys("Duplicated panel");
+            addpaneldialog.BtnOK.Click();
+            string errormessage = CommonMethods.CloseAlertAndGetItsText(webDriver);
+            Assert.AreEqual("Duplicated panel already exists. Please enter a different name.", errormessage);
+
+        }
+
+
+        [TestMethod]
+        public void TC33()
+        {
+            Console.WriteLine("TC33 - Verify that \"Data Profile\" listing of \"Add New Panel\" and \"Edit Panel\" control/form are in alphabetical order");
+
+            //1	Step	Navigate to Dashboard login page
+            //2	Step	Login with valid account
+            //3	Step	Click on Administer/Panels link
+            //4	Step	Click on Add new link
+            //5	VP	Verify that Data Profile list is in alphabetical order
+
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
+            mainpage.LnkPanels.Click();
+            PanelsPage panelspage = new PanelsPage(webDriver);
+            panelspage.LnkAddNew.Click();
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
+            addpaneldialog.CbbProfile.Click();
+            SelectElement SelectedCbo = new SelectElement(addpaneldialog.CbbProfile);
+
+            Console.WriteLine(SelectedCbo.Options.Count);
+
+
+            //6	Step	Enter a display name to display name field
+            //7	Step	Click on OK button
+            //8	Step	Click on Edit link
+            //9	VP	Verify that Data Profile list is in alphabetical order
+
+
+        }
 
     }
 }

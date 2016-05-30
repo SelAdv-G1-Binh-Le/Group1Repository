@@ -30,10 +30,22 @@ namespace Group1Project.PageObjects
         static readonly By _lnkAddPanel = By.XPath("//a[contains(@onclick,'openAddPanel')]");
         static readonly By _btnChoosepanel = By.XPath("//a[@id='btnChoosepanel']");
         static readonly By _dlgOverlay = By.XPath("//div[@class='ui-dialog-overlay custom-overlay']");
+        static readonly By _lnkAdminister = By.XPath("//a[@href='#Administer']");
+        static readonly By _lnkPanels = By.XPath(" //a[@href='panels.jsp']");
 
         #endregion
 
         #region Elements
+
+        public IWebElement LnkPanels
+        {
+            get { return webDriver.FindElement(_lnkPanels); }
+        }
+
+        public IWebElement LnkAdminister
+        {
+            get { return webDriver.FindElement(_lnkAdminister); }
+        }
         public IWebElement DlgOverlay
         {
             get { return webDriver.FindElement(_dlgOverlay); }

@@ -17,10 +17,14 @@ namespace Group1Project.PageObjects
         static readonly By _chbPublic = By.XPath("//input[@id='ispublic']");
         static readonly By _btnOK = By.XPath("//input[@id='OK']");
         static readonly By _btnCancel = By.XPath("//input[@id='Cancel']");
+        
+                
 
         #endregion
 
         #region Elements
+
+      
 
         public IWebElement CmbParentPage
         {

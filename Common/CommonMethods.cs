@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using Group1Project.TestCases;
 using OpenQA.Selenium.Support;
+using System.Diagnostics;
 
 
 namespace Group1Project.Common
@@ -49,8 +50,21 @@ namespace Group1Project.Common
 
         public static void WaitForControlDisappear(IWebDriver webDriver, By by, int timeout)
         {
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
-            wait.Until(d => !d.FindElement(by).Displayed);
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            bool flag = CommonMethods.IsElementPresent(webDriver, by);
+
+            while (flag && timeout > 0)
+            {
+                Thread.Sleep(1000);
+                flag = CommonMethods.IsElementPresent(webDriver, by);
+                timeout = timeout - 1;
+            }
+            stopWatch.Stop();
+            TimeSpan ts = stopWatch.Elapsed;
+            Console.WriteLine("WaitForControlDisappear: " + by.ToString() + "-" + ts.Seconds + " seconds");
+
         }
 
         public static bool WaitForControlEnable(IWebDriver webDriver, By by, int timeout)
