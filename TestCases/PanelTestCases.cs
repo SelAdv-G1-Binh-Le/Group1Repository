@@ -220,17 +220,39 @@ namespace Group1Project.TestCases
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
-            addpaneldialog.CbbProfile.Click();
-            SelectElement SelectedCbo = new SelectElement(addpaneldialog.CbbProfile);
 
-            Console.WriteLine(SelectedCbo.Options.Count);
+            SelectElement CbbProfile = new SelectElement(addpaneldialog.CbbProfile);
 
+            int count = CbbProfile.Options.Count;
+
+            for (int i = count - 1; i >= 1; i--)
+            {
+                Console.WriteLine("Check Sort: " + CbbProfile.Options[i].Text + " > " + CbbProfile.Options[i - 1].Text);
+                Assert.IsTrue(String.Compare(CbbProfile.Options[i].Text, CbbProfile.Options[i - 1].Text) == 1, "Items are not sorted correctly !!!");
+            }
 
             //6	Step	Enter a display name to display name field
             //7	Step	Click on OK button
+            SelectElement CbbSeriesField = new SelectElement(addpaneldialog.CbbSeriesField);
+            CbbSeriesField.SelectByValue("name");
+            addpaneldialog.TxtDisplayName.SendKeys(Constant.panelTC33);
+            addpaneldialog.BtnOK.Click();
+            
             //8	Step	Click on Edit link
             //9	VP	Verify that Data Profile list is in alphabetical order
+            
+            By dynamicbtnEdit = By.XPath("//a[contains(.,'"+Constant.panelTC33+"')]/following::a[contains(.,'Edit')][1]");
+            webDriver.FindElement(dynamicbtnEdit).Click();
 
+            CbbProfile = new SelectElement(addpaneldialog.CbbProfile);
+
+            count = CbbProfile.Options.Count;
+
+            for (int i = count - 1; i >= 1; i--)
+            {
+                Console.WriteLine("Check Sort: " + CbbProfile.Options[i].Text + " > " + CbbProfile.Options[i - 1].Text);
+                Assert.IsTrue(String.Compare(CbbProfile.Options[i].Text, CbbProfile.Options[i - 1].Text) == 1, "Items are not sorted correctly !!!");
+            }
 
         }
 

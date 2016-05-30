@@ -6,7 +6,7 @@ namespace Group1Project.Common
 {
     public class Constant
     {
-        //Diep Logigear: http://192.168.170.37:54001/TADashboard/login.jsp
+        //Diep Logigear: http://192.168.170.37/TADashboard/login.jsp
         //Diep Home: http://192.168.1.2/TADashboard/login.jsp
         //Binh Home: http://192.168.1.2:54000/TADashboard/login.jsp
         //Global home page: http://groupba.dyndns.org:54000/TADashboard/login.jsp
@@ -24,8 +24,7 @@ namespace Group1Project.Common
         public const string LoginFailMessage1 = "Username or password is invalid";
         public const string LoginFailMessage2 = "Please enter username";
         public const int DefaultTimeout = 10;
-
-
+        public const string panelTC33 = "giang - panel";
     }
 
 
