@@ -5,10 +5,8 @@ using System;
 
 namespace Group1Project.PageObjects
 {
-    class AddPanelDialog : GeneralPage
+    class AddPanelDialog : GeneralPage 
     {
-
-        public IWebDriver webDriver;
 
         #region Locators
 
@@ -85,14 +83,7 @@ namespace Group1Project.PageObjects
 
         #region Methods
 
-        public AddPanelDialog(IWebDriver webDriver)
-        {
-            this.webDriver = webDriver;
-
-        }
-
-
-        /// <summary>
+               /// <summary>
         /// Adds the chart panel.
         /// </summary>
         /// <param name="displayname">The displayname.</param>

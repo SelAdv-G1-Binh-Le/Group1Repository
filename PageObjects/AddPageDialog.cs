@@ -6,8 +6,7 @@ namespace Group1Project.PageObjects
     class AddPageDialog : GeneralPage
     {
 
-        public IWebDriver webDriver;
-
+      
         #region Locators
 
         static readonly By _txtPageName = By.XPath("//input[@id='name']");
@@ -59,19 +58,15 @@ namespace Group1Project.PageObjects
 
         #region Methods
 
-        public AddPageDialog(IWebDriver webDriver)
-        {
-            this.webDriver = webDriver;
-
-        }
-
-
-        public void AddPage(string pagename, string button = "OK")
+              public void AddPage(string pagename, string button = "OK")
         {
             IWebElementExtension.Set(this.TxtPageName, pagename, true);
             this.BtnOK.Click();
             CommonMethods.WaitForControl(webDriver, By.XPath(CommonMethods.XPathContainGenerate("a", pagename)), 10);
         }
+
+
+              public AddPageDialog() { }
 
 
         #endregion

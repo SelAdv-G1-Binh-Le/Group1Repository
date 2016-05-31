@@ -7,7 +7,6 @@ namespace Group1Project.PageObjects
 {
     class LoginPage : GeneralPage
     {
-        public IWebDriver webDriver;
 
         #region Locators
 

@@ -39,7 +39,7 @@ namespace Group1Project.TestCases
             loginpage.Login(Constant.InvalidUsername, Constant.InvalidPassword, Constant.DefaultRepository);
 
             //4		Verify that Dashboard Error message "Username or password is invalid" appears
-            string alerttext = CommonMethods.CloseAlertAndGetItsText(loginpage.webDriver);
+            string alerttext = CommonMethods.CloseAlertAndGetItsText(webDriver);
             VP.CheckText(Constant.LoginFailMessage1, alerttext);
         }
 
@@ -56,7 +56,7 @@ namespace Group1Project.TestCases
             loginpage.Login(Constant.DefaultUsername, Constant.InvalidPassword, Constant.DefaultRepository);
 
             //4		Verify that Dashboard Error message "Username or password is invalid" appears
-            string alerttext = CommonMethods.CloseAlertAndGetItsText(loginpage.webDriver);
+            string alerttext = CommonMethods.CloseAlertAndGetItsText(webDriver);
             VP.CheckText(Constant.LoginFailMessage1, alerttext);
         }
 

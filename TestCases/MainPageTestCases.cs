@@ -286,7 +286,7 @@ namespace Group1Project.TestCases
 
             //Step6	    Click "Delete" link
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
-            WebDriverWait wait = new WebDriverWait(mainPage.webDriver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.AlertIsPresent());
             IAlert alert = mainPage.webDriver.SwitchTo().Alert();
             string ActualResult = alert.Text;
@@ -569,7 +569,7 @@ namespace Group1Project.TestCases
 
             //Post-Condition delete newly added page
             //Close TA Dashboard Main Page
-            AddPageDialog dialog = new AddPageDialog(webDriver);
+            AddPageDialog dialog = new AddPageDialog();
             dialog.BtnCancel.Click();
             mainPage.DeletePage(pageName1, pageName2);
             mainPage.DeletePage(pageName1);

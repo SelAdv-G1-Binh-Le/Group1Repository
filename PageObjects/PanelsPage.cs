@@ -8,8 +8,6 @@ namespace Group1Project.PageObjects
     class PanelsPage : GeneralPage
     {
 
-         public IWebDriver webDriver;
-
         #region Locators
 
          static readonly By _lnkAddNew = By.XPath("//a[contains(@href,'AddPanel')]");
@@ -39,10 +37,6 @@ namespace Group1Project.PageObjects
 
         #endregion
 
-
-
-
-
-
+        
     }
 }

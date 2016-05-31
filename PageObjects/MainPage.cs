@@ -11,9 +11,8 @@ using OpenQA.Selenium.Interactions;
 namespace Group1Project.PageObjects
 {
     class MainPage : GeneralPage
+        
     {
-
-        public IWebDriver webDriver;
 
         //string dynamicRepository = Constant.Repository2;
 
@@ -324,7 +323,7 @@ namespace Group1Project.PageObjects
         /// <returns></returns>
         public AddPageDialog ClickAddPage()
         {
-            AddPageDialog dialog = new AddPageDialog(this.webDriver);
+            AddPageDialog dialog = new AddPageDialog();
             this.MnGlobalSetting.Click();
             this.LnkAddPage.Click();
             return dialog;
