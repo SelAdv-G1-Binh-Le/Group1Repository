@@ -29,17 +29,17 @@ namespace Group1Project.PageObjects
 
         public IWebElement CbbProfile
         {
-            get { return webDriver.FindElement(_cbbProfile); }
+            get { return FindElement(_cbbProfile,60); }
         }
 
         public IWebElement LgdIndicatorSettings
         {
-            get { return webDriver.FindElement(_lgdIndicatorSettings); }
+            get { return FindElement(_lgdIndicatorSettings,60); }
         }
 
         public IWebElement LgdChartSettings
         {
-            get { return webDriver.FindElement(_lgdChartSettings); }
+            get { return FindElement(_lgdChartSettings,60); }
         }
 
         #region Elements

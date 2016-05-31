@@ -42,7 +42,6 @@ namespace Group1Project.PageObjects
             try
             {
                 webElement = webDriver.FindElement(by);
-
             }
 
             catch(StaleElementReferenceException)
