@@ -87,6 +87,9 @@
   <ItemGroup>
     <Folder Include="BaseMethods\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Document\Dashboard_Testcases.xls" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
