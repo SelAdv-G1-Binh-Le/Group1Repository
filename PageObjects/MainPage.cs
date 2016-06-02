@@ -31,11 +31,20 @@ namespace Group1Project.PageObjects
         static readonly By _btnChoosepanel = By.XPath("//a[@id='btnChoosepanel']");
         static readonly By _dlgOverlay = By.XPath("//div[@class='ui-dialog-overlay custom-overlay']");
         static readonly By _lnkAdminister = By.XPath("//a[@href='#Administer']");
-        static readonly By _lnkPanels = By.XPath(" //a[@href='panels.jsp']");
+        static readonly By _lnkPanels = By.XPath("//a[@href='panels.jsp']");
+        static readonly By _lnkMenuSettingDelete = By.XPath("//li[@class='mn-setting']//a[@class='delete']");
+             
+
+
 
         #endregion
 
         #region Elements
+
+        public IWebElement LnkMenuSettingDelete
+        {
+            get { return FindElement(_lnkMenuSettingDelete, Constant.DefaultTimeout); }
+        }
 
         public IWebElement LnkPanels
         {
@@ -256,7 +265,7 @@ namespace Group1Project.PageObjects
         /// Deletes the page.
         /// </summary>
         /// <param name="pagename">The pagename.</param>
-        public void DeletePage(string pagename)
+        public MainPage DeletePage(string pagename)
         {
             CommonMethods.WaitAndClickControl(webDriver, "a", "text()", this.ConvertBlankCharacter(pagename), "");
             this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
@@ -265,6 +274,7 @@ namespace Group1Project.PageObjects
             IAlert alert = webDriver.SwitchTo().Alert();
             alert.Accept();
             webDriver.SwitchTo().DefaultContent();
+            return this;
         }
         /// <summary>
         /// Deletes the page.
@@ -354,10 +364,13 @@ namespace Group1Project.PageObjects
             return element.Text;
         }
 
+
         /// <summary>
         /// Waits for overlay disappear.
         /// </summary>
         /// <param name="timeout">The timeout.</param>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 03:25</datetime>
         public void WaitForOverlayDisappear(int timeout)
         {
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
@@ -432,6 +445,24 @@ namespace Group1Project.PageObjects
             Console.WriteLine(totalString);
             return totalString;
         }
+
+
+        /// <summary>
+        /// Gotoes the panels page.
+        /// </summary>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 05:03</datetime>
+        public PanelsPage GotoPanelsPage()
+        {
+            this.LnkAdminister.Click();
+            this.LnkPanels.Click();
+            return new PanelsPage(webDriver);
+        }
+
+       
+
+
 
         #endregion
 

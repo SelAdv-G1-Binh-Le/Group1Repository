@@ -63,7 +63,7 @@ namespace Group1Project.Common
             }
             stopWatch.Stop();
             TimeSpan ts = stopWatch.Elapsed;
-            Console.WriteLine("WaitForControlDisappear: " + by.ToString() + "-" + ts.Seconds + " seconds");
+            Console.WriteLine("Wait For {0} disappears in {1} miliseconds! ", by.ToString(), ts.Milliseconds);
 
         }
 
@@ -157,6 +157,14 @@ namespace Group1Project.Common
             webDriver.FindElement(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))).Click();
         }
 
+        /// <summary>
+        /// xes the path contain generate.
+        /// </summary>
+        /// <param name="tagname">The tagname.</param>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 05:18</datetime>
         public static string XPathContainGenerate(string tagname, string str)
         {
             //Use it while the xPath has space characters 

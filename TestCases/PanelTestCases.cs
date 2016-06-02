@@ -11,6 +11,10 @@ namespace Group1Project.TestCases
     [TestClass]
     public class Panel : Testbase
     {
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 03:13</datetime>
         [TestMethod]
         public void TC27()
         {
@@ -33,13 +37,18 @@ namespace Group1Project.TestCases
             mainpage.LnkAddPanel.Click();
 
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
-            addpaneldialog.AddChartPanel("zbox", "name");
-
-            mainpage.WaitForOverlayDisappear(5);
-
-            mainpage.BtnChoosepanel.Click();
-
+            addpaneldialog.AddChartPanelSuccess("zbox", "name").BtnChoosepanel.Click();
+            
             //7	VP	Verify that all pre-set panels are populated and sorted correctly	
+            string actual = mainpage.FindElement(By.XPath("//a[contains(.,'zbox')]//preceding::a[1]"), Constant.DefaultTimeout).GetAttribute("innerHTML");
+            VP.CheckText("Test&nbsp;Module&nbsp;Status&nbsp;per&nbsp;Assigned&nbsp;Users", actual);
+
+            //Clean up TC 27
+
+            PanelsPage panelspage = new PanelsPage(webDriver);
+            mainpage.DeletePage("Page 1");
+            panelspage.DeletePanel("zbox");
+            
 
         }
 
@@ -190,7 +199,7 @@ namespace Group1Project.TestCases
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
-            addpaneldialog.AddChartPanel("Duplicated panel", "name");
+            addpaneldialog.AddChartPanelSuccess("Duplicated panel", "name");
             panelspage.LnkAddNew.Click();
             SelectElement SelectedCbo = new SelectElement(addpaneldialog.CbbSeriesField);
             SelectedCbo.SelectByValue("name");
@@ -200,8 +209,11 @@ namespace Group1Project.TestCases
             Assert.AreEqual("Duplicated panel already exists. Please enter a different name.", errormessage);
 
         }
-
-
+        
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 02:55</datetime>
         [TestMethod]
         public void TC33()
         {
@@ -237,11 +249,11 @@ namespace Group1Project.TestCases
             CbbSeriesField.SelectByValue("name");
             addpaneldialog.TxtDisplayName.SendKeys(Constant.panelTC33);
             addpaneldialog.BtnOK.Click();
-            
+
             //8	Step	Click on Edit link
             //9	VP	Verify that Data Profile list is in alphabetical order
-            
-            By dynamicbtnEdit = By.XPath("//a[contains(.,'"+Constant.panelTC33+"')]/following::a[contains(.,'Edit')][1]");
+
+            By dynamicbtnEdit = By.XPath("//a[contains(.,'" + Constant.panelTC33 + "')]/following::a[contains(.,'Edit')][1]");
             webDriver.FindElement(dynamicbtnEdit).Click();
 
             CbbProfile = new SelectElement(addpaneldialog.CbbProfile);

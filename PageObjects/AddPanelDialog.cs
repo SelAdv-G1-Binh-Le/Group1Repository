@@ -24,10 +24,12 @@ namespace Group1Project.PageObjects
         static By _dlgOverlay = By.XPath("//div[@class='ui-dialog-overlay custom-overlay']");
         static By _cbbProfile = By.XPath("//select[@id='cbbProfile']");
 
-
-        //input[@id='radPanelType1']
-
-        #endregion
+                #endregion
+        #region Elements
+        public IWebElement BtnOKPanelConfiguration
+        {
+            get { return FindElement(_btnOKPanelConfiguration, Constant.DefaultTimeout); }
+        }
 
         public IWebElement CbbProfile
         {
@@ -44,41 +46,36 @@ namespace Group1Project.PageObjects
             get { return FindElement(_lgdChartSettings, Constant.DefaultTimeout); }
         }
 
-        #region Elements
+     
 
         public IWebElement RadReportType
         {
-            get { return webDriver.FindElement(_radReportType); }
+            get { return FindElement(_radReportType, Constant.DefaultTimeout); }
         }
 
         public IWebElement RadIndicatorType
         {
-            get { return webDriver.FindElement(_radIndicatorType); }
+            get { return FindElement(_radIndicatorType, Constant.DefaultTimeout); }
         }
 
         public IWebElement BtnOK
         {
-            get { return webDriver.FindElement(_btnOK); }
+            get { return FindElement(_btnOK, Constant.DefaultTimeout); }
         }
 
-        public IWebElement BtnOKPanelConfiguration
+                public IWebElement RadTypeChart
         {
-            get { return webDriver.FindElement(_btnOKPanelConfiguration); }
-        }
-
-        public IWebElement RadTypeChart
-        {
-            get { return webDriver.FindElement(_radTypeChart); }
+            get { return FindElement(_radTypeChart, Constant.DefaultTimeout); }
         }
 
         public IWebElement TxtDisplayName
         {
-            get { return webDriver.FindElement(_txtDisplayName); }
+            get { return FindElement(_txtDisplayName, Constant.DefaultTimeout); }
         }
 
         public IWebElement CbbSeriesField
         {
-            get { return webDriver.FindElement(_cbbSeriesField); }
+            get { return FindElement(_cbbSeriesField, Constant.DefaultTimeout); }
         }
 
         #endregion
@@ -100,13 +97,20 @@ namespace Group1Project.PageObjects
         /// Author: Diep Duong
         /// Updated Date: 05/30/2016
 
-        public void AddChartPanel(string displayname, string series)
+        public MainPage AddChartPanelSuccess(string displayname, string series)
         {
             TxtDisplayName.SendKeys(displayname);
             SelectElement SelectedCbo = new SelectElement(CbbSeriesField);
             SelectedCbo.SelectByValue(series);
             BtnOK.Click();
+
+            if (CommonMethods.IsElementPresent(webDriver,_btnOKPanelConfiguration))
+            {
+                BtnOKPanelConfiguration.Click();                
+            }
+
             CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), 10);
+            return new MainPage(webDriver);
         }
 
         /// <summary>

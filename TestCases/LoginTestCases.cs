@@ -9,6 +9,10 @@ namespace Group1Project.TestCases
     [TestClass]
     public class LOGIN : Testbase
     {
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 03:02</datetime>
         [TestMethod]
         public void TC01()
         {
@@ -27,6 +31,10 @@ namespace Group1Project.TestCases
             Assert.AreEqual(Constant.DefaultUsername, actual);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 03:02</datetime>
         [TestMethod]
         public void TC02()
         {
@@ -44,6 +52,10 @@ namespace Group1Project.TestCases
         }
 
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 03:02</datetime>
         [TestMethod]
         public void TC03()
         {
@@ -60,6 +72,10 @@ namespace Group1Project.TestCases
             VP.CheckText(Constant.LoginFailMessage1, alerttext);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 03:02</datetime>
         [TestMethod]
         public void TC04()
         {
@@ -88,6 +104,10 @@ namespace Group1Project.TestCases
 
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 03:02</datetime>
         [TestMethod]
         public void TC05()
         {
@@ -114,6 +134,10 @@ namespace Group1Project.TestCases
 
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 03:02</datetime>
         [TestMethod]
         public void TC06()
         {
@@ -138,6 +162,10 @@ namespace Group1Project.TestCases
             VP.CheckText(Constant.LoginFailMessage1, alerttext);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 03:02</datetime>
         [TestMethod]
         public void TC07()
         {
@@ -166,6 +194,10 @@ namespace Group1Project.TestCases
 
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 03:02</datetime>
         [TestMethod]
         public void TC08()
         {
@@ -182,6 +214,10 @@ namespace Group1Project.TestCases
             Assert.AreEqual("specialCharsPassword", actual);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 03:02</datetime>
         [TestMethod]
         public void TC09()
         {
@@ -199,6 +235,10 @@ namespace Group1Project.TestCases
             Assert.AreEqual("`~!@$^&()',.", actual);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 03:02</datetime>
         [TestMethod]
         public void TC10()
         {

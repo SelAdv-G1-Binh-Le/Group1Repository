@@ -34,21 +34,27 @@ namespace Group1Project.PageObjects
         {
         }
 
+        /// <summary>
+        /// Finds the element.
+        /// </summary>
+        /// <param name="by">The by.</param>
+        /// <param name="timeout">The timeout.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 04:07</datetime>
         public IWebElement FindElement(By by, long timeout)
         {
-            Console.WriteLine("FindElement: {0}", by.ToString());
             IWebElement webElement = null;
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             try
             {
-                
-                webElement = webDriver.FindElement(by);               
+                webElement = webDriver.FindElement(by);
             }
 
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: {0} in {1} seconds", ex.ToString(), stopWatch.ElapsedMilliseconds / 1000);
+                Console.WriteLine("Exception: {0} in {1} milliseconds", ex.ToString(), stopWatch.ElapsedMilliseconds);
                 if (ex is StaleElementReferenceException || ex is NullReferenceException)
                 {
                     webElement = this.FindElement(by, ((timeout * 1000 - stopWatch.ElapsedMilliseconds) / 1000));
@@ -56,6 +62,14 @@ namespace Group1Project.PageObjects
             }
 
             stopWatch.Stop();
+
+            if (webElement == null)
+
+                Console.WriteLine("Element <{0}> is NOT found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
+            else
+
+                Console.WriteLine("Element <{0}> is found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
+
             return webElement;
         }
 

@@ -46,12 +46,7 @@ namespace Group1Project.Common
             element.SendKeys(value);
         }
 
-        public static IWebElement FindElement(By by, IWebDriver webDriver)
-        {
-            return webDriver.FindElement(by);
-        }
-
-        public static void MoveMouse(this IWebElement element, IWebDriver webDriver)
+              public static void MoveMouse(this IWebElement element, IWebDriver webDriver)
         {
             Actions action = new Actions(webDriver);
             action.MoveToElement(element).Perform();
