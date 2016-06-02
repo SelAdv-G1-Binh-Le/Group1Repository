@@ -5,7 +5,8 @@ namespace Group1Project.PageObjects
 {
     class AddPageDialog : GeneralPage
     {
-      
+
+        private IWebDriver driver;
         #region Locators
 
         static readonly By _txtPageName = By.XPath("//input[@id='name']");
@@ -15,14 +16,14 @@ namespace Group1Project.PageObjects
         static readonly By _chbPublic = By.XPath("//input[@id='ispublic']");
         static readonly By _btnOK = By.XPath("//input[@id='OK']");
         static readonly By _btnCancel = By.XPath("//input[@id='Cancel']");
-        
-                
+
+
 
         #endregion
 
         #region Elements
 
-      
+
 
         public IWebElement CmbParentPage
         {
@@ -57,7 +58,7 @@ namespace Group1Project.PageObjects
 
         #region Methods
 
-              public void AddPage(string pagename, string button = "OK")
+        public void AddPage(string pagename, string button = "OK")
         {
             IWebElementExtension.Set(this.TxtPageName, pagename, true);
             this.BtnOK.Click();
@@ -65,7 +66,11 @@ namespace Group1Project.PageObjects
         }
 
 
-              public AddPageDialog() { }
+        public AddPageDialog(IWebDriver webDriver)
+            : base(webDriver)
+        {
+            this.driver = webDriver;
+        }
 
 
         #endregion

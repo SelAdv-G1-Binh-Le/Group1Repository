@@ -13,6 +13,8 @@ namespace Group1Project.PageObjects
     class MainPage : GeneralPage
         
     {
+        private IWebDriver driver;
+        
         //string dynamicRepository = Constant.Repository2;
 
         #region Locators
@@ -99,11 +101,10 @@ namespace Group1Project.PageObjects
 
         #region Methods
 
-        public MainPage(IWebDriver webDriver)
+        public MainPage(IWebDriver webDriver) : base (webDriver)
         {
-            this.webDriver = webDriver;
+            this.driver = webDriver;
         }
-
 
 
         /// <summary>
@@ -322,7 +323,7 @@ namespace Group1Project.PageObjects
         /// <returns></returns>
         public AddPageDialog ClickAddPage()
         {
-            AddPageDialog dialog = new AddPageDialog();
+            AddPageDialog dialog = new AddPageDialog(webDriver);
             this.MnGlobalSetting.Click();
             this.LnkAddPage.Click();
             return dialog;

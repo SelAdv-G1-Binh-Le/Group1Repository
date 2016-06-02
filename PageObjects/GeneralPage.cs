@@ -8,7 +8,7 @@ namespace Group1Project.PageObjects
     public class GeneralPage
     {
 
-        public IWebDriver webDriver;
+        protected IWebDriver webDriver;
 
         #region Locators
 
@@ -25,9 +25,9 @@ namespace Group1Project.PageObjects
 
         #region Methods
 
-        public GeneralPage(IWebDriver webDriver)
+        public GeneralPage(IWebDriver _webDriver)
         {
-            this.webDriver = webDriver;
+            this.webDriver = _webDriver;
         }
 
         public GeneralPage()

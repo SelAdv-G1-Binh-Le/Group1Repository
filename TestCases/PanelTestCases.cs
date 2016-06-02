@@ -32,7 +32,7 @@ namespace Group1Project.TestCases
             mainpage.MnGlobalSetting.Click();
             mainpage.LnkAddPanel.Click();
 
-            AddPanelDialog addpaneldialog = new AddPanelDialog();
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
             addpaneldialog.AddChartPanel("zbox", "name");
 
             mainpage.WaitForOverlayDisappear(5);
@@ -148,7 +148,7 @@ namespace Group1Project.TestCases
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
 
-            AddPanelDialog addpaneldialog = new AddPanelDialog();
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
 
             Console.WriteLine("Verify Chart panel setting form is displayed \"Chart setting\" under Display Name field");
             Assert.IsNotNull(addpaneldialog.LgdChartSettings, "Chart panel setting form is NOT displayed");
@@ -189,7 +189,7 @@ namespace Group1Project.TestCases
             mainpage.LnkPanels.Click();
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
-            AddPanelDialog addpaneldialog = new AddPanelDialog();
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
             addpaneldialog.AddChartPanel("Duplicated panel", "name");
             panelspage.LnkAddNew.Click();
             SelectElement SelectedCbo = new SelectElement(addpaneldialog.CbbSeriesField);
@@ -219,7 +219,7 @@ namespace Group1Project.TestCases
             mainpage.LnkPanels.Click();
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
-            AddPanelDialog addpaneldialog = new AddPanelDialog();
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
 
             SelectElement CbbProfile = new SelectElement(addpaneldialog.CbbProfile);
 

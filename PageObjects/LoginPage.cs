@@ -7,6 +7,8 @@ namespace Group1Project.PageObjects
 {
     class LoginPage : GeneralPage
     {
+        private IWebDriver driver;
+        
         #region Locators
 
         static readonly By _cboRepository = By.XPath("//select[@id='repository']");
@@ -41,17 +43,16 @@ namespace Group1Project.PageObjects
 
         #region Methods
 
-
-
         public LoginPage(IWebDriver webDriver)
+            : base(webDriver)
         {
-            this.webDriver = webDriver;
+            this.driver = webDriver;
         }
 
 
         public LoginPage Open()
         {
-            webDriver.Navigate().GoToUrl(Constant.LoginPageURL);
+            driver.Navigate().GoToUrl(Constant.LoginPageURL);
             return this;
         }
 

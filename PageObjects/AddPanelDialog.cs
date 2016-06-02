@@ -5,8 +5,11 @@ using System;
 
 namespace Group1Project.PageObjects
 {
-    class AddPanelDialog : GeneralPage 
+    class AddPanelDialog : GeneralPage
     {
+
+        private IWebDriver driver;
+
         #region Locators
 
         static By _radTypeChart = By.XPath("//input[@id='radPanelType0']");
@@ -82,7 +85,14 @@ namespace Group1Project.PageObjects
 
         #region Methods
 
-               /// <summary>
+
+        public AddPanelDialog(IWebDriver webDriver)
+            : base(webDriver)
+        {
+            this.driver = webDriver;
+        }
+
+        /// <summary>
         /// Adds the chart panel.
         /// </summary>
         /// <param name="displayname">The displayname.</param>
