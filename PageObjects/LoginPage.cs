@@ -7,7 +7,6 @@ namespace Group1Project.PageObjects
 {
     class LoginPage : GeneralPage
     {
-
         #region Locators
 
         static readonly By _cboRepository = By.XPath("//select[@id='repository']");
@@ -20,22 +19,22 @@ namespace Group1Project.PageObjects
         #region Elements
         public IWebElement CboRepository
         {
-            get { return webDriver.FindElement(_cboRepository); }
+            get { return FindElement(_cboRepository, Constant.DefaultTimeout); }
         }
 
         public IWebElement TxtUsername
         {
-            get { return webDriver.FindElement(_txtUsername); }
+            get { return FindElement(_txtUsername, Constant.DefaultTimeout); }
         }
 
         public IWebElement TxtPassword
         {
-            get { return webDriver.FindElement(_txtPassword); }
+            get { return FindElement(_txtPassword, Constant.DefaultTimeout); }
         }
 
         public IWebElement BtnLogin
         {
-            get { return webDriver.FindElement(_btnLogin); }
+            get { return FindElement(_btnLogin, Constant.DefaultTimeout); }
         }
 
         #endregion

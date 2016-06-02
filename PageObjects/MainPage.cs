@@ -13,7 +13,6 @@ namespace Group1Project.PageObjects
     class MainPage : GeneralPage
         
     {
-
         //string dynamicRepository = Constant.Repository2;
 
         #region Locators
@@ -38,61 +37,61 @@ namespace Group1Project.PageObjects
 
         public IWebElement LnkPanels
         {
-            get { return webDriver.FindElement(_lnkPanels); }
+            get { return FindElement(_lnkPanels,Constant.DefaultTimeout); }
         }
 
         public IWebElement LnkAdminister
         {
-            get { return webDriver.FindElement(_lnkAdminister); }
+            get { return FindElement(_lnkAdminister, Constant.DefaultTimeout); }
         }
         public IWebElement DlgOverlay
         {
-            get { return webDriver.FindElement(_dlgOverlay); }
+            get { return FindElement(_dlgOverlay, Constant.DefaultTimeout); }
         }
 
         public IWebElement BtnChoosepanel
         {
-            get { return webDriver.FindElement(_btnChoosepanel); }
+            get { return FindElement(_btnChoosepanel, Constant.DefaultTimeout); }
         }
         public IWebElement LnkAddPanel
         {
-            get { return webDriver.FindElement(_lnkAddPanel); }
+            get { return FindElement(_lnkAddPanel, Constant.DefaultTimeout); }
         }
         public IWebElement LnkAddPage
         {
-            get { return webDriver.FindElement(_lnkAddPage); }
+            get { return FindElement(_lnkAddPage, Constant.DefaultTimeout); }
         }
 
         public IWebElement MnMainBar
         {
-            get { return webDriver.FindElement(_mnMainBar); }
+            get { return FindElement(_mnMainBar, Constant.DefaultTimeout); }
         }
         public IWebElement TxtPageName
         {
-            get { return webDriver.FindElement(_txtPageName); }
+            get { return FindElement(_txtPageName, Constant.DefaultTimeout); }
         }
         public IWebElement BtnPopupOk
         {
-            get { return webDriver.FindElement(_btnPopupOk); }
+            get { return FindElement(_btnPopupOk, Constant.DefaultTimeout); }
         }
         public IWebElement MnGlobalSetting
         {
-            get { return webDriver.FindElement(_mnGlobalSetting); }
+            get { return FindElement(_mnGlobalSetting, Constant.DefaultTimeout); }
         }
         public IWebElement LblWelcome
         {
-            get { return webDriver.FindElement(_lblWelcome); }
+            get { return FindElement(_lblWelcome, Constant.DefaultTimeout); }
         }
 
         public IWebElement LnkLogout
         {
-            get { return webDriver.FindElement(_lnkLogout); }
+            get { return FindElement(_lnkLogout, Constant.DefaultTimeout); }
         }
 
 
         public IWebElement LblRepository
         {
-            get { return webDriver.FindElement(_lblRepository); }
+            get { return FindElement(_lblRepository, Constant.DefaultTimeout); }
         }
 
 
@@ -103,8 +102,8 @@ namespace Group1Project.PageObjects
         public MainPage(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
-
         }
+
 
 
         /// <summary>

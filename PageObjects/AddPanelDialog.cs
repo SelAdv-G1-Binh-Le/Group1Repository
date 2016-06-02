@@ -7,7 +7,6 @@ namespace Group1Project.PageObjects
 {
     class AddPanelDialog : GeneralPage 
     {
-
         #region Locators
 
         static By _radTypeChart = By.XPath("//input[@id='radPanelType0']");
@@ -29,17 +28,17 @@ namespace Group1Project.PageObjects
 
         public IWebElement CbbProfile
         {
-            get { return FindElement(_cbbProfile,60); }
+            get { return FindElement(_cbbProfile, Constant.DefaultTimeout); }
         }
 
         public IWebElement LgdIndicatorSettings
         {
-            get { return FindElement(_lgdIndicatorSettings,60); }
+            get { return FindElement(_lgdIndicatorSettings, Constant.DefaultTimeout); }
         }
 
         public IWebElement LgdChartSettings
         {
-            get { return FindElement(_lgdChartSettings,60); }
+            get { return FindElement(_lgdChartSettings, Constant.DefaultTimeout); }
         }
 
         #region Elements

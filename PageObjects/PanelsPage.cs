@@ -7,7 +7,6 @@ namespace Group1Project.PageObjects
 {
     class PanelsPage : GeneralPage
     {
-
         #region Locators
 
          static readonly By _lnkAddNew = By.XPath("//a[contains(@href,'AddPanel')]");

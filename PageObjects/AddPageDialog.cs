@@ -5,7 +5,6 @@ namespace Group1Project.PageObjects
 {
     class AddPageDialog : GeneralPage
     {
-
       
         #region Locators
 

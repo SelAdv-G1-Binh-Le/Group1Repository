@@ -23,8 +23,9 @@ namespace Group1Project.Common
         public const string Repository2 = "TestRepository";
         public const string LoginFailMessage1 = "Username or password is invalid";
         public const string LoginFailMessage2 = "Please enter username";
-        public const int DefaultTimeout = 10;
+        public const int DefaultTimeout = 5;
         public const string panelTC33 = "giang - panel";
+
 
     }
 

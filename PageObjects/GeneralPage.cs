@@ -36,27 +36,31 @@ namespace Group1Project.PageObjects
 
         public IWebElement FindElement(By by, long timeout)
         {
+            Console.WriteLine("FindElement: {0}", by.ToString());
             IWebElement webElement = null;
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             try
             {
-                webElement = webDriver.FindElement(by);
+                
+                webElement = webDriver.FindElement(by);               
             }
 
-            catch(StaleElementReferenceException)
+            catch (Exception ex)
             {
-                long te = stopWatch.ElapsedMilliseconds;
-
-                this.FindElement(by, ((timeout * 1000 - stopWatch.ElapsedMilliseconds)/1000));
+                Console.WriteLine("Exception: {0} in {1} seconds", ex.ToString(), stopWatch.ElapsedMilliseconds / 1000);
+                if (ex is StaleElementReferenceException || ex is NullReferenceException)
+                {
+                    webElement = this.FindElement(by, ((timeout * 1000 - stopWatch.ElapsedMilliseconds) / 1000));
+                }
             }
 
             stopWatch.Stop();
             return webElement;
         }
-            
 
-        
+
+
         #endregion
     }
 }
