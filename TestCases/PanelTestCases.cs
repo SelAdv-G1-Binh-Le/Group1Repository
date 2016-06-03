@@ -72,9 +72,9 @@ namespace Group1Project.TestCases
             mainpage.LnkPanels.Click();
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
-            AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);            
-            addPanelDialog.TxtDisplayName.WaitForControl(webDriver,Constant.DefaultTimeout);
-            
+            AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
+            addPanelDialog.TxtDisplayName.WaitForControl(webDriver, Constant.DefaultTimeout);
+
             //6	Step	Try to click other controls when Add New Panel dialog is opening
             //7	VP	Observe the current page
             Assert.IsFalse(CommonMethods.Click(mainpage.MnGlobalSetting), "Control still can be clickable!!!");
@@ -104,9 +104,9 @@ namespace Group1Project.TestCases
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
             AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
-            
-            addPanelDialog.TxtDisplayName.WaitForControl(webDriver,Constant.DefaultTimeout);
-                        addPanelDialog.BtnOK.Click();
+
+            addPanelDialog.TxtDisplayName.WaitForControl(webDriver, Constant.DefaultTimeout);
+            addPanelDialog.BtnOK.Click();
             string alerttext = CommonMethods.CloseAlertAndGetItsText(webDriver);
             VP.CheckText("Display Name is a required field.", alerttext);
 
@@ -128,7 +128,7 @@ namespace Group1Project.TestCases
             //6	Step	Enter value into Display Name field with special characters except "@"
             //7	Step	Click Ok button
             //8	VP	Observe the current page
-            
+
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
@@ -182,7 +182,7 @@ namespace Group1Project.TestCases
             panelspage.LnkAddNew.Click();
 
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
-            addpaneldialog.TxtDisplayName.WaitForControl(webDriver,Constant.DefaultTimeout);
+            addpaneldialog.TxtDisplayName.WaitForControl(webDriver, Constant.DefaultTimeout);
             Console.WriteLine("Verify Chart panel setting form is displayed \"Chart setting\" under Display Name field");
             Assert.IsNotNull(addpaneldialog.LgdChartSettings, "Chart panel setting form is NOT displayed");
 
@@ -190,7 +190,7 @@ namespace Group1Project.TestCases
             //7	VP	Verify that indicator panel setting form is displayed with corresponding panel type selected
 
             addpaneldialog.RadIndicatorType.Click();
-            addpaneldialog.TxtDisplayName.WaitForControl(webDriver,Constant.DefaultTimeout);
+            addpaneldialog.TxtDisplayName.WaitForControl(webDriver, Constant.DefaultTimeout);
             Console.WriteLine("Verify Indicator panel setting form is displayed \"Indicator setting\" under Display Name field");
             Assert.IsNotNull(addpaneldialog.LgdIndicatorSettings, "Indicator panel setting form is NOT displayed");
 
@@ -199,9 +199,12 @@ namespace Group1Project.TestCases
 
             addpaneldialog.RadReportType.Click();
             Console.WriteLine("Bug document here: Report panel setting form is displayed \"View mode\" under Display Name.");
-            
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/3/2016 - 10:27</datetime>
         [TestMethod]
         public void TC32()
         {
@@ -220,26 +223,29 @@ namespace Group1Project.TestCases
 
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-            IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
+            mainpage.LnkAdminister.MoveMouse(webDriver);
             mainpage.LnkPanels.Click();
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
             addpaneldialog.AddChartPanelSuccess("Duplicated panel", "name");
             panelspage.LnkAddNew.Click();
-            SelectElement SelectedCbo = new SelectElement(addpaneldialog.CbbSeriesField);
-            SelectedCbo.SelectByValue("name");
-            addpaneldialog.TxtDisplayName.SendKeys("Duplicated panel");
+            addpaneldialog.CbbSeriesField.SelectByValue("name");
+            addpaneldialog.TxtDisplayName.Set("Duplicated panel");
             addpaneldialog.BtnOK.Click();
             string errormessage = CommonMethods.CloseAlertAndGetItsText(webDriver);
             Assert.AreEqual("Duplicated panel already exists. Please enter a different name.", errormessage);
+
+            //Clean up TC 32
+            addpaneldialog.Close();
+            panelspage.DeletePanel("Duplicated panel");
 
         }
 
         /// <summary>
         /// </summary>
         /// <author>Diep Duong</author>
-        /// <datetime>6/2/2016 - 02:55</datetime>
+        /// <datetime>6/3/2016 - 10:32</datetime>
         [TestMethod]
         public void TC33()
         {
@@ -253,14 +259,12 @@ namespace Group1Project.TestCases
 
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-            IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
+            mainpage.LnkAdminister.MoveMouse(webDriver);
             mainpage.LnkPanels.Click();
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
-
             SelectElement CbbProfile = new SelectElement(addpaneldialog.CbbProfile);
-
             int count = CbbProfile.Options.Count;
 
             for (int i = count - 1; i >= 1; i--)
@@ -271,16 +275,16 @@ namespace Group1Project.TestCases
 
             //6	Step	Enter a display name to display name field
             //7	Step	Click on OK button
-            SelectElement CbbSeriesField = new SelectElement(addpaneldialog.CbbSeriesField);
-            CbbSeriesField.SelectByValue("name");
-            addpaneldialog.TxtDisplayName.SendKeys(Constant.panelTC33);
+
+            addpaneldialog.CbbSeriesField.SelectByValue("name");
+            addpaneldialog.TxtDisplayName.Set(Constant.panelTC33);
             addpaneldialog.BtnOK.Click();
 
             //8	Step	Click on Edit link
             //9	VP	Verify that Data Profile list is in alphabetical order
 
             By dynamicbtnEdit = By.XPath("//a[contains(.,'" + Constant.panelTC33 + "')]/following::a[contains(.,'Edit')][1]");
-            webDriver.FindElement(dynamicbtnEdit).Click();
+            panelspage.FindElement(dynamicbtnEdit, Constant.DefaultTimeout).Click();
 
             CbbProfile = new SelectElement(addpaneldialog.CbbProfile);
 
@@ -291,7 +295,10 @@ namespace Group1Project.TestCases
                 Console.WriteLine("Check Sort: " + CbbProfile.Options[i].Text + " > " + CbbProfile.Options[i - 1].Text);
                 Assert.IsTrue(String.Compare(CbbProfile.Options[i].Text, CbbProfile.Options[i - 1].Text) == 1, "Items are not sorted correctly !!!");
             }
-
+            
+            //Clean up TC 33
+            addpaneldialog.Close();
+            panelspage.DeletePanel(Constant.panelTC33);
         }
 
     }

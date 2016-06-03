@@ -21,7 +21,6 @@ namespace Group1Project.TestCases
             webDriver = new FirefoxDriver(new FirefoxBinary(), new FirefoxProfile(), TimeSpan.FromSeconds(180));
             webDriver.Manage().Window.Maximize();
             webDriver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
-            
         }
 
         [TestCleanup]

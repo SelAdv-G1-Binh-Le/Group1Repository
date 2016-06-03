@@ -70,12 +70,10 @@ namespace Group1Project.PageObjects
             else
             {
                 Console.WriteLine("Element <{0}> is found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
-                          }
+            }
 
             return webElement;
         }
-
-       
 
         #endregion
     }

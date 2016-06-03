@@ -6,6 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using Group1Project.PageObjects;
 using System;
+using System.Diagnostics;
 
 namespace Group1Project.Common
 {
@@ -108,5 +109,10 @@ namespace Group1Project.Common
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
             wait.Until(d => webElement.Enabled);
         }
+
+       
     }
+
+
+
 }

@@ -53,7 +53,7 @@ namespace Group1Project.Common
         /// <author>Diep Duong</author>
         /// <datetime>6/3/2016 - 02:19</datetime>
         public static bool Click(IWebElement iwebelement)
-        {                      
+        {
             try
             {
                 iwebelement.Click();
@@ -78,10 +78,8 @@ namespace Group1Project.Common
         {
             GeneralPage generalPage = new GeneralPage(webDriver);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
-            wait.Until(d => generalPage.FindElement(by,timeout));
+            wait.Until(d => generalPage.FindElement(by, timeout));
         }
-
-        
 
         public static void WaitForControlDisappear(IWebDriver webDriver, By by, int timeout)
         {

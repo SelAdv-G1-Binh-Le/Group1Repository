@@ -20,10 +20,9 @@ namespace Group1Project.PageObjects
         #region Elements
         public IWebElement LnkAddNew
         {
-            get { return webDriver.FindElement(_lnkAddNew); }
+            get { return FindElement(_lnkAddNew,Constant.DefaultTimeout); }
         }
-
-
+        
 
         #endregion
 

@@ -23,12 +23,26 @@ namespace Group1Project.PageObjects
         static By _lgdIndicatorSettings = By.XPath("//legend[contains(.,'Indicator Settings')]");
         static By _dlgOverlay = By.XPath("//div[@class='ui-dialog-overlay custom-overlay']");
         static By _cbbProfile = By.XPath("//select[@id='cbbProfile']");
+        static By _lnkCloseButton = By.XPath("//a[@class='ui-dialog-titlebar-close']");
+
 
         #endregion
+
         #region Elements
+
+        public IWebElement DlgOverlay
+        {
+            get { return FindElement(_dlgOverlay, Constant.DefaultTimeout); }
+        }
+
         public IWebElement BtnOKPanelConfiguration
         {
             get { return FindElement(_btnOKPanelConfiguration, Constant.DefaultTimeout); }
+        }
+
+        public IWebElement LnkCloseButton
+        {
+            get { return FindElement(_lnkCloseButton, Constant.DefaultTimeout); }
         }
 
         public IWebElement CbbProfile
@@ -45,8 +59,6 @@ namespace Group1Project.PageObjects
         {
             get { return FindElement(_lgdChartSettings, Constant.DefaultTimeout); }
         }
-
-
 
         public IWebElement RadReportType
         {
@@ -89,8 +101,6 @@ namespace Group1Project.PageObjects
             this.driver = webDriver;
         }
 
-
-
         /// <summary>
         /// Adds the chart panel success.
         /// </summary>
@@ -130,10 +140,14 @@ namespace Group1Project.PageObjects
             TxtDisplayName.SendKeys(displayname);
             BtnOK.Click();
             CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), 10);
-
         }
 
-
+        public PanelsPage Close()
+        {
+            LnkCloseButton.Click();
+            CommonMethods.WaitForControlDisappear(webDriver, _dlgOverlay, Constant.DefaultTimeout);
+            return new PanelsPage(webDriver);
+        }
         #endregion
 
 
