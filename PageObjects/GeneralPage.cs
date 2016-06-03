@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using Group1Project.Common;
 using System.Diagnostics;
+using OpenQA.Selenium.Support.UI;
 
 namespace Group1Project.PageObjects
 {
@@ -74,7 +75,7 @@ namespace Group1Project.PageObjects
             return webElement;
         }
 
-
+       
 
         #endregion
     }

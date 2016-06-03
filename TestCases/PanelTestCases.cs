@@ -72,9 +72,9 @@ namespace Group1Project.TestCases
             mainpage.LnkPanels.Click();
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
-            AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
-            CommonMethods.WaitForControl(webDriver, addPanelDialog.TxtDisplayName, Constant.DefaultTimeout);
-
+            AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);            
+            addPanelDialog.TxtDisplayName.WaitForControl(webDriver,Constant.DefaultTimeout);
+            
             //6	Step	Try to click other controls when Add New Panel dialog is opening
             //7	VP	Observe the current page
             Assert.IsFalse(CommonMethods.Click(mainpage.MnGlobalSetting), "Control still can be clickable!!!");
@@ -104,8 +104,9 @@ namespace Group1Project.TestCases
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
             AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
-            CommonMethods.WaitForControl(webDriver, addPanelDialog.TxtDisplayName, Constant.DefaultTimeout);
-            addPanelDialog.BtnOK.Click();
+            
+            addPanelDialog.TxtDisplayName.WaitForControl(webDriver,Constant.DefaultTimeout);
+                        addPanelDialog.BtnOK.Click();
             string alerttext = CommonMethods.CloseAlertAndGetItsText(webDriver);
             VP.CheckText("Display Name is a required field.", alerttext);
 
@@ -156,6 +157,10 @@ namespace Group1Project.TestCases
             panelspage.DeletePanel("Logigear@");
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/3/2016 - 09:27</datetime>
         [TestMethod]
         public void TC31()
         {
@@ -177,8 +182,7 @@ namespace Group1Project.TestCases
             panelspage.LnkAddNew.Click();
 
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
-
-
+            addpaneldialog.TxtDisplayName.WaitForControl(webDriver,Constant.DefaultTimeout);
             Console.WriteLine("Verify Chart panel setting form is displayed \"Chart setting\" under Display Name field");
             Assert.IsNotNull(addpaneldialog.LgdChartSettings, "Chart panel setting form is NOT displayed");
 
@@ -186,14 +190,16 @@ namespace Group1Project.TestCases
             //7	VP	Verify that indicator panel setting form is displayed with corresponding panel type selected
 
             addpaneldialog.RadIndicatorType.Click();
+            addpaneldialog.TxtDisplayName.WaitForControl(webDriver,Constant.DefaultTimeout);
             Console.WriteLine("Verify Indicator panel setting form is displayed \"Indicator setting\" under Display Name field");
             Assert.IsNotNull(addpaneldialog.LgdIndicatorSettings, "Indicator panel setting form is NOT displayed");
 
             //8	Step	Select Report type
-            //9	VP	Verify that report panel setting form is displayed with corresponding panel type selected
+            //9	VP	Verify that report panel setting form is displayed with corresponding panel type selected - Report panel setting form is displayed "View mode" under Display Name.
 
             addpaneldialog.RadReportType.Click();
-
+            Console.WriteLine("Bug document here: Report panel setting form is displayed \"View mode\" under Display Name.");
+            
         }
 
         [TestMethod]

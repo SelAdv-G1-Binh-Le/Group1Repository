@@ -24,7 +24,7 @@ namespace Group1Project.PageObjects
         static By _dlgOverlay = By.XPath("//div[@class='ui-dialog-overlay custom-overlay']");
         static By _cbbProfile = By.XPath("//select[@id='cbbProfile']");
 
-                #endregion
+        #endregion
         #region Elements
         public IWebElement BtnOKPanelConfiguration
         {
@@ -46,7 +46,7 @@ namespace Group1Project.PageObjects
             get { return FindElement(_lgdChartSettings, Constant.DefaultTimeout); }
         }
 
-     
+
 
         public IWebElement RadReportType
         {
@@ -63,7 +63,7 @@ namespace Group1Project.PageObjects
             get { return FindElement(_btnOK, Constant.DefaultTimeout); }
         }
 
-                public IWebElement RadTypeChart
+        public IWebElement RadTypeChart
         {
             get { return FindElement(_radTypeChart, Constant.DefaultTimeout); }
         }
@@ -89,25 +89,26 @@ namespace Group1Project.PageObjects
             this.driver = webDriver;
         }
 
+
+
         /// <summary>
-        /// Adds the chart panel.
+        /// Adds the chart panel success.
         /// </summary>
         /// <param name="displayname">The displayname.</param>
         /// <param name="series">The series.</param>
-        /// Author: Diep Duong
-        /// Updated Date: 05/30/2016
-
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/3/2016 - 09:40</datetime>
         public MainPage AddChartPanelSuccess(string displayname, string series)
         {
-            Console.WriteLine("- AddChartPanelSuccess");       
-            SelectElement SelectedCbo = new SelectElement(CbbSeriesField);
-            SelectedCbo.SelectByValue(series);
-            TxtDisplayName.SendKeys(displayname);
+            Console.WriteLine("- AddChartPanelSuccess");
+            CbbSeriesField.SelectByValue(series);
+            TxtDisplayName.Set(displayname);
             BtnOK.Click();
 
-            if (CommonMethods.IsElementPresent(webDriver,_btnOKPanelConfiguration))
+            if (CommonMethods.IsElementPresent(webDriver, _btnOKPanelConfiguration))
             {
-                BtnOKPanelConfiguration.Click();                
+                BtnOKPanelConfiguration.Click();
             }
 
             CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), 10);

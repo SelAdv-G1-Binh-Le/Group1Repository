@@ -94,5 +94,19 @@ namespace Group1Project.Common
             action.MoveToElement(element).Perform();
         }
 
+        /// <summary>
+        /// Waits for control.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        /// <param name="webElement">The web element.</param>
+        /// <param name="timeout">The timeout.</param>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/3/2016 - 09:18</datetime>
+        public static void WaitForControl(this IWebElement webElement, IWebDriver webDriver, int timeout)
+        {
+            GeneralPage generalPage = new GeneralPage(webDriver);
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+            wait.Until(d => webElement.Enabled);
+        }
     }
 }

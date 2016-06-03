@@ -15,7 +15,7 @@ namespace Group1Project.TestCases
         [TestInitialize]
         public void TestInitializeMethod()
         {
-            Console.WriteLine("Run Test Initialize");
+            Console.WriteLine("- Run Test Initialize");
 
             //Start Firefox browser and maximize window
             webDriver = new FirefoxDriver(new FirefoxBinary(), new FirefoxProfile(), TimeSpan.FromSeconds(180));
@@ -27,7 +27,7 @@ namespace Group1Project.TestCases
         [TestCleanup]
         public void TestCleanupMethod()
         {
-            Console.WriteLine("Run Test Cleanup");
+            Console.WriteLine("- Run Test Cleanup");
             // CLose browser
             //webDriver.Quit();
 
