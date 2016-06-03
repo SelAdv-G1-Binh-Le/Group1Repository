@@ -47,8 +47,7 @@ namespace Group1Project.TestCases
 
             PanelsPage panelspage = new PanelsPage(webDriver);
             mainpage.DeletePage("Page 1");
-            panelspage.DeletePanel("zbox");
-            
+            panelspage.DeletePanel("zbox");            
 
         }
 
@@ -59,16 +58,25 @@ namespace Group1Project.TestCases
 
             //1	Step	Navigate to Dashboard login page
             //2	Step	Login with valid account
-            LoginPage loginpage = new LoginPage(webDriver).Open();
-            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             //3	Step	Click Administer link
             //4	Step	Click Panel link
             //5	Step	Click Add New link
 
-            //IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Administer')]")).Click();
-            //IWebElementExtension.FindElement(By.XPath("//a[@href='panels.jsp']")).Click();
-            //IWebElementExtension.FindElement(By.XPath("//a[contains(.,'Add New')]")).Click();
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
+            mainpage.LnkPanels.Click();
+            PanelsPage panelspage = new PanelsPage(webDriver);
+            panelspage.LnkAddNew.Click();
 
+
+            Console.WriteLine("Test: {0}", panelspage.LnkAddNew.Displayed.ToString());
+            Console.WriteLine("Test: {0}", panelspage.LnkAddNew.Enabled.ToString());
+
+            Thread.Sleep(3000);
+
+            panelspage.LnkAddNew.Click();
+            
             //6	Step	Try to click other controls when Add New Panel dialog is opening
             //7	VP	Observe the current page
 

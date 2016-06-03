@@ -7,6 +7,7 @@ using System.Threading;
 using Group1Project.TestCases;
 using OpenQA.Selenium.Support;
 using System.Diagnostics;
+using Group1Project.PageObjects;
 
 
 namespace Group1Project.Common
@@ -42,10 +43,19 @@ namespace Group1Project.Common
             }
         }
 
+        /// <summary>
+        /// Waits for control.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        /// <param name="by">The by.</param>
+        /// <param name="timeout">The timeout.</param>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 22:43</datetime>
         public static void WaitForControl(IWebDriver webDriver, By by, int timeout)
         {
+            GeneralPage generalPage = new GeneralPage(webDriver);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
-            wait.Until(d => webDriver.FindElement(by));
+            wait.Until(d => generalPage.FindElement(by,timeout));
         }
 
         public static void WaitForControlDisappear(IWebDriver webDriver, By by, int timeout)
@@ -111,6 +121,13 @@ namespace Group1Project.Common
             }
         }
 
+        /// <summary>
+        /// Closes the alert and get its text.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/2/2016 - 22:33</datetime>
         public static string CloseAlertAndGetItsText(IWebDriver webDriver)
         {
             try
@@ -157,6 +174,7 @@ namespace Group1Project.Common
             webDriver.FindElement(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))).Click();
         }
 
+
         /// <summary>
         /// xes the path contain generate.
         /// </summary>
@@ -164,7 +182,7 @@ namespace Group1Project.Common
         /// <param name="str">The string.</param>
         /// <returns></returns>
         /// <author>Diep Duong</author>
-        /// <datetime>6/2/2016 - 05:18</datetime>
+        /// <datetime>6/2/2016 - 22:33</datetime>
         public static string XPathContainGenerate(string tagname, string str)
         {
             //Use it while the xPath has space characters 
@@ -186,7 +204,7 @@ namespace Group1Project.Common
         }
 
 
-      
-        
+
+
     }
 }

@@ -67,8 +67,9 @@ namespace Group1Project.PageObjects
 
                 Console.WriteLine("Element <{0}> is NOT found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
             else
-
+            {
                 Console.WriteLine("Element <{0}> is found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
+                          }
 
             return webElement;
         }

@@ -99,9 +99,10 @@ namespace Group1Project.PageObjects
 
         public MainPage AddChartPanelSuccess(string displayname, string series)
         {
-            TxtDisplayName.SendKeys(displayname);
+            Console.WriteLine("- AddChartPanelSuccess");       
             SelectElement SelectedCbo = new SelectElement(CbbSeriesField);
             SelectedCbo.SelectByValue(series);
+            TxtDisplayName.SendKeys(displayname);
             BtnOK.Click();
 
             if (CommonMethods.IsElementPresent(webDriver,_btnOKPanelConfiguration))
