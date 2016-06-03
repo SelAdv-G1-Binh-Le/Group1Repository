@@ -43,6 +43,29 @@ namespace Group1Project.Common
             }
         }
 
+
+        /// <summary>
+        /// Clicks the specified web driver.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        /// <param name="by">The by.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/3/2016 - 02:19</datetime>
+        public static bool Click(IWebElement iwebelement)
+        {                      
+            try
+            {
+                iwebelement.Click();
+            }
+            catch (WebDriverException)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Waits for control.
         /// </summary>
@@ -56,6 +79,22 @@ namespace Group1Project.Common
             GeneralPage generalPage = new GeneralPage(webDriver);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
             wait.Until(d => generalPage.FindElement(by,timeout));
+        }
+
+
+        /// <summary>
+        /// Waits for control.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        /// <param name="webElement">The web element.</param>
+        /// <param name="timeout">The timeout.</param>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/3/2016 - 02:30</datetime>
+        public static void WaitForControl(IWebDriver webDriver, IWebElement webElement, int timeout)
+        {
+            GeneralPage generalPage = new GeneralPage(webDriver);
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+            wait.Until(d => webElement.Enabled);
         }
 
         public static void WaitForControlDisappear(IWebDriver webDriver, By by, int timeout)

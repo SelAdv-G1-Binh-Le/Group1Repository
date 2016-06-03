@@ -5,6 +5,7 @@ using Group1Project.PageObjects;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Interactions;
 
 namespace Group1Project.TestCases
 {
@@ -38,19 +39,23 @@ namespace Group1Project.TestCases
 
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
             addpaneldialog.AddChartPanelSuccess("zbox", "name").BtnChoosepanel.Click();
-            
+
             //7	VP	Verify that all pre-set panels are populated and sorted correctly	
             string actual = mainpage.FindElement(By.XPath("//a[contains(.,'zbox')]//preceding::a[1]"), Constant.DefaultTimeout).GetAttribute("innerHTML");
-            VP.CheckText("Test&nbsp;Module&nbsp;Status&nbsp;per&nbsp;Assigned&nbsp;Users", actual);
+            Assert.IsTrue(String.Compare(actual, "zbox") == -1, "New item is NOT sorted correctly!!!");
 
             //Clean up TC 27
-
             PanelsPage panelspage = new PanelsPage(webDriver);
             mainpage.DeletePage("Page 1");
-            panelspage.DeletePanel("zbox");            
+            panelspage.DeletePanel("zbox");
 
         }
 
+
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/3/2016 - 02:34</datetime>
         [TestMethod]
         public void TC28()
         {
@@ -61,25 +66,18 @@ namespace Group1Project.TestCases
             //3	Step	Click Administer link
             //4	Step	Click Panel link
             //5	Step	Click Add New link
-
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
             mainpage.LnkPanels.Click();
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
-
-
-            Console.WriteLine("Test: {0}", panelspage.LnkAddNew.Displayed.ToString());
-            Console.WriteLine("Test: {0}", panelspage.LnkAddNew.Enabled.ToString());
-
-            Thread.Sleep(3000);
-
-            panelspage.LnkAddNew.Click();
+            AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
+            CommonMethods.WaitForControl(webDriver, addPanelDialog.TxtDisplayName,Constant.DefaultTimeout);
             
             //6	Step	Try to click other controls when Add New Panel dialog is opening
             //7	VP	Observe the current page
-
+            Assert.IsFalse(CommonMethods.Click(mainpage.MnGlobalSetting), "Control still can be clickable!!!");
         }
 
 
@@ -217,7 +215,7 @@ namespace Group1Project.TestCases
             Assert.AreEqual("Duplicated panel already exists. Please enter a different name.", errormessage);
 
         }
-        
+
         /// <summary>
         /// </summary>
         /// <author>Diep Duong</author>
