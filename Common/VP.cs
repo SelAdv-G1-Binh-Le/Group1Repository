@@ -28,12 +28,19 @@ namespace Group1Project.Common
             //Assert.IsTrue(CommonMethods.IsElementPresent(by), "Control " + by + " NOT Exist");
         }
 
+        /// <summary>
+        /// Checks the text.
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="actual">The actual.</param>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/3/2016 - 08:02</datetime>
         public static void CheckText(string expected, string actual)
         {
             Console.WriteLine("Check text:");
             Console.WriteLine("Expected: " + expected);
             Console.WriteLine("Recorded: " + actual);
-            Assert.AreEqual(expected, actual, "Fail");
+            Assert.AreEqual(expected, actual, "Failed to check text!");
         }
 
         #endregion

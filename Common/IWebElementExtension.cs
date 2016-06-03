@@ -4,6 +4,8 @@ using System.Threading;
 using Group1Project.TestCases;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
+using Group1Project.PageObjects;
+using System;
 
 namespace Group1Project.Common
 {
@@ -40,6 +42,46 @@ namespace Group1Project.Common
             } while (loop < times);
             driver.ExecuteScript(clear, rc);
         }
+
+        /// <summary>
+        /// Selects the by value.
+        /// </summary>
+        /// <param name="webElement">The web element.</param>
+        /// <param name="value">The value.</param>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/3/2016 - 08:47</datetime>
+        public static void SelectByValue(IWebElement webElement, string value)
+        {
+            SelectElement SelectedCbo = new SelectElement(webElement);
+            SelectedCbo.SelectByValue(value);
+        }
+
+        /// <summary>
+        /// Selects the by text.
+        /// </summary>
+        /// <param name="webElement">The web element.</param>
+        /// <param name="text">The text.</param>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/3/2016 - 08:47</datetime>
+        public static void SelectByText(IWebElement webElement, string text)
+        {
+            SelectElement SelectedCbo = new SelectElement(webElement);
+            SelectedCbo.SelectByText(text);
+        }
+
+        /// <summary>
+        /// Selects the index of the by.
+        /// </summary>
+        /// <param name="webElement">The web element.</param>
+        /// <param name="index">The index.</param>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/3/2016 - 08:47</datetime>
+        public static void SelectByIndex(IWebElement webElement, int index)
+        {
+            SelectElement SelectedCbo = new SelectElement(webElement);
+            SelectedCbo.SelectByIndex(index);
+        }
+
         public static void Set(this IWebElement element, string value, bool clearFirst)
         {
             if (clearFirst) element.Clear();
