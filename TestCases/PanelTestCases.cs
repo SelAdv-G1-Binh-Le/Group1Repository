@@ -110,6 +110,10 @@ namespace Group1Project.TestCases
             VP.CheckText("Display Name is a required field.", alerttext);
 
         }
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/3/2016 - 09:13</datetime>
         [TestMethod]
         public void TC30()
         {
@@ -123,7 +127,7 @@ namespace Group1Project.TestCases
             //6	Step	Enter value into Display Name field with special characters except "@"
             //7	Step	Click Ok button
             //8	VP	Observe the current page
-
+            
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
@@ -132,21 +136,24 @@ namespace Group1Project.TestCases
             panelspage.LnkAddNew.Click();
             AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
 
-            IWebElementExtension.SelectByValue(addPanelDialog.CbbSeriesField,"name");
-            addPanelDialog.TxtDisplayName.SendKeys("Logigear#$%");
+            addPanelDialog.CbbSeriesField.SelectByValue("name");
+            addPanelDialog.TxtDisplayName.Set("Logigear#$%", false);
             addPanelDialog.BtnOK.Click();
 
             string alerttext = CommonMethods.CloseAlertAndGetItsText(webDriver);
             VP.CheckText("Invalid display name. The name cannot contain high ASCII characters or any of the following characters: /:*?<>|\"#[]{}=%;", alerttext);
+            Console.WriteLine("Bug document here: Invalid display name. The name can't contain high ASCII characters or any of following characters: /:*?<>|\"#{[]{};");
 
             //9	Step	Close Warning Message box
-            //10 Step	Click Add New link
+            //10 Step	Click Add New link        
             //11 Step	Enter value into Display Name field with special character is @
             //12 VP	Observe the current page
-           
 
+            addPanelDialog.TxtDisplayName.Set("Logigear@");
+            addPanelDialog.BtnOK.Click();
 
-
+            //Clean up TC 30
+            panelspage.DeletePanel("Logigear@");
         }
 
         [TestMethod]
@@ -163,13 +170,14 @@ namespace Group1Project.TestCases
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
-            IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
+            mainpage.LnkAdminister.MoveMouse(webDriver);
             mainpage.LnkPanels.Click();
 
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
 
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
+
 
             Console.WriteLine("Verify Chart panel setting form is displayed \"Chart setting\" under Display Name field");
             Assert.IsNotNull(addpaneldialog.LgdChartSettings, "Chart panel setting form is NOT displayed");

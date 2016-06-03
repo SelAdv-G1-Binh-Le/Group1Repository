@@ -50,7 +50,7 @@ namespace Group1Project.Common
         /// <param name="value">The value.</param>
         /// <author>Diep Duong</author>
         /// <datetime>6/3/2016 - 08:47</datetime>
-        public static void SelectByValue(IWebElement webElement, string value)
+        public static void SelectByValue(this IWebElement webElement, string value)
         {
             SelectElement SelectedCbo = new SelectElement(webElement);
             SelectedCbo.SelectByValue(value);
@@ -63,7 +63,7 @@ namespace Group1Project.Common
         /// <param name="text">The text.</param>
         /// <author>Diep Duong</author>
         /// <datetime>6/3/2016 - 08:47</datetime>
-        public static void SelectByText(IWebElement webElement, string text)
+        public static void SelectByText(this IWebElement webElement, string text)
         {
             SelectElement SelectedCbo = new SelectElement(webElement);
             SelectedCbo.SelectByText(text);
@@ -76,19 +76,19 @@ namespace Group1Project.Common
         /// <param name="index">The index.</param>
         /// <author>Diep Duong</author>
         /// <datetime>6/3/2016 - 08:47</datetime>
-        public static void SelectByIndex(IWebElement webElement, int index)
+        public static void SelectByIndex(this IWebElement webElement, int index)
         {
             SelectElement SelectedCbo = new SelectElement(webElement);
             SelectedCbo.SelectByIndex(index);
         }
 
-        public static void Set(this IWebElement element, string value, bool clearFirst)
+        public static void Set(this IWebElement element, string value, bool clearFirst = true)
         {
             if (clearFirst) element.Clear();
             element.SendKeys(value);
         }
 
-              public static void MoveMouse(this IWebElement element, IWebDriver webDriver)
+        public static void MoveMouse(this IWebElement element, IWebDriver webDriver)
         {
             Actions action = new Actions(webDriver);
             action.MoveToElement(element).Perform();

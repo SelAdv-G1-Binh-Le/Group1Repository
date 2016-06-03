@@ -81,7 +81,6 @@ namespace Group1Project.Common
             wait.Until(d => generalPage.FindElement(by,timeout));
         }
 
-
         /// <summary>
         /// Waits for control.
         /// </summary>
@@ -89,8 +88,8 @@ namespace Group1Project.Common
         /// <param name="webElement">The web element.</param>
         /// <param name="timeout">The timeout.</param>
         /// <author>Diep Duong</author>
-        /// <datetime>6/3/2016 - 02:30</datetime>
-        public static void WaitForControl(IWebDriver webDriver, IWebElement webElement, int timeout)
+        /// <datetime>6/3/2016 - 09:18</datetime>
+        public static void WaitForControl(this IWebDriver webDriver, IWebElement webElement, int timeout)
         {
             GeneralPage generalPage = new GeneralPage(webDriver);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
