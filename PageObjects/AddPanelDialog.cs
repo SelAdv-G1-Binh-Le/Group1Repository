@@ -158,7 +158,9 @@ namespace Group1Project.PageObjects
             TxtChartTitle.Set(title);
             CbbChartType.SelectByValue(type);
             BtnOK.Click();
-            return CommonMethods.CloseAlertAndGetItsText(webDriver);
+            string alert = CommonMethods.CloseAlertAndGetItsText(webDriver);
+            this.Close();
+            return alert;
         }
 
         /// <summary>
@@ -186,6 +188,7 @@ namespace Group1Project.PageObjects
         /// <datetime>6/4/2016 - 16:31</datetime>
         public PanelsPage Close()
         {
+            CommonMethods.WaitForControlDisplayed(webDriver,_lnkCloseButton, Constant.DefaultTimeout);
             LnkCloseButton.Click();
             CommonMethods.WaitForControlDisappear(webDriver, _dlgOverlay, Constant.DefaultTimeout);
             return new PanelsPage(webDriver);

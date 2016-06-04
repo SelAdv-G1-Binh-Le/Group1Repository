@@ -104,6 +104,22 @@ namespace Group1Project.Common
             return wait.Until(d => webDriver.FindElement(by).Enabled);
         }
 
+        /// <summary>
+        /// Waits for control displayed.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        /// <param name="by">The by.</param>
+        /// <param name="timeout">The timeout.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/4/2016 - 16:56</datetime>
+        public static bool WaitForControlDisplayed(IWebDriver webDriver, By by, int timeout)
+        {
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+            return wait.Until(d => webDriver.FindElement(by).Displayed);
+        }
+
+
         public static void WaitForControlEnable(IWebDriver webDriver, IWebElement webelement, int timeout)
         {
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));

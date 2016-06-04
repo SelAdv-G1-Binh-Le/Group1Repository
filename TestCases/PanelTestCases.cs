@@ -46,6 +46,7 @@ namespace Group1Project.TestCases
             Assert.IsTrue(String.Compare(actual, "zbox") == -1, "New item is NOT sorted correctly!!!");
 
             //Clean up TC 27
+            Console.WriteLine("Clean up TC 27");
             PanelsPage panelspage = new PanelsPage(webDriver);
             mainpage.DeletePage("Page 1");
             panelspage.DeletePanel("zbox");
@@ -141,12 +142,13 @@ namespace Group1Project.TestCases
             //10 Step	Click Add New link        
             //11 Step	Enter value into Display Name field with special character is @
             //12 VP	Observe the current page
-            addPanelDialog.TxtDisplayName.Set("Logigear@");
-            addPanelDialog.BtnOK.Click();
+            panelspage.LnkAddNew.Click();
+            addPanelDialog.AddChartPanelSuccess("Logigear@");
             Assert.IsTrue(panelspage.IsPanelPresent("Logigear@"), "Panel \"Logigear@\" is NOT present");
 
             //Clean up TC 30
-            //panelspage.DeletePanel("Logigear@");
+            Console.WriteLine("Clean up TC 30");
+            panelspage.DeletePanel("Logigear@");
         }
 
         /// <summary>
@@ -223,6 +225,7 @@ namespace Group1Project.TestCases
             VP.CheckText("Duplicated panel already exists. Please enter a different name.", addpaneldialog.AddChartPanelUnsuccess("Duplicated panel"));
 
             //Clean up TC 32
+            Console.WriteLine("Clean up TC 32");
             addpaneldialog.Close();
             panelspage.DeletePanel("Duplicated panel");
 
@@ -276,6 +279,7 @@ namespace Group1Project.TestCases
             }
 
             //Clean up TC 33
+            Console.WriteLine("Clean up TC 33");
             addpaneldialog.Close();
             panelspage.DeletePanel(Constant.panelTC33);
         }
@@ -302,6 +306,11 @@ namespace Group1Project.TestCases
             Console.WriteLine("TBD - Wait for Binh creates DataProfilePage Actions!");
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/4/2016 - 16:37</datetime>
+        [TestMethod]
         public void TC35()
         {
             Console.WriteLine("TC35 - Verify that no special character except '@' character is allowed to be inputted into \"Chart Title\" field");
@@ -315,18 +324,78 @@ namespace Group1Project.TestCases
             //        Enter value into Chart Title field with special characters except "@"
             //7	Step	Click Ok button
             //8	VP	Observe the current page
+
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
+            mainpage.LnkPanels.Click();
+            PanelsPage panelspage = new PanelsPage(webDriver);
+            panelspage.LnkAddNew.Click();
+            AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
+            VP.CheckText("Invalid title name. The name cannot contain high ASCII characters or any of the following characters: /:*?<>|\"#[]{}=%;", addPanelDialog.AddChartPanelUnsuccess("Logigear", "Chart#$%"));
+            Console.WriteLine("Bug document here: Invalid display name. The name can't contain high ASCII characters or any of following characters: /:*?<>|\"#{[]{};");
+
             //9	Step	Close Warning Message box
             //10	Step	Click Add New link
             //11	Step	Enter value into Display Name field
             //        Enter value into Chart Title field with special character is @
             //12	VP	Observe the current page
+            panelspage.LnkAddNew.Click();
+            addPanelDialog.AddChartPanelSuccess("Logigear@", "Chart@");
+            Assert.IsTrue(panelspage.IsPanelPresent("Logigear@"), "Panel \"Logigear@\" is NOT present");
 
-
-
-
+            //Clean up TC 35
+            Console.WriteLine("Clean up TC 35");
+            panelspage.DeletePanel("Logigear@");
         }
 
+        [TestMethod]
+        public void TC36()
+        {
+            Console.WriteLine("TC36 - Verify that all chart types ( Pie, Single Bar, Stacked Bar, Group Bar, Line ) are listed correctly under \"Chart Type\" dropped down menu.");
+            //1	Step	Navigate to Dashboard login page
+            //2	Step	Select a specific repository 
+            //3	Step	Enter valid Username and Password
+            //4	Step	Click 'Login' button
+            //5	Step	Click 'Add Page' link
+            //6	Step	Enter Page Name
+            //7	Step	Click 'OK' button
+            //8	Step	Click 'Choose Panels' button
+            //9	Step	Click 'Create new panel' button
+            //10	Step	Click 'Chart Type' drop-down menu
+            //11	VP	Check that 'Chart Type' are listed 5 options: 'Pie', 'Single Bar', 'Stacked Bar', 'Group Bar' and 'Line'
 
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            string pagename = "main_hung";
+            mainpage.ClickAddPage().AddPage(pagename);
+            mainpage.MnGlobalSetting.Click();
+            mainpage.LnkAddPanel.Click();
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
+            addpaneldialog.CbbChartType.Click();
+
+            string[] expectedOptions = new string[5];
+            expectedOptions[0] = "Pie";
+            expectedOptions[1] = "Single Bar";
+            expectedOptions[2] = "Stacked Bar";
+            expectedOptions[3] = "Group Bar";
+            expectedOptions[4] = "Line";
+
+            SelectElement CbbChartType = new SelectElement(addpaneldialog.CbbChartType);
+            int count = CbbChartType.Options.Count;
+            for (int i = count - 1; i >= 0; i--)
+            {
+                Console.WriteLine("Check options: " + CbbChartType.Options[i].Text);
+                Assert.IsTrue(CbbChartType.Options[i].Text == expectedOptions[i], "Option is not correct !!!");
+            }
+
+            //Clean up TC 36
+            Console.WriteLine("Clean up TC 36");
+            PanelsPage panelspage = new PanelsPage(webDriver);
+            addpaneldialog.Close();
+            mainpage.DeletePage("main_hung");           
+
+        }
 
     }
 }
