@@ -67,7 +67,7 @@ namespace Group1Project.Common
         public static void SelectByText(this IWebElement webElement, string text)
         {
             SelectElement SelectedCbo = new SelectElement(webElement);
-            SelectedCbo.SelectByText(text);
+            SelectedCbo.SelectByText(text);            
         }
 
         /// <summary>

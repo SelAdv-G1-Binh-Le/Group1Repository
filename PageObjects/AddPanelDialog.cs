@@ -26,12 +26,30 @@ namespace Group1Project.PageObjects
         static By _lnkCloseButton = By.XPath("//a[@class='ui-dialog-titlebar-close']");
         static By _txtChartTitle = By.XPath("//input[@id='txtChartTitle']");
         static By _cbbChartType = By.XPath("//select[@id='cbbChartType']");
+        static By _txtCategoryCaption = By.XPath("//input[@id='txtCategoryXAxis']");
+        static By _txtSeriesCaption = By.XPath("//input[@id='txtValueYAxis']");
+        static By _cbbCategoryField = By.XPath("//select[@id='cbbCategoryField']");
 
-
+        
+        //select[@id='cbbCategoryField']
 
         #endregion
 
         #region Elements
+        public IWebElement CbbCategoryField
+        {
+            get { return FindElement(_cbbCategoryField, Constant.DefaultTimeout); }
+        }
+
+        public IWebElement TxtSeriesCaption
+        {
+            get { return FindElement(_txtSeriesCaption, Constant.DefaultTimeout); }
+        }
+
+        public IWebElement TxtCategoryCaption
+        {
+            get { return FindElement(_txtCategoryCaption, Constant.DefaultTimeout); }
+        }
 
         public IWebElement CbbChartType
         {
@@ -188,7 +206,6 @@ namespace Group1Project.PageObjects
         /// <datetime>6/4/2016 - 16:31</datetime>
         public PanelsPage Close()
         {
-            CommonMethods.WaitForControlDisplayed(webDriver,_lnkCloseButton, Constant.DefaultTimeout);
             LnkCloseButton.Click();
             CommonMethods.WaitForControlDisappear(webDriver, _dlgOverlay, Constant.DefaultTimeout);
             return new PanelsPage(webDriver);

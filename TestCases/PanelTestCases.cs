@@ -226,7 +226,6 @@ namespace Group1Project.TestCases
 
             //Clean up TC 32
             Console.WriteLine("Clean up TC 32");
-            addpaneldialog.Close();
             panelspage.DeletePanel("Duplicated panel");
 
         }
@@ -393,9 +392,79 @@ namespace Group1Project.TestCases
             Console.WriteLine("Clean up TC 36");
             PanelsPage panelspage = new PanelsPage(webDriver);
             addpaneldialog.Close();
-            mainpage.DeletePage("main_hung");           
+            mainpage.DeletePage("main_hung");
+        }
+        [TestMethod]
+        public void TC37()
+        {
+            Console.WriteLine("TC37 - Verify that \"Category\", \"Series\" and \"Caption\" field are enabled and disabled correctly corresponding to each type of the \"Chart Type\"");
+            //1	Step	Navigate to Dashboard login page
+            //2	Step	Select a specific repository 
+            //3	Step	Enter valid Username and Password
+            //4	Step	Click 'Login' button
+            //5	Step	Click 'Add Page' button
+            //6	Step	Enter Page Name
+            //7	Step	Click 'OK' button
+            //8	Step	Click 'Choose Panels' button below 'main_hung' button
+            //9	Step	Click 'Create new panel' button
+            //10 Step	Click 'Chart Type' drop-down menu
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            string pagename = "main_hung";
+            mainpage.ClickAddPage().AddPage(pagename);
+            mainpage.MnGlobalSetting.Click();
+            mainpage.LnkAddPanel.Click();
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
+
+            //11 Step	Select 'Pie' Chart Type
+            //12 VP	Check that 'Category' and 'Caption' are disabled, 'Series' is enabled
+            addpaneldialog.CbbChartType.SelectByText("Pie");
+            Assert.IsTrue(addpaneldialog.CbbCategoryField.Enabled == false, "Category is enabled");
+            Assert.IsTrue(addpaneldialog.CbbSeriesField.Enabled,"Series is disabled");
+            Assert.IsTrue(addpaneldialog.TxtCategoryCaption.Enabled == false, "Category Caption is enabled");
+            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled == false, "Series Caption is enabled");            
+            
+            //Console.WriteLine("CbbCategoryField - " + addpaneldialog.CbbCategoryField.Enabled);
+            //Console.WriteLine("CbbSeriesField - " + addpaneldialog.CbbSeriesField.Enabled);
+            //Console.WriteLine("TxtCategoryCaption - " + addpaneldialog.TxtCategoryCaption.Enabled);
+            //Console.WriteLine("TxtSeriesCaption - " + addpaneldialog.TxtSeriesCaption.Enabled);                       
+
+            //13 Step	Click 'Chart Type' drop-down menu
+            //14 Step	Select 'Single Bar' Chart Type
+            //15 VP	Check that 'Category' is disabled, 'Series' and 'Caption' are enabled
+            addpaneldialog.CbbChartType.SelectByText("Single Bar");
+            Assert.IsTrue(addpaneldialog.CbbCategoryField.Enabled == false, "Category is enabled");
+            Assert.IsTrue(addpaneldialog.CbbSeriesField.Enabled, "Series is disabled");
+            Assert.IsTrue(addpaneldialog.TxtCategoryCaption.Enabled, "Category Caption is disabled");
+            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled"); 
+
+            //16 Step	Click 'Chart Type' drop-down menu
+            //17 Step	Select 'Stacked Bar' Chart Type
+            //18 VP	Check that 'Category' ,'Series' and 'Caption' are enabled
+            addpaneldialog.CbbChartType.SelectByText("Stacked Bar");
+            Assert.IsTrue(addpaneldialog.CbbCategoryField.Enabled, "Category is disabled");
+            Assert.IsTrue(addpaneldialog.CbbSeriesField.Enabled, "Series is disabled");
+            Assert.IsTrue(addpaneldialog.TxtCategoryCaption.Enabled, "Category Caption is disabled");
+            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled"); 
+
+            //19 Step	Click 'Chart Type' drop-down menu
+            //20 Step	Select 'Group Bar' Chart Type
+            //21 VP	Check that 'Category' ,'Series' and 'Caption' are enabled
+            addpaneldialog.CbbChartType.SelectByText("Group Bar");
+            Assert.IsTrue(addpaneldialog.CbbCategoryField.Enabled, "Category is disabled");
+            Assert.IsTrue(addpaneldialog.CbbSeriesField.Enabled, "Series is disabled");
+            Assert.IsTrue(addpaneldialog.TxtCategoryCaption.Enabled, "Category Caption is disabled");
+            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled"); 
+
+            //22 Step	Click 'Chart Type' drop-down menu
+            //23 Step	Select 'Line' Chart Type
+            //24 VP	Check that 'Category' ,'Series' and 'Caption' are enabled
+            addpaneldialog.CbbChartType.SelectByText("Line");
+            Assert.IsTrue(addpaneldialog.CbbCategoryField.Enabled, "Category is disabled");
+            Assert.IsTrue(addpaneldialog.CbbSeriesField.Enabled, "Series is disabled");
+            Assert.IsTrue(addpaneldialog.TxtCategoryCaption.Enabled, "Category Caption is disabled");
+            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled"); 
 
         }
-
     }
 }
