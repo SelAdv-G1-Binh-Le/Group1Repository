@@ -20,9 +20,9 @@ namespace Group1Project.PageObjects
         #region Elements
         public IWebElement LnkAddNew
         {
-            get { return FindElement(_lnkAddNew,Constant.DefaultTimeout); }
+            get { return FindElement(_lnkAddNew, Constant.DefaultTimeout); }
         }
-        
+
 
         #endregion
 
@@ -50,7 +50,13 @@ namespace Group1Project.PageObjects
             webDriver.SwitchTo().Alert().Accept();
         }
 
+        public bool IsPanelPresent(string panelname)
+        {
 
+            //table[@class='GridView']//a[text()='Lewin Yue']
+            IWebElement webElement = FindElement(By.XPath("//table[@class='GridView']//a[text()='" + panelname + "']"), Constant.DefaultTimeout);
+            if (webElement == null) return false; else return true;
+        }
 
         #endregion
 

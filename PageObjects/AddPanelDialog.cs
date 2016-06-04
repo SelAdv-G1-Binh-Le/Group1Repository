@@ -123,7 +123,7 @@ namespace Group1Project.PageObjects
         /// <datetime>6/3/2016 - 09:40</datetime>
         public PanelsPage AddChartPanelSuccess(string displayname, string title = "", string type = Constant.DefaultChartType, string series = Constant.DefaultSeriesValue)
         {
-            Console.WriteLine("- AddChartPanelSuccess");
+            Console.WriteLine("- Add Chart Panel Success");
             CbbSeriesField.SelectByValue(series);
             TxtDisplayName.Set(displayname);
             TxtChartTitle.Set(title);
@@ -136,21 +136,19 @@ namespace Group1Project.PageObjects
                 BtnOKPanelConfiguration.Click();
             }
 
-            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), 10);
+            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), Constant.DefaultTimeout);
             return new PanelsPage(webDriver);
         }
 
-        public MainPage AddChartPanelUnSuccess(string displayname, string title = "", string type = Constant.DefaultChartType, string series = Constant.DefaultSeriesValue)
+        public string AddChartPanelUnsuccess(string displayname = "", string title = "", string type = Constant.DefaultChartType, string series = Constant.DefaultSeriesValue)
         {
-            Console.WriteLine("- AddChartPanelSuccess");
+            Console.WriteLine("- Add Chart Panel Unsuccess");
             CbbSeriesField.SelectByValue(series);
             TxtDisplayName.Set(displayname);
             TxtChartTitle.Set(title);
             CbbChartType.SelectByValue(type);
             BtnOK.Click();
-
-            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), 10);
-            return new MainPage(webDriver);
+            return CommonMethods.CloseAlertAndGetItsText(webDriver);
         }
 
         /// <summary>

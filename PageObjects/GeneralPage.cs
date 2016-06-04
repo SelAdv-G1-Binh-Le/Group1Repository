@@ -55,7 +55,7 @@ namespace Group1Project.PageObjects
 
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: {0} in {1} milliseconds", ex.ToString(), stopWatch.ElapsedMilliseconds);
+                Console.WriteLine("Exception: {0} in {1} milliseconds", ex.Message, stopWatch.ElapsedMilliseconds);
                 if (ex is StaleElementReferenceException || ex is NullReferenceException)
                 {
                     webElement = this.FindElement(by, ((timeout * 1000 - stopWatch.ElapsedMilliseconds) / 1000));

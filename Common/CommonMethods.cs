@@ -43,26 +43,24 @@ namespace Group1Project.Common
             }
         }
 
-
         /// <summary>
-        /// Clicks the specified web driver.
+        /// Clicks the specified iwebelement.
         /// </summary>
-        /// <param name="webDriver">The web driver.</param>
-        /// <param name="by">The by.</param>
+        /// <param name="iwebelement">The iwebelement.</param>
         /// <returns></returns>
         /// <author>Diep Duong</author>
-        /// <datetime>6/3/2016 - 02:19</datetime>
+        /// <datetime>6/4/2016 - 15:35</datetime>
         public static bool Click(IWebElement iwebelement)
         {
             try
             {
                 iwebelement.Click();
             }
-            catch (WebDriverException)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return false;
             }
-
             return true;
         }
 

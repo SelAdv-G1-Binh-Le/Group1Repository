@@ -96,7 +96,6 @@ namespace Group1Project.TestCases
             //6	Step	Click on "Add new" link
             //7	Step	Click on OK button
             //8	VP	Check warning message show up.
-
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
@@ -105,10 +104,10 @@ namespace Group1Project.TestCases
             panelspage.LnkAddNew.Click();
             AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
 
-            addPanelDialog.TxtDisplayName.WaitForControl(webDriver, Constant.DefaultTimeout);
-            addPanelDialog.BtnOK.Click();
-            string alerttext = CommonMethods.CloseAlertAndGetItsText(webDriver);
-            VP.CheckText("Display Name is a required field.", alerttext);
+            //addPanelDialog.TxtDisplayName.WaitForControl(webDriver, Constant.DefaultTimeout);
+            //addPanelDialog.BtnOK.Click();
+            //string alerttext = CommonMethods.CloseAlertAndGetItsText(webDriver);
+            VP.CheckText("Display Name is a required field.", addPanelDialog.AddChartPanelUnsuccess());
 
         }
         /// <summary>
@@ -128,7 +127,6 @@ namespace Group1Project.TestCases
             //6	Step	Enter value into Display Name field with special characters except "@"
             //7	Step	Click Ok button
             //8	VP	Observe the current page
-
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
@@ -136,25 +134,19 @@ namespace Group1Project.TestCases
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
             AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
-
-            addPanelDialog.CbbSeriesField.SelectByValue("name");
-            addPanelDialog.TxtDisplayName.Set("Logigear#$%", false);
-            addPanelDialog.BtnOK.Click();
-
-            string alerttext = CommonMethods.CloseAlertAndGetItsText(webDriver);
-            VP.CheckText("Invalid display name. The name cannot contain high ASCII characters or any of the following characters: /:*?<>|\"#[]{}=%;", alerttext);
+            VP.CheckText("Invalid display name. The name cannot contain high ASCII characters or any of the following characters: /:*?<>|\"#[]{}=%;", addPanelDialog.AddChartPanelUnsuccess("Logigear#$%"));
             Console.WriteLine("Bug document here: Invalid display name. The name can't contain high ASCII characters or any of following characters: /:*?<>|\"#{[]{};");
 
             //9	Step	Close Warning Message box
             //10 Step	Click Add New link        
             //11 Step	Enter value into Display Name field with special character is @
             //12 VP	Observe the current page
-
             addPanelDialog.TxtDisplayName.Set("Logigear@");
             addPanelDialog.BtnOK.Click();
+            Assert.IsTrue(panelspage.IsPanelPresent("Logigear@"), "Panel \"Logigear@\" is NOT present");
 
             //Clean up TC 30
-            panelspage.DeletePanel("Logigear@");
+            //panelspage.DeletePanel("Logigear@");
         }
 
         /// <summary>
@@ -180,7 +172,6 @@ namespace Group1Project.TestCases
 
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
-
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
             addpaneldialog.TxtDisplayName.WaitForControl(webDriver, Constant.DefaultTimeout);
             Console.WriteLine("Verify Chart panel setting form is displayed \"Chart setting\" under Display Name field");
@@ -228,13 +219,18 @@ namespace Group1Project.TestCases
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
-            addpaneldialog.AddChartPanelSuccess("Duplicated panel", "name");
+
+            addpaneldialog.AddChartPanelSuccess("Duplicated panel");
             panelspage.LnkAddNew.Click();
-            addpaneldialog.CbbSeriesField.SelectByValue("name");
-            addpaneldialog.TxtDisplayName.Set("Duplicated panel");
-            addpaneldialog.BtnOK.Click();
-            string errormessage = CommonMethods.CloseAlertAndGetItsText(webDriver);
-            Assert.AreEqual("Duplicated panel already exists. Please enter a different name.", errormessage);
+
+            //addpaneldialog.AddChartPanelUnsuccess("Duplicated panel");
+            //addpaneldialog.CbbSeriesField.SelectByValue("name");
+            //addpaneldialog.TxtDisplayName.Set("Duplicated panel");
+            //addpaneldialog.BtnOK.Click();
+            //string errormessage = CommonMethods.CloseAlertAndGetItsText(webDriver);
+            //Assert.AreEqual("Duplicated panel already exists. Please enter a different name.", errormessage);
+
+            VP.CheckText("Duplicated panel already exists. Please enter a different name.",  addpaneldialog.AddChartPanelUnsuccess("Duplicated panel"));
 
             //Clean up TC 32
             addpaneldialog.Close();
