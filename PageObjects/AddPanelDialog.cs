@@ -24,11 +24,23 @@ namespace Group1Project.PageObjects
         static By _dlgOverlay = By.XPath("//div[@class='ui-dialog-overlay custom-overlay']");
         static By _cbbProfile = By.XPath("//select[@id='cbbProfile']");
         static By _lnkCloseButton = By.XPath("//a[@class='ui-dialog-titlebar-close']");
+        static By _txtChartTitle = By.XPath("//input[@id='txtChartTitle']");
+        static By _cbbChartType = By.XPath("//select[@id='cbbChartType']");
+
 
 
         #endregion
 
         #region Elements
+
+        public IWebElement CbbChartType
+        {
+            get { return FindElement(_cbbChartType, Constant.DefaultTimeout); }
+        }
+        public IWebElement TxtChartTitle
+        {
+            get { return FindElement(_txtChartTitle, Constant.DefaultTimeout); }
+        }
 
         public IWebElement DlgOverlay
         {
@@ -109,17 +121,33 @@ namespace Group1Project.PageObjects
         /// <returns></returns>
         /// <author>Diep Duong</author>
         /// <datetime>6/3/2016 - 09:40</datetime>
-        public MainPage AddChartPanelSuccess(string displayname, string series)
+        public PanelsPage AddChartPanelSuccess(string displayname, string title = "", string type = Constant.DefaultChartType, string series = Constant.DefaultSeriesValue)
         {
             Console.WriteLine("- AddChartPanelSuccess");
             CbbSeriesField.SelectByValue(series);
             TxtDisplayName.Set(displayname);
+            TxtChartTitle.Set(title);
+            CbbChartType.SelectByValue(type);
             BtnOK.Click();
 
+            //Handle for creating new Panel at MainPage
             if (CommonMethods.IsElementPresent(webDriver, _btnOKPanelConfiguration))
             {
                 BtnOKPanelConfiguration.Click();
             }
+
+            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), 10);
+            return new PanelsPage(webDriver);
+        }
+
+        public MainPage AddChartPanelUnSuccess(string displayname, string title = "", string type = Constant.DefaultChartType, string series = Constant.DefaultSeriesValue)
+        {
+            Console.WriteLine("- AddChartPanelSuccess");
+            CbbSeriesField.SelectByValue(series);
+            TxtDisplayName.Set(displayname);
+            TxtChartTitle.Set(title);
+            CbbChartType.SelectByValue(type);
+            BtnOK.Click();
 
             CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), 10);
             return new MainPage(webDriver);

@@ -455,7 +455,7 @@ namespace Group1Project.PageObjects
         /// <datetime>6/2/2016 - 05:03</datetime>
         public PanelsPage GotoPanelsPage()
         {
-            this.LnkAdminister.Click();
+            this.LnkAdminister.MoveMouse(webDriver);
             this.LnkPanels.Click();
             return new PanelsPage(webDriver);
         }

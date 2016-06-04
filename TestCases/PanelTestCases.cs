@@ -38,7 +38,8 @@ namespace Group1Project.TestCases
             mainpage.LnkAddPanel.Click();
 
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
-            addpaneldialog.AddChartPanelSuccess("zbox", "name").BtnChoosepanel.Click();
+            addpaneldialog.AddChartPanelSuccess("zbox", "name");
+            mainpage.BtnChoosepanel.Click();
 
             //7	VP	Verify that all pre-set panels are populated and sorted correctly	
             string actual = mainpage.FindElement(By.XPath("//a[contains(.,'zbox')]//preceding::a[1]"), Constant.DefaultTimeout).GetAttribute("innerHTML");
@@ -48,7 +49,6 @@ namespace Group1Project.TestCases
             PanelsPage panelspage = new PanelsPage(webDriver);
             mainpage.DeletePage("Page 1");
             panelspage.DeletePanel("zbox");
-
         }
 
 
@@ -295,11 +295,59 @@ namespace Group1Project.TestCases
                 Console.WriteLine("Check Sort: " + CbbProfile.Options[i].Text + " > " + CbbProfile.Options[i - 1].Text);
                 Assert.IsTrue(String.Compare(CbbProfile.Options[i].Text, CbbProfile.Options[i - 1].Text) == 1, "Items are not sorted correctly !!!");
             }
-            
+
             //Clean up TC 33
             addpaneldialog.Close();
             panelspage.DeletePanel(Constant.panelTC33);
         }
+
+        [TestMethod]
+        public void TC34()
+        {
+            Console.WriteLine("TC34 - Verify that newly created data profiles are populated correctly under the \"Data Profile\" dropped down menu in  \"Add New Panel\" and \"Edit Panel\" control/form");
+
+            //1	Step	Navigate to Dashboard login page		
+            //2	Step	Login with valid account	
+            //3	Step	Click on Administer/Data Profiles link		
+            //4	Step	Click on add new link		
+            //5	Step	Enter name to Name textbox	/ giang - data	
+            //6	Step	Click on Finish button		
+            //7	Step	Click on Administer/Panels link		
+            //8	Step	Click on add new link		
+            //9	VP	Verify that "giang - data" data profiles are populated correctly under the "Data Profile" dropped down menu. / giang - data data profiles are populated correctly under the "Data Profile" dropped down menu.
+            //10	Step	Enter display name to Display Name textbox	/ giang - panel	
+            //11	Step	Click Ok button to create a panel		
+            //12	Step	Click on edit link		
+            //13	VP	Verify that "giang - data" data profiles are populated correctly under the "Data Profile" dropped down menu.	/	giang - data data profiles are populated correctly under the "Data Profile" dropped down menu.
+
+            Console.WriteLine("TBD - Wait for Binh creates DataProfilePage Actions!");
+        }
+
+        public void TC35()
+        {
+            Console.WriteLine("TC35 - Verify that no special character except '@' character is allowed to be inputted into \"Chart Title\" field");
+
+            //1	Step	Navigate to Dashboard login page
+            //2	Step	Login with valid account
+            //3	Step	Click Administer link
+            //4	Step	Click Panel link
+            //5	Step	Click Add New link
+            //6	Step	Enter value into Display Name field
+            //        Enter value into Chart Title field with special characters except "@"
+            //7	Step	Click Ok button
+            //8	VP	Observe the current page
+            //9	Step	Close Warning Message box
+            //10	Step	Click Add New link
+            //11	Step	Enter value into Display Name field
+            //        Enter value into Chart Title field with special character is @
+            //12	VP	Observe the current page
+
+
+
+
+        }
+
+
 
     }
 }
