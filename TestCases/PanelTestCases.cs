@@ -394,6 +394,7 @@ namespace Group1Project.TestCases
             addpaneldialog.Close();
             mainpage.DeletePage("main_hung");
         }
+
         [TestMethod]
         public void TC37()
         {
@@ -463,8 +464,21 @@ namespace Group1Project.TestCases
             Assert.IsTrue(addpaneldialog.CbbCategoryField.Enabled, "Category is disabled");
             Assert.IsTrue(addpaneldialog.CbbSeriesField.Enabled, "Series is disabled");
             Assert.IsTrue(addpaneldialog.TxtCategoryCaption.Enabled, "Category Caption is disabled");
-            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled"); 
+            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled");
 
+            //Clean up TC 37
+            Console.WriteLine("Clean up TC 37");
+            addpaneldialog.Close();
+            mainpage.DeletePage("main_hung");
+        }
+
+        [TestMethod]
+        public void TC38()
+        {
+            Console.WriteLine("TC38 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"2D\" and \"3D\" radio buttons");
+
+
+            
         }
     }
 }
