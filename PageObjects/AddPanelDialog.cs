@@ -140,6 +140,16 @@ namespace Group1Project.PageObjects
             return new PanelsPage(webDriver);
         }
 
+        /// <summary>
+        /// Adds the chart panel unsuccess.
+        /// </summary>
+        /// <param name="displayname">The displayname.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="type">The type.</param>
+        /// <param name="series">The series.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/4/2016 - 16:31</datetime>
         public string AddChartPanelUnsuccess(string displayname = "", string title = "", string type = Constant.DefaultChartType, string series = Constant.DefaultSeriesValue)
         {
             Console.WriteLine("- Add Chart Panel Unsuccess");
@@ -168,6 +178,12 @@ namespace Group1Project.PageObjects
             CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), 10);
         }
 
+        /// <summary>
+        /// Closes this instance.
+        /// </summary>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/4/2016 - 16:31</datetime>
         public PanelsPage Close()
         {
             LnkCloseButton.Click();

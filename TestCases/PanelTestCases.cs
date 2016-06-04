@@ -211,7 +211,6 @@ namespace Group1Project.TestCases
             //8	Step	Enter display name same with previous display name to "display name" field. 
             //9	Step	Click on OK button
             //10	VP	Check warning message show up
-
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             mainpage.LnkAdminister.MoveMouse(webDriver);
@@ -219,18 +218,9 @@ namespace Group1Project.TestCases
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.LnkAddNew.Click();
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
-
             addpaneldialog.AddChartPanelSuccess("Duplicated panel");
             panelspage.LnkAddNew.Click();
-
-            //addpaneldialog.AddChartPanelUnsuccess("Duplicated panel");
-            //addpaneldialog.CbbSeriesField.SelectByValue("name");
-            //addpaneldialog.TxtDisplayName.Set("Duplicated panel");
-            //addpaneldialog.BtnOK.Click();
-            //string errormessage = CommonMethods.CloseAlertAndGetItsText(webDriver);
-            //Assert.AreEqual("Duplicated panel already exists. Please enter a different name.", errormessage);
-
-            VP.CheckText("Duplicated panel already exists. Please enter a different name.",  addpaneldialog.AddChartPanelUnsuccess("Duplicated panel"));
+            VP.CheckText("Duplicated panel already exists. Please enter a different name.", addpaneldialog.AddChartPanelUnsuccess("Duplicated panel"));
 
             //Clean up TC 32
             addpaneldialog.Close();
@@ -252,7 +242,6 @@ namespace Group1Project.TestCases
             //3	Step	Click on Administer/Panels link
             //4	Step	Click on Add new link
             //5	VP	Verify that Data Profile list is in alphabetical order
-
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             mainpage.LnkAdminister.MoveMouse(webDriver);
@@ -262,7 +251,6 @@ namespace Group1Project.TestCases
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
             SelectElement CbbProfile = new SelectElement(addpaneldialog.CbbProfile);
             int count = CbbProfile.Options.Count;
-
             for (int i = count - 1; i >= 1; i--)
             {
                 Console.WriteLine("Check Sort: " + CbbProfile.Options[i].Text + " > " + CbbProfile.Options[i - 1].Text);
@@ -271,21 +259,16 @@ namespace Group1Project.TestCases
 
             //6	Step	Enter a display name to display name field
             //7	Step	Click on OK button
-
             addpaneldialog.CbbSeriesField.SelectByValue("name");
             addpaneldialog.TxtDisplayName.Set(Constant.panelTC33);
             addpaneldialog.BtnOK.Click();
 
             //8	Step	Click on Edit link
             //9	VP	Verify that Data Profile list is in alphabetical order
-
             By dynamicbtnEdit = By.XPath("//a[contains(.,'" + Constant.panelTC33 + "')]/following::a[contains(.,'Edit')][1]");
             panelspage.FindElement(dynamicbtnEdit, Constant.DefaultTimeout).Click();
-
             CbbProfile = new SelectElement(addpaneldialog.CbbProfile);
-
             count = CbbProfile.Options.Count;
-
             for (int i = count - 1; i >= 1; i--)
             {
                 Console.WriteLine("Check Sort: " + CbbProfile.Options[i].Text + " > " + CbbProfile.Options[i - 1].Text);

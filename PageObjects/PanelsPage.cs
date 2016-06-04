@@ -50,10 +50,15 @@ namespace Group1Project.PageObjects
             webDriver.SwitchTo().Alert().Accept();
         }
 
+        /// <summary>
+        /// Determines whether [is panel present] [the specified panelname].
+        /// </summary>
+        /// <param name="panelname">The panelname.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/4/2016 - 16:36</datetime>
         public bool IsPanelPresent(string panelname)
         {
-
-            //table[@class='GridView']//a[text()='Lewin Yue']
             IWebElement webElement = FindElement(By.XPath("//table[@class='GridView']//a[text()='" + panelname + "']"), Constant.DefaultTimeout);
             if (webElement == null) return false; else return true;
         }
