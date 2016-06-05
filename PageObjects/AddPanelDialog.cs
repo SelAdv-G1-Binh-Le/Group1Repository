@@ -42,9 +42,6 @@ namespace Group1Project.PageObjects
         static By _chkDataLabelsValue = By.XPath("//input[@id='chkValue']");
         static By _chkDataLabelsPercentage = By.XPath("//input[@id='chkPercentage']");
 
-
-
-
         #endregion
         public IWebElement ChkDataLabelsPercentage
         {

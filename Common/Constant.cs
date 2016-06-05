@@ -27,6 +27,7 @@ namespace Group1Project.Common
         public const string DefaultSeriesValue = "name";
         public const string DefaultChartType = "Pie";
         public const string panelTC33 = "giang - panel";
+        public const string dynamicxPathTC38 = "//li[@class='edit']";
 
 
     }

@@ -472,6 +472,10 @@ namespace Group1Project.TestCases
             mainpage.DeletePage("main_hung");
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/5/2016 - 22:17</datetime>
         [TestMethod]
         public void TC38()
         {
@@ -501,21 +505,75 @@ namespace Group1Project.TestCases
             mainpage.MnGlobalSetting.Click();
             mainpage.LnkAddPanel.Click();
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
-            addpaneldialog.AddChartPanelSuccess("hung_panel","hung_chart","Stacked Bar","url",Constant.DefaultSeriesValue,"Test Case Execution",true,"3D","Top");
+
+            addpaneldialog.CbbChartType.SelectByValue("Stacked Bar");
+            addpaneldialog.CbbProfile.SelectByText("Test Case Execution");
+            addpaneldialog.TxtDisplayName.Set("hung_panel");
+            addpaneldialog.CbbSeriesField.SelectByValue("name");
+            addpaneldialog.TxtChartTitle.Set("hung_chart");
+            addpaneldialog.ChkShowTitle.Check(true);
+            addpaneldialog.RadLegendsTop.Click();
+            addpaneldialog.RadChartStyle3D.Click();
+            addpaneldialog.CbbCategoryField.SelectByValue("url");
+
+            VP.CheckText("Stacked Bar", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Test Case Execution", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText("hung_panel", addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText("hung_chart", addpaneldialog.TxtChartTitle.GetAttribute("value"));
+            Assert.IsTrue(addpaneldialog.ChkShowTitle.Selected);
+            Assert.IsTrue(addpaneldialog.RadLegendsTop.Selected);
 
             //18	Step	Select 'Style' radio button
             //19	VP	Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+
+            addpaneldialog.RadChartStyle2D.Click();
+
+            VP.CheckText("Stacked Bar", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Test Case Execution", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText("hung_panel", addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText("hung_chart", addpaneldialog.TxtChartTitle.GetAttribute("value"));
+            Assert.IsTrue(addpaneldialog.ChkShowTitle.Selected);
+            Assert.IsTrue(addpaneldialog.RadLegendsTop.Selected);
+
             //20	Step	Click OK button
             //21	Step	Select a page in drop-down menu
             //22	Step	Enter path of Folder
             //23	Step	Click OK button
             //24	Step	Click 'Edit Panel' button of panel 'hung_panel'
             //25	Step	Select 'Style' radio button
-            //26	Step	Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+            //26	VP	Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+
+            addpaneldialog.BtnOK.Click();
+            addpaneldialog.BtnOKPanelConfiguration.Click();
+            mainpage.FindElement(By.XPath(Constant.dynamicxPathTC38),Constant.DefaultTimeout).Click();
+
+            addpaneldialog.RadChartStyle3D.Click();
+
+            VP.CheckText("Stacked Bar", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Test Case Execution", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText("hung_panel", addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText("hung_chart", addpaneldialog.TxtChartTitle.GetAttribute("value"));
+            Assert.IsTrue(addpaneldialog.ChkShowTitle.Selected);
+            Assert.IsTrue(addpaneldialog.RadLegendsTop.Selected);
+
             //27	Step	Select 'Style' radio button
-            //28	Step	Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+            //28	VP	Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
 
+            addpaneldialog.RadChartStyle2D.Click();
 
+            VP.CheckText("Stacked Bar", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Test Case Execution", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText("hung_panel", addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText("hung_chart", addpaneldialog.TxtChartTitle.GetAttribute("value"));
+            Assert.IsTrue(addpaneldialog.ChkShowTitle.Selected);
+            Assert.IsTrue(addpaneldialog.RadLegendsTop.Selected);
+
+            //Clean up TC 38
+            Console.WriteLine("Clean up TC 38");
+            addpaneldialog.Close();
+            mainpage.DeletePage("main_hung");
+            PanelsPage panelsPage = new PanelsPage(webDriver);
+            panelsPage.DeletePanel("hung_panel");
         }
     }
 }

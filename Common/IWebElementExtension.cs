@@ -90,6 +90,19 @@ namespace Group1Project.Common
         }
 
         /// <summary>
+        /// Gets the selected text.
+        /// </summary>
+        /// <param name="webElement">The web element.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/5/2016 - 21:39</datetime>
+        public static string GetSelectedText(this IWebElement webElement)
+        {
+            SelectElement SelectedCbo = new SelectElement(webElement);
+            return SelectedCbo.SelectedOption.Text;
+        }
+
+        /// <summary>
         /// Checks the specified value.
         /// </summary>
         /// <param name="element">The element.</param>
