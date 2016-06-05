@@ -421,10 +421,10 @@ namespace Group1Project.TestCases
             //12 VP	Check that 'Category' and 'Caption' are disabled, 'Series' is enabled
             addpaneldialog.CbbChartType.SelectByText("Pie");
             Assert.IsTrue(addpaneldialog.CbbCategoryField.Enabled == false, "Category is enabled");
-            Assert.IsTrue(addpaneldialog.CbbSeriesField.Enabled,"Series is disabled");
+            Assert.IsTrue(addpaneldialog.CbbSeriesField.Enabled, "Series is disabled");
             Assert.IsTrue(addpaneldialog.TxtCategoryCaption.Enabled == false, "Category Caption is enabled");
-            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled == false, "Series Caption is enabled");            
-            
+            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled == false, "Series Caption is enabled");
+
             //Console.WriteLine("CbbCategoryField - " + addpaneldialog.CbbCategoryField.Enabled);
             //Console.WriteLine("CbbSeriesField - " + addpaneldialog.CbbSeriesField.Enabled);
             //Console.WriteLine("TxtCategoryCaption - " + addpaneldialog.TxtCategoryCaption.Enabled);
@@ -437,7 +437,7 @@ namespace Group1Project.TestCases
             Assert.IsTrue(addpaneldialog.CbbCategoryField.Enabled == false, "Category is enabled");
             Assert.IsTrue(addpaneldialog.CbbSeriesField.Enabled, "Series is disabled");
             Assert.IsTrue(addpaneldialog.TxtCategoryCaption.Enabled, "Category Caption is disabled");
-            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled"); 
+            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled");
 
             //16 Step	Click 'Chart Type' drop-down menu
             //17 Step	Select 'Stacked Bar' Chart Type
@@ -446,7 +446,7 @@ namespace Group1Project.TestCases
             Assert.IsTrue(addpaneldialog.CbbCategoryField.Enabled, "Category is disabled");
             Assert.IsTrue(addpaneldialog.CbbSeriesField.Enabled, "Series is disabled");
             Assert.IsTrue(addpaneldialog.TxtCategoryCaption.Enabled, "Category Caption is disabled");
-            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled"); 
+            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled");
 
             //19 Step	Click 'Chart Type' drop-down menu
             //20 Step	Select 'Group Bar' Chart Type
@@ -455,7 +455,7 @@ namespace Group1Project.TestCases
             Assert.IsTrue(addpaneldialog.CbbCategoryField.Enabled, "Category is disabled");
             Assert.IsTrue(addpaneldialog.CbbSeriesField.Enabled, "Series is disabled");
             Assert.IsTrue(addpaneldialog.TxtCategoryCaption.Enabled, "Category Caption is disabled");
-            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled"); 
+            Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled");
 
             //22 Step	Click 'Chart Type' drop-down menu
             //23 Step	Select 'Line' Chart Type
@@ -477,8 +477,45 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("TC38 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"2D\" and \"3D\" radio buttons");
 
+            //1	Step	Navigate to Dashboard login page
+            //2	Step	Select a specific repository 
+            //3	Step	Enter valid Username and Password
+            //4	Step	Click 'Login' button
+            //5	Step	Click 'Add Page' button
+            //6	Step	Enter Page Name
+            //7	Step	Click 'OK' button
+            //8	Step	Click 'Choose Panels' button below 'main_hung' button
+            //9	Step	Click 'Create new panel' button
+            //10	Step	Click 'Chart Type' drop-down menu
+            //11	Step	Select a specific Chart Type
+            //12	Step	Select 'Data Profile' drop-down menu
+            //13	Step	Enter 'Display Name' and 'Chart Title'
+            //14	Step	Select 'Show Title' checkbox
+            //15	Step	Select 'Legends' radio button
+            //16	Step	Select 'Style' radio button
+            //17	VP	Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            string pagename = "main_hung";
+            mainpage.ClickAddPage().AddPage(pagename);
+            mainpage.MnGlobalSetting.Click();
+            mainpage.LnkAddPanel.Click();
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
+            addpaneldialog.AddChartPanelSuccess("hung_panel","hung_chart","Stacked Bar","url",Constant.DefaultSeriesValue,"Test Case Execution",true,"3D","Top");
 
-            
+            //18	Step	Select 'Style' radio button
+            //19	VP	Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+            //20	Step	Click OK button
+            //21	Step	Select a page in drop-down menu
+            //22	Step	Enter path of Folder
+            //23	Step	Click OK button
+            //24	Step	Click 'Edit Panel' button of panel 'hung_panel'
+            //25	Step	Select 'Style' radio button
+            //26	Step	Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+            //27	Step	Select 'Style' radio button
+            //28	Step	Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+
+
         }
     }
 }

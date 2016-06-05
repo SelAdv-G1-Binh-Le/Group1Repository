@@ -67,7 +67,7 @@ namespace Group1Project.Common
         public static void SelectByText(this IWebElement webElement, string text)
         {
             SelectElement SelectedCbo = new SelectElement(webElement);
-            SelectedCbo.SelectByText(text);            
+            SelectedCbo.SelectByText(text);
         }
 
         /// <summary>
@@ -87,6 +87,19 @@ namespace Group1Project.Common
         {
             if (clearFirst) element.Clear();
             element.SendKeys(value);
+        }
+
+        /// <summary>
+        /// Checks the specified value.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/5/2016 - 12:01</datetime>
+        public static void Check(this IWebElement element, bool value)
+        {
+            Console.WriteLine("Checked {0} {1}", element.ToString(), value);
+            if (element.Selected != value) element.Click();
         }
 
         public static void MoveMouse(this IWebElement element, IWebDriver webDriver)
@@ -110,7 +123,7 @@ namespace Group1Project.Common
             wait.Until(d => webElement.Enabled);
         }
 
-       
+
     }
 
 

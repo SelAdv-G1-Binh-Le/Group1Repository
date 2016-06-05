@@ -29,12 +29,73 @@ namespace Group1Project.PageObjects
         static By _txtCategoryCaption = By.XPath("//input[@id='txtCategoryXAxis']");
         static By _txtSeriesCaption = By.XPath("//input[@id='txtValueYAxis']");
         static By _cbbCategoryField = By.XPath("//select[@id='cbbCategoryField']");
+        static By _chkShowTitle = By.XPath("//input[@id='chkShowTitle']");
+        static By _radChartStyle2D = By.XPath("//input[@id='rdoChartStyle2D']");
+        static By _radChartStyle3D = By.XPath("//input[@id='rdoChartStyle3D']");
+        static By _radLegendsNone = By.XPath("//input[@id='radPlacementNone']");
+        static By _radLegendsTop = By.XPath("//input[@id='radPlacementTop']");
+        static By _radLegendsRight = By.XPath("//input[@id='radPlacementRight']");
+        static By _radLegendsBottom = By.XPath("//input[@id='radPlacementBottom']");
+        static By _radLegendsLeft = By.XPath("//input[@id='radPlacementLeft']");
+        static By _chkDataLabelsSeries = By.XPath("//input[@id='chkSeriesName']");
+        static By _chkDataLabelsCategories = By.XPath("//input[@id='chkCategoriesName']");
+        static By _chkDataLabelsValue = By.XPath("//input[@id='chkValue']");
+        static By _chkDataLabelsPercentage = By.XPath("//input[@id='chkPercentage']");
 
-        
-        //select[@id='cbbCategoryField']
+
+
 
         #endregion
+        public IWebElement ChkDataLabelsPercentage
+        {
+            get { return FindElement(_chkDataLabelsPercentage, Constant.DefaultTimeout); }
+        }
+        public IWebElement ChkDataLabelsValue
+        {
+            get { return FindElement(_chkDataLabelsValue, Constant.DefaultTimeout); }
+        }
+        public IWebElement ChkDataLabelsCategories
+        {
+            get { return FindElement(_chkDataLabelsCategories, Constant.DefaultTimeout); }
+        }
+        public IWebElement ChkDataLabelsSeries
+        {
+            get { return FindElement(_chkDataLabelsSeries, Constant.DefaultTimeout); }
+        }
+        public IWebElement RadLegendsLeft
+        {
+            get { return FindElement(_radLegendsLeft, Constant.DefaultTimeout); }
+        }
+        public IWebElement RadLegendsBottom
+        {
+            get { return FindElement(_radLegendsBottom, Constant.DefaultTimeout); }
+        }
+        public IWebElement RadLegendsRight
+        {
+            get { return FindElement(_radLegendsRight, Constant.DefaultTimeout); }
+        }
 
+        public IWebElement RadLegendsTop
+        {
+            get { return FindElement(_radLegendsTop, Constant.DefaultTimeout); }
+        }
+        public IWebElement RadLegendsNone
+        {
+            get { return FindElement(_radLegendsNone, Constant.DefaultTimeout); }
+        }
+        public IWebElement RadChartStyle3D
+        {
+            get { return FindElement(_radChartStyle3D, Constant.DefaultTimeout); }
+        }
+        public IWebElement RadChartStyle2D
+        {
+            get { return FindElement(_radChartStyle2D, Constant.DefaultTimeout); }
+        }
+
+        public IWebElement ChkShowTitle
+        {
+            get { return FindElement(_chkShowTitle, Constant.DefaultTimeout); }
+        }
         #region Elements
         public IWebElement CbbCategoryField
         {
@@ -139,13 +200,64 @@ namespace Group1Project.PageObjects
         /// <returns></returns>
         /// <author>Diep Duong</author>
         /// <datetime>6/3/2016 - 09:40</datetime>
-        public PanelsPage AddChartPanelSuccess(string displayname, string title = "", string type = Constant.DefaultChartType, string series = Constant.DefaultSeriesValue)
+        public PanelsPage AddChartPanelSuccess
+            (string displayname,
+            string title = "",
+            string type = Constant.DefaultChartType,
+            string categoryvalue = "name",
+            string series = Constant.DefaultSeriesValue,
+            string dataprofiletext = "Action Implementation By Status",
+            bool showtitle = false,
+            string style = "2D",
+            string legends = "Bottom",
+            bool dataLabelsSeries = false,
+            bool dataLabelsCategories = false,
+            bool dataLabelsValue = false,
+            bool dataLabelsPercentage = false)
         {
             Console.WriteLine("- Add Chart Panel Success");
-            CbbSeriesField.SelectByValue(series);
-            TxtDisplayName.Set(displayname);
+
+            CbbProfile.SelectByText(dataprofiletext);
+            CommonMethods.WaitForControl(webDriver,_txtDisplayName, Constant.DefaultTimeout);
+
+            switch (legends)
+            {
+                case "None":
+                    RadLegendsNone.Click();
+                    break;
+                case "Top":
+                    RadLegendsTop.Click();
+                    break;
+                case "Right":
+                    RadLegendsRight.Click();
+                    break;
+                case "Bottom":
+                    RadLegendsBottom.Click();
+                    break;
+                case "Left":
+                    RadLegendsLeft.Click();
+                    break;
+            }
+
             TxtChartTitle.Set(title);
+
             CbbChartType.SelectByValue(type);
+
+            ChkDataLabelsSeries.Check(dataLabelsSeries);
+            ChkDataLabelsCategories.Check(dataLabelsCategories);
+            ChkDataLabelsValue.Check(dataLabelsValue);
+            ChkDataLabelsPercentage.Check(dataLabelsPercentage);
+
+            TxtDisplayName.Set(displayname);
+            CbbSeriesField.SelectByValue(series);
+          
+           
+            if (style == "3D") RadChartStyle3D.Click();
+            if (style == "2D") RadChartStyle2D.Click();
+            ChkShowTitle.Check(showtitle);
+
+            if (CbbCategoryField.Enabled) CbbCategoryField.SelectByValue(categoryvalue);
+            //Click OK button
             BtnOK.Click();
 
             //Handle for creating new Panel at MainPage
@@ -168,14 +280,55 @@ namespace Group1Project.PageObjects
         /// <returns></returns>
         /// <author>Diep Duong</author>
         /// <datetime>6/4/2016 - 16:31</datetime>
-        public string AddChartPanelUnsuccess(string displayname = "", string title = "", string type = Constant.DefaultChartType, string series = Constant.DefaultSeriesValue)
+        public string AddChartPanelUnsuccess
+            (string displayname = "",
+            string title = "",
+            string type = Constant.DefaultChartType,
+            string series = Constant.DefaultSeriesValue,
+            string dataprofiletext = "Action Implementation By Status",
+            bool showtitle = false,
+            string style = "2D",
+            string legends = "Bottom",
+            bool dataLabelsSeries = false,
+            bool dataLabelsCategories = false,
+            bool dataLabelsValue = false,
+            bool dataLabelsPercentage = false)
         {
             Console.WriteLine("- Add Chart Panel Unsuccess");
+            CbbChartType.SelectByValue(type);
             CbbSeriesField.SelectByValue(series);
             TxtDisplayName.Set(displayname);
             TxtChartTitle.Set(title);
-            CbbChartType.SelectByValue(type);
+            ChkShowTitle.Check(showtitle);
+            if (style != "2D") RadChartStyle3D.Click(); else RadChartStyle2D.Click();
+
+            switch (legends)
+            {
+                case "None":
+                    RadLegendsNone.Click();
+                    break;
+                case "Top":
+                    RadLegendsTop.Click();
+                    break;
+                case "Right":
+                    RadLegendsRight.Click();
+                    break;
+                case "Bottom":
+                    RadLegendsBottom.Click();
+                    break;
+                case "Left":
+                    RadLegendsLeft.Click();
+                    break;
+            }
+
+            ChkDataLabelsSeries.Check(dataLabelsSeries);
+            ChkDataLabelsCategories.Check(dataLabelsCategories);
+            ChkDataLabelsValue.Check(dataLabelsValue);
+            ChkDataLabelsPercentage.Check(dataLabelsPercentage);
+
+            //Click OK button
             BtnOK.Click();
+
             string alert = CommonMethods.CloseAlertAndGetItsText(webDriver);
             this.Close();
             return alert;
