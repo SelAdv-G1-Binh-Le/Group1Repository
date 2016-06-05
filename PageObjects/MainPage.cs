@@ -456,7 +456,7 @@ namespace Group1Project.PageObjects
         public PanelsPage GotoPanelsPage()
         {
             this.LnkAdminister.MoveMouse(webDriver);
-            CommonMethods.WaitForControlDisplayed(webDriver, _lnkPanels, Constant.DefaultTimeout);
+            CommonMethods.WaitForControl(webDriver, _lnkPanels, Constant.DefaultTimeout);
             this.LnkPanels.Click();
             return new PanelsPage(webDriver);
         }
