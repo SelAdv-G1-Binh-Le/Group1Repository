@@ -545,7 +545,7 @@ namespace Group1Project.TestCases
 
             addpaneldialog.BtnOK.Click();
             addpaneldialog.BtnOKPanelConfiguration.Click();
-            mainpage.FindElement(By.XPath(Constant.dynamicxPathTC38),Constant.DefaultTimeout).Click();
+            mainpage.FindElement(By.XPath(Constant.dynamicxPathTC38), Constant.DefaultTimeout).Click();
 
             addpaneldialog.RadChartStyle3D.Click();
 
@@ -574,6 +574,141 @@ namespace Group1Project.TestCases
             mainpage.DeletePage("main_hung");
             PanelsPage panelsPage = new PanelsPage(webDriver);
             panelsPage.DeletePanel("hung_panel");
+        }
+
+        [TestMethod]
+        public void TC39()
+        {
+            Console.WriteLine("TC39 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"Legends\" radio buttons");
+
+            //1	Step	Navigate to Dashboard login page
+            //2	Step	Login with valid account
+            //3	Step	Click Administer link
+            //4	Step	Click Panel link
+            //5	Step	Click Add New link            
+
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            mainpage.LnkAdminister.MoveMouse(webDriver);
+            mainpage.LnkPanels.Click();
+            PanelsPage panelspage = new PanelsPage(webDriver);
+            panelspage.LnkAddNew.Click();
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
+
+            //Get default Settings values
+            string chartype = addpaneldialog.CbbChartType.GetSelectedText();
+            string dataprofile = addpaneldialog.CbbProfile.GetSelectedText();
+            bool categoryField = addpaneldialog.CbbCategoryField.Enabled;
+            bool seriesField = addpaneldialog.CbbSeriesField.Enabled;
+            bool showtitle = addpaneldialog.ChkShowTitle.Selected;
+            bool style2d = addpaneldialog.RadChartStyle2D.Selected;
+            bool style3d = addpaneldialog.RadChartStyle3D.Selected;
+            bool dataLabelsSeries = addpaneldialog.ChkDataLabelsSeries.Selected;
+            bool dataLabelsCategories = addpaneldialog.ChkDataLabelsCategories.Selected;
+            bool dataLabelsValue = addpaneldialog.ChkDataLabelsValue.Selected;
+            bool dataLabelsPercentage = addpaneldialog.ChkDataLabelsPercentage.Selected;
+
+            //6	Step	Click None radio button for Legend
+            //7	VP	Observe the current page
+            addpaneldialog.RadLegendsNone.Click();
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(dataLabelsSeries, addpaneldialog.ChkDataLabelsSeries.Selected);
+            Assert.AreEqual(dataLabelsCategories, addpaneldialog.ChkDataLabelsCategories.Selected);
+            Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
+            Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
+
+            //8	Step	Click Top radio button for Legend
+            //9	VP	Observe the current page
+            addpaneldialog.RadLegendsTop.Click();
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(dataLabelsSeries, addpaneldialog.ChkDataLabelsSeries.Selected);
+            Assert.AreEqual(dataLabelsCategories, addpaneldialog.ChkDataLabelsCategories.Selected);
+            Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
+            Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
+            
+            //10 Step	Click Right radio button for Legend
+            //11 VP	Observe the current page
+            addpaneldialog.RadLegendsRight.Click();
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(dataLabelsSeries, addpaneldialog.ChkDataLabelsSeries.Selected);
+            Assert.AreEqual(dataLabelsCategories, addpaneldialog.ChkDataLabelsCategories.Selected);
+            Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
+            Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
+
+            //12 Step	Click Bottom radio button for Legend
+            //13 VP	Observe the current page
+            addpaneldialog.RadLegendsBottom.Click();
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(dataLabelsSeries, addpaneldialog.ChkDataLabelsSeries.Selected);
+            Assert.AreEqual(dataLabelsCategories, addpaneldialog.ChkDataLabelsCategories.Selected);
+            Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
+            Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
+
+            //14 Step	Click Left radio button for Legend
+            //15 VP	Observe the current page
+            addpaneldialog.RadLegendsLeft.Click();
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(dataLabelsSeries, addpaneldialog.ChkDataLabelsSeries.Selected);
+            Assert.AreEqual(dataLabelsCategories, addpaneldialog.ChkDataLabelsCategories.Selected);
+            Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
+            Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
+
+            //16 Step	Create a new panel
+            //17 Step	Click Edit Panel link
+
+            addpaneldialog.Close();
+            panelspage.LnkAddNew.Click();
+            addpaneldialog.AddChartPanelSuccess().ClickPanel(Constant.DefaultDisplayName);
+
+
+            
+
+
+
+
+
+            //18 Step	Click None radio button for Legend
+            //19 VP	Observe the current page
+            //20 Step	Click Top radio button for Legend
+            //21 VP	Observe the current page
+            //22 Step	Click Right radio button for Legend
+            //23 VP	Observe the current page
+            //24 Step	Click Bottom radio button for Legend
+            //25 VP	Observe the current page
+            //26 Step	Click Left radio button for Legend
+            //27 VP	Observe the current page
+
+
         }
     }
 }

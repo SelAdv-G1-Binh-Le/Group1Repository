@@ -459,12 +459,8 @@ namespace Group1Project.PageObjects
             CommonMethods.WaitForControl(webDriver, _lnkPanels, Constant.DefaultTimeout);
             this.LnkPanels.Click();
             return new PanelsPage(webDriver);
-        }
-
-       
-
-
-
+        }      
+        
         #endregion
 
     }

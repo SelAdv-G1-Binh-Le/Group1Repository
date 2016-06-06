@@ -7,7 +7,6 @@ namespace Group1Project.PageObjects
 {
     class AddPanelDialog : GeneralPage
     {
-
         private IWebDriver driver;
 
         #region Locators
@@ -43,6 +42,9 @@ namespace Group1Project.PageObjects
         static By _chkDataLabelsPercentage = By.XPath("//input[@id='chkPercentage']");
 
         #endregion
+
+        #region Elements
+
         public IWebElement ChkDataLabelsPercentage
         {
             get { return FindElement(_chkDataLabelsPercentage, Constant.DefaultTimeout); }
@@ -93,7 +95,7 @@ namespace Group1Project.PageObjects
         {
             get { return FindElement(_chkShowTitle, Constant.DefaultTimeout); }
         }
-        #region Elements
+      
         public IWebElement CbbCategoryField
         {
             get { return FindElement(_cbbCategoryField, Constant.DefaultTimeout); }
@@ -182,7 +184,6 @@ namespace Group1Project.PageObjects
 
         #region Methods
 
-
         public AddPanelDialog(IWebDriver webDriver)
             : base(webDriver)
         {
@@ -198,7 +199,7 @@ namespace Group1Project.PageObjects
         /// <author>Diep Duong</author>
         /// <datetime>6/3/2016 - 09:40</datetime>
         public PanelsPage AddChartPanelSuccess
-            (string displayname,
+            (string displayname = Constant.DefaultDisplayName,
             string title = "",
             string type = Constant.DefaultChartType,
             string categoryvalue = "name",
@@ -375,8 +376,8 @@ namespace Group1Project.PageObjects
             CommonMethods.WaitForControlDisappear(webDriver, _dlgOverlay, Constant.DefaultTimeout);
             return new PanelsPage(webDriver);
         }
-        #endregion
 
+        #endregion
 
     }
 }

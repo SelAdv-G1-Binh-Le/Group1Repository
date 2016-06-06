@@ -41,12 +41,13 @@ namespace Group1Project.PageObjects
         /// <param name="panelname">The panelname.</param>
         /// <author>Diep Duong</author>
         /// <datetime>6/2/2016 - 05:13</datetime>
-        public void DeletePanel(string panelname)
+        public PanelsPage DeletePanel(string panelname)
         {
             By dynamicXpath = By.XPath("//td[contains(.,'" + panelname + "')]//following::a[contains(.,'Delete')]");
             MainPage mainpage = new MainPage(webDriver);
             mainpage.GotoPanelsPage().FindElement(dynamicXpath, Constant.DefaultTimeout).Click();
             webDriver.SwitchTo().Alert().Accept();
+            return this;
         }
 
         /// <summary>
@@ -58,8 +59,21 @@ namespace Group1Project.PageObjects
         /// <datetime>6/4/2016 - 16:36</datetime>
         public bool IsPanelPresent(string panelname)
         {
-            IWebElement webElement = FindElement(By.XPath("//table[@class='GridView']//a[text()='" + panelname + "']"), Constant.DefaultTimeout);
+            IWebElement webElement = this.FindElement(By.XPath("//table[@class='GridView']//a[text()='" + panelname + "']"), Constant.DefaultTimeout);
             if (webElement == null) return false; else return true;
+        }
+
+        /// <summary>
+        /// Clicks the panel.
+        /// </summary>
+        /// <param name="panelname">The panelname.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/6/2016 - 00:58</datetime>
+        public PanelsPage ClickPanel(string panelname)
+        {
+            this.FindElement(By.XPath("//table[@class='GridView']//a[text()='" + panelname + "']"), Constant.DefaultTimeout).Click();
+            return this;
         }
 
         #endregion
