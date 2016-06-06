@@ -72,16 +72,16 @@ namespace Group1Project.Common
         /// <param name="timeout">The timeout.</param>
         /// <author>Diep Duong</author>
         /// <datetime>6/2/2016 - 22:43</datetime>
-        public static void WaitForControl(IWebDriver webDriver, By by, int timeout)
+        public static IWebElement WaitForControl(IWebDriver webDriver, By by, int timeout)
         {
             Stopwatch sW = new Stopwatch();
-            sW.Start();            
-            GeneralPage generalPage = new GeneralPage(webDriver);
+            sW.Start();
+            MainPage mainPage = new MainPage(webDriver);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
-            wait.Until(d => generalPage.FindElement(by, timeout));
-            Console.WriteLine("Already wait for control {0} in {1} milliseconds!"by.ToString(),sW.ElapsedMilliseconds);
+            wait.Until(d => mainPage.FindElement(by, timeout));
+            Console.WriteLine("Already wait for control {0} in {1} milliseconds!",by.ToString(),sW.ElapsedMilliseconds);
             sW.Stop();
-
+            return mainPage.FindElement(by, timeout);
         }
 
         public static void WaitForControlDisappear(IWebDriver webDriver, By by, int timeout)
