@@ -1079,5 +1079,17 @@ namespace Group1Project.TestCases
             mainpage.DeletePage("main_hung3");
 
         }
+
+        [TestMethod]
+        public void TC43()
+        {
+            Console.WriteLine("TC43 - Verify that only integer number inputs from 300-800 are valid for \"Height *\" field");
+
+
+
+
+        }
     }
+
+
 }
