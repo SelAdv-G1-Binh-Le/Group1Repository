@@ -214,53 +214,55 @@ namespace Group1Project.PageObjects
         {
             Console.WriteLine("- Add Chart Panel Success");
 
-            CbbProfile.SelectByText(dataprofiletext);
-            CommonMethods.WaitForControl(webDriver,_txtDisplayName, Constant.DefaultTimeout);
+            CommonMethods.WaitForControl(webDriver, _cbbProfile, Constant.DefaultTimeout);
+            this.CbbProfile.SelectByText(dataprofiletext);
+
+            CommonMethods.WaitForControl(webDriver, _txtDisplayName, Constant.DefaultTimeout);
 
             switch (legends)
             {
                 case "None":
-                    RadLegendsNone.Click();
+                    this.RadLegendsNone.Click();
                     break;
                 case "Top":
-                    RadLegendsTop.Click();
+                    this.RadLegendsTop.Click();
                     break;
                 case "Right":
-                    RadLegendsRight.Click();
+                    this.RadLegendsRight.Click();
                     break;
                 case "Bottom":
-                    RadLegendsBottom.Click();
+                    this.RadLegendsBottom.Click();
                     break;
                 case "Left":
-                    RadLegendsLeft.Click();
+                    this.RadLegendsLeft.Click();
                     break;
             }
 
-            TxtChartTitle.Set(title);
+            this.TxtChartTitle.Set(title);
 
-            CbbChartType.SelectByValue(type);
+            this.CbbChartType.SelectByValue(type);
 
-            ChkDataLabelsSeries.Check(dataLabelsSeries);
-            ChkDataLabelsCategories.Check(dataLabelsCategories);
-            ChkDataLabelsValue.Check(dataLabelsValue);
-            ChkDataLabelsPercentage.Check(dataLabelsPercentage);
+            this.ChkDataLabelsSeries.Check(dataLabelsSeries);
+            this.ChkDataLabelsCategories.Check(dataLabelsCategories);
+            this.ChkDataLabelsValue.Check(dataLabelsValue);
+            this.ChkDataLabelsPercentage.Check(dataLabelsPercentage);
 
-            TxtDisplayName.Set(displayname);
-            CbbSeriesField.SelectByValue(series);
-          
-           
-            if (style == "3D") RadChartStyle3D.Click();
-            if (style == "2D") RadChartStyle2D.Click();
-            ChkShowTitle.Check(showtitle);
+            this.TxtDisplayName.Set(displayname);
+            this.CbbSeriesField.SelectByValue(series);
 
-            if (CbbCategoryField.Enabled) CbbCategoryField.SelectByValue(categoryvalue);
+
+            if (style == "3D") this.RadChartStyle3D.Click();
+            if (style == "2D") this.RadChartStyle2D.Click();
+            this.ChkShowTitle.Check(showtitle);
+
+            if (CbbCategoryField.Enabled) this.CbbCategoryField.SelectByValue(categoryvalue);
             //Click OK button
-            BtnOK.Click();
+            this.BtnOK.Click();
 
             //Handle for creating new Panel at MainPage
             if (CommonMethods.IsElementPresent(webDriver, _btnOKPanelConfiguration))
             {
-                BtnOKPanelConfiguration.Click();
+                this.BtnOKPanelConfiguration.Click();
             }
 
             CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), Constant.DefaultTimeout);
@@ -281,6 +283,7 @@ namespace Group1Project.PageObjects
             (string displayname = "",
             string title = "",
             string type = Constant.DefaultChartType,
+            string categoryvalue = "name",
             string series = Constant.DefaultSeriesValue,
             string dataprofiletext = "Action Implementation By Status",
             bool showtitle = false,
@@ -292,36 +295,48 @@ namespace Group1Project.PageObjects
             bool dataLabelsPercentage = false)
         {
             Console.WriteLine("- Add Chart Panel Unsuccess");
-            CbbChartType.SelectByValue(type);
-            CbbSeriesField.SelectByValue(series);
-            TxtDisplayName.Set(displayname);
-            TxtChartTitle.Set(title);
-            ChkShowTitle.Check(showtitle);
-            if (style != "2D") RadChartStyle3D.Click(); else RadChartStyle2D.Click();
+            CommonMethods.WaitForControl(webDriver, _cbbProfile, Constant.DefaultTimeout);
+            this.CbbProfile.SelectByText(dataprofiletext);
+
+            CommonMethods.WaitForControl(webDriver, _txtDisplayName, Constant.DefaultTimeout);
 
             switch (legends)
             {
                 case "None":
-                    RadLegendsNone.Click();
+                    this.RadLegendsNone.Click();
                     break;
                 case "Top":
-                    RadLegendsTop.Click();
+                    this.RadLegendsTop.Click();
                     break;
                 case "Right":
-                    RadLegendsRight.Click();
+                    this.RadLegendsRight.Click();
                     break;
                 case "Bottom":
-                    RadLegendsBottom.Click();
+                    this.RadLegendsBottom.Click();
                     break;
                 case "Left":
-                    RadLegendsLeft.Click();
+                    this.RadLegendsLeft.Click();
                     break;
             }
 
-            ChkDataLabelsSeries.Check(dataLabelsSeries);
-            ChkDataLabelsCategories.Check(dataLabelsCategories);
-            ChkDataLabelsValue.Check(dataLabelsValue);
-            ChkDataLabelsPercentage.Check(dataLabelsPercentage);
+            this.TxtChartTitle.Set(title);
+
+            this.CbbChartType.SelectByValue(type);
+
+            this.ChkDataLabelsSeries.Check(dataLabelsSeries);
+            this.ChkDataLabelsCategories.Check(dataLabelsCategories);
+            this.ChkDataLabelsValue.Check(dataLabelsValue);
+            this.ChkDataLabelsPercentage.Check(dataLabelsPercentage);
+
+            this.TxtDisplayName.Set(displayname);
+            this.CbbSeriesField.SelectByValue(series);
+
+
+            if (style == "3D") this.RadChartStyle3D.Click();
+            if (style == "2D") this.RadChartStyle2D.Click();
+            this.ChkShowTitle.Check(showtitle);
+
+            if (CbbCategoryField.Enabled) this.CbbCategoryField.SelectByValue(categoryvalue);
 
             //Click OK button
             BtnOK.Click();

@@ -74,9 +74,14 @@ namespace Group1Project.Common
         /// <datetime>6/2/2016 - 22:43</datetime>
         public static void WaitForControl(IWebDriver webDriver, By by, int timeout)
         {
+            Stopwatch sW = new Stopwatch();
+            sW.Start();            
             GeneralPage generalPage = new GeneralPage(webDriver);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
             wait.Until(d => generalPage.FindElement(by, timeout));
+            Console.WriteLine("Already wait for control {0} in {1} milliseconds!"by.ToString(),sW.ElapsedMilliseconds);
+            sW.Stop();
+
         }
 
         public static void WaitForControlDisappear(IWebDriver webDriver, By by, int timeout)
