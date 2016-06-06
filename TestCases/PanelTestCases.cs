@@ -782,9 +782,83 @@ namespace Group1Project.TestCases
 
             //Clean up TC 39
             Console.WriteLine("Clean up TC 39");
-            addpaneldialog.Close();           
+            addpaneldialog.Close();
             panelspage.DeletePanel(Constant.DefaultDisplayName);
-        
+
         }
+
+        [TestMethod]
+        public void TC40()
+        {
+            Console.WriteLine("TC40 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"Legends\" radio buttons");
+            //1	Step	Navigate to Dashboard login page		
+            //2	Step	Select a specific repository 	Dashboard_STT	
+            //3	Step	Enter valid Username and Password	hung.nguyen/(empty)	
+            //4	Step	Click 'Login' button		
+            //5	Step	Click 'Add Page' button		
+            //6	Step	Enter Page Name	main_hung	
+            //7	Step	Click 'OK' button		
+            //8	Step	Click 'Choose Panels' button below 'main_hung' button		
+            //9	Step	Click 'Create new panel' button
+
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            string pagename = "main_hung";
+            mainpage.ClickAddPage().AddPage(pagename);
+            mainpage.MnGlobalSetting.Click();
+            mainpage.LnkAddPanel.Click();
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
+
+            //10 Step	Click 'Chart Type' drop-down menu		
+            //11 Step	Select 'Pie' Chart Type		
+            //12 VP	Check that 'Categories' checkbox is disabled, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled		'Categories' checkbox is disabled, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled
+            addpaneldialog.CbbChartType.SelectByText("Pie");                        
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsSeries.Enabled, "Series checkbox is is disabled");
+            Assert.IsTrue(!addpaneldialog.ChkDataLabelsCategories.Enabled, "Categories checkbox is enabled");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsValue.Enabled, "Value checkbox is is disabled");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsPercentage.Enabled, "Percentage checkbox is is disabled");
+         
+            //13 Step	Click 'Chart Type' drop-down menu		
+            //14 Step	Select 'Single Bar' Chart Type		
+            //15 VP	Check that 'Categories' checkbox is disabled, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled		'Categories' checkbox is disabled, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled
+            addpaneldialog.CbbChartType.SelectByText("Single Bar");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsSeries.Enabled, "Series checkbox is is disabled");
+            Assert.IsTrue(!addpaneldialog.ChkDataLabelsCategories.Enabled, "Categories checkbox is enabled");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsValue.Enabled, "Value checkbox is is disabled");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsPercentage.Enabled, "Percentage checkbox is is disabled");
+
+            //16 Step	Click 'Chart Type' drop-down menu		
+            //17 Step	Select 'Stacked Bar' Chart Type		
+            //18 VP	Check that 'Categories' checkbox, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled		'Categories' checkbox, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled
+            addpaneldialog.CbbChartType.SelectByText("Stacked Bar");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsSeries.Enabled, "Series checkbox is is disabled");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsCategories.Enabled, "Categories checkbox is disabled");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsValue.Enabled, "Value checkbox is is disabled");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsPercentage.Enabled, "Percentage checkbox is is disabled");
+
+            //19 Step	Click 'Chart Type' drop-down menu		
+            //20 Step	Select 'Group Bar' Chart Type		
+            //21 VP	Check that 'Categories' checkbox, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled		'Categories' checkbox, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled
+            addpaneldialog.CbbChartType.SelectByText("Group Bar");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsSeries.Enabled, "Series checkbox is is disabled");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsCategories.Enabled, "Categories checkbox is disabled");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsValue.Enabled, "Value checkbox is is disabled");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsPercentage.Enabled, "Percentage checkbox is is disabled");
+
+            //22 Step	Click 'Chart Type' drop-down menu		
+            //23 Step	Select 'Line' Chart Type		
+            //24 VP	Check that 'Categories' checkbox, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are disabled		'Categories' checkbox, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are disabled
+            addpaneldialog.CbbChartType.SelectByText("Line");
+            Assert.IsTrue(!addpaneldialog.ChkDataLabelsSeries.Enabled, "Series checkbox is is enabled");
+            Assert.IsTrue(!addpaneldialog.ChkDataLabelsCategories.Enabled, "Categories checkbox is enabled");
+            Assert.IsTrue(addpaneldialog.ChkDataLabelsValue.Enabled, "Value checkbox is is disabled");
+            Assert.IsTrue(!addpaneldialog.ChkDataLabelsPercentage.Enabled, "Percentage checkbox is is enabled");
+
+            //Clean up TC 40
+            Console.WriteLine("Clean up TC 40");
+            addpaneldialog.Close();
+            mainpage.DeletePage(pagename);
+        }
+
     }
 }
