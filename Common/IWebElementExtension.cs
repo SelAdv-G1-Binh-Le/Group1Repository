@@ -110,9 +110,9 @@ namespace Group1Project.Common
         /// <param name="value">if set to <c>true</c> [value].</param>
         /// <author>Diep Duong</author>
         /// <datetime>6/5/2016 - 12:01</datetime>
-        public static void Check(this IWebElement element, bool value)
+        public static void Check(this IWebElement element, bool value = true)
         {
-            Console.WriteLine("Checked {0} {1}", element.ToString(), value);
+            Console.WriteLine("[checkbox id:{0}] is checked {1}", element.GetAttribute("id"), (value ? "On" : "Off"));
             if (element.Selected != value) element.Click();
         }
 

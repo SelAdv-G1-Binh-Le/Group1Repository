@@ -576,6 +576,10 @@ namespace Group1Project.TestCases
             panelsPage.DeletePanel("hung_panel");
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/6/2016 - 03:48</datetime>
         [TestMethod]
         public void TC39()
         {
@@ -787,6 +791,10 @@ namespace Group1Project.TestCases
 
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/6/2016 - 03:48</datetime>
         [TestMethod]
         public void TC40()
         {
@@ -812,12 +820,12 @@ namespace Group1Project.TestCases
             //10 Step	Click 'Chart Type' drop-down menu		
             //11 Step	Select 'Pie' Chart Type		
             //12 VP	Check that 'Categories' checkbox is disabled, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled		'Categories' checkbox is disabled, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled
-            addpaneldialog.CbbChartType.SelectByText("Pie");                        
+            addpaneldialog.CbbChartType.SelectByText("Pie");
             Assert.IsTrue(addpaneldialog.ChkDataLabelsSeries.Enabled, "Series checkbox is is disabled");
             Assert.IsTrue(!addpaneldialog.ChkDataLabelsCategories.Enabled, "Categories checkbox is enabled");
             Assert.IsTrue(addpaneldialog.ChkDataLabelsValue.Enabled, "Value checkbox is is disabled");
             Assert.IsTrue(addpaneldialog.ChkDataLabelsPercentage.Enabled, "Percentage checkbox is is disabled");
-         
+
             //13 Step	Click 'Chart Type' drop-down menu		
             //14 Step	Select 'Single Bar' Chart Type		
             //15 VP	Check that 'Categories' checkbox is disabled, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled		'Categories' checkbox is disabled, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled
@@ -860,5 +868,155 @@ namespace Group1Project.TestCases
             mainpage.DeletePage(pagename);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/6/2016 - 03:48</datetime>
+        [TestMethod]
+        public void TC41()
+        {
+            Console.WriteLine("TC41 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"Data Labels\" check boxes buttons");
+            //1	Step	Navigate to Dashboard login page		
+            //2	Step	Login with valid account	test / test	
+            //3	Step	Click Administer link		
+            //4	Step	Click Panel link		
+            //5	Step	Click Add New link
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            IWebElementExtension.MoveMouse(mainpage.LnkAdminister, webDriver);
+            mainpage.LnkPanels.Click();
+            PanelsPage panelspage = new PanelsPage(webDriver);
+            panelspage.LnkAddNew.Click();
+            AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
+
+            //Get default Settings values
+            string chartype = addpaneldialog.CbbChartType.GetSelectedText();
+            string dataprofile = addpaneldialog.CbbProfile.GetSelectedText();
+            bool categoryField = addpaneldialog.CbbCategoryField.Enabled;
+            bool seriesField = addpaneldialog.CbbSeriesField.Enabled;
+            bool showtitle = addpaneldialog.ChkShowTitle.Selected;
+            bool style2d = addpaneldialog.RadChartStyle2D.Selected;
+            bool style3d = addpaneldialog.RadChartStyle3D.Selected;
+            bool legendsNone = addpaneldialog.RadLegendsNone.Selected;
+            bool legendsTop = addpaneldialog.RadLegendsTop.Selected;
+            bool legendsRight = addpaneldialog.RadLegendsRight.Selected;
+            bool legendsBottom = addpaneldialog.RadLegendsBottom.Selected;
+            bool legendsLeft = addpaneldialog.RadLegendsLeft.Selected;
+
+            //6	Step	Check Series checkbox for Data Labels		
+            //7	VP	Observe the current page		All settings are unchange in Add New Panel dialog
+            //8	Step	Uncheck Series checkbox
+
+            addpaneldialog.ChkDataLabelsSeries.Check(true);
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(legendsNone , addpaneldialog.RadLegendsNone.Selected);
+            Assert.AreEqual(legendsTop , addpaneldialog.RadLegendsTop.Selected);
+            Assert.AreEqual(legendsRight , addpaneldialog.RadLegendsRight.Selected);
+            Assert.AreEqual(legendsBottom , addpaneldialog.RadLegendsBottom.Selected);
+            Assert.AreEqual(legendsLeft , addpaneldialog.RadLegendsLeft.Selected);
+            addpaneldialog.ChkDataLabelsSeries.Check(false);
+
+            //9	Step	Check Value checkbox for Data Labels		
+            //10 VP	Observe the current page		All settings are unchange in Add New Panel dialog
+            //11 Step	Uncheck Value checkbox		
+            addpaneldialog.ChkDataLabelsValue.Check(true);
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(legendsNone, addpaneldialog.RadLegendsNone.Selected);
+            Assert.AreEqual(legendsTop, addpaneldialog.RadLegendsTop.Selected);
+            Assert.AreEqual(legendsRight, addpaneldialog.RadLegendsRight.Selected);
+            Assert.AreEqual(legendsBottom, addpaneldialog.RadLegendsBottom.Selected);
+            Assert.AreEqual(legendsLeft, addpaneldialog.RadLegendsLeft.Selected);
+            addpaneldialog.ChkDataLabelsValue.Check(false);
+
+            //12 Step	Check Percentage checbox for Data Labels		
+            //13 VP	Observe the current page		All settings are unchange in Add New Panel dialog
+            //14 Step	Uncheck Percentage checkbox	
+            addpaneldialog.ChkDataLabelsPercentage.Check(true);
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(legendsNone, addpaneldialog.RadLegendsNone.Selected);
+            Assert.AreEqual(legendsTop, addpaneldialog.RadLegendsTop.Selected);
+            Assert.AreEqual(legendsRight, addpaneldialog.RadLegendsRight.Selected);
+            Assert.AreEqual(legendsBottom, addpaneldialog.RadLegendsBottom.Selected);
+            Assert.AreEqual(legendsLeft, addpaneldialog.RadLegendsLeft.Selected);
+            addpaneldialog.ChkDataLabelsPercentage.Check(false);
+
+            //15 Step	Create a new panel	Panel 1	
+            //16 Step	Click Edit Panel link	
+            addpaneldialog.Close();
+            panelspage.LnkAddNew.Click();
+            addpaneldialog.AddChartPanelSuccess(Constant.DefaultDisplayName).ClickPanel(Constant.DefaultDisplayName);
+
+            //17 Step	Check Series checkbox for Data Labels		
+            //18 VP	Observe the current page		All settings are unchange in Edit New Panel dialog
+            //19 Step	Uncheck Series checkbox		
+            addpaneldialog.ChkDataLabelsSeries.Check(true);
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(legendsNone, addpaneldialog.RadLegendsNone.Selected);
+            Assert.AreEqual(legendsTop, addpaneldialog.RadLegendsTop.Selected);
+            Assert.AreEqual(legendsRight, addpaneldialog.RadLegendsRight.Selected);
+            Assert.AreEqual(legendsBottom, addpaneldialog.RadLegendsBottom.Selected);
+            Assert.AreEqual(legendsLeft, addpaneldialog.RadLegendsLeft.Selected);
+            addpaneldialog.ChkDataLabelsSeries.Check(false);
+
+            //20 Step	Check Value checkbox for Data Labels		
+            //21 VP	Observe the current page		All settings are unchange in Edit New Panel dialog
+            //22 Step	Uncheck Value checkbox		
+            addpaneldialog.ChkDataLabelsValue.Check(true);
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(legendsNone, addpaneldialog.RadLegendsNone.Selected);
+            Assert.AreEqual(legendsTop, addpaneldialog.RadLegendsTop.Selected);
+            Assert.AreEqual(legendsRight, addpaneldialog.RadLegendsRight.Selected);
+            Assert.AreEqual(legendsBottom, addpaneldialog.RadLegendsBottom.Selected);
+            Assert.AreEqual(legendsLeft, addpaneldialog.RadLegendsLeft.Selected);
+            addpaneldialog.ChkDataLabelsValue.Check(false);
+
+            //23 Step	Check Percentage checbox for Data Labels		
+            //24 VP	Observe the current page		All settings are unchange in Edit New Panel dialog
+            addpaneldialog.ChkDataLabelsPercentage.Check(true);
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(legendsNone, addpaneldialog.RadLegendsNone.Selected);
+            Assert.AreEqual(legendsTop, addpaneldialog.RadLegendsTop.Selected);
+            Assert.AreEqual(legendsRight, addpaneldialog.RadLegendsRight.Selected);
+            Assert.AreEqual(legendsBottom, addpaneldialog.RadLegendsBottom.Selected);
+            Assert.AreEqual(legendsLeft, addpaneldialog.RadLegendsLeft.Selected);
+            addpaneldialog.ChkDataLabelsPercentage.Check(false);
+            
+        }
     }
 }
