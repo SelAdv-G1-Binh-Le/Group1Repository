@@ -62,7 +62,7 @@ namespace Group1Project.PageObjects
         {
             IWebElementExtension.Set(this.TxtPageName, pagename, true);
             this.BtnOK.Click();
-            CommonMethods.WaitForControl(webDriver, By.XPath(CommonMethods.XPathContainGenerate("a", pagename)), 10);
+            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), Constant.DefaultTimeout);
         }
 
 

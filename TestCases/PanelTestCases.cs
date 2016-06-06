@@ -571,9 +571,10 @@ namespace Group1Project.TestCases
             //Clean up TC 38
             Console.WriteLine("Clean up TC 38");
             addpaneldialog.Close();
-            mainpage.DeletePage("main_hung");
             PanelsPage panelsPage = new PanelsPage(webDriver);
             panelsPage.DeletePanel("hung_panel");
+            mainpage.DeletePage("main_hung");
+            
         }
 
         /// <summary>
@@ -1056,7 +1057,7 @@ namespace Group1Project.TestCases
             mainpage.BtnChoosepanel.Click();
             AddPanelDialog panelConfigurationDlg = new AddPanelDialog(webDriver);
 
-            IWebElement table = mainpage.FindElement(By.XPath("//table[contains(.,'DiepDuong')]"), 10);
+            IWebElement table = mainpage.FindElement(By.XPath("//div[@class='ptit pchart']//following::table[1]"), Constant.DefaultTimeout);
             Random r = new Random();
             int col = r.Next(1, table.GetTableColumns() + 1);
             int row = r.Next(1, table.GetTableRows());
@@ -1076,7 +1077,6 @@ namespace Group1Project.TestCases
             mainpage.DeletePage("main_hung1");
             mainpage.DeletePage("main_hung2");
             mainpage.DeletePage("main_hung3");
-
 
         }
     }
