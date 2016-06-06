@@ -915,11 +915,11 @@ namespace Group1Project.TestCases
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
             Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
             Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
-            Assert.AreEqual(legendsNone , addpaneldialog.RadLegendsNone.Selected);
-            Assert.AreEqual(legendsTop , addpaneldialog.RadLegendsTop.Selected);
-            Assert.AreEqual(legendsRight , addpaneldialog.RadLegendsRight.Selected);
-            Assert.AreEqual(legendsBottom , addpaneldialog.RadLegendsBottom.Selected);
-            Assert.AreEqual(legendsLeft , addpaneldialog.RadLegendsLeft.Selected);
+            Assert.AreEqual(legendsNone, addpaneldialog.RadLegendsNone.Selected);
+            Assert.AreEqual(legendsTop, addpaneldialog.RadLegendsTop.Selected);
+            Assert.AreEqual(legendsRight, addpaneldialog.RadLegendsRight.Selected);
+            Assert.AreEqual(legendsBottom, addpaneldialog.RadLegendsBottom.Selected);
+            Assert.AreEqual(legendsLeft, addpaneldialog.RadLegendsLeft.Selected);
             addpaneldialog.ChkDataLabelsSeries.Check(false);
 
             //9	Step	Check Value checkbox for Data Labels		
@@ -1016,7 +1016,68 @@ namespace Group1Project.TestCases
             Assert.AreEqual(legendsBottom, addpaneldialog.RadLegendsBottom.Selected);
             Assert.AreEqual(legendsLeft, addpaneldialog.RadLegendsLeft.Selected);
             addpaneldialog.ChkDataLabelsPercentage.Check(false);
-            
+
+        }
+        
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/6/2016 - 06:27</datetime>
+        [TestMethod]
+        public void TC42()
+        {
+            Console.WriteLine("TC42 - Verify that all pages are listed correctly under the \"Select page *\" dropped down menu of \"Panel Configuration\" form/ control");
+
+            //1	Step	Navigate to Dashboard login page		
+            //2	Step	Select a specific repository 	Dashboard_STT	
+            //3	Step	Enter valid Username and Password	hung.nguyen/(empty)	
+            //4	Step	Click 'Login' button		
+            //5	Step	Click 'Add Page' button		
+            //6	Step	Enter Page Name	main_hung1	
+            //7	Step	Click 'OK' button		
+            //8	Step	Click 'Add Page' button		
+            //9	Step	Enter Page Name	main_hung2	
+            //10 Step	Click 'OK' button		
+            //11 Step	Click 'Add Page' button		
+            //12 Step	Enter Page Name	main_hung3	
+            //13 Step	Click 'OK' button		
+            //14 Step	Click 'Choose panels' button		
+            //15 Step	Click on any Chart panel instance		
+            //16 Step	Click 'Select Page*' drop-down menu		
+            //17 VP	Check that 'Select Page*' drop-down menu contains 3 items: 'main_hung1', 'main_hung2' and 'main_hung3'		'Select Page*' drop-down menu contains 3 items: 'main_hung1', 'main_hung2' and 'main_hung3'
+
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+
+            mainpage.AddOrEditPage("main_hung1");
+            mainpage.AddOrEditPage("main_hung2");
+            mainpage.AddOrEditPage("main_hung3");
+
+            mainpage.BtnChoosepanel.Click();
+            AddPanelDialog panelConfigurationDlg = new AddPanelDialog(webDriver);
+
+            IWebElement table = mainpage.FindElement(By.XPath("//table[contains(.,'DiepDuong')]"), 10);
+            Random r = new Random();
+            int col = r.Next(1, table.GetTableColumns() + 1);
+            int row = r.Next(1, table.GetTableRows());
+            Console.WriteLine("Cols: " + col);
+            Console.WriteLine("Rows: " + row);
+            string dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
+            mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
+            mainpage.CbbPages.Click();
+
+            Assert.IsTrue(IWebElementExtension.IsItemExists(mainpage.CbbPages, "main_hung1"), "main_hung1 is NOT existed");
+            Assert.IsTrue(IWebElementExtension.IsItemExists(mainpage.CbbPages, "main_hung2"), "main_hung2 is NOT existed");
+            Assert.IsTrue(IWebElementExtension.IsItemExists(mainpage.CbbPages, "main_hung3"), "main_hung3 is NOT existed");
+
+            //Clean up TC 42
+            Console.WriteLine("Clean up TC 42");
+            panelConfigurationDlg.Close();
+            mainpage.DeletePage("main_hung1");
+            mainpage.DeletePage("main_hung2");
+            mainpage.DeletePage("main_hung3");
+
+
         }
     }
 }

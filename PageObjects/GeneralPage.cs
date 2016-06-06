@@ -43,7 +43,7 @@ namespace Group1Project.PageObjects
         /// <returns></returns>
         /// <author>Diep Duong</author>
         /// <datetime>6/2/2016 - 04:07</datetime>
-        public IWebElement FindElement(By by, long timeout)
+        public IWebElement FindElement(By by, long timeout = Constant.DefaultTimeout)
         {
             IWebElement webElement = null;
             Stopwatch stopWatch = new Stopwatch();

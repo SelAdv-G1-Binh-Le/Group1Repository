@@ -33,14 +33,16 @@ namespace Group1Project.PageObjects
         static readonly By _lnkAdminister = By.XPath("//a[@href='#Administer']");
         static readonly By _lnkPanels = By.XPath("//a[@href='panels.jsp']");
         static readonly By _lnkMenuSettingDelete = By.XPath("//li[@class='mn-setting']//a[@class='delete']");
-             
+        static readonly By _cbbPages = By.XPath("//div[@id='div_panelConfigurationDlg']//select[@id='cbbPages']");
 
-
-
+        //select[@id='cbbPages']
         #endregion
 
         #region Elements
-
+        public IWebElement CbbPages
+        {
+            get { return FindElement(_cbbPages, Constant.DefaultTimeout); }
+        }
         public IWebElement LnkMenuSettingDelete
         {
             get { return FindElement(_lnkMenuSettingDelete, Constant.DefaultTimeout); }
@@ -214,7 +216,7 @@ namespace Group1Project.PageObjects
         /// <param name="after">The after.</param>
         /// <param name="status">if set to <c>true</c> [status].</param>
         /// <param name="clickbutton">The clickbutton.</param>
-        public void AddOrEditPage(string name, string parent, string column, string after, bool status, string clickbutton)
+        public void AddOrEditPage(string name, string parent="", string column="", string after="", bool status=false, string clickbutton="OK")
         {
             bool checkpopupexist = CommonMethods.IsElementPresent(webDriver, By.XPath("//input[@id='name']"));
             if (checkpopupexist != true)

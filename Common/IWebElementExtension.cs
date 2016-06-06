@@ -137,6 +137,56 @@ namespace Group1Project.Common
             wait.Until(d => webElement.Enabled);
         }
 
+        /// <summary>
+        /// Gets the table rows.
+        /// </summary>
+        /// <param name="webElement">The web element.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/6/2016 - 05:17</datetime>
+        public static int GetTableRows(this IWebElement webElement)
+        {
+            return webElement.FindElements(By.TagName("tr")).Count;
+        }
+
+        /// <summary>
+        /// Gets the table columns.
+        /// </summary>
+        /// <param name="webElement">The web element.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/6/2016 - 05:18</datetime>
+        public static int GetTableColumns(this IWebElement webElement)
+        {
+            return (webElement.FindElements(By.TagName("td")).Count / webElement.FindElements(By.TagName("tr")).Count);
+        }
+
+
+        /// <summary>
+        /// Determines whether [is item exists] [the specified item].
+        /// </summary>
+        /// <param name="webElement">The web element.</param>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/6/2016 - 06:04</datetime>
+        public static bool IsItemExists(this IWebElement webElement, string item)
+        {
+            bool flag = false;
+
+            SelectElement selectElement = new SelectElement(webElement);
+            int count = selectElement.Options.Count;
+            for (int i = 0; i < count; i++)
+            {
+                if (selectElement.Options[i].Text == item)
+                {
+                    flag = true;
+                    break;
+                }             
+
+            }
+            return flag;
+        }
 
     }
 
