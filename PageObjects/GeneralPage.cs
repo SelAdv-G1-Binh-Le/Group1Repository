@@ -59,6 +59,7 @@ namespace Group1Project.PageObjects
                 if (ex is StaleElementReferenceException || ex is NullReferenceException)
                 {
                     webElement = this.FindElement(by, ((timeout * 1000 - stopWatch.ElapsedMilliseconds) / 1000));
+                    Console.WriteLine("Dang bi " + ex + "time eslapsed la: " + ((timeout * 1000 - stopWatch.ElapsedMilliseconds) / 1000));
                 }
             }
 

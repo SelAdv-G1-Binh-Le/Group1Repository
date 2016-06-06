@@ -208,6 +208,12 @@ namespace Group1Project.Common
             }
         }
 
+        /// <summary>
+        /// Randoms the string.
+        /// </summary>
+        /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/6/2016 - 11:41 PM</datetime>
         public static string RandomString()
         {
             string Random = DateTime.Now.ToString("ddMMMyyHHmmssfff");
@@ -216,20 +222,8 @@ namespace Group1Project.Common
 
         public static void WaitAndClickControl(IWebDriver webDriver, string type, string property, string value, string selectvalue)
         {
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(20));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))));
-            //if (type == "select")
-            //{
-            //    //SelectElement box = new SelectElement(Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[{1}='{2}']", type, property, value))));
-            //    //box.SelectByText(selectvalue);
-            //    IWebElement box = Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value)));
-            //    box.Click();
-            //}
-            //else
-            //{
-            //    Testbase.WebDriver.FindElement(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))).Click();
-            //}
-            webDriver.FindElement(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))).Click();
+            GeneralPage genPage = new GeneralPage(webDriver);
+            genPage.FindElement(By.XPath(string.Format("//{0}[contains({1},'{2}')]", type, property, value))).Click();
         }
 
 

@@ -14,6 +14,10 @@ namespace Group1Project.TestCases
     [TestClass]
     public class MainPageTestCases : Testbase
     {
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:22 AM</datetime>
         [TestMethod]
         public void TC11()
         {
@@ -40,6 +44,10 @@ namespace Group1Project.TestCases
             mainPage.Logout();
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:22 AM</datetime>
         [TestMethod]
         public void TC12()
         {
@@ -57,7 +65,7 @@ namespace Group1Project.TestCases
             //Step5 Click OK button
             string randomStr = CommonMethods.RandomString();
             string pageName = "test" + randomStr;
-            mainPage.AddOrEditPage(pageName, "", "", "Overview", false, "OK");
+            mainPage.AddPage(pageName, "", "", "Overview", false, "OK");
 
             //VP. Check "Test" page is displayed besides "Overview" page
             //New page is displayed besides "Overview" page
@@ -69,6 +77,10 @@ namespace Group1Project.TestCases
             mainPage.DeletePage(pageName);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:22 AM</datetime>
         [TestMethod]
         public void TC13()
         {
@@ -84,7 +96,7 @@ namespace Group1Project.TestCases
             //Step5 Click OK button
             string randomStr1 = CommonMethods.RandomString();
             string pageName1 = "test" + randomStr1;
-            mainPage.AddOrEditPage(pageName1, "", "", "", false, "OK");
+            mainPage.AddPage(pageName1, "", "", "", false, "OK");
 
             //Step6	Go to Global Setting -> Add page
             //Step7	Enter Page Name field
@@ -93,7 +105,7 @@ namespace Group1Project.TestCases
             //Step10 Click OK button
             string randomStr2 = CommonMethods.RandomString();
             string pageName2 = "test" + randomStr2;
-            mainPage.AddOrEditPage(pageName2, "", "", pageName1, false, "OK");
+            mainPage.AddPage(pageName2, "", "", pageName1, false, "OK");
 
             //VP. Page 1 is positioned besides the Page 2
             int position1 = mainPage.GetTabIndex(pageName1);
@@ -105,6 +117,10 @@ namespace Group1Project.TestCases
             mainPage.DeletePage(pageName2);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:22 AM</datetime>
         [TestMethod]
         public void TC14()
         {
@@ -121,7 +137,7 @@ namespace Group1Project.TestCases
             //Step6 Click OK button
             string randomStr = CommonMethods.RandomString();
             string pageName = "test" + randomStr;
-            mainPage.AddOrEditPage(pageName, "", "", "", true, "OK");
+            mainPage.AddPage(pageName, "", "", "", true, "OK");
 
             //Step7	Click on Log out link
             mainPage.Logout();
@@ -140,6 +156,10 @@ namespace Group1Project.TestCases
             mainPage.DeletePage(pageName);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:22 AM</datetime>
         [TestMethod]
         public void TC15()
         {
@@ -156,7 +176,7 @@ namespace Group1Project.TestCases
             //Step6 Click OK button
             string randomStr1 = CommonMethods.RandomString();
             string pageName1 = "test" + randomStr1;
-            mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
+            mainPage.AddPage(pageName1, "", "", "", true, "OK");
 
 
             //Step7	Go to Global Setting -> Add page
@@ -166,7 +186,7 @@ namespace Group1Project.TestCases
             //Step11 Click OK button
             string randomStr2 = CommonMethods.RandomString();
             string pageName2 = "test" + randomStr2;
-            mainPage.AddOrEditPage(pageName2, pageName1, "", "", false, "OK");
+            mainPage.AddPage(pageName2, pageName1, "", "", false, "OK");
 
             //Step12 Click on Log out link
             mainPage.Logout();
@@ -186,6 +206,10 @@ namespace Group1Project.TestCases
             mainpage3.DeletePage(pageName1);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:22 AM</datetime>
         [TestMethod]
         public void TC16()
         {
@@ -201,7 +225,7 @@ namespace Group1Project.TestCases
             //Step5	Click OK button
             string randomStr1 = CommonMethods.RandomString();
             string pageName1 = "test1" + randomStr1;
-            mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
+            mainPage.AddPage(pageName1, "", "", "", true, "OK");
 
             //Step6	Go to Global Setting -> Add page
             //Step7	Enter Page Name
@@ -209,7 +233,7 @@ namespace Group1Project.TestCases
             //Step9	Click OK button
             string randomStr2 = CommonMethods.RandomString();
             string pageName2 = "test2" + randomStr2;
-            mainPage.AddOrEditPage(pageName2, "", "", "", true, "OK");
+            mainPage.AddPage(pageName2, "", "", "", true, "OK");
 
             //Step10	Click on "Test" page
             mainPage.ClickTab(pageName1);
@@ -218,12 +242,12 @@ namespace Group1Project.TestCases
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
 
             //VP	Check "Edit Page" pop up window is displayed
-            bool ActualResult1 = CommonMethods.IsElementPresent(mainPage.webDriver, OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
+            bool ActualResult1 = CommonMethods.IsElementPresent(webDriver, OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
             Assert.AreEqual(true, ActualResult1, "Edit Page is not displayed");
 
             //Step12	Check Public checkbox
             //Step13	Click OK button
-            mainPage.AddOrEditPage("", "", "", "", true, "OK");
+            mainPage.EditPage("", "", "", "", true, "OK");
 
             //Step14	Click on "Another Test" page
             mainPage.ClickTab(pageName2);
@@ -232,12 +256,12 @@ namespace Group1Project.TestCases
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
 
             //VP	Check "Edit Page" pop up window is displayed
-            bool ActualResult2 = CommonMethods.IsElementPresent(mainPage.webDriver, OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
+            bool ActualResult2 = CommonMethods.IsElementPresent(webDriver, OpenQA.Selenium.By.XPath("//table//h2[.='Edit Page']"));
             Assert.AreEqual(true, ActualResult2, "Edit Page is not displayed");
 
             //Step16	Uncheck Public checkbox
             //Step17	Click OK button
-            mainPage.AddOrEditPage("", "", "", "", false, "OK");
+            mainPage.EditPage("", "", "", "", false, "OK");
 
             //Step18	Click Log out link
             mainPage.Logout();
@@ -261,6 +285,10 @@ namespace Group1Project.TestCases
             mainpage3.DeletePage(pageName2);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:22 AM</datetime>
         [TestMethod]
         public void TC17()
         {
@@ -274,12 +302,12 @@ namespace Group1Project.TestCases
             //Step3	    Add a new parent page
             string randomStr1 = CommonMethods.RandomString();
             string pageName1 = "test1" + randomStr1;
-            mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
+            mainPage.AddPage(pageName1, "", "", "", true, "OK");
 
             //Step4	    Add a children page of newly added page
             string randomStr2 = CommonMethods.RandomString();
             string pageName2 = "test2" + randomStr2;
-            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+            mainPage.AddPage(pageName2, pageName1, "", "", true, "OK");
 
             //Step5	    Click on parent page
             mainPage.ClickTab(pageName1);
@@ -288,7 +316,7 @@ namespace Group1Project.TestCases
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.AlertIsPresent());
-            IAlert alert = mainPage.webDriver.SwitchTo().Alert();
+            IAlert alert = webDriver.SwitchTo().Alert();
             string ActualResult = alert.Text;
             string ExpectedResult1 = "Are you sure you want to remove this page?";
 
@@ -305,18 +333,18 @@ namespace Group1Project.TestCases
 
             //Step8	    Click OK button
             alert.Accept();
-            mainPage.webDriver.SwitchTo().DefaultContent();
+            webDriver.SwitchTo().DefaultContent();
 
             //Step9	    Click on  children page
-            IWebElement tab1 = mainPage.webDriver.FindElement(By.XPath("//a[.='" + pageName1 + "']"));
-            tab1.MoveMouse(mainPage.webDriver);
+            IWebElement tab1 = webDriver.FindElement(By.XPath("//a[.='" + pageName1 + "']"));
+            tab1.MoveMouse(webDriver);
             mainPage.ClickTab(pageName2);
 
             //Step10	Click "Delete" link
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
-            WebDriverWait wait2 = new WebDriverWait(mainPage.webDriver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait2 = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
             wait2.Until(ExpectedConditions.AlertIsPresent());
-            IAlert alert2 = mainPage.webDriver.SwitchTo().Alert();
+            IAlert alert2 = webDriver.SwitchTo().Alert();
             string ActualResult3 = alert2.Text;
 
             //VP	    Check confirm message "Are you sure you want to remove this page?" appears
@@ -324,8 +352,8 @@ namespace Group1Project.TestCases
 
             //Step11	Click OK button
             alert2.Accept();
-            mainPage.webDriver.SwitchTo().DefaultContent();
-            CommonMethods.WaitUntilControlDisappear(mainPage.webDriver, "a", "text()", pageName2);
+            webDriver.SwitchTo().DefaultContent();
+            CommonMethods.WaitUntilControlDisappear(webDriver, "a", "text()", pageName2);
             bool ActualResult4 = mainPage.IsTabVisible(pageName2);
 
             //VP	    Check children page is deleted
@@ -336,9 +364,9 @@ namespace Group1Project.TestCases
 
             //Step13	Click "Delete" link
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
-            WebDriverWait wait3 = new WebDriverWait(mainPage.webDriver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait3 = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
             wait2.Until(ExpectedConditions.AlertIsPresent());
-            IAlert alert3 = mainPage.webDriver.SwitchTo().Alert();
+            IAlert alert3 = webDriver.SwitchTo().Alert();
             string ActualResult5 = alert3.Text;
 
             //VP	    Check confirm message "Are you sure you want to remove this page?" appears
@@ -346,8 +374,8 @@ namespace Group1Project.TestCases
 
             //Step14	Click OK button
             alert3.Accept();
-            mainPage.webDriver.SwitchTo().DefaultContent();
-            CommonMethods.WaitUntilControlDisappear(mainPage.webDriver, "a", "text()", pageName1);
+            webDriver.SwitchTo().DefaultContent();
+            CommonMethods.WaitUntilControlDisappear(webDriver, "a", "text()", pageName1);
             bool ActualResult6 = mainPage.IsTabVisible(pageName1);
 
             //VP	    Check parent page is deleted
@@ -355,13 +383,17 @@ namespace Group1Project.TestCases
 
             //Step15	Click on "Overview" page
             mainPage.ClickTab("Overview");
-            CommonMethods.WaitAndClickControl(mainPage.webDriver, "li", "@class", "mn-setting", "");
-            bool ActualResult7 = CommonMethods.IsElementPresent(mainPage.webDriver, By.XPath("//a[.='Delete']"));
+            CommonMethods.WaitAndClickControl(webDriver, "li", "@class", "mn-setting", "");
+            bool ActualResult7 = CommonMethods.IsElementPresent(webDriver, By.XPath("//a[.='Delete']"));
 
             //VP	    Check "Delete" link disappears
             Assert.AreEqual(false, ActualResult7, "The 'Delete' link is still displayed");
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:22 AM</datetime>
         [TestMethod]
         public void TC18()
         {
@@ -377,7 +409,7 @@ namespace Group1Project.TestCases
             //Step5	    Click OK button
             string randomStr1 = CommonMethods.RandomString();
             string pageName1 = "test 1" + randomStr1;
-            mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
+            mainPage.AddPage(pageName1, "", "", "", true, "OK");
 
             //Step6	    Go to Global Setting -> Add page
             //Step7	    Enter Page Name
@@ -386,7 +418,7 @@ namespace Group1Project.TestCases
             //Step10	Click OK button
             string randomStr2 = CommonMethods.RandomString();
             string pageName2 = "test 2" + randomStr2;
-            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+            mainPage.AddPage(pageName2, pageName1, "", "", true, "OK");
 
             //Step11	Go to Global Setting -> Add page
             //Step12	Enter Page Name
@@ -395,7 +427,7 @@ namespace Group1Project.TestCases
             //Step15	Click OK button
             string randomStr3 = CommonMethods.RandomString();
             string pageName3 = "test 3" + randomStr3;
-            mainPage.AddOrEditPage(pageName3, pageName1, "", "", true, "OK");
+            mainPage.AddPage(pageName3, pageName1, "", "", true, "OK");
             bool ActualResult = mainPage.IsTabVisible(pageName3);
 
             //VP	Check "Test Child 2" is added successfully
@@ -408,6 +440,10 @@ namespace Group1Project.TestCases
             mainPage.DeletePage(pageName1);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:23 AM</datetime>
         [TestMethod]
         public void TC19()
         {
@@ -422,7 +458,7 @@ namespace Group1Project.TestCases
             //Step4	    Enter info into all required fields on New Page dialog: Page name: Page 1, Parent page: Overview
             string randomStr = CommonMethods.RandomString();
             string pageName = "test" + randomStr;
-            mainPage.AddOrEditPage(pageName, "Overview", "", "", true, "OK");
+            mainPage.AddPage(pageName, "Overview", "", "", true, "OK");
             string ActualResult = mainPage.GetParentPage(pageName);
             string ExpectedResult = "Overview";
 
@@ -435,6 +471,10 @@ namespace Group1Project.TestCases
             mainPage.DeletePage("Overview", pageName);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:23 AM</datetime>
         [TestMethod]
         public void TC20()
         {
@@ -449,13 +489,13 @@ namespace Group1Project.TestCases
             //Step4	        Enter info into all required fields on New Page dialog: Page name: Page 1, Parent page: Overview
             string randomStr1 = CommonMethods.RandomString();
             string pageName1 = "test1" + randomStr1;
-            mainPage.AddOrEditPage(pageName1, "Overview", "", "", true, "OK");
+            mainPage.AddPage(pageName1, "Overview", "", "", true, "OK");
 
             //Step5	        Go to Global Setting -> Add page
             //Step6	        Enter info into all required fields on New Page dialog: Page name: Page 2, Parent page: Page 1
             string randomStr2 = CommonMethods.RandomString();
             string pageName2 = "test2" + randomStr2;
-            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+            mainPage.AddPage(pageName2, pageName1, "", "", true, "OK");
 
             //Step7	        Go to the first created page: Page 1
             //Step8	        Click Delete link
@@ -482,6 +522,10 @@ namespace Group1Project.TestCases
             //Close TA Dashboard Main Page
             mainPage.DeletePage("Overview", pageName1);
         }
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:23 AM</datetime>
         [TestMethod]
         public void TC21()
         {
@@ -499,11 +543,11 @@ namespace Group1Project.TestCases
             string pageName2 = "test2" + randomStr;
             string pageName3 = "test3" + randomStr;
             string pageName4 = "test4" + randomStr;
-            mainPage.AddOrEditPage(pageName1, "Overview", "", "", true, "OK");
+            mainPage.AddPage(pageName1, "Overview", "", "", true, "OK");
 
             //Step5	    Go to Global Setting -> Add page
             //Step6	    Enter info into all required fields on New Page dialog: Page name: Page 2, Parent page: Page 1
-            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+            mainPage.AddPage(pageName2, pageName1, "", "", true, "OK");
 
             //Step7	    Go to the first created page: Page 1
             mainPage.SelectChildPage("Overview", pageName1);
@@ -512,7 +556,7 @@ namespace Group1Project.TestCases
             //Step9	    Enter another name into Page Name field: Page name: Page 3
             //Step10    Click Ok button on Edit Page dialog
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
-            mainPage.AddOrEditPage(pageName3, "", "", "", true, "OK");
+            mainPage.EditPage(pageName3, "", "", "", true, "OK");
             bool ActualResult1 = mainPage.IsTabVisible(pageName3);
 
             //VP	    Observe the current page: User is able to edit the name of parent page successfully
@@ -524,7 +568,7 @@ namespace Group1Project.TestCases
             //Step14    Click Ok button on Edit Page dialog: Page name: Page 4
             mainPage.SelectChildPage("Overview", pageName3, pageName2);
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
-            mainPage.AddOrEditPage(pageName4, "", "", "", true, "OK");
+            mainPage.EditPage(pageName4, "", "", "", true, "OK");
             bool ActualResult2 = mainPage.IsTabVisible(pageName4);
 
             //VP	    Observe the current page: User is able to edit the name of sibbling page successfully
@@ -536,6 +580,10 @@ namespace Group1Project.TestCases
             mainPage.DeletePage("Overview", pageName3);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:23 AM</datetime>
         [TestMethod]
         public void TC22()
         {
@@ -550,17 +598,19 @@ namespace Group1Project.TestCases
             string randomStr = CommonMethods.RandomString();
             string pageName1 = "test1" + randomStr;
             string pageName2 = "test2" + randomStr;
-            mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
+            mainPage.AddPage(pageName1, "", "", "", true, "OK");
 
             //Step4	Add a sibling page of new page:	Test Child 1
-            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+            mainPage.AddPage(pageName2, pageName1, "", "", true, "OK");
 
             //Step5	Go to Global Setting -> Add page	
             //Step6	Enter Page Name:	Test Child 1
             //Step7	Click on  Parent Page dropdown list	
             //Step8	Select a parent page:	Test
             //Step9	Click OK button	
-            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+            mainPage.AddPage(pageName2, pageName1, "", "", true, "");
+            AddPageDialog dialog = new AddPageDialog(webDriver);
+            dialog.BtnOK.Click();
             string ActualResult = mainPage.GetAlertMessage();
             string ExpectedResult = pageName2 + " already exists. Please enter a different name.";
 
@@ -569,12 +619,15 @@ namespace Group1Project.TestCases
 
             //Post-Condition delete newly added page
             //Close TA Dashboard Main Page
-            AddPageDialog dialog = new AddPageDialog();
             dialog.BtnCancel.Click();
             mainPage.DeletePage(pageName1, pageName2);
             mainPage.DeletePage(pageName1);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:23 AM</datetime>
         [TestMethod]
         public void TC23()
         {
@@ -591,11 +644,11 @@ namespace Group1Project.TestCases
             string pageName1 = "test1" + randomStr;
             string pageName2 = "test2" + randomStr;
             string pageName3 = "test3" + randomStr;
-            mainPage.AddOrEditPage(pageName1, "Overview", "", "", true, "OK");
+            mainPage.AddPage(pageName1, "Overview", "", "", true, "OK");
 
             //Step	Go to Global Setting -> Add page		
             //Step	Enter info into all required fields on New Page dialog	"Page name: Page 2,Parent page: Page 1"	
-            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+            mainPage.AddPage(pageName2, pageName1, "", "", true, "OK");
 
             //Step	Go to the first created page:	Page 1	
             mainPage.SelectChildPage("Overview", pageName1);
@@ -605,7 +658,7 @@ namespace Group1Project.TestCases
 
             //Step	Enter another name into Page Name field	Page name: Page 3	
             //Step	Click Ok button on Edit Page dialog		
-            mainPage.AddOrEditPage(pageName3, "", "", "", true, "OK");
+            mainPage.EditPage(pageName3, "", "", "", true, "OK");
             bool ActualResult = mainPage.IsTabVisible(pageName3);
 
             //VP	Observe the current page: User is able to edit the parent page of the sibbling page successfully
@@ -616,6 +669,10 @@ namespace Group1Project.TestCases
             mainPage.DeletePage("Overview", pageName3, pageName2);
             mainPage.DeletePage("Overview", pageName3);
         }
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:23 AM</datetime>
         [TestMethod]
         public void TC24()
         {
@@ -631,11 +688,11 @@ namespace Group1Project.TestCases
             string randomStr = CommonMethods.RandomString();
             string pageName1 = "test1" + randomStr;
             string pageName2 = "test2" + randomStr;
-            mainPage.AddOrEditPage(pageName1, "Overview", "", "", true, "OK");
+            mainPage.AddPage(pageName1, "Overview", "", "", true, "OK");
 
             //Step5	Go to Global Setting -> Add page		
             //Step6	Enter info into all required fields on New Page dialog	"Page name: Page 2, Parent page: Page 1"
-            mainPage.AddOrEditPage(pageName2, pageName1, "", "", true, "OK");
+            mainPage.AddPage(pageName2, pageName1, "", "", true, "OK");
 
             //Step7	Click the first breadcrums	Page 1	
             mainPage.SelectChildPage("Overview", pageName1);
@@ -660,6 +717,10 @@ namespace Group1Project.TestCases
             mainPage.DeletePage("Overview", pageName1, pageName2);
             mainPage.DeletePage("Overview", pageName1);
         }
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:23 AM</datetime>
         [TestMethod]
         public void TC25()
         {
@@ -675,11 +736,11 @@ namespace Group1Project.TestCases
             string randomStr = CommonMethods.RandomString();
             string pageName1 = "test1" + randomStr;
             string pageName2 = "test2" + randomStr;
-            mainPage.AddOrEditPage(pageName1, "", "", "", true, "OK");
+            mainPage.AddPage(pageName1, "", "", "", true, "OK");
 
             //Step5	Go to Global Setting -> Add page		
             //Step6	Enter info into all required fields on New Page dialog	Page name: Page 2	
-            mainPage.AddOrEditPage(pageName2, "", "", pageName1, true, "OK");
+            mainPage.AddPage(pageName2, "", "", pageName1, true, "OK");
 
 
             //Step7	Click Edit link for the second created page	
@@ -687,7 +748,7 @@ namespace Group1Project.TestCases
 
             //Step8	Change value Display After for the second created page to after Overview page		
             //Step8 Click Ok button on Edit Page dialog		
-            mainPage.AddOrEditPage("", "", "", "Overview", true, "OK");
+            mainPage.EditPage("", "", "", "Overview", true, "OK");
             int firstPageIndex = mainPage.GetTabIndex("Overview");
             int secondPageIndex = mainPage.GetTabIndex(pageName2);
 
@@ -700,6 +761,10 @@ namespace Group1Project.TestCases
             mainPage.DeletePage("Overview", pageName2);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:23 AM</datetime>
         [TestMethod]
         public void TC26()
         {
@@ -714,14 +779,14 @@ namespace Group1Project.TestCases
             //Step4	Enter info into all required fields on New Page dialog	"Page name: Page 1, Number of Columns: 2"	
             string randomStr = CommonMethods.RandomString();
             string pageName = "test" + randomStr;
-            mainPage.AddOrEditPage(pageName, "", "2", "", true, "OK");
+            mainPage.AddPage(pageName, "", "2", "", true, "OK");
 
             //Step5	Go to Global Setting -> Edit link	
             mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Edit);
 
             //Step6	Edit Number of Columns for the above created page	Number of Columns: 3	
             //Step7	Click Ok button on Edit Page dialog		
-            mainPage.AddOrEditPage("", "", "3", "", true, "OK");
+            mainPage.EditPage("", "", "3", "", true, "OK");
             int ActualResult = mainPage.GetPageColumn();
 
             //VP	Observe the current page: There are 3 columns on the above created page

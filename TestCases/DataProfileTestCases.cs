@@ -13,6 +13,10 @@ namespace Group1Project.TestCases
     [TestClass]
     public class DataProfileTestCases : Testbase
     {
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:23 AM</datetime>
         [TestMethod]
         public void TC65()
         {
@@ -83,6 +87,10 @@ namespace Group1Project.TestCases
             //Close TA Dashboard Main Page
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 2:23 AM</datetime>
         [TestMethod]
         public void TC66()
         {

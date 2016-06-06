@@ -11,10 +11,9 @@ using OpenQA.Selenium.Interactions;
 namespace Group1Project.PageObjects
 {
     class MainPage : GeneralPage
-        
     {
         private IWebDriver driver;
-        
+
         //string dynamicRepository = Constant.Repository2;
 
         #region Locators
@@ -50,7 +49,7 @@ namespace Group1Project.PageObjects
 
         public IWebElement LnkPanels
         {
-            get { return FindElement(_lnkPanels,Constant.DefaultTimeout); }
+            get { return FindElement(_lnkPanels, Constant.DefaultTimeout); }
         }
 
         public IWebElement LnkAdminister
@@ -112,7 +111,8 @@ namespace Group1Project.PageObjects
 
         #region Methods
 
-        public MainPage(IWebDriver webDriver) : base (webDriver)
+        public MainPage(IWebDriver webDriver)
+            : base(webDriver)
         {
             this.driver = webDriver;
         }
@@ -154,12 +154,13 @@ namespace Group1Project.PageObjects
         /// <param name="child">The child.</param>
         public void SelectChildMenu(MenuList.MainMenuEnum main, MenuList.ChildMenuEnum child)
         {
-            WebDriverWait wait = new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(20));
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main)))));
-            IWebElement ParentLink = this.webDriver.FindElement(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main))));
-            Actions action = new Actions(this.webDriver);
-            action.MoveToElement(ParentLink).Perform();
-            IWebElement ChildLink = this.webDriver.FindElement(By.XPath(String.Format("//a[.='{0}']", MenuList.returnChildMenu(child))));
+            IWebElement ParentLink = this.FindElement(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main))), Constant.DefaultTimeout);
+            ParentLink.Click();
+            //Actions action = new Actions(this.webDriver);
+            //action.MoveToElement(ParentLink).Perform();
+            IWebElement ChildLink = this.FindElement(By.XPath(String.Format("//a[.='{0}']", MenuList.returnChildMenu(child))), Constant.DefaultTimeout);
             ChildLink.Click();
         }
         /// <summary>
@@ -216,39 +217,18 @@ namespace Group1Project.PageObjects
         /// <param name="after">The after.</param>
         /// <param name="status">if set to <c>true</c> [status].</param>
         /// <param name="clickbutton">The clickbutton.</param>
-        public void AddOrEditPage(string name, string parent="", string column="", string after="", bool status=false, string clickbutton="OK")
+        public void AddPage(string name, string parent = "", string column = "", string after = "", bool status = false, string clickbutton = "OK")
         {
-            bool checkpopupexist = CommonMethods.IsElementPresent(webDriver, By.XPath("//input[@id='name']"));
-            if (checkpopupexist != true)
-            {
-                WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(2));
-                wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//li[@class='mn-setting']")));
-                this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
-            }
-            IWebElement namebox = webDriver.FindElement(By.XPath("//input[@id='name']"));
+            this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
+            IWebElement namebox = this.FindElement(By.XPath("//input[@id='name']"), Constant.DefaultTimeout);
             if (name != "")
             {
                 namebox.Clear();
                 namebox.SendKeys(name);
             }
-            if (parent != "")
-            {
-                //CommonMethods.WaitAndClickControl("select", "@id", "parent", parent);
-                CommonMethods.WaitAndClickControl(webDriver, "option", ".", parent, "");
-                Thread.Sleep(500);
-            }
-            if (column != "")
-            {
-                SelectElement box = new SelectElement(webDriver.FindElement(By.XPath("//select[@id='columnnumber']")));
-                box.SelectByText(column);
-            }
-            if (after != "")
-            {
-                CommonMethods.WaitAndClickControl(webDriver, "option", ".", after, "");
-            }
             if (status.ToString() != "")
             {
-                IWebElement checkbox = webDriver.FindElement(By.XPath("//input[@id='ispublic']"));
+                IWebElement checkbox = this.FindElement(By.XPath("//input[@id='ispublic']"), Constant.DefaultTimeout);
                 if (status == true & checkbox.Selected == false)
                 {
                     checkbox.Click();
@@ -258,11 +238,81 @@ namespace Group1Project.PageObjects
                     checkbox.Click();
                 }
             }
+            if (parent != "")
+            {
+                this.FindElement(By.XPath("//select[@id='parent']/option[contains(.,'" + parent + "')]"), Constant.DefaultTimeout).Click();
+                //Thread.Sleep(500);
+            }
+            if (column != "")
+            {
+                SelectElement box = new SelectElement(this.FindElement(By.XPath("//select[@id='columnnumber']"), Constant.DefaultTimeout));
+                box.SelectByText(column);
+            }
+            if (after != "")
+            {
+                this.FindElement(By.XPath("//select[@id='afterpage']/option[contains(.,'" + after + "')]"), Constant.DefaultTimeout).Click();
+            }
+
+            if (clickbutton != "")
             {
                 CommonMethods.WaitAndClickControl(webDriver, "input", "@id", clickbutton, "");
+                this.FindElement(By.XPath("//input[@id='" + clickbutton + "']"), Constant.DefaultTimeout);
             }
-            Thread.Sleep(500);
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
+                wait.Until(ExpectedConditions.ElementExists(By.XPath("//a[.='" + this.ConvertBlankCharacter(name) + "']")));
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
+        public void EditPage(string name, string parent = "", string column = "", string after = "", bool status = false, string clickbutton = "OK")
+        {
+            IWebElement namebox = this.FindElement(By.XPath("//input[@id='name']"), Constant.DefaultTimeout);
+            if (name != "")
+            {
+                namebox.Clear();
+                namebox.SendKeys(name);
+            }
+            if (parent != "")
+            {
+                //CommonMethods.WaitAndClickControl("select", "@id", "parent", parent);
+                //CommonMethods.WaitAndClickControl(webDriver, "option", ".", parent, "");
+                this.FindElement(By.XPath("//select[@id='parent']/option[contains(.,'" + parent + "')]"), Constant.DefaultTimeout).Click();
+                //Thread.Sleep(500);
+            }
+            if (column != "")
+            {
+                SelectElement box = new SelectElement(this.FindElement(By.XPath("//select[@id='columnnumber']"), Constant.DefaultTimeout));
+                box.SelectByText(column);
+            }
+            if (after != "")
+            {
+                //CommonMethods.WaitAndClickControl(webDriver, "option", ".", after, "");
+                this.FindElement(By.XPath("//select[@id='afterpage']/option[contains(.,'" + after + "')]"), Constant.DefaultTimeout).Click();
+            }
+            if (status.ToString() != "")
+            {
+                IWebElement checkbox = this.FindElement(By.XPath("//input[@id='ispublic']"), Constant.DefaultTimeout);
+                if (status == true & checkbox.Selected == false)
+                {
+                    checkbox.Click();
+                }
+                if (status == false & checkbox.Selected == true)
+                {
+                    checkbox.Click();
+                }
+            }
+            if (clickbutton != "")
+            {
+                CommonMethods.WaitAndClickControl(webDriver, "input", "@id", clickbutton, "");
+                this.FindElement(By.XPath("//input[@id='" + clickbutton + "']"), Constant.DefaultTimeout);
+            }
+            //Thread.Sleep(500);
+        }
+
         /// <summary>
         /// Deletes the page.
         /// </summary>
@@ -327,7 +377,8 @@ namespace Group1Project.PageObjects
         /// <param name="tabname">The tabname.</param>
         public void ClickTab(string tabname)
         {
-            CommonMethods.WaitAndClickControl(webDriver, "a", "text()", this.ConvertBlankCharacter(tabname), "");
+            //CommonMethods.WaitAndClickControl(webDriver, "a", "text()", this.ConvertBlankCharacter(tabname), "");
+            this.FindElement(By.XPath("//a[.='" + this.ConvertBlankCharacter(tabname) + "']"), Constant.DefaultTimeout).Click();
         }
         /// <summary>
         /// Clicks the add page.
@@ -418,7 +469,7 @@ namespace Group1Project.PageObjects
         {
             int totalRow = webDriver.FindElements(By.XPath("//a[.='Save as']")).Count;
             string totalString = "";
-            for (int i = 2; i < totalRow+2; i++)
+            for (int i = 2; i < totalRow + 2; i++)
             {
                 string xPath = string.Format("//table[@class='GridView']//tr[{1}]/td[count(//th[.='{0}']/preceding-sibling::th)+1]", colname, i);
                 string value = webDriver.FindElement(By.XPath(xPath)).Text;
@@ -461,8 +512,8 @@ namespace Group1Project.PageObjects
             CommonMethods.WaitForControl(webDriver, _lnkPanels, Constant.DefaultTimeout);
             this.LnkPanels.Click();
             return new PanelsPage(webDriver);
-        }      
-        
+        }
+
         #endregion
 
     }

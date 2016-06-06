@@ -1050,9 +1050,9 @@ namespace Group1Project.TestCases
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
-            mainpage.AddOrEditPage("main_hung1");
-            mainpage.AddOrEditPage("main_hung2");
-            mainpage.AddOrEditPage("main_hung3");
+            mainpage.AddPage("main_hung1");
+            mainpage.AddPage("main_hung2");
+            mainpage.AddPage("main_hung3");
 
             mainpage.BtnChoosepanel.Click();
             AddPanelDialog panelConfigurationDlg = new AddPanelDialog(webDriver);
