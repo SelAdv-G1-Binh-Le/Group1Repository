@@ -147,11 +147,14 @@ namespace Group1Project.PageObjects
             return this;
         }
 
+
         /// <summary>
         /// Selects the child menu.
         /// </summary>
         /// <param name="main">The main.</param>
         /// <param name="child">The child.</param>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:05 AM</datetime>
         public void SelectChildMenu(MenuList.MainMenuEnum main, MenuList.ChildMenuEnum child)
         {
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(20));
@@ -163,11 +166,14 @@ namespace Group1Project.PageObjects
             IWebElement ChildLink = this.FindElement(By.XPath(String.Format("//a[.='{0}']", MenuList.returnChildMenu(child))), Constant.DefaultTimeout);
             ChildLink.Click();
         }
+
         /// <summary>
         /// Selects the child page.
         /// </summary>
         /// <param name="parent">The parent.</param>
         /// <param name="child">The child.</param>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:06 AM</datetime>
         public void SelectChildPage(string parent, string child)
         {
             WebDriverWait wait = new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(5));
@@ -178,12 +184,15 @@ namespace Group1Project.PageObjects
             IWebElement ChildLink = this.webDriver.FindElement(By.XPath("//a[contains(.,'" + child + "')]"));
             ChildLink.Click();
         }
+
         /// <summary>
         /// Selects the child page.
         /// </summary>
         /// <param name="parent">The parent.</param>
         /// <param name="mid">The mid.</param>
         /// <param name="child">The child.</param>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:06 AM</datetime>
         public void SelectChildPage(string parent, string mid, string child)
         {
             WebDriverWait wait = new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(5));
@@ -196,11 +205,14 @@ namespace Group1Project.PageObjects
             IWebElement ChildLink = this.webDriver.FindElement(By.XPath("//a[contains(.,'" + child + "')]"));
             ChildLink.Click();
         }
+
         /// <summary>
         /// Gets the index of the tab.
         /// </summary>
         /// <param name="tabname">The tabname.</param>
         /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:06 AM</datetime>
         public int GetTabIndex(string tabname)
         {
             string xpath = string.Format("//div[@id='main-menu']//a[.='{0}']/../preceding-sibling::li", tabname);
@@ -208,8 +220,9 @@ namespace Group1Project.PageObjects
             return tabindex + 1;
         }
 
+
         /// <summary>
-        /// Adds the or edit page.
+        /// Adds the page.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="parent">The parent.</param>
@@ -217,6 +230,8 @@ namespace Group1Project.PageObjects
         /// <param name="after">The after.</param>
         /// <param name="status">if set to <c>true</c> [status].</param>
         /// <param name="clickbutton">The clickbutton.</param>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:06 AM</datetime>
         public void AddPage(string name, string parent = "", string column = "", string after = "", bool status = false, string clickbutton = "OK")
         {
             this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
@@ -268,6 +283,17 @@ namespace Group1Project.PageObjects
                 Console.WriteLine(ex);
             }
         }
+        /// <summary>
+        /// Edits the page.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="parent">The parent.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="after">The after.</param>
+        /// <param name="status">if set to <c>true</c> [status].</param>
+        /// <param name="clickbutton">The clickbutton.</param>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:06 AM</datetime>
         public void EditPage(string name, string parent = "", string column = "", string after = "", bool status = false, string clickbutton = "OK")
         {
             IWebElement namebox = this.FindElement(By.XPath("//input[@id='name']"), Constant.DefaultTimeout);
@@ -313,10 +339,14 @@ namespace Group1Project.PageObjects
             //Thread.Sleep(500);
         }
 
+
         /// <summary>
         /// Deletes the page.
         /// </summary>
         /// <param name="pagename">The pagename.</param>
+        /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:06 AM</datetime>
         public MainPage DeletePage(string pagename)
         {
             CommonMethods.WaitAndClickControl(webDriver, "a", "text()", this.ConvertBlankCharacter(pagename), "");
@@ -328,11 +358,14 @@ namespace Group1Project.PageObjects
             webDriver.SwitchTo().DefaultContent();
             return this;
         }
+
         /// <summary>
         /// Deletes the page.
         /// </summary>
         /// <param name="parentpage">The parentpage.</param>
         /// <param name="childpage">The childpage.</param>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:07 AM</datetime>
         public void DeletePage(string parentpage, string childpage)
         {
             this.SelectChildPage(this.ConvertBlankCharacter(parentpage), this.ConvertBlankCharacter(childpage));
@@ -344,12 +377,15 @@ namespace Group1Project.PageObjects
             webDriver.SwitchTo().DefaultContent();
             Thread.Sleep(500);
         }
+
         /// <summary>
         /// Deletes the page.
         /// </summary>
         /// <param name="parentpage">The parentpage.</param>
         /// <param name="midpage">The midpage.</param>
         /// <param name="childpage">The childpage.</param>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:07 AM</datetime>
         public void DeletePage(string parentpage, string midpage, string childpage)
         {
             this.SelectChildPage(parentpage, midpage, childpage);
@@ -362,28 +398,37 @@ namespace Group1Project.PageObjects
             Thread.Sleep(500);
         }
 
+
         /// <summary>
         /// Determines whether [is tab visible] [the specified tabname].
         /// </summary>
         /// <param name="tabname">The tabname.</param>
         /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:07 AM</datetime>
         public bool IsTabVisible(string tabname)
         {
             return CommonMethods.IsElementPresent(webDriver, OpenQA.Selenium.By.XPath("//a[.='" + this.ConvertBlankCharacter(tabname) + "']"));
         }
+
         /// <summary>
         /// Clicks the tab.
         /// </summary>
         /// <param name="tabname">The tabname.</param>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:07 AM</datetime>
         public void ClickTab(string tabname)
         {
             //CommonMethods.WaitAndClickControl(webDriver, "a", "text()", this.ConvertBlankCharacter(tabname), "");
             this.FindElement(By.XPath("//a[.='" + this.ConvertBlankCharacter(tabname) + "']"), Constant.DefaultTimeout).Click();
         }
+
         /// <summary>
         /// Clicks the add page.
         /// </summary>
         /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:07 AM</datetime>
         public AddPageDialog ClickAddPage()
         {
             AddPageDialog dialog = new AddPageDialog(webDriver);
@@ -391,10 +436,13 @@ namespace Group1Project.PageObjects
             this.LnkAddPage.Click();
             return dialog;
         }
+
         /// <summary>
         /// Gets the alert message.
         /// </summary>
         /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:07 AM</datetime>
         public string GetAlertMessage()
         {
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
@@ -406,11 +454,14 @@ namespace Group1Project.PageObjects
             return alerttext;
         }
 
+
         /// <summary>
         /// Gets the parent page.
         /// </summary>
         /// <param name="childpage">The childpage.</param>
         /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:08 AM</datetime>
         public string GetParentPage(string childpage)
         {
             IWebElement element = webDriver.FindElement(By.XPath("//a[.='" + childpage + "']/ancestor::li/a[contains(@class,'haschild')]"));
@@ -434,10 +485,13 @@ namespace Group1Project.PageObjects
 
         }
 
+
         /// <summary>
         /// Gets the page column.
         /// </summary>
         /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:08 AM</datetime>
         public int GetPageColumn()
         {
             string xPath = "//div[@id='columns']/ul[contains(@id,'column')]";
@@ -448,23 +502,29 @@ namespace Group1Project.PageObjects
             return text.Replace(" ", "\u00A0");
         }
 
+
         /// <summary>
         /// Gets the profile data table cell value.
         /// </summary>
         /// <param name="column">The column.</param>
         /// <param name="row">The row.</param>
         /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:08 AM</datetime>
         public string GetProfileDataTableCellValue(string column, string row)
         {
             string convertedRowText = this.ConvertBlankCharacter(row);
             string xPath = string.Format("//table[@class='GridView']//tr[count(//td[.='{1}']/../preceding-sibling::tr)+1]/td[count(//th[.='{0}']/preceding-sibling::th)+1]", column, convertedRowText);
             return webDriver.FindElement(By.XPath(xPath)).Text;
         }
+
         /// <summary>
         /// Gets all value of column.
         /// </summary>
         /// <param name="colname">The colname.</param>
         /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:08 AM</datetime>
         public string GetAllValueOfColumn(string colname)
         {
             int totalRow = webDriver.FindElements(By.XPath("//a[.='Save as']")).Count;
@@ -478,13 +538,14 @@ namespace Group1Project.PageObjects
             Console.WriteLine(totalString);
             return totalString;
         }
+
         /// <summary>
-        /// Gets all value of a specific column.
-        ///  - Author: Binh Le
-        ///  - Created Date: May/30/2016
+        /// Gets all value of column.
         /// </summary>
         /// <param name="colindex">The colindex.</param>
         /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/7/2016 - 3:09 AM</datetime>
         public string GetAllValueOfColumn(int colindex)
         {
             int totalRow = webDriver.FindElements(By.XPath("//a[.='Save as']")).Count;
