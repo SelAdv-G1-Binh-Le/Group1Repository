@@ -68,6 +68,7 @@ namespace Group1Project.Common
         {
             SelectElement SelectedCbo = new SelectElement(webElement);
             SelectedCbo.SelectByText(text);
+
         }
 
         /// <summary>

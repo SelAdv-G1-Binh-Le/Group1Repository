@@ -637,7 +637,7 @@ namespace Group1Project.TestCases
             Assert.AreEqual(dataLabelsCategories, addpaneldialog.ChkDataLabelsCategories.Selected);
             Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
             Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
-            
+
             //10 Step	Click Right radio button for Legend
             //11 VP	Observe the current page
             addpaneldialog.RadLegendsRight.Click();
@@ -690,25 +690,101 @@ namespace Group1Project.TestCases
             panelspage.LnkAddNew.Click();
             addpaneldialog.AddChartPanelSuccess().ClickPanel(Constant.DefaultDisplayName);
 
-
-            
-
-
-
-
+            VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(dataLabelsSeries, addpaneldialog.ChkDataLabelsSeries.Selected);
+            Assert.AreEqual(dataLabelsCategories, addpaneldialog.ChkDataLabelsCategories.Selected);
+            Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
+            Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
 
             //18 Step	Click None radio button for Legend
             //19 VP	Observe the current page
+            addpaneldialog.RadLegendsNone.Click();
+            VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(dataLabelsSeries, addpaneldialog.ChkDataLabelsSeries.Selected);
+            Assert.AreEqual(dataLabelsCategories, addpaneldialog.ChkDataLabelsCategories.Selected);
+            Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
+            Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
+
             //20 Step	Click Top radio button for Legend
             //21 VP	Observe the current page
+            addpaneldialog.RadLegendsTop.Click();
+            VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(dataLabelsSeries, addpaneldialog.ChkDataLabelsSeries.Selected);
+            Assert.AreEqual(dataLabelsCategories, addpaneldialog.ChkDataLabelsCategories.Selected);
+            Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
+            Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
             //22 Step	Click Right radio button for Legend
             //23 VP	Observe the current page
+            addpaneldialog.RadLegendsRight.Click();
+            VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(dataLabelsSeries, addpaneldialog.ChkDataLabelsSeries.Selected);
+            Assert.AreEqual(dataLabelsCategories, addpaneldialog.ChkDataLabelsCategories.Selected);
+            Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
+            Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
             //24 Step	Click Bottom radio button for Legend
             //25 VP	Observe the current page
+            addpaneldialog.RadLegendsBottom.Click();
+            VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(dataLabelsSeries, addpaneldialog.ChkDataLabelsSeries.Selected);
+            Assert.AreEqual(dataLabelsCategories, addpaneldialog.ChkDataLabelsCategories.Selected);
+            Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
+            Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
             //26 Step	Click Left radio button for Legend
             //27 VP	Observe the current page
+            addpaneldialog.RadLegendsLeft.Click();
+            VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
+            Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
+            Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
+            Assert.AreEqual(style2d, addpaneldialog.RadChartStyle2D.Selected);
+            Assert.AreEqual(style3d, addpaneldialog.RadChartStyle3D.Selected);
+            Assert.AreEqual(dataLabelsSeries, addpaneldialog.ChkDataLabelsSeries.Selected);
+            Assert.AreEqual(dataLabelsCategories, addpaneldialog.ChkDataLabelsCategories.Selected);
+            Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
+            Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
 
-
+            //Clean up TC 39
+            Console.WriteLine("Clean up TC 39");
+            addpaneldialog.Close();           
+            panelspage.DeletePanel(Constant.DefaultDisplayName);
+        
         }
     }
 }

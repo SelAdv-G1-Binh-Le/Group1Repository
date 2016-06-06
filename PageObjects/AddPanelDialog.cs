@@ -215,10 +215,8 @@ namespace Group1Project.PageObjects
         {
             Console.WriteLine("- Add Chart Panel Success");
 
-            CommonMethods.WaitForControl(webDriver, _cbbProfile, Constant.DefaultTimeout);
+            CommonMethods.WaitForControl(webDriver, _dlgOverlay, Constant.DefaultTimeout);            
             this.CbbProfile.SelectByText(dataprofiletext);
-
-            CommonMethods.WaitForControl(webDriver, _txtDisplayName, Constant.DefaultTimeout);
 
             switch (legends)
             {
@@ -296,7 +294,7 @@ namespace Group1Project.PageObjects
             bool dataLabelsPercentage = false)
         {
             Console.WriteLine("- Add Chart Panel Unsuccess");
-            CommonMethods.WaitForControl(webDriver, _cbbProfile, Constant.DefaultTimeout);
+            CommonMethods.WaitForControl(webDriver, _dlgOverlay, Constant.DefaultTimeout);
             this.CbbProfile.SelectByText(dataprofiletext);
 
             CommonMethods.WaitForControl(webDriver, _txtDisplayName, Constant.DefaultTimeout);

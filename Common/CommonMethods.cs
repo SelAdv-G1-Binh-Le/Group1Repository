@@ -74,16 +74,25 @@ namespace Group1Project.Common
         /// <datetime>6/2/2016 - 22:43</datetime>
         public static IWebElement WaitForControl(IWebDriver webDriver, By by, int timeout)
         {
+            IWebElement webElement = null;            
             Stopwatch sW = new Stopwatch();
             sW.Start();
             MainPage mainPage = new MainPage(webDriver);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
-            wait.Until(d => mainPage.FindElement(by, timeout));
+            wait.Until(d => webElement = mainPage.FindElement(by, timeout));
             Console.WriteLine("Already wait for control {0} in {1} milliseconds!",by.ToString(),sW.ElapsedMilliseconds);
             sW.Stop();
-            return mainPage.FindElement(by, timeout);
+            return webElement;
         }
 
+        /// <summary>
+        /// Waits for control disappear.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        /// <param name="by">The by.</param>
+        /// <param name="timeout">The timeout.</param>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/6/2016 - 02:26</datetime>
         public static void WaitForControlDisappear(IWebDriver webDriver, By by, int timeout)
         {
             Stopwatch stopWatch = new Stopwatch();
@@ -144,6 +153,13 @@ namespace Group1Project.Common
         }
 
 
+        /// <summary>
+        /// Gets the combobox selected value.
+        /// </summary>
+        /// <param name="combobox">The combobox.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/6/2016 - 02:25</datetime>
         public static string GetComboboxSelectedValue(IWebElement combobox)
         {
             SelectElement SelectedCbo = new SelectElement(combobox);

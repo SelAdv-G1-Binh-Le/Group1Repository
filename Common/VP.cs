@@ -37,10 +37,8 @@ namespace Group1Project.Common
         /// <datetime>6/3/2016 - 08:02</datetime>
         public static void CheckText(string expected, string actual)
         {
-            Console.WriteLine("Check text:");
-            Console.WriteLine("Expected: " + expected);
-            Console.WriteLine("Recorded: " + actual);
-            Assert.AreEqual(expected, actual, "Failed to check text!");
+            Console.Write("Check text: Expected:{0} <-> Recorded:{1}", expected, actual);
+            Assert.AreEqual(expected, actual, "Failed: Text is not corrected!!!");
         }
 
        
