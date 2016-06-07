@@ -39,7 +39,7 @@ namespace Group1Project.TestCases
             }
             catch (Exception e)
             {
-                Console.WriteLine("Cannot open Redirect.txt for writing");
+                Console.WriteLine("- Cannot open D:\\{0} for writing",filename);
                 Console.WriteLine(e.Message);
                 return;
             }
@@ -71,7 +71,7 @@ namespace Group1Project.TestCases
             Console.SetOut(oldOut);
             writer.Close();
             ostrm.Close();
-            Console.WriteLine("Please see the log file in D:\\" + filename);
+            Console.WriteLine("- Please see the log file in D:\\" + filename);
         }
     }
 }

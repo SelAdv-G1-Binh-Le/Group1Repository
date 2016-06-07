@@ -80,7 +80,7 @@ namespace Group1Project.Common
             MainPage mainPage = new MainPage(webDriver);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
             wait.Until(d => webElement = mainPage.FindElement(by, timeout));
-            Console.WriteLine("Already wait for control {0} in {1} milliseconds!",by.ToString(),sW.ElapsedMilliseconds);
+            Console.WriteLine("Already waiting for control <{0}> in {1} milliseconds!",by.ToString(),sW.ElapsedMilliseconds);
             sW.Stop();
             return webElement;
         }
@@ -99,7 +99,7 @@ namespace Group1Project.Common
             stopWatch.Start();
 
             bool flag = CommonMethods.IsElementPresent(webDriver, by);
-
+            
             while (flag && timeout > 0)
             {
                 Thread.Sleep(1000);
@@ -108,7 +108,7 @@ namespace Group1Project.Common
             }
             stopWatch.Stop();
             TimeSpan ts = stopWatch.Elapsed;
-            Console.WriteLine("Wait For {0} disappears in {1} miliseconds! ", by.ToString(), ts.Milliseconds);
+            Console.WriteLine("Wait for <{0}> disappears in {1} milliseconds!", by.ToString(), ts.Milliseconds);
 
         }
 

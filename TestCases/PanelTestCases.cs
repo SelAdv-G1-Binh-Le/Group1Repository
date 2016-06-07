@@ -45,8 +45,8 @@ namespace Group1Project.TestCases
             string actual = mainpage.FindElement(By.XPath("//a[contains(.,'zbox')]//preceding::a[1]"), Constant.DefaultTimeout).GetAttribute("innerHTML");
             Assert.IsTrue(String.Compare(actual, "zbox") == -1, "New item is NOT sorted correctly!!!");
 
-            //Clean up TC 27
-            Console.WriteLine("Clean up TC 27");
+            //- Clean up TC 27
+            Console.WriteLine("- Clean up TC 27");
             PanelsPage panelspage = new PanelsPage(webDriver);
             mainpage.DeletePage("Page 1");
             panelspage.DeletePanel("zbox");
@@ -146,8 +146,8 @@ namespace Group1Project.TestCases
             addPanelDialog.AddChartPanelSuccess("Logigear@");
             Assert.IsTrue(panelspage.IsPanelPresent("Logigear@"), "Panel \"Logigear@\" is NOT present");
 
-            //Clean up TC 30
-            Console.WriteLine("Clean up TC 30");
+            //- Clean up TC 30
+            Console.WriteLine("- Clean up TC 30");
             panelspage.DeletePanel("Logigear@");
         }
 
@@ -224,8 +224,8 @@ namespace Group1Project.TestCases
             panelspage.LnkAddNew.Click();
             VP.CheckText("Duplicated panel already exists. Please enter a different name.", addpaneldialog.AddChartPanelUnsuccess("Duplicated panel"));
 
-            //Clean up TC 32
-            Console.WriteLine("Clean up TC 32");
+            //- Clean up TC 32
+            Console.WriteLine("- Clean up TC 32");
             panelspage.DeletePanel("Duplicated panel");
 
         }
@@ -277,8 +277,8 @@ namespace Group1Project.TestCases
                 Assert.IsTrue(String.Compare(CbbProfile.Options[i].Text, CbbProfile.Options[i - 1].Text) == 1, "Items are not sorted correctly !!!");
             }
 
-            //Clean up TC 33
-            Console.WriteLine("Clean up TC 33");
+            //- Clean up TC 33
+            Console.WriteLine("- Clean up TC 33");
             addpaneldialog.Close();
             panelspage.DeletePanel(Constant.panelTC33);
         }
@@ -343,8 +343,8 @@ namespace Group1Project.TestCases
             addPanelDialog.AddChartPanelSuccess("Logigear@", "Chart@");
             Assert.IsTrue(panelspage.IsPanelPresent("Logigear@"), "Panel \"Logigear@\" is NOT present");
 
-            //Clean up TC 35
-            Console.WriteLine("Clean up TC 35");
+            //- Clean up TC 35
+            Console.WriteLine("- Clean up TC 35");
             panelspage.DeletePanel("Logigear@");
         }
 
@@ -388,8 +388,8 @@ namespace Group1Project.TestCases
                 Assert.IsTrue(CbbChartType.Options[i].Text == expectedOptions[i], "Option is not correct !!!");
             }
 
-            //Clean up TC 36
-            Console.WriteLine("Clean up TC 36");
+            //- Clean up TC 36
+            Console.WriteLine("- Clean up TC 36");
             PanelsPage panelspage = new PanelsPage(webDriver);
             addpaneldialog.Close();
             mainpage.DeletePage("main_hung");
@@ -466,8 +466,8 @@ namespace Group1Project.TestCases
             Assert.IsTrue(addpaneldialog.TxtCategoryCaption.Enabled, "Category Caption is disabled");
             Assert.IsTrue(addpaneldialog.TxtSeriesCaption.Enabled, "Series Caption is disabled");
 
-            //Clean up TC 37
-            Console.WriteLine("Clean up TC 37");
+            //- Clean up TC 37
+            Console.WriteLine("- Clean up TC 37");
             addpaneldialog.Close();
             mainpage.DeletePage("main_hung");
         }
@@ -568,8 +568,8 @@ namespace Group1Project.TestCases
             Assert.IsTrue(addpaneldialog.ChkShowTitle.Selected);
             Assert.IsTrue(addpaneldialog.RadLegendsTop.Selected);
 
-            //Clean up TC 38
-            Console.WriteLine("Clean up TC 38");
+            //- Clean up TC 38
+            Console.WriteLine("- Clean up TC 38");
             addpaneldialog.Close();
             PanelsPage panelsPage = new PanelsPage(webDriver);
             panelsPage.DeletePanel("hung_panel");
@@ -785,8 +785,8 @@ namespace Group1Project.TestCases
             Assert.AreEqual(dataLabelsValue, addpaneldialog.ChkDataLabelsValue.Selected);
             Assert.AreEqual(dataLabelsPercentage, addpaneldialog.ChkDataLabelsPercentage.Selected);
 
-            //Clean up TC 39
-            Console.WriteLine("Clean up TC 39");
+            //- Clean up TC 39
+            Console.WriteLine("- Clean up TC 39");
             addpaneldialog.Close();
             panelspage.DeletePanel(Constant.DefaultDisplayName);
 
@@ -863,8 +863,8 @@ namespace Group1Project.TestCases
             Assert.IsTrue(addpaneldialog.ChkDataLabelsValue.Enabled, "Value checkbox is is disabled");
             Assert.IsTrue(!addpaneldialog.ChkDataLabelsPercentage.Enabled, "Percentage checkbox is is enabled");
 
-            //Clean up TC 40
-            Console.WriteLine("Clean up TC 40");
+            //- Clean up TC 40
+            Console.WriteLine("- Clean up TC 40");
             addpaneldialog.Close();
             mainpage.DeletePage(pagename);
         }
@@ -1069,15 +1069,13 @@ namespace Group1Project.TestCases
             Assert.IsTrue(IWebElementExtension.IsItemExists(mainpage.CbbPages, "main_hung2"), "main_hung2 is NOT existed");
             Assert.IsTrue(IWebElementExtension.IsItemExists(mainpage.CbbPages, "main_hung3"), "main_hung3 is NOT existed");
 
-            //Clean up TC 42
-            Console.WriteLine("Clean up TC 42");
+            //- Clean up TC 42
+            Console.WriteLine("- Clean up TC 42");
             panelConfigurationDlg.Close();
             mainpage.DeletePage("main_hung1");
             mainpage.DeletePage("main_hung2");
             mainpage.DeletePage("main_hung3");
-
         }
-
 
         /// <summary>
         /// </summary>
@@ -1097,21 +1095,17 @@ namespace Group1Project.TestCases
             //7	Step	Click 'OK' button		
             //11 Step	Click 'Choose panels' button		
             //12 Step	Click on any Chart panel instance
-
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-
             mainpage.AddPage("main_hung");
-
             mainpage.BtnChoosepanel.Click();
             PanelConfigurationDialog panelConfigurationDlg = new PanelConfigurationDialog(webDriver);
-
             IWebElement table = mainpage.FindElement(By.XPath("//div[@class='ptit pchart']/parent::div//table"), Constant.DefaultTimeout);
             Random r = new Random();
+
             //13 Step	Enter integer number to 'Height *' field	299	
             //14 Step	Click OK button		
             //15 VP	Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display		Error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display
-
             int col = r.Next(1, table.GetTableColumns() + 1);
             int row = r.Next(1, table.GetTableRows());
             string dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
@@ -1162,9 +1156,46 @@ namespace Group1Project.TestCases
             mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
             VP.CheckText("Panel height must be an integer number", panelConfigurationDlg.EditPanelUnsuccess("main_hung", "abc"));
 
-            //Clean up TC 43
-            Console.WriteLine("Clean up TC 43");            
+            //- Clean up TC 43
+            Console.WriteLine("- Clean up TC 43");
             mainpage.DeletePage("main_hung");
+        }
+
+        [TestMethod]
+        public void TC44()
+        {
+            Console.WriteLine("TC44 - Verify that \"Height *\" field is not allowed to be empty");
+
+            //1	Step	Navigate to Dashboard login page
+            //2	Step	Select a specific repository 
+            //3	Step	Enter valid Username and Password
+            //4	Step	Click 'Login' button
+            //5	Step	Click 'Add Page' button
+            //6	Step	Enter Page Name
+            //7	Step	Click 'OK' button
+            //11 Step	Click 'Choose panels' button
+            //12 Step	Click on any Chart panel instance
+            //13 Step	Leave 'Height *' field empty
+            //14 Step	Click OK button
+            //15 VP	Check that 'Panel height is required field' message display
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            mainpage.AddPage("main_hung");
+            mainpage.BtnChoosepanel.Click();
+            PanelConfigurationDialog panelConfigurationDlg = new PanelConfigurationDialog(webDriver);
+            IWebElement table = mainpage.FindElement(By.XPath("//div[@class='ptit pchart']/parent::div//table"), Constant.DefaultTimeout);
+            Random r = new Random();
+            int col = r.Next(1, table.GetTableColumns() + 1);
+            int row = r.Next(1, table.GetTableRows());
+            string dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
+            mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
+            VP.CheckText("Panel height is a required field.", panelConfigurationDlg.EditPanelUnsuccess("main_hung"));
+            Console.WriteLine("Bug document here: //15 VP - Check that 'Panel height is required field' message display");
+
+            //- Clean up TC 44
+            Console.WriteLine("- Clean up TC 44");
+            mainpage.DeletePage("main_hung");
+
         }
     }
 

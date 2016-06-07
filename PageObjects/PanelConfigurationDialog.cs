@@ -89,7 +89,7 @@ namespace Group1Project.PageObjects
         /// <returns></returns>
         /// <author>Diep Duong</author>
         /// <datetime>6/6/2016 - 23:26</datetime>
-        public string EditPanelUnsuccess(string pagename="Execution Dashboard", string height="0", string folder="")
+        public string EditPanelUnsuccess(string pagename="Execution Dashboard", string height="", string folder="")
         {
             Console.WriteLine("- Edit Panel Unsuccess:");
             CommonMethods.WaitForControl(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay'][contains(@style,'top: 0px')]"), Constant.DefaultTimeout);

@@ -356,6 +356,7 @@ namespace Group1Project.PageObjects
             IAlert alert = webDriver.SwitchTo().Alert();
             alert.Accept();
             webDriver.SwitchTo().DefaultContent();
+            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//a[contains(@href,'/TADashboard/')][contains(.,'" + this.ConvertBlankCharacter(pagename) + "')]"), Constant.DefaultTimeout);
             return this;
         }
 
