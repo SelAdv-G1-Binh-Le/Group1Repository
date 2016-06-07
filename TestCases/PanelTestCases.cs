@@ -1161,6 +1161,10 @@ namespace Group1Project.TestCases
             mainpage.DeletePage("main_hung");
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/7/2016 - 03:13</datetime>
         [TestMethod]
         public void TC44()
         {
@@ -1195,6 +1199,40 @@ namespace Group1Project.TestCases
             //- Clean up TC 44
             Console.WriteLine("- Clean up TC 44");
             mainpage.DeletePage("main_hung");
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/7/2016 - 04:01</datetime>
+        [TestMethod]
+        public void TC45()
+        {
+            Console.WriteLine("TC45 - Verify that \"Folder\" field is not allowed to be empty");
+
+            //1	Step	Navigate to Dashboard login page
+            //2	Step	Login with valid account
+            //3	Step	Create a new page
+            //4	Step	Click Choose Panel button
+            //5	Step	Click Create New Panel button
+            //6	Step	Enter all required fields on Add New Panel page
+            //7	Step	Click Ok button
+            //8	Step	Leave empty on Folder field
+            //9	Step	Click Ok button on Panel Configuration dialog
+            //10 VP	Observe the current page
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            mainpage.AddPage("Page 1").OpenChoosePanels().BtnCreateNewPanel.Click();
+            AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
+            addPanelDialog.AddChartPanelSuccess("Panel 1");
+            PanelConfigurationDialog panelConfigurationDialog = new PanelConfigurationDialog(webDriver);
+            VP.CheckText("Panel folder is incorrect", panelConfigurationDialog.EditPanelUnsuccess("Page 1", "456"));
+
+            //- Clean up TC 45
+            Console.WriteLine("- Clean up TC 45");
+            mainpage.DeletePage("Page 1");
+            PanelsPage panelsPage = new PanelsPage(webDriver);
+            panelsPage.DeletePanel("Panel 1");
 
         }
     }

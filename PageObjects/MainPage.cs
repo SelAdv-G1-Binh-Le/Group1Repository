@@ -33,11 +33,24 @@ namespace Group1Project.PageObjects
         static readonly By _lnkPanels = By.XPath("//a[@href='panels.jsp']");
         static readonly By _lnkMenuSettingDelete = By.XPath("//li[@class='mn-setting']//a[@class='delete']");
         static readonly By _cbbPages = By.XPath("//div[@id='div_panelConfigurationDlg']//select[@id='cbbPages']");
+        static readonly By _btnCreateNewPanel = By.XPath("//span[text()='Create new panel']");
+        static readonly By _divChoosePanelsOpen = By.XPath("//div[@class='ccpanels'][contains(@style,'block')]");
+        
 
-        //select[@id='cbbPages']
+        //span[text()='Create new panel']
         #endregion
 
         #region Elements
+
+        public IWebElement DivChoosePanelsOpen
+        {
+            get { return FindElement(_divChoosePanelsOpen, Constant.DefaultTimeout); }
+        }
+
+        public IWebElement BtnCreateNewPanel
+        {
+            get { return FindElement(_btnCreateNewPanel, Constant.DefaultTimeout); }
+        }
         public IWebElement CbbPages
         {
             get { return FindElement(_cbbPages, Constant.DefaultTimeout); }
@@ -232,7 +245,7 @@ namespace Group1Project.PageObjects
         /// <param name="clickbutton">The clickbutton.</param>
         /// <author>Binh Le</author>
         /// <datetime>6/7/2016 - 3:06 AM</datetime>
-        public void AddPage(string name, string parent = "", string column = "", string after = "", bool status = false, string clickbutton = "OK")
+        public MainPage AddPage(string name, string parent = "", string column = "", string after = "", bool status = false, string clickbutton = "OK")
         {
             this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
             IWebElement namebox = this.FindElement(By.XPath("//input[@id='name']"), Constant.DefaultTimeout);
@@ -282,6 +295,8 @@ namespace Group1Project.PageObjects
             {
                 Console.WriteLine(ex);
             }
+
+            return this;
         }
         /// <summary>
         /// Edits the page.
@@ -561,7 +576,6 @@ namespace Group1Project.PageObjects
             return totalString;
         }
 
-
         /// <summary>
         /// Gotoes the panels page.
         /// </summary>
@@ -574,6 +588,19 @@ namespace Group1Project.PageObjects
             CommonMethods.WaitForControl(webDriver, _lnkPanels, Constant.DefaultTimeout);
             this.LnkPanels.Click();
             return new PanelsPage(webDriver);
+        }
+
+        /// <summary>
+        /// Opens the choose panels.
+        /// </summary>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/7/2016 - 03:35</datetime>
+        public MainPage OpenChoosePanels()
+        {
+            this.BtnChoosepanel.Click();
+            CommonMethods.WaitForControl(webDriver, _divChoosePanelsOpen, Constant.DefaultTimeout);            
+            return this;
         }
 
         #endregion

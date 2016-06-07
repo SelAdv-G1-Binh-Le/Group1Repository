@@ -256,15 +256,9 @@ namespace Group1Project.PageObjects
 
             if (CbbCategoryField.Enabled) this.CbbCategoryField.SelectByValue(categoryvalue);
             //Click OK button
-            this.BtnOK.Click();
+            this.BtnOK.Click();           
 
-            //Handle for creating new Panel at MainPage
-            if (CommonMethods.IsElementPresent(webDriver, _btnOKPanelConfiguration))
-            {
-                this.BtnOKPanelConfiguration.Click();
-            }
-
-            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), Constant.DefaultTimeout);
+            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), 3);
             return new PanelsPage(webDriver);
         }
 
