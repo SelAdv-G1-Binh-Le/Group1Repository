@@ -140,9 +140,16 @@ namespace Group1Project.Common
             wait.Until(d => webelement.Enabled);
         }
 
+        /// <summary>
+        /// Converts the date time to string.
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/7/2016 - 00:18</datetime>
         public static string ConvertDateTimeToString(DateTime dt)
         {
-            return dt.Month.ToString() + '/' + dt.Day.ToString() + '/' + dt.Year.ToString();
+            return dt.Month.ToString() + '-' + dt.Day.ToString() + '-' + dt.Year.ToString() + '-' + dt.Hour.ToString() +'-' + dt.Minute.ToString() +'-' + dt.Second.ToString();
         }
 
         public static DateTime ConvertStringToDateTime(string str)

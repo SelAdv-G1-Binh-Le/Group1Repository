@@ -574,7 +574,7 @@ namespace Group1Project.TestCases
             PanelsPage panelsPage = new PanelsPage(webDriver);
             panelsPage.DeletePanel("hung_panel");
             mainpage.DeletePage("main_hung");
-            
+
         }
 
         /// <summary>
@@ -1019,7 +1019,7 @@ namespace Group1Project.TestCases
             addpaneldialog.ChkDataLabelsPercentage.Check(false);
 
         }
-        
+
         /// <summary>
         /// </summary>
         /// <author>Diep Duong</author>
@@ -1055,14 +1055,12 @@ namespace Group1Project.TestCases
             mainpage.AddPage("main_hung3");
 
             mainpage.BtnChoosepanel.Click();
-            AddPanelDialog panelConfigurationDlg = new AddPanelDialog(webDriver);
+            PanelConfigurationDialog panelConfigurationDlg = new PanelConfigurationDialog(webDriver);
 
-            IWebElement table = mainpage.FindElement(By.XPath("//div[@class='ptit pchart']//following::table[1]"), Constant.DefaultTimeout);
+            IWebElement table = mainpage.FindElement(By.XPath("//div[@class='ptit pchart']/parent::div//table"), Constant.DefaultTimeout);
             Random r = new Random();
             int col = r.Next(1, table.GetTableColumns() + 1);
             int row = r.Next(1, table.GetTableRows());
-            Console.WriteLine("Cols: " + col);
-            Console.WriteLine("Rows: " + row);
             string dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
             mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
             mainpage.CbbPages.Click();
@@ -1080,14 +1078,93 @@ namespace Group1Project.TestCases
 
         }
 
+
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/7/2016 - 00:58</datetime>
         [TestMethod]
         public void TC43()
         {
             Console.WriteLine("TC43 - Verify that only integer number inputs from 300-800 are valid for \"Height *\" field");
 
+            //1	Step	Navigate to Dashboard login page		
+            //2	Step	Select a specific repository 		
+            //3	Step	Enter valid Username and Password		
+            //4	Step	Click 'Login' button		
+            //5	Step	Click 'Add Page' button		
+            //6	Step	Enter Page Name	main_hung	
+            //7	Step	Click 'OK' button		
+            //11 Step	Click 'Choose panels' button		
+            //12 Step	Click on any Chart panel instance
 
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
+            mainpage.AddPage("main_hung");
 
+            mainpage.BtnChoosepanel.Click();
+            PanelConfigurationDialog panelConfigurationDlg = new PanelConfigurationDialog(webDriver);
+
+            IWebElement table = mainpage.FindElement(By.XPath("//div[@class='ptit pchart']/parent::div//table"), Constant.DefaultTimeout);
+            Random r = new Random();
+            //13 Step	Enter integer number to 'Height *' field	299	
+            //14 Step	Click OK button		
+            //15 VP	Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display		Error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display
+
+            int col = r.Next(1, table.GetTableColumns() + 1);
+            int row = r.Next(1, table.GetTableRows());
+            string dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
+            mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
+            VP.CheckText("Panel height must be greater than or equal to 300 and less than or equal to 800.", panelConfigurationDlg.EditPanelUnsuccess("main_hung", "299"));
+            Console.WriteLine("Bug document here: //15 VP - Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display");
+
+            //16 Step	Click OK button		
+            //17 Step	Enter integer number to 'Height *' field	801	
+            //18 Step	Click OK button		
+            //19 VP	Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display		Error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display
+            col = r.Next(1, table.GetTableColumns() + 1);
+            row = r.Next(1, table.GetTableRows());
+            dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
+            mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
+            VP.CheckText("Panel height must be greater than or equal to 300 and less than or equal to 800.", panelConfigurationDlg.EditPanelUnsuccess("main_hung", "801"));
+            Console.WriteLine("Bug document here: //19 VP - Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display");
+
+            //20 Step	Click OK button		
+            //21 Step	Enter integer number to 'Height *' field	-2	
+            //23 Step	Click OK button		
+            //24 VP	Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display		Error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display
+            col = r.Next(1, table.GetTableColumns() + 1);
+            row = r.Next(1, table.GetTableRows());
+            dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
+            mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
+            VP.CheckText("Panel height must be greater than or equal to 300 and less than or equal to 800.", panelConfigurationDlg.EditPanelUnsuccess("main_hung", "-2"));
+            Console.WriteLine("Bug document here: //24 VP - Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display");
+
+            //25 Step	Click OK button		
+            //26 Step	Enter integer number to 'Height *' field	3.1	
+            //27 Step	Click OK button		
+            //28 VP	Check that error message 'Panel height must be an integer number' display		Error message 'Panel height must be an integer number' display
+            col = r.Next(1, table.GetTableColumns() + 1);
+            row = r.Next(1, table.GetTableRows());
+            dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
+            mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
+            VP.CheckText("Panel height must be greater than or equal to 300 and less than or equal to 800.", panelConfigurationDlg.EditPanelUnsuccess("main_hung", "3.1"));
+            Console.WriteLine("Bug document here: //28 VP - Check that error message 'Panel height must be an integer number' display		Error message 'Panel height must be an integer number' display");
+
+            //29 Step	Click OK button		
+            //30 Step	Enter integer number to 'Height *' field	abc	
+            //31 Step	Click OK button		
+            //32 VP	Check that error message 'Panel height must be an integer number' display		Error message 'Panel height must be an integer number' display
+            col = r.Next(1, table.GetTableColumns() + 1);
+            row = r.Next(1, table.GetTableRows());
+            dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
+            mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
+            VP.CheckText("Panel height must be an integer number", panelConfigurationDlg.EditPanelUnsuccess("main_hung", "abc"));
+
+            //Clean up TC 43
+            Console.WriteLine("Clean up TC 43");            
+            mainpage.DeletePage("main_hung");
         }
     }
 

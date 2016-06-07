@@ -88,6 +88,7 @@ namespace Group1Project.Common
         {
             if (clearFirst) element.Clear();
             element.SendKeys(value);
+            Console.WriteLine(element.GetAttribute("id") + " is set to " + value);
         }
 
         /// <summary>
@@ -182,7 +183,7 @@ namespace Group1Project.Common
                 {
                     flag = true;
                     break;
-                }             
+                }
 
             }
             return flag;

@@ -92,7 +92,7 @@ namespace Group1Project.PageObjects
         public string EditPanelUnsuccess(string pagename="Execution Dashboard", string height="0", string folder="")
         {
             Console.WriteLine("- Edit Panel Unsuccess:");
-
+            CommonMethods.WaitForControl(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay'][contains(@style,'top: 0px')]"), Constant.DefaultTimeout);
             this.CbbPages.SelectByText(pagename);
             this.TxtHeight.Set(height);
             this.TxtFolder.Set(folder);            

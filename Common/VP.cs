@@ -19,11 +19,11 @@ namespace Group1Project.Common
         }
 
         public static void CheckControlNotExist(IWebDriver webDriver, By by)
-        {     
-            Assert.IsFalse(CommonMethods.IsElementPresent(webDriver , by), "Control " + by + " Exists");
+        {
+            Assert.IsFalse(CommonMethods.IsElementPresent(webDriver, by), "Control " + by + " Exists");
         }
 
-        public static void CheckControlExist(IWebDriver webDriver,By by)
+        public static void CheckControlExist(IWebDriver webDriver, By by)
         {
             //Assert.IsTrue(CommonMethods.IsElementPresent(by), "Control " + by + " NOT Exist");
         }
@@ -37,11 +37,13 @@ namespace Group1Project.Common
         /// <datetime>6/3/2016 - 08:02</datetime>
         public static void CheckText(string expected, string actual)
         {
-            Console.Write("Check text: Expected:{0} <-> Recorded:{1}", expected, actual);
+            Console.WriteLine("Check text:");
+            Console.WriteLine("Expected: <{0}>", expected);
+            Console.WriteLine("Recorded:<{0}>", actual);
             Assert.AreEqual(expected, actual, "Failed: Text is not corrected!!!");
         }
 
-       
+
 
 
 
