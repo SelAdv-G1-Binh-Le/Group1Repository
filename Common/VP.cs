@@ -39,7 +39,7 @@ namespace Group1Project.Common
         {
             Console.WriteLine("Check text:");
             Console.WriteLine("Expected: <{0}>", expected);
-            Console.WriteLine("Recorded:<{0}>", actual);
+            Console.WriteLine("Recorded: <{0}>", actual);
             Assert.AreEqual(expected, actual, "Failed: Text is not corrected!!!");
         }
 

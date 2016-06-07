@@ -65,9 +65,7 @@ namespace Group1Project.PageObjects
             if (webElement == null)
                 Console.WriteLine("Element <{0}> is NOT found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
             else
-            {               
-                WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
-                wait.Until(ExpectedConditions.ElementIsVisible(by));
+            {  
                 Console.WriteLine("Element <{0}> is found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
             }
             stopWatch.Stop();
