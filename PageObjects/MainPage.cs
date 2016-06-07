@@ -611,7 +611,7 @@ namespace Group1Project.PageObjects
         /// <datetime>6/7/2016 - 06:03</datetime>
         public MainPage SelectPage(string pagename)
         {
-            this.FindElement(By.XPath("//a[contains(@href,'/TADashboard/')][contains(.,'" + pagename.Replace(" ", "&nbsp;") + "')]"), Constant.DefaultTimeout).Click();
+            this.FindElement(By.XPath("//a[contains(@href,'/TADashboard/')][contains(.,'" + pagename.Replace(" ", "\u00A0") + "')]"), Constant.DefaultTimeout).Click();
             return this;
         }
 
