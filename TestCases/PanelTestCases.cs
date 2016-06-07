@@ -354,6 +354,10 @@ namespace Group1Project.TestCases
             panelspage.DeletePanel("Logigear@");
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/7/2016 - 23:43</datetime>
         [TestMethod]
         public void TC36()
         {
@@ -401,6 +405,10 @@ namespace Group1Project.TestCases
             mainpage.DeletePage("main_hung");
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/7/2016 - 23:43</datetime>
         [TestMethod]
         public void TC37()
         {
@@ -581,7 +589,6 @@ namespace Group1Project.TestCases
             panelsPage.DeletePanel("hung_panel");
 
             mainpage.DeletePage("main_hung");
-
         }
 
         /// <summary>
@@ -796,7 +803,6 @@ namespace Group1Project.TestCases
             Console.WriteLine("- Clean up TC 39");
             addpaneldialog.Close();
             panelspage.DeletePanel(Constant.DefaultDisplayName);
-
         }
 
         /// <summary>
@@ -1024,7 +1030,6 @@ namespace Group1Project.TestCases
             Assert.AreEqual(legendsBottom, addpaneldialog.RadLegendsBottom.Selected);
             Assert.AreEqual(legendsLeft, addpaneldialog.RadLegendsLeft.Selected);
             addpaneldialog.ChkDataLabelsPercentage.Check(false);
-
         }
 
         /// <summary>
@@ -1239,7 +1244,6 @@ namespace Group1Project.TestCases
             mainpage.DeletePage("Page 1");
             PanelsPage panelsPage = new PanelsPage(webDriver);
             panelsPage.DeletePanel("Panel 1");
-
         }
     }
 
