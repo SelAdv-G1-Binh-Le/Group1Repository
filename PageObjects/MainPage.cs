@@ -364,7 +364,9 @@ namespace Group1Project.PageObjects
         public MainPage DeletePage(string pagename)
         {
             this.SelectPage(pagename);
-            this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
+            //this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
+            this.MnGlobalSetting.Click();
+            this.LnkMenuSettingDelete.Click();
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.AlertIsPresent());
             IAlert alert = webDriver.SwitchTo().Alert();
