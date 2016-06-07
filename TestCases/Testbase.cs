@@ -17,7 +17,9 @@ namespace Group1Project.TestCases
     public class Testbase
     {
 
-        public IWebDriver webDriver;       
+        public IWebDriver webDriver;
+
+        DirectoryInfo di = Directory.CreateDirectory(@"D:\TADashBoard");
         Stopwatch stopWatch = new Stopwatch();
         FileStream ostrm;
         StreamWriter writer;
@@ -34,7 +36,7 @@ namespace Group1Project.TestCases
         {
             try
             {
-                ostrm = new FileStream(@"D:\" + filename, FileMode.OpenOrCreate, FileAccess.Write);
+                ostrm = new FileStream(@"D:\TADashBoard\" + filename, FileMode.OpenOrCreate, FileAccess.Write);
                 writer = new StreamWriter(ostrm);
             }
             catch (Exception e)
@@ -71,7 +73,7 @@ namespace Group1Project.TestCases
             Console.SetOut(oldOut);
             writer.Close();
             ostrm.Close();
-            Console.WriteLine("- Please see the log file in D:\\" + filename);
+            Console.WriteLine("- Please see the log file in D:\\TADashBoard\\" + filename);
         }
     }
 }
