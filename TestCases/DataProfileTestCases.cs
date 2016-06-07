@@ -121,5 +121,70 @@ namespace Group1Project.TestCases
             //Post-Condition delete newly added page
             //Close TA Dashboard Main Page
         }
+
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/8/2016 - 2:02 AM</datetime>
+        [TestMethod]
+        public void TC67()
+        {
+            Console.WriteLine("Verify that Data Profiles are listed alphabetically");
+            //Step1	Navigate to Dashboard login page	
+            LoginPage loginPage = new LoginPage(webDriver).Open();
+
+            //Step2	Select a specific repository 	SampleRepository
+            //Step3	Enter valid Username and Password	thinh.vu/(empty)	
+            //Step4	Click Login
+            MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+
+            //Step5	Click Administer->Data Profiles	
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.Administer, MenuList.ChildMenuEnum.DataProfiles);
+            bool ActualResult = mainPage.CheckDataProfileSort("Data Profile");
+
+            //VP	Check Data Profiles are listed alphabetically
+            Assert.AreEqual(true, ActualResult, "Column Data Profile is not sorted properly");
+
+            //Post-Condition delete newly added page
+            //Close TA Dashboard Main Page
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/8/2016 - 2:02 AM</datetime>
+        [TestMethod]
+        public void TC68()
+        {
+            Console.WriteLine("Verify that Check Boxes are only present for non-preset Data Profiles.");
+            //Step1	Navigate to Dashboard login page	
+            LoginPage loginPage = new LoginPage(webDriver).Open();
+
+            //Step2	Select a specific repository 	SampleRepository	
+            //Step3	Enter valid Username and Password	thinh.vu/(empty)	
+            //Step4	Click Login		
+            MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+
+            //Step5	Click Administer->Data Profiles		
+            mainPage.SelectChildMenu(MenuList.MainMenuEnum.Administer, MenuList.ChildMenuEnum.DataProfiles);
+
+            //Step6	Create a new Data Profile
+            string profileName = "Profile" + CommonMethods.RandomString();
+            mainPage.AddDataProfile(profileName, "Finish");
+
+            //Step7	Back to Data Profiles page
+            bool ActualResult1 = mainPage.IsCheckBoxOnRow(profileName);
+            bool ActualResult2 = mainPage.IsCheckBoxOnRow("Test Case Execution");
+
+            //VP	Check Check Boxes are only present for non-preset Data Profiles.
+            Assert.AreEqual(true, ActualResult1, "Non-Preset profile does not have the checkbox");
+            Assert.AreEqual(false, ActualResult2, "Preset profile has the checkbox");
+
+
+            //Post-Condition delete newly data profile
+            mainPage.DeleteDataProfile(profileName);
+            //Close TA Dashboard Main Page
+        }
+
     }
 }

@@ -555,6 +555,36 @@ namespace Group1Project.PageObjects
             Console.WriteLine(totalString);
             return totalString;
         }
+        /// <summary>
+        /// Checks the data profile sort.
+        /// </summary>
+        /// <param name="colname">The colname.</param>
+        /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/8/2016 - 2:03 AM</datetime>
+        public bool CheckDataProfileSort(string colname)
+        {
+            int totalRow = webDriver.FindElements(By.XPath("//a[.='Save as']")).Count;
+            bool checkSort = true;
+            for (int i = 2; i < totalRow + 1; i++)
+            {
+                string xPath1 = string.Format("//table[@class='GridView']//tr[{1}]/td[count(//th[.='{0}']/preceding-sibling::th)+1]", colname, i);
+                string xPath2 = string.Format("//table[@class='GridView']//tr[{1}]/td[count(//th[.='{0}']/preceding-sibling::th)+1]", colname, i+1);
+                string value1 = webDriver.FindElement(By.XPath(xPath1)).Text;
+                string value2 = webDriver.FindElement(By.XPath(xPath2)).Text;
+                if(value2.CompareTo(value1)>0)
+                {
+                    checkSort = true;
+                }
+                else
+                {
+                    checkSort = false;
+                    break;
+                }
+            }
+            Console.WriteLine(checkSort);
+            return checkSort;
+        }
 
         /// <summary>
         /// Gets all value of column.
@@ -575,6 +605,62 @@ namespace Group1Project.PageObjects
             }
             Console.WriteLine(totalString);
             return totalString;
+        }
+
+        /// <summary>
+        /// Adds the data profile.
+        /// </summary>
+        /// <param name="profilename">The profilename.</param>
+        /// <param name="clickbutton">The clickbutton.</param>
+        /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/8/2016 - 2:02 AM</datetime>
+        public MainPage AddDataProfile(string profilename,string clickbutton)
+        {
+            this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.CreateProfile);
+            this.FindElement(By.XPath("//input[@id='txtProfileName']")).SendKeys(profilename);
+            this.FindElement(By.XPath("//input[@class='button' and @value='"+clickbutton+"']")).Click();
+            CommonMethods.WaitForControl(webDriver, By.XPath("//td[.='" + this.ConvertBlankCharacter(profilename) + "']"),Constant.DefaultTimeout);
+            return this;
+        }
+
+        /// <summary>
+        /// Determines whether [is CheckBox on row] [the specified rowtext].
+        /// </summary>
+        /// <param name="rowtext">The rowtext.</param>
+        /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/8/2016 - 2:02 AM</datetime>
+        public bool IsCheckBoxOnRow(string rowtext)
+        {
+            string xPath = string.Format("//td[.='{0}']/preceding-sibling::td/input[@type='checkbox']", this.ConvertBlankCharacter(rowtext));
+            return CommonMethods.IsElementPresent(webDriver, By.XPath(xPath));
+        }
+
+        /// <summary>
+        /// Deletes the data profile.
+        /// </summary>
+        /// <param name="profilename">The profilename.</param>
+        /// <returns></returns>
+        /// <author>Binh Le</author>
+        /// <datetime>6/8/2016 - 2:02 AM</datetime>
+        public MainPage DeleteDataProfile(string profilename)
+        {
+            bool isPageExist = CommonMethods.IsElementPresent(webDriver, By.XPath("//table[@class='GridView']"));
+            if(isPageExist!=true)
+            {
+                this.SelectChildMenu(MenuList.MainMenuEnum.Administer, MenuList.ChildMenuEnum.DataProfiles);
+            }
+            string xPath = string.Format("//td[.='{0}']/preceding-sibling::td/input[@type='checkbox']", this.ConvertBlankCharacter(profilename));
+            this.FindElement(By.XPath(xPath)).Click();
+            this.FindElement(By.XPath("//div[@class='panel_tag2']/a[.='Delete']")).Click();
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            IAlert alert = webDriver.SwitchTo().Alert();
+            alert.Accept();
+            webDriver.SwitchTo().DefaultContent();
+            CommonMethods.WaitForControlDisappear(webDriver, By.XPath(xPath), 1);
+            return this;
         }
 
         /// <summary>
