@@ -52,7 +52,7 @@ namespace Group1Project.PageObjects
 
         public LoginPage Open()
         {
-            driver.Navigate().GoToUrl(Constant.LoginPageURL);
+            webDriver.Navigate().GoToUrl(Constant.LoginPageURL);
             return this;
         }
 

@@ -34,7 +34,7 @@ namespace Group1Project.PageObjects
         static readonly By _lnkMenuSettingDelete = By.XPath("//li[@class='mn-setting']//a[@class='delete']");
         static readonly By _cbbPages = By.XPath("//div[@id='div_panelConfigurationDlg']//select[@id='cbbPages']");
         static readonly By _btnCreateNewPanel = By.XPath("//span[text()='Create new panel']");
-        static readonly By _divChoosePanelsOpen = By.XPath("//div[@class='ccpanels'][contains(@style,'block')]");
+        static readonly By _divChoosePanelsOpen = By.XPath("//div[@class='ccpanels'][@style='display: block;']");
         
 
         //span[text()='Create new panel']
@@ -364,7 +364,7 @@ namespace Group1Project.PageObjects
         /// <datetime>6/7/2016 - 3:06 AM</datetime>
         public MainPage DeletePage(string pagename)
         {
-            CommonMethods.WaitAndClickControl(webDriver, "a", "text()", this.ConvertBlankCharacter(pagename), "");
+            this.SelectPage(pagename);
             this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.Delete);
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.AlertIsPresent());
@@ -600,6 +600,19 @@ namespace Group1Project.PageObjects
         {
             this.BtnChoosepanel.Click();
             CommonMethods.WaitForControl(webDriver, _divChoosePanelsOpen, Constant.DefaultTimeout);            
+            return this;
+        }
+
+        /// <summary>
+        /// Selects the page.
+        /// </summary>
+        /// <param name="pagename">The pagename.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/7/2016 - 06:03</datetime>
+        public MainPage SelectPage(string pagename)
+        {
+            this.FindElement(By.XPath("//a[contains(@href,'/TADashboard/')][contains(.,'" + this.ConvertBlankCharacter(pagename) + "')]"), Constant.DefaultTimeout).Click();
             return this;
         }
 

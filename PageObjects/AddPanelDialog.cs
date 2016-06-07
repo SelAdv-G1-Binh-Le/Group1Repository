@@ -215,7 +215,7 @@ namespace Group1Project.PageObjects
         {
             Console.WriteLine("- Add Chart Panel Success");
 
-            CommonMethods.WaitForControl(webDriver, _dlgOverlay, Constant.DefaultTimeout);            
+            CommonMethods.WaitForControl(webDriver, _cbbProfile, Constant.DefaultTimeout);            
             this.CbbProfile.SelectByText(dataprofiletext);
 
             switch (legends)
@@ -256,9 +256,9 @@ namespace Group1Project.PageObjects
 
             if (CbbCategoryField.Enabled) this.CbbCategoryField.SelectByValue(categoryvalue);
             //Click OK button
-            this.BtnOK.Click();           
+            this.BtnOK.Click();          
 
-            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), 3);
+            //CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), Constant.DefaultTimeout);
             return new PanelsPage(webDriver);
         }
 
@@ -288,7 +288,7 @@ namespace Group1Project.PageObjects
             bool dataLabelsPercentage = false)
         {
             Console.WriteLine("- Add Chart Panel Unsuccess");
-            CommonMethods.WaitForControl(webDriver, _dlgOverlay, Constant.DefaultTimeout);
+            CommonMethods.WaitForControl(webDriver, _cbbProfile, Constant.DefaultTimeout);
             this.CbbProfile.SelectByText(dataprofiletext);
 
             CommonMethods.WaitForControl(webDriver, _txtDisplayName, Constant.DefaultTimeout);

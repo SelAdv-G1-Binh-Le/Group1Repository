@@ -39,7 +39,11 @@ namespace Group1Project.TestCases
 
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
             addpaneldialog.AddChartPanelSuccess("zbox", "name");
-            mainpage.BtnChoosepanel.Click();
+
+            PanelConfigurationDialog panelConfigurationDialog = new PanelConfigurationDialog(webDriver);
+            panelConfigurationDialog.Close();
+
+            mainpage.SelectPage(pagename).OpenChoosePanels();
 
             //7	VP	Verify that all pre-set panels are populated and sorted correctly	
             string actual = mainpage.FindElement(By.XPath("//a[contains(.,'zbox')]//preceding::a[1]"), Constant.DefaultTimeout).GetAttribute("innerHTML");
@@ -1054,7 +1058,7 @@ namespace Group1Project.TestCases
             mainpage.AddPage("main_hung2");
             mainpage.AddPage("main_hung3");
 
-            mainpage.BtnChoosepanel.Click();
+            mainpage.OpenChoosePanels();
             PanelConfigurationDialog panelConfigurationDlg = new PanelConfigurationDialog(webDriver);
 
             IWebElement table = mainpage.FindElement(By.XPath("//div[@class='ptit pchart']/parent::div//table"), Constant.DefaultTimeout);
@@ -1097,8 +1101,8 @@ namespace Group1Project.TestCases
             //12 Step	Click on any Chart panel instance
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-            mainpage.AddPage("main_hung");
-            mainpage.BtnChoosepanel.Click();
+            mainpage.AddPage("main_hung").OpenChoosePanels();
+
             PanelConfigurationDialog panelConfigurationDlg = new PanelConfigurationDialog(webDriver);
             IWebElement table = mainpage.FindElement(By.XPath("//div[@class='ptit pchart']/parent::div//table"), Constant.DefaultTimeout);
             Random r = new Random();
@@ -1184,8 +1188,7 @@ namespace Group1Project.TestCases
             //15 VP	Check that 'Panel height is required field' message display
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-            mainpage.AddPage("main_hung");
-            mainpage.BtnChoosepanel.Click();
+            mainpage.AddPage("main_hung").OpenChoosePanels();
             PanelConfigurationDialog panelConfigurationDlg = new PanelConfigurationDialog(webDriver);
             IWebElement table = mainpage.FindElement(By.XPath("//div[@class='ptit pchart']/parent::div//table"), Constant.DefaultTimeout);
             Random r = new Random();

@@ -48,7 +48,6 @@ namespace Group1Project.PageObjects
             IWebElement webElement = null;
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
-            Console.WriteLine("Finding element <{0}> ...",by.ToString());
             try
             {
                 webElement = webDriver.FindElement(by);

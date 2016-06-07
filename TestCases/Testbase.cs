@@ -39,7 +39,7 @@ namespace Group1Project.TestCases
             }
             catch (Exception e)
             {
-                Console.WriteLine("- Cannot open D:\\{0} for writing",filename);
+                Console.WriteLine("- Cannot open D:\\for writing",filename);
                 Console.WriteLine(e.Message);
                 return;
             }

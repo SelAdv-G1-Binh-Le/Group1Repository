@@ -149,7 +149,7 @@ namespace Group1Project.Common
         /// <datetime>6/7/2016 - 00:18</datetime>
         public static string ConvertDateTimeToString(DateTime dt)
         {
-            return dt.Month.ToString() + '-' + dt.Day.ToString() + '-' + dt.Year.ToString() + '-' + dt.Hour.ToString() +'-' + dt.Minute.ToString() +'-' + dt.Second.ToString();
+            return dt.Month.ToString() + '-' + dt.Day.ToString() + '-' + dt.Year.ToString() + '-' + dt.Hour.ToString() +'-' + dt.Minute.ToString() +'-' + dt.Second.ToString()+ '-' + dt.Millisecond.ToString();
         }
 
         public static DateTime ConvertStringToDateTime(string str)
