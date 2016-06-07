@@ -19,7 +19,7 @@ namespace Group1Project.TestCases
 
         public IWebDriver webDriver;
 
-        DirectoryInfo di = Directory.CreateDirectory(@"D:\TADashBoard");
+        DirectoryInfo di = Directory.CreateDirectory(Constant.DefaultLogFolder);
         Stopwatch stopWatch = new Stopwatch();
         FileStream ostrm;
         StreamWriter writer;
@@ -36,12 +36,12 @@ namespace Group1Project.TestCases
         {
             try
             {
-                ostrm = new FileStream(@"D:\TADashBoard\" + filename, FileMode.OpenOrCreate, FileAccess.Write);
+                ostrm = new FileStream(Constant.DefaultLogFolder + "\\" + filename, FileMode.OpenOrCreate, FileAccess.Write);
                 writer = new StreamWriter(ostrm);
             }
             catch (Exception e)
             {
-                Console.WriteLine("- Cannot open D:\\for writing",filename);
+                Console.WriteLine("- Cannot open " + Constant.DefaultLogFolder + " for writing");
                 Console.WriteLine(e.Message);
                 return;
             }
@@ -73,7 +73,7 @@ namespace Group1Project.TestCases
             Console.SetOut(oldOut);
             writer.Close();
             ostrm.Close();
-            Console.WriteLine("- Please see the log file in D:\\TADashBoard\\" + filename);
+            Console.WriteLine("- Please see the log file in " + Constant.DefaultLogFolder + "\\" + filename);
         }
     }
 }

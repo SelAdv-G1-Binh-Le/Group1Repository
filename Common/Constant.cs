@@ -18,7 +18,9 @@ namespace Group1Project.Common
         public const string DefaultUsername = "administrator";
         public const string DefaultPassword = "";
         public const string DefaultRepository = "SampleRepository";
-        public const int DefaultTimeout = 5; 
+        public const int DefaultTimeout = 5;
+        public const string DefaultLogFolder = @"D:\TADashBoard";
+
 
         #endregion
 
