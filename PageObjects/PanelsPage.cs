@@ -47,6 +47,7 @@ namespace Group1Project.PageObjects
             MainPage mainpage = new MainPage(webDriver);
             mainpage.GotoPanelsPage().FindElement(dynamicXpath, Constant.DefaultTimeout).Click();
             webDriver.SwitchTo().Alert().Accept();
+            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//table[@class='GridView']//a[text()='" + panelname + "']"), Constant.DefaultTimeout);
             return this;
         }
 

@@ -579,6 +579,7 @@ namespace Group1Project.TestCases
             addpaneldialog.Close();
             PanelsPage panelsPage = new PanelsPage(webDriver);
             panelsPage.DeletePanel("hung_panel");
+
             mainpage.DeletePage("main_hung");
 
         }
