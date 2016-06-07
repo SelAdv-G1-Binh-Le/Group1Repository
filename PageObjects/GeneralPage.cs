@@ -59,21 +59,18 @@ namespace Group1Project.PageObjects
                 if (ex is StaleElementReferenceException || ex is NullReferenceException)
                 {
                     webElement = this.FindElement(by, ((timeout * 1000 - stopWatch.ElapsedMilliseconds) / 1000));
-                    Console.WriteLine("Dang bi " + ex + "time eslapsed la: " + ((timeout * 1000 - stopWatch.ElapsedMilliseconds) / 1000));
                 }
-            }
-
-            stopWatch.Stop();
+            }            
 
             if (webElement == null)
                 Console.WriteLine("Element <{0}> is NOT found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
             else
-            {
-                Console.WriteLine("Element <{0}> is found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
+            {               
                 WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
                 wait.Until(ExpectedConditions.ElementIsVisible(by));
+                Console.WriteLine("Element <{0}> is found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
             }
-
+            stopWatch.Stop();
             return webElement;
         }
 

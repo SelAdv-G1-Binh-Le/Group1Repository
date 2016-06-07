@@ -283,8 +283,7 @@ namespace Group1Project.PageObjects
 
             if (clickbutton != "")
             {
-                CommonMethods.WaitAndClickControl(webDriver, "input", "@id", clickbutton, "");
-                this.FindElement(By.XPath("//input[@id='" + clickbutton + "']"), Constant.DefaultTimeout);
+                this.FindElement(By.XPath("//input[@id='" + clickbutton + "']"), Constant.DefaultTimeout).Click();
             }
             try
             {
@@ -293,7 +292,7 @@ namespace Group1Project.PageObjects
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine(ex.Message);
             }
 
             return this;
@@ -612,7 +611,7 @@ namespace Group1Project.PageObjects
         /// <datetime>6/7/2016 - 06:03</datetime>
         public MainPage SelectPage(string pagename)
         {
-            this.FindElement(By.XPath("//a[contains(@href,'/TADashboard/')][contains(.,'" + this.ConvertBlankCharacter(pagename) + "')]"), Constant.DefaultTimeout).Click();
+            this.FindElement(By.XPath("//a[contains(@href,'/TADashboard/')][contains(.,'" + pagename.Replace(" ", "&nbsp;") + "')]"), Constant.DefaultTimeout).Click();
             return this;
         }
 
