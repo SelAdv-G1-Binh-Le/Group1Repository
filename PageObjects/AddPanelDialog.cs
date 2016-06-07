@@ -20,7 +20,7 @@ namespace Group1Project.PageObjects
         static By _radReportType = By.XPath("//input[@id='radPanelType2']");
         static By _lgdChartSettings = By.XPath("//legend[contains(.,'Chart Settings')]");
         static By _lgdIndicatorSettings = By.XPath("//legend[contains(.,'Indicator Settings')]");
-        static By _dlgOverlay = By.XPath("//div[@class='ui-dialog-overlay custom-overlay']");
+        static By _dlgOverlay = By.XPath("//div[@class='ui-dialog-overlay custom-overlay'][contains(@style,'top: 0px')]");
         static By _cbbProfile = By.XPath("//select[@id='cbbProfile']");
         static By _lnkCloseButton = By.XPath("//a[@class='ui-dialog-titlebar-close']");
         static By _txtChartTitle = By.XPath("//input[@id='txtChartTitle']");
@@ -95,7 +95,7 @@ namespace Group1Project.PageObjects
         {
             get { return FindElement(_chkShowTitle, Constant.DefaultTimeout); }
         }
-      
+
         public IWebElement CbbCategoryField
         {
             get { return FindElement(_cbbCategoryField, Constant.DefaultTimeout); }
@@ -215,7 +215,7 @@ namespace Group1Project.PageObjects
         {
             Console.WriteLine("- Add Chart Panel Success");
 
-            CommonMethods.WaitForControl(webDriver, _cbbProfile, Constant.DefaultTimeout);            
+            CommonMethods.WaitForControl(webDriver, _cbbProfile, Constant.DefaultTimeout);
             this.CbbProfile.SelectByText(dataprofiletext);
 
             switch (legends)
@@ -256,9 +256,9 @@ namespace Group1Project.PageObjects
 
             if (CbbCategoryField.Enabled) this.CbbCategoryField.SelectByValue(categoryvalue);
             //Click OK button
-            this.BtnOK.Click();          
+            this.BtnOK.Click();
 
-            //CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), Constant.DefaultTimeout);
+            CommonMethods.WaitForControlDisappear(webDriver, _dlgOverlay, Constant.DefaultTimeout);
             return new PanelsPage(webDriver);
         }
 
@@ -367,6 +367,16 @@ namespace Group1Project.PageObjects
             LnkCloseButton.Click();
             CommonMethods.WaitForControlDisappear(webDriver, _dlgOverlay, Constant.DefaultTimeout);
             return new PanelsPage(webDriver);
+        }
+
+        /// <summary>
+        /// Waits for overlay disappear.
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/7/2016 - 19:48</datetime>
+        public void WaitForOverlayDisappear()
+        {
+            CommonMethods.WaitForControlDisappear(webDriver, _dlgOverlay, Constant.DefaultTimeout);
         }
 
         #endregion

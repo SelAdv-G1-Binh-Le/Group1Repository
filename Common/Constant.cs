@@ -14,7 +14,7 @@ namespace Group1Project.Common
         #region Configuration variable area
 
         public const bool DebugMode = false;
-        public const string LoginPageURL = "http://192.168.170.37/TADashboard/login.jsp";
+        public const string LoginPageURL = "http://192.168.1.2/TADashboard/login.jsp";
         public const string DefaultUsername = "administrator";
         public const string DefaultPassword = "";
         public const string DefaultRepository = "SampleRepository";

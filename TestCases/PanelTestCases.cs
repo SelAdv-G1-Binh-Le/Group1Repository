@@ -31,6 +31,8 @@ namespace Group1Project.TestCases
             //5	Step	Click OK button	           
 
             string pagename = "Page 1";
+            string panelname = "zbox";
+
             mainpage.ClickAddPage().AddPage(pagename);
 
             //6	Step	Go to Global Setting -> Create Panel
@@ -38,7 +40,7 @@ namespace Group1Project.TestCases
             mainpage.LnkAddPanel.Click();
 
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
-            addpaneldialog.AddChartPanelSuccess("zbox", "name");
+            addpaneldialog.AddChartPanelSuccess(panelname, "name");
 
             PanelConfigurationDialog panelConfigurationDialog = new PanelConfigurationDialog(webDriver);
             panelConfigurationDialog.Close();
@@ -46,14 +48,14 @@ namespace Group1Project.TestCases
             mainpage.SelectPage(pagename).OpenChoosePanels();
 
             //7	VP	Verify that all pre-set panels are populated and sorted correctly	
-            string actual = mainpage.FindElement(By.XPath("//a[contains(.,'zbox')]//preceding::a[1]"), Constant.DefaultTimeout).GetAttribute("innerHTML");
-            Assert.IsTrue(String.Compare(actual, "zbox") == -1, "New item is NOT sorted correctly!!!");
+            string actual = mainpage.FindElement(By.XPath("//a[contains(.,'"+panelname+"')]//preceding::a[1]"), Constant.DefaultTimeout).GetAttribute("innerHTML");
+            Assert.IsTrue(String.Compare(actual, panelname) == -1, "New item is NOT sorted correctly!!!");
 
             //- Clean up TC 27
             Console.WriteLine("- Clean up TC 27");
             PanelsPage panelspage = new PanelsPage(webDriver);
-            mainpage.DeletePage("Page 1");
-            panelspage.DeletePanel("zbox");
+            mainpage.DeletePage(pagename);
+            panelspage.DeletePanel(panelname);
         }
 
 
