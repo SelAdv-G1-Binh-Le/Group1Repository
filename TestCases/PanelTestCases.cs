@@ -1030,6 +1030,12 @@ namespace Group1Project.TestCases
             Assert.AreEqual(legendsBottom, addpaneldialog.RadLegendsBottom.Selected);
             Assert.AreEqual(legendsLeft, addpaneldialog.RadLegendsLeft.Selected);
             addpaneldialog.ChkDataLabelsPercentage.Check(false);
+
+            //- Clean up TC 41
+            Console.WriteLine("- Clean up TC 41");
+            addpaneldialog.Close();
+            panelspage.DeletePanel(Constant.DefaultDisplayName);
+
         }
 
         /// <summary>
