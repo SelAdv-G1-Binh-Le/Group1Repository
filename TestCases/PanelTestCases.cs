@@ -297,17 +297,26 @@ namespace Group1Project.TestCases
             //2	Step	Login with valid account	
             //3	Step	Click on Administer/Data Profiles link		
             //4	Step	Click on add new link		
-            //5	Step	Enter name to Name textbox	/ giang - data	
-            //6	Step	Click on Finish button		
-            //7	Step	Click on Administer/Panels link		
-            //8	Step	Click on add new link		
-            //9	VP	Verify that "giang - data" data profiles are populated correctly under the "Data Profile" dropped down menu. / giang - data data profiles are populated correctly under the "Data Profile" dropped down menu.
-            //10	Step	Enter display name to Display Name textbox	/ giang - panel	
-            //11	Step	Click Ok button to create a panel		
-            //12	Step	Click on edit link		
-            //13	VP	Verify that "giang - data" data profiles are populated correctly under the "Data Profile" dropped down menu.	/	giang - data data profiles are populated correctly under the "Data Profile" dropped down menu.
+            //5	Step	Enter name to Name textbox	/ DataProfile TC34	
+            //6	Step	Click on Finish button
+            string dataprofilename = "DataProfile TC34";
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            mainpage.GotoDataProfilesPage().AddDataProfileSuccess(dataprofilename);
 
-            Assert.Fail("TBD - Wait for Binh creates DataProfilePage Actions!");
+            //7	Step	Click on Administer/Panels link		
+            //8	Step	Click on add new link
+            //9	VP	Verify that "DataProfile TC34" data profiles are populated correctly under the "Data Profile" dropped down menu.  
+            mainpage.GotoPanelsPage().LnkAddNew.Click();
+            AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
+            addPanelDialog.CbbProfile.Click();
+            Assert.IsNotNull(addPanelDialog.FindElement(By.XPath("//select[@id='cbbProfile']//option[@title='" + dataprofilename + "']")), "Data Profile <" + dataprofilename + "> not exist!!!");
+
+            //10 Step	Enter display name to Display Name textbox	/ Panel TC34	
+            //11 Step	Click Ok button to create a panel		
+            //12 Step	Click on edit link		
+            //13 VP	Verify that "DataProfile TC34" data profiles are populated correctly under the "Data Profile" dropped down menu.
+
         }
 
         /// <summary>

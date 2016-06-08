@@ -55,8 +55,19 @@ namespace Group1Project.PageObjects
             this.driver = webDriver;
         }
 
-
-
+        /// <summary>
+        /// Adds the data profile success.
+        /// </summary>
+        /// <param name="dataprofilename">The dataprofilename.</param>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/8/2016 - 20:26</datetime>
+        public DataProfilesPage AddDataProfileSuccess(string dataprofilename)
+        {
+            LnkAddNew.Click();
+            TxtProfileName.Set(dataprofilename);
+            BtnFinish.Click();
+            return this;
+        }
 
         #endregion
     }
