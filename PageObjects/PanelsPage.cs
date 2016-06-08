@@ -18,7 +18,7 @@ namespace Group1Project.PageObjects
 
         #region Locators
 
-        static readonly By _lnkAddNew = By.XPath("//a[contains(@href,'AddPanel')]");
+        static readonly By _lnkAddNew = By.XPath("//a[(text()='Add New')]");
 
 
         #endregion

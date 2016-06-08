@@ -223,6 +223,8 @@ namespace Group1Project.PageObjects
 
             CommonMethods.WaitForControl(webDriver, _dlgOverlay, Constant.DefaultTimeout);
             CbbProfile.SelectByText(dataprofiletext);
+        
+            CommonMethods.WaitForControl(webDriver, By.XPath("//select[@id='cbbProfile'][@title='" + dataprofiletext + "']"), Constant.DefaultTimeout);
 
             switch (legends)
             {
@@ -296,7 +298,8 @@ namespace Group1Project.PageObjects
             Console.WriteLine("- Add Chart Panel Unsuccess");
 
             CommonMethods.WaitForControl(webDriver, _dlgOverlay, Constant.DefaultTimeout);
-            CbbProfile.SelectByText(dataprofiletext);            
+            CbbProfile.SelectByText(dataprofiletext);
+            CommonMethods.WaitForControl(webDriver, By.XPath("//select[@id='cbbProfile'][@title='" + dataprofiletext + "']"), Constant.DefaultTimeout);
 
             switch (legends)
             {

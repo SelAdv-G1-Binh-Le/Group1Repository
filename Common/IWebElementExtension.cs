@@ -55,6 +55,8 @@ namespace Group1Project.Common
         {
             SelectElement SelectedCbo = new SelectElement(webElement);
             SelectedCbo.SelectByValue(value);
+            webElement.Click();
+            webElement.Click();
         }
 
         /// <summary>
@@ -65,10 +67,11 @@ namespace Group1Project.Common
         /// <author>Diep Duong</author>
         /// <datetime>6/3/2016 - 08:47</datetime>
         public static void SelectByText(this IWebElement webElement, string text)
-        {
+        {         
             SelectElement SelectedCbo = new SelectElement(webElement);
             SelectedCbo.SelectByText(text);
-
+            webElement.Click();
+            webElement.Click();
         }
 
         /// <summary>

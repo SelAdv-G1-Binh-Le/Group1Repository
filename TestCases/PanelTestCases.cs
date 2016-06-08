@@ -300,6 +300,8 @@ namespace Group1Project.TestCases
             //5	Step	Enter name to Name textbox	/ DataProfile TC34	
             //6	Step	Click on Finish button
             string dataprofilename = "DataProfile TC34";
+            string panelname = "Panel TC34";
+
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             mainpage.GotoDataProfilesPage().AddDataProfileSuccess(dataprofilename);
@@ -311,12 +313,21 @@ namespace Group1Project.TestCases
             AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
             addPanelDialog.CbbProfile.Click();
             Assert.IsNotNull(addPanelDialog.FindElement(By.XPath("//select[@id='cbbProfile']//option[@title='" + dataprofilename + "']")), "Data Profile <" + dataprofilename + "> not exist!!!");
-
+            addPanelDialog.Close().LnkAddNew.Click();
+            
             //10 Step	Enter display name to Display Name textbox	/ Panel TC34	
             //11 Step	Click Ok button to create a panel		
-            //12 Step	Click on edit link		
+            //12 Step	Click on edit link
             //13 VP	Verify that "DataProfile TC34" data profiles are populated correctly under the "Data Profile" dropped down menu.
+            addPanelDialog.AddChartPanelSuccess(panelname, "", Constant.DefaultChartType, "name", Constant.DefaultSeriesValue, dataprofilename).ClickPanel(panelname);
+            Assert.IsNotNull(addPanelDialog.FindElement(By.XPath("//select[@id='cbbProfile']//option[@title='" + dataprofilename + "']")), "Data Profile <" + dataprofilename + "> not exist!!!");
 
+            //- Clean up TC 34
+            Console.WriteLine("- Clean up TC 34");
+            addPanelDialog.Close();
+            PanelsPage panelspage = new PanelsPage(webDriver);
+            panelspage.DeleteAllPanels();
+            
         }
 
         /// <summary>

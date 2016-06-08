@@ -23,7 +23,7 @@ namespace Group1Project.PageObjects
 
         #region Locators
 
-        static By _lnkAddNew = By.XPath("//a[contains(@href,'AddPanel')]");
+        static By _lnkAddNew = By.XPath("//a[(text()='Add New')]");
         static By _txtProfileName = By.XPath("//input[@id='txtProfileName']");
         static By _btnFinish = By.XPath("//input[@value='Finish']");
 
@@ -68,6 +68,17 @@ namespace Group1Project.PageObjects
             BtnFinish.Click();
             return this;
         }
+
+
+        //public DataProfilesPage DeleteDataProfile(string dataprofilename)
+        //{
+        //    By dynamicXpath = By.XPath("//td[contains(.,'" + dataprofilename + "')]//following::a[contains(.,'Delete')]");
+        //    MainPage mainpage = new MainPage(webDriver);
+        //    mainpage.GotoPanelsPage().FindElement(dynamicXpath, Constant.DefaultTimeout).Click();
+        //    webDriver.SwitchTo().Alert().Accept();
+        //    CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//table[@class='GridView']//a[text()='" + panelname + "']"), Constant.DefaultTimeout);
+        //    return this;
+        //}
 
         #endregion
     }
