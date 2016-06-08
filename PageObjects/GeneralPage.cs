@@ -52,7 +52,6 @@ namespace Group1Project.PageObjects
             {
                 webElement = webDriver.FindElement(by);
             }
-
             catch (Exception ex)
             {
                 Console.WriteLine("Exception: {0} in {1} milliseconds", ex.Message, stopWatch.ElapsedMilliseconds);
@@ -60,12 +59,11 @@ namespace Group1Project.PageObjects
                 {
                     webElement = FindElement(by, ((timeout * 1000 - stopWatch.ElapsedMilliseconds) / 1000));
                 }
-            }            
-
+            }
             if (webElement == null)
                 Console.WriteLine("Element <{0}> is NOT found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
             else
-            {  
+            {
                 Console.WriteLine("Element <{0}> is found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
             }
             stopWatch.Stop();
