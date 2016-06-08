@@ -48,7 +48,7 @@ namespace Group1Project.TestCases
             mainpage.SelectPage(pagename).OpenChoosePanels();
 
             //7	VP	Verify that all pre-set panels are populated and sorted correctly	
-            string actual = mainpage.FindElement(By.XPath("//a[contains(.,'"+panelname+"')]//preceding::a[1]"), Constant.DefaultTimeout).GetAttribute("innerHTML");
+            string actual = mainpage.FindElement(By.XPath("//a[contains(.,'" + panelname + "')]//preceding::a[1]"), Constant.DefaultTimeout).GetAttribute("innerHTML");
             Assert.IsTrue(String.Compare(actual, panelname) == -1, "New item is NOT sorted correctly!!!");
 
             //- Clean up TC 27
@@ -1255,6 +1255,46 @@ namespace Group1Project.TestCases
             mainpage.DeletePage("Page TC45");
             PanelsPage panelsPage = new PanelsPage(webDriver);
             panelsPage.DeletePanel("Panel 1");
+        }
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/8/2016 - 03:13</datetime>
+        [TestMethod]
+        public void TC46()
+        {
+            Console.WriteLine("TC46 - Verify that only valid folder path of corresponding item type ( e.g. Actions, Test Modules) are allowed to be entered into \"Folder\" field");
+            //1	Step	Navigate to Dashboard login page		
+            //2	Step	Login with valid account		
+            //3	Step	Create a new page	- Page TC46	
+            //4	Step	Click Choose Panel button		
+            //5	Step	Click Create New Panel button
+
+            string pagename = "Page TC46";
+            string panelname = "Panel TC46";
+
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
+            mainpage.AddPage(pagename).OpenChoosePanels().BtnCreateNewPanel.Click();
+            AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
+
+            //6	Step	Enter all required fields on Add New Panel page	Display Name: - Panel TC46	
+            //7	Step	Click Ok button
+            addPanelDialog.AddChartPanelSuccess(panelname);
+
+            //8	Step	Enter invalid folder path	Folder: abc	
+            //9	Step	Click Ok button on Panel Configuration dialog		
+            //10 VP	Observe the current page		There is message "Panel folder is incorrect"
+            PanelConfigurationDialog panelConfigurationDialog = new PanelConfigurationDialog(webDriver);
+            VP.CheckText("Panel folder is incorrect", panelConfigurationDialog.EditPanelUnsuccess(pagename, "456", "abc"));
+
+            //11 Step	Enter valid folder path	Folder: [Repository name]/Actions	
+            //12 Step	Click Ok button on Panel Configuration dialog		
+            //13 VP	Observe the current page		The new panel is created
+            mainpage.SelectPage(pagename).ChoosePanel(panelname);
+            panelConfigurationDialog.EditPanelSuccess(pagename, "789", "/Car Rental - Mobile/Actions/Car");
+            Assert.IsNotNull(mainpage.FindElement(By.XPath("//div[@class='al_lft'][@title='" + panelname + "']")), panelname + " is not existed!!!");
+
         }
     }
 

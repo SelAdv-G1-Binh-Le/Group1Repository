@@ -80,6 +80,21 @@ namespace Group1Project.PageObjects
             CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay'][contains(@style,'top: 0px')]"), Constant.DefaultTimeout);
             return new MainPage(webDriver);
         }
+
+
+        public MainPage EditPanelSuccess(string pagename = "Execution Dashboard", string height = "", string folder = "")
+        {
+            Console.WriteLine("- Edit Panel Success:");
+            CommonMethods.WaitForControl(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay'][contains(@style,'top: 0px')]"), Constant.DefaultTimeout);
+            this.CbbPages.SelectByText(pagename);
+            this.TxtHeight.Set(height);
+            this.TxtFolder.Set(folder);
+            this.BtnOK.Click();
+            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay'][contains(@style,'top: 0px')]"), Constant.DefaultTimeout);
+            return new MainPage(webDriver);
+        }
+
+
         /// <summary>
         /// Edits the panel unsuccess.
         /// </summary>

@@ -703,6 +703,20 @@ namespace Group1Project.PageObjects
             return this;
         }
 
+        /// <summary>
+        /// Chooses the panel.
+        /// </summary>
+        /// <param name="panelname">The panelname.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/8/2016 - 02:36</datetime>
+        public PanelConfigurationDialog ChoosePanel(string panelname)
+        {
+            this.OpenChoosePanels().FindElement(By.XPath("//a[contains(@onclick,'Dashboard.showPanelConfiguration')][contains(.,'" + panelname.Replace(" ", "\u00A0") + "')]"), Constant.DefaultTimeout).Click();
+            return new PanelConfigurationDialog(webDriver); ;
+        }
+
+
         #endregion
 
     }
