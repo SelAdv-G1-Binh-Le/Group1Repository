@@ -30,7 +30,7 @@ namespace Group1Project.TestCases
             //4	Step	Enter page name to Page Name field.	Page 1
             //5	Step	Click OK button	           
 
-            string pagename = "Page 1";
+            string pagename = "Page TC27";
             string panelname = "zbox";
 
             mainpage.ClickAddPage().AddPage(pagename);
@@ -376,7 +376,7 @@ namespace Group1Project.TestCases
 
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-            string pagename = "main_hung";
+            string pagename = "page_TC36";
             mainpage.ClickAddPage().AddPage(pagename);
             mainpage.MnGlobalSetting.Click();
             mainpage.LnkAddPanel.Click();
@@ -402,7 +402,7 @@ namespace Group1Project.TestCases
             Console.WriteLine("- Clean up TC 36");
             PanelsPage panelspage = new PanelsPage(webDriver);
             addpaneldialog.Close();
-            mainpage.DeletePage("main_hung");
+            mainpage.DeletePage("page_TC36");
         }
 
         /// <summary>
@@ -420,12 +420,12 @@ namespace Group1Project.TestCases
             //5	Step	Click 'Add Page' button
             //6	Step	Enter Page Name
             //7	Step	Click 'OK' button
-            //8	Step	Click 'Choose Panels' button below 'main_hung' button
+            //8	Step	Click 'Choose Panels' button below the page button
             //9	Step	Click 'Create new panel' button
             //10 Step	Click 'Chart Type' drop-down menu
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-            string pagename = "main_hung";
+            string pagename = "page_TC37";
             mainpage.ClickAddPage().AddPage(pagename);
             mainpage.MnGlobalSetting.Click();
             mainpage.LnkAddPanel.Click();
@@ -483,7 +483,7 @@ namespace Group1Project.TestCases
             //- Clean up TC 37
             Console.WriteLine("- Clean up TC 37");
             addpaneldialog.Close();
-            mainpage.DeletePage("main_hung");
+            mainpage.DeletePage("page_TC37");
         }
 
         /// <summary>
@@ -502,7 +502,7 @@ namespace Group1Project.TestCases
             //5	Step	Click 'Add Page' button
             //6	Step	Enter Page Name
             //7	Step	Click 'OK' button
-            //8	Step	Click 'Choose Panels' button below 'main_hung' button
+            //8	Step	Click 'Choose Panels' button below page button
             //9	Step	Click 'Create new panel' button
             //10	Step	Click 'Chart Type' drop-down menu
             //11	Step	Select a specific Chart Type
@@ -514,7 +514,7 @@ namespace Group1Project.TestCases
             //17	VP	Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-            string pagename = "main_hung";
+            string pagename = "page_TC38";
             mainpage.ClickAddPage().AddPage(pagename);
             mainpage.MnGlobalSetting.Click();
             mainpage.LnkAddPanel.Click();
@@ -588,7 +588,7 @@ namespace Group1Project.TestCases
             PanelsPage panelsPage = new PanelsPage(webDriver);
             panelsPage.DeletePanel("hung_panel");
 
-            mainpage.DeletePage("main_hung");
+            mainpage.DeletePage("page_TC38");
         }
 
         /// <summary>
@@ -825,7 +825,7 @@ namespace Group1Project.TestCases
 
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-            string pagename = "main_hung";
+            string pagename = "page_TC40";
             mainpage.ClickAddPage().AddPage(pagename);
             mainpage.MnGlobalSetting.Click();
             mainpage.LnkAddPanel.Click();
@@ -1068,9 +1068,9 @@ namespace Group1Project.TestCases
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
-            mainpage.AddPage("main_hung1");
-            mainpage.AddPage("main_hung2");
-            mainpage.AddPage("main_hung3");
+            mainpage.AddPage("page_TC42_1");
+            mainpage.AddPage("page_TC42_2");
+            mainpage.AddPage("page_TC42_3");
 
             mainpage.OpenChoosePanels();
             PanelConfigurationDialog panelConfigurationDlg = new PanelConfigurationDialog(webDriver);
@@ -1083,16 +1083,16 @@ namespace Group1Project.TestCases
             mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
             mainpage.CbbPages.Click();
 
-            Assert.IsTrue(IWebElementExtension.IsItemExists(mainpage.CbbPages, "main_hung1"), "main_hung1 is NOT existed");
-            Assert.IsTrue(IWebElementExtension.IsItemExists(mainpage.CbbPages, "main_hung2"), "main_hung2 is NOT existed");
-            Assert.IsTrue(IWebElementExtension.IsItemExists(mainpage.CbbPages, "main_hung3"), "main_hung3 is NOT existed");
+            Assert.IsTrue(IWebElementExtension.IsItemExists(mainpage.CbbPages, "page_TC42_1"), "page_TC42_1 is NOT existed");
+            Assert.IsTrue(IWebElementExtension.IsItemExists(mainpage.CbbPages, "page_TC42_2"), "page_TC42_2 is NOT existed");
+            Assert.IsTrue(IWebElementExtension.IsItemExists(mainpage.CbbPages, "page_TC42_3"), "page_TC42_3 is NOT existed");
 
             //- Clean up TC 42
             Console.WriteLine("- Clean up TC 42");
             panelConfigurationDlg.Close();
-            mainpage.DeletePage("main_hung1");
-            mainpage.DeletePage("main_hung2");
-            mainpage.DeletePage("main_hung3");
+            mainpage.DeletePage("page_TC42_1");
+            mainpage.DeletePage("page_TC42_2");
+            mainpage.DeletePage("page_TC42_3");
         }
 
         /// <summary>
@@ -1113,9 +1113,12 @@ namespace Group1Project.TestCases
             //7	Step	Click 'OK' button		
             //11 Step	Click 'Choose panels' button		
             //12 Step	Click on any Chart panel instance
+
+            string pagename = "page_TC43";
+
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-            mainpage.AddPage("main_hung").OpenChoosePanels();
+            mainpage.AddPage(pagename).OpenChoosePanels();
 
             PanelConfigurationDialog panelConfigurationDlg = new PanelConfigurationDialog(webDriver);
             IWebElement table = mainpage.FindElement(By.XPath("//div[@class='ptit pchart']/parent::div//table"), Constant.DefaultTimeout);
@@ -1128,7 +1131,7 @@ namespace Group1Project.TestCases
             int row = r.Next(1, table.GetTableRows());
             string dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
             mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
-            VP.CheckText("Panel height must be greater than or equal to 300 and less than or equal to 800.", panelConfigurationDlg.EditPanelUnsuccess("main_hung", "299"));
+            VP.CheckText("Panel height must be greater than or equal to 300 and less than or equal to 800.", panelConfigurationDlg.EditPanelUnsuccess(pagename, "299"));
             Console.WriteLine("Bug document here: //15 VP - Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display");
 
             //16 Step	Click OK button		
@@ -1139,7 +1142,7 @@ namespace Group1Project.TestCases
             row = r.Next(1, table.GetTableRows());
             dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
             mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
-            VP.CheckText("Panel height must be greater than or equal to 300 and less than or equal to 800.", panelConfigurationDlg.EditPanelUnsuccess("main_hung", "801"));
+            VP.CheckText("Panel height must be greater than or equal to 300 and less than or equal to 800.", panelConfigurationDlg.EditPanelUnsuccess(pagename, "801"));
             Console.WriteLine("Bug document here: //19 VP - Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display");
 
             //20 Step	Click OK button		
@@ -1150,7 +1153,7 @@ namespace Group1Project.TestCases
             row = r.Next(1, table.GetTableRows());
             dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
             mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
-            VP.CheckText("Panel height must be greater than or equal to 300 and less than or equal to 800.", panelConfigurationDlg.EditPanelUnsuccess("main_hung", "-2"));
+            VP.CheckText("Panel height must be greater than or equal to 300 and less than or equal to 800.", panelConfigurationDlg.EditPanelUnsuccess(pagename, "-2"));
             Console.WriteLine("Bug document here: //24 VP - Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display");
 
             //25 Step	Click OK button		
@@ -1161,7 +1164,7 @@ namespace Group1Project.TestCases
             row = r.Next(1, table.GetTableRows());
             dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
             mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
-            VP.CheckText("Panel height must be greater than or equal to 300 and less than or equal to 800.", panelConfigurationDlg.EditPanelUnsuccess("main_hung", "3.1"));
+            VP.CheckText("Panel height must be greater than or equal to 300 and less than or equal to 800.", panelConfigurationDlg.EditPanelUnsuccess(pagename, "3.1"));
             Console.WriteLine("Bug document here: //28 VP - Check that error message 'Panel height must be an integer number' display		Error message 'Panel height must be an integer number' display");
 
             //29 Step	Click OK button		
@@ -1172,11 +1175,11 @@ namespace Group1Project.TestCases
             row = r.Next(1, table.GetTableRows());
             dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
             mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
-            VP.CheckText("Panel height must be an integer number", panelConfigurationDlg.EditPanelUnsuccess("main_hung", "abc"));
+            VP.CheckText("Panel height must be an integer number", panelConfigurationDlg.EditPanelUnsuccess(pagename, "abc"));
 
             //- Clean up TC 43
             Console.WriteLine("- Clean up TC 43");
-            mainpage.DeletePage("main_hung");
+            mainpage.DeletePage(pagename);
         }
 
         /// <summary>
@@ -1200,9 +1203,11 @@ namespace Group1Project.TestCases
             //13 Step	Leave 'Height *' field empty
             //14 Step	Click OK button
             //15 VP	Check that 'Panel height is required field' message display
+
+            string pagename = "page_TC44";
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-            mainpage.AddPage("main_hung").OpenChoosePanels();
+            mainpage.AddPage(pagename).OpenChoosePanels();
             PanelConfigurationDialog panelConfigurationDlg = new PanelConfigurationDialog(webDriver);
             IWebElement table = mainpage.FindElement(By.XPath("//div[@class='ptit pchart']/parent::div//table"), Constant.DefaultTimeout);
             Random r = new Random();
@@ -1210,12 +1215,12 @@ namespace Group1Project.TestCases
             int row = r.Next(1, table.GetTableRows());
             string dynamicxPath = "//div[@class='ptit pchart']/parent::div//table//tr[" + row + "]//td[" + col + "]//a";
             mainpage.FindElement(By.XPath(dynamicxPath), 10).Click();
-            VP.CheckText("Panel height is a required field.", panelConfigurationDlg.EditPanelUnsuccess("main_hung"));
+            VP.CheckText("Panel height is a required field.", panelConfigurationDlg.EditPanelUnsuccess(pagename));
             Console.WriteLine("Bug document here: //15 VP - Check that 'Panel height is required field' message display");
 
             //- Clean up TC 44
             Console.WriteLine("- Clean up TC 44");
-            mainpage.DeletePage("main_hung");
+            mainpage.DeletePage(pagename);
         }
 
         /// <summary>
@@ -1239,15 +1244,15 @@ namespace Group1Project.TestCases
             //10 VP	Observe the current page
             LoginPage loginpage = new LoginPage(webDriver).Open();
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-            mainpage.AddPage("Page 1").OpenChoosePanels().BtnCreateNewPanel.Click();
+            mainpage.AddPage("Page TC45").OpenChoosePanels().BtnCreateNewPanel.Click();
             AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
             addPanelDialog.AddChartPanelSuccess("Panel 1");
             PanelConfigurationDialog panelConfigurationDialog = new PanelConfigurationDialog(webDriver);
-            VP.CheckText("Panel folder is incorrect", panelConfigurationDialog.EditPanelUnsuccess("Page 1", "456"));
+            VP.CheckText("Panel folder is incorrect", panelConfigurationDialog.EditPanelUnsuccess("Page TC45", "456"));
 
             //- Clean up TC 45
             Console.WriteLine("- Clean up TC 45");
-            mainpage.DeletePage("Page 1");
+            mainpage.DeletePage("Page TC45");
             PanelsPage panelsPage = new PanelsPage(webDriver);
             panelsPage.DeletePanel("Panel 1");
         }
