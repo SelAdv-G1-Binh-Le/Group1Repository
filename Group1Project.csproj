@@ -63,6 +63,7 @@
     <Compile Include="Common\IWebElementExtension.cs" />
     <Compile Include="Common\VP.cs" />
     <Compile Include="DataObjects\MenuList.cs" />
+    <Compile Include="PageObjects\AddDataProfilePage.cs" />
     <Compile Include="PageObjects\AddPageDialog.cs" />
     <Compile Include="PageObjects\AddPanelDialog.cs" />
     <Compile Include="PageObjects\DataProfilesPage.cs" />

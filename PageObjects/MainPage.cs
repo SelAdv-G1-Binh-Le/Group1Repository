@@ -623,8 +623,11 @@ namespace Group1Project.PageObjects
         {
             this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.CreateProfile);
             this.FindElement(By.XPath("//input[@id='txtProfileName']")).SendKeys(profilename);
-            this.FindElement(By.XPath("//input[@class='button' and @value='"+clickbutton+"']")).Click();
-            CommonMethods.WaitForControl(webDriver, By.XPath("//td[.='" + this.ConvertBlankCharacter(profilename) + "']"),Constant.DefaultTimeout);
+            if(clickbutton!="")
+            {
+                this.FindElement(By.XPath("//input[@class='button' and @value='" + clickbutton + "']")).Click();
+            }  
+            //CommonMethods.WaitForControl(webDriver, By.XPath("//td[.='" + this.ConvertBlankCharacter(profilename) + "']"),Constant.DefaultTimeout);
             return this;
         }
 
