@@ -31,6 +31,7 @@ namespace Group1Project.PageObjects
         static readonly By _dlgOverlay = By.XPath("//div[@class='ui-dialog-overlay custom-overlay']");
         static readonly By _lnkAdminister = By.XPath("//a[@href='#Administer']");
         static readonly By _lnkPanels = By.XPath("//a[@href='panels.jsp']");
+        static readonly By _lnkDataProfiles = By.XPath("//a[@href='profiles.jsp']");
         static readonly By _lnkMenuSettingDelete = By.XPath("//li[@class='mn-setting']//a[@class='delete']");
         static readonly By _cbbPages = By.XPath("//div[@id='div_panelConfigurationDlg']//select[@id='cbbPages']");
         static readonly By _btnCreateNewPanel = By.XPath("//span[text()='Create new panel']");
@@ -41,7 +42,10 @@ namespace Group1Project.PageObjects
         #endregion
 
         #region Elements
-
+        public IWebElement LnkDataProfiles
+        {
+            get { return FindElement(_lnkDataProfiles, Constant.DefaultTimeout); }
+        }
         public IWebElement DivChoosePanelsOpen
         {
             get { return FindElement(_divChoosePanelsOpen, Constant.DefaultTimeout); }
@@ -675,6 +679,20 @@ namespace Group1Project.PageObjects
             CommonMethods.WaitForControl(webDriver, _lnkPanels, Constant.DefaultTimeout);
             this.LnkPanels.Click();
             return new PanelsPage(webDriver);
+        }
+
+        /// <summary>
+        /// Gotoes the data profiles page.
+        /// </summary>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/8/2016 - 20:18</datetime>
+        public DataProfilesPage GotoDataProfilesPage()
+        {
+            this.LnkAdminister.MoveMouse(webDriver);
+            CommonMethods.WaitForControl(webDriver, _lnkDataProfiles, Constant.DefaultTimeout);
+            this.LnkDataProfiles.Click();
+            return new DataProfilesPage(webDriver);
         }
 
         /// <summary>

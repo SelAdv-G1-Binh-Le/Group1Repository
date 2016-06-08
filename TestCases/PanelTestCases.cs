@@ -55,7 +55,7 @@ namespace Group1Project.TestCases
             Console.WriteLine("- Clean up TC 27");
             PanelsPage panelspage = new PanelsPage(webDriver);
             mainpage.DeletePage(pagename);
-            panelspage.DeletePanel(panelname);
+            panelspage.DeleteAllPanels();
         }
 
 
@@ -154,7 +154,7 @@ namespace Group1Project.TestCases
 
             //- Clean up TC 30
             Console.WriteLine("- Clean up TC 30");
-            panelspage.DeletePanel("Logigear@");
+            panelspage.DeleteAllPanels();
         }
 
         /// <summary>
@@ -232,8 +232,7 @@ namespace Group1Project.TestCases
 
             //- Clean up TC 32
             Console.WriteLine("- Clean up TC 32");
-            panelspage.DeletePanel("Duplicated panel");
-
+            panelspage.DeleteAllPanels();
         }
 
         /// <summary>
@@ -286,7 +285,7 @@ namespace Group1Project.TestCases
             //- Clean up TC 33
             Console.WriteLine("- Clean up TC 33");
             addpaneldialog.Close();
-            panelspage.DeletePanel(Constant.panelTC33);
+            panelspage.DeleteAllPanels();
         }
 
         [TestMethod]
@@ -308,7 +307,7 @@ namespace Group1Project.TestCases
             //12	Step	Click on edit link		
             //13	VP	Verify that "giang - data" data profiles are populated correctly under the "Data Profile" dropped down menu.	/	giang - data data profiles are populated correctly under the "Data Profile" dropped down menu.
 
-            Console.WriteLine("TBD - Wait for Binh creates DataProfilePage Actions!");
+            Assert.Fail("TBD - Wait for Binh creates DataProfilePage Actions!");
         }
 
         /// <summary>
@@ -351,7 +350,7 @@ namespace Group1Project.TestCases
 
             //- Clean up TC 35
             Console.WriteLine("- Clean up TC 35");
-            panelspage.DeletePanel("Logigear@");
+            panelspage.DeleteAllPanels();
         }
 
         /// <summary>
@@ -585,9 +584,8 @@ namespace Group1Project.TestCases
             //- Clean up TC 38
             Console.WriteLine("- Clean up TC 38");
             addpaneldialog.Close();
-            PanelsPage panelsPage = new PanelsPage(webDriver);
-            panelsPage.DeletePanel("hung_panel");
-
+            PanelsPage panelspage = new PanelsPage(webDriver);
+            panelspage.DeleteAllPanels();
             mainpage.DeletePage("page_TC38");
         }
 
@@ -707,7 +705,7 @@ namespace Group1Project.TestCases
 
             addpaneldialog.Close();
             panelspage.LnkAddNew.Click();
-            addpaneldialog.AddChartPanelSuccess().ClickPanel(Constant.DefaultDisplayName);
+            addpaneldialog.AddChartPanelSuccess("Panel_TC39").ClickPanel("Panel_TC39");
 
             VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
             VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
@@ -802,7 +800,7 @@ namespace Group1Project.TestCases
             //- Clean up TC 39
             Console.WriteLine("- Clean up TC 39");
             addpaneldialog.Close();
-            panelspage.DeletePanel(Constant.DefaultDisplayName);
+            panelspage.DeleteAllPanels();
         }
 
         /// <summary>
@@ -976,7 +974,7 @@ namespace Group1Project.TestCases
             //16 Step	Click Edit Panel link	
             addpaneldialog.Close();
             panelspage.LnkAddNew.Click();
-            addpaneldialog.AddChartPanelSuccess(Constant.DefaultDisplayName).ClickPanel(Constant.DefaultDisplayName);
+            addpaneldialog.AddChartPanelSuccess("Panel_TC41").ClickPanel("Panel_TC41");
 
             //17 Step	Check Series checkbox for Data Labels		
             //18 VP	Observe the current page		All settings are unchange in Edit New Panel dialog
@@ -1034,7 +1032,7 @@ namespace Group1Project.TestCases
             //- Clean up TC 41
             Console.WriteLine("- Clean up TC 41");
             addpaneldialog.Close();
-            panelspage.DeletePanel(Constant.DefaultDisplayName);
+            panelspage.DeleteAllPanels();
 
         }
 
@@ -1246,7 +1244,7 @@ namespace Group1Project.TestCases
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             mainpage.AddPage("Page TC45").OpenChoosePanels().BtnCreateNewPanel.Click();
             AddPanelDialog addPanelDialog = new AddPanelDialog(webDriver);
-            addPanelDialog.AddChartPanelSuccess("Panel 1");
+            addPanelDialog.AddChartPanelSuccess("Panel_TC45");
             PanelConfigurationDialog panelConfigurationDialog = new PanelConfigurationDialog(webDriver);
             VP.CheckText("Panel folder is incorrect", panelConfigurationDialog.EditPanelUnsuccess("Page TC45", "456"));
 
@@ -1254,7 +1252,7 @@ namespace Group1Project.TestCases
             Console.WriteLine("- Clean up TC 45");
             mainpage.DeletePage("Page TC45");
             PanelsPage panelsPage = new PanelsPage(webDriver);
-            panelsPage.DeletePanel("Panel 1");
+            panelsPage.DeleteAllPanels();
         }
         /// <summary>
         /// </summary>

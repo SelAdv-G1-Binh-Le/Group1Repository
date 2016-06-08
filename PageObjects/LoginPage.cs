@@ -5,6 +5,12 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Group1Project.PageObjects
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <author>Diep Duong</author>
+    /// <datetime>6/8/2016 - 19:47</datetime>
+    /// <seealso cref="Group1Project.PageObjects.GeneralPage" />
     class LoginPage : GeneralPage
     {
         private IWebDriver driver;

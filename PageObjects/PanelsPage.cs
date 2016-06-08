@@ -5,6 +5,12 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Group1Project.PageObjects
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <author>Diep Duong</author>
+    /// <datetime>6/8/2016 - 19:47</datetime>
+    /// <seealso cref="Group1Project.PageObjects.GeneralPage" />
     class PanelsPage : GeneralPage
     {
 
@@ -76,6 +82,27 @@ namespace Group1Project.PageObjects
             this.FindElement(By.XPath("//table[@class='GridView']//a[text()='" + panelname + "']"), Constant.DefaultTimeout).Click();
             return this;
         }
+
+        /// <summary>
+        /// Deletes all panels.
+        /// </summary>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/8/2016 - 19:37</datetime>
+        public PanelsPage DeleteAllPanels()
+        {
+            MainPage mainPage = new MainPage(webDriver);
+            mainPage.GotoPanelsPage();
+            if (CommonMethods.IsElementPresent(webDriver, By.XPath("//a[text()='Check All']")))
+            {
+                FindElement(By.XPath("//a[text()='Check All']")).Click();
+                FindElement(By.XPath("//a[@href='javascript:Dashboard.deletePanels();']")).Click();
+                CommonMethods.CloseAlertAndGetItsText(webDriver);
+                CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//a[@href='javascript:Dashboard.deletePanels();']"), Constant.DefaultTimeout);
+            }
+            return this;
+        }
+
 
         #endregion
 
