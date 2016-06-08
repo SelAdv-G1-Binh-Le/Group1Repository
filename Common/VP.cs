@@ -38,9 +38,9 @@ namespace Group1Project.Common
         public static void CheckText(string expected, string actual)
         {
             Console.WriteLine("Check text:");
-            Console.WriteLine("Expected: <{0}>", expected);
-            Console.WriteLine("Recorded: <{0}>", actual);
-            Assert.AreEqual(expected, actual, "Failed: Text is not corrected!!!");
+            Console.WriteLine("Expected:<{0}>", expected);
+            Console.WriteLine("Recorded:<{0}>", actual);
+            Assert.AreEqual(expected, actual, "Failed: Text is not correct!!!");
         }
 
 
