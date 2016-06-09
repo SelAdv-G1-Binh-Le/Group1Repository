@@ -54,11 +54,18 @@ namespace Group1Project.PageObjects
 
         #region Methods
 
+        /// <summary>
+        /// Adds the page.
+        /// </summary>
+        /// <param name="pagename">The pagename.</param>
+        /// <param name="button">The button.</param>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/9/2016 - 02:38</datetime>
         public void AddPage(string pagename, string button = "OK")
         {
             IWebElementExtension.Set(this.TxtPageName, pagename, true);
             this.BtnOK.Click();
-            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@class='ui-dialog-overlay custom-overlay']"), Constant.DefaultTimeout);
+            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//div[@id='div_Lock'][@class='transbox_show']"), Constant.DefaultTimeout);
         }
 
 

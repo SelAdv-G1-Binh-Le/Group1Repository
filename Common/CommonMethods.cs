@@ -99,7 +99,9 @@ namespace Group1Project.Common
             Stopwatch sW = new Stopwatch();
             sW.Start();            
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+            wait.Until(d => ExpectedConditions.ElementIsVisible(by));
             wait.Until(d => ExpectedConditions.ElementToBeClickable(by));
+            
             Console.WriteLine("Already waiting for control <{0}> clickable in {1} milliseconds!", by.ToString(), sW.ElapsedMilliseconds);
             sW.Stop();
             MainPage mainPage = new MainPage(webDriver);

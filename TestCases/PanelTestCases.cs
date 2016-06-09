@@ -734,9 +734,10 @@ namespace Group1Project.TestCases
 
             addpaneldialog.Close();
             panelspage.LnkAddNew.Click();
-            addpaneldialog.AddChartPanelSuccess("Panel_TC39").ClickPanel("Panel_TC39");
+            string panelname = "Panel_TC39";
+            addpaneldialog.AddChartPanelSuccess(panelname).ClickPanel(panelname);
 
-            VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText(panelname, addpaneldialog.TxtDisplayName.GetAttribute("value"));
             VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
             VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
@@ -752,7 +753,7 @@ namespace Group1Project.TestCases
             //18 Step	Click None radio button for Legend
             //19 VP	Observe the current page
             addpaneldialog.RadLegendsNone.Click();
-            VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText(panelname, addpaneldialog.TxtDisplayName.GetAttribute("value"));
             VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
             VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
@@ -768,7 +769,7 @@ namespace Group1Project.TestCases
             //20 Step	Click Top radio button for Legend
             //21 VP	Observe the current page
             addpaneldialog.RadLegendsTop.Click();
-            VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText(panelname, addpaneldialog.TxtDisplayName.GetAttribute("value"));
             VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
             VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
@@ -783,7 +784,7 @@ namespace Group1Project.TestCases
             //22 Step	Click Right radio button for Legend
             //23 VP	Observe the current page
             addpaneldialog.RadLegendsRight.Click();
-            VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText(panelname, addpaneldialog.TxtDisplayName.GetAttribute("value"));
             VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
             VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
@@ -798,7 +799,7 @@ namespace Group1Project.TestCases
             //24 Step	Click Bottom radio button for Legend
             //25 VP	Observe the current page
             addpaneldialog.RadLegendsBottom.Click();
-            VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText(panelname, addpaneldialog.TxtDisplayName.GetAttribute("value"));
             VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
             VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
@@ -813,7 +814,7 @@ namespace Group1Project.TestCases
             //26 Step	Click Left radio button for Legend
             //27 VP	Observe the current page
             addpaneldialog.RadLegendsLeft.Click();
-            VP.CheckText(Constant.DefaultDisplayName, addpaneldialog.TxtDisplayName.GetAttribute("value"));
+            VP.CheckText(panelname, addpaneldialog.TxtDisplayName.GetAttribute("value"));
             VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
             VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
