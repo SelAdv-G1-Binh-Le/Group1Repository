@@ -17,41 +17,37 @@ namespace Group1Project.PageObjects
         static readonly By _btnOK = By.XPath("//input[@id='OK']");
         static readonly By _btnCancel = By.XPath("//input[@id='Cancel']");
 
-
-
         #endregion
 
         #region Elements
 
-
-
         public IWebElement CmbParentPage
         {
-            get { return webDriver.FindElement(_cmbParentPage); }
+            get { return FindElement(_cmbParentPage); }
         }
         public IWebElement CmbNumberColumn
         {
-            get { return webDriver.FindElement(_cmbNumberColumn); }
+            get { return FindElement(_cmbNumberColumn); }
         }
         public IWebElement CmbDisplayAfter
         {
-            get { return webDriver.FindElement(_cmbDisplayAfter); }
+            get { return FindElement(_cmbDisplayAfter); }
         }
         public IWebElement ChbPublic
         {
-            get { return webDriver.FindElement(_chbPublic); }
+            get { return FindElement(_chbPublic); }
         }
         public IWebElement BtnCancel
         {
-            get { return webDriver.FindElement(_btnCancel); }
+            get { return FindElement(_btnCancel); }
         }
         public IWebElement TxtPageName
         {
-            get { return webDriver.FindElement(_txtPageName); }
+            get { return FindElement(_txtPageName); }
         }
         public IWebElement BtnOK
         {
-            get { return webDriver.FindElement(_btnOK); }
+            get { return FindElement(_btnOK); }
         }
 
         #endregion

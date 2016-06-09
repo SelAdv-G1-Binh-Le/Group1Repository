@@ -261,7 +261,7 @@ namespace Group1Project.TestCases
         {
             Console.WriteLine("sSandbox test case");
             LoginPage loginpage = new LoginPage(webDriver).Open();
-            loginpage.FindElement(By.XPath("//diep"));
+            loginpage.CboRepository.SelectByText(Constant.DefaultRepository);            
 
         }
     }

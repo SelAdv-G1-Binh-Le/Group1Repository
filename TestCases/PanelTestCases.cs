@@ -327,7 +327,7 @@ namespace Group1Project.TestCases
             addPanelDialog.Close();
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.DeleteAllPanels();
-            
+          
         }
 
         /// <summary>
@@ -1312,6 +1312,11 @@ namespace Group1Project.TestCases
             mainpage.SelectPage(pagename).ChoosePanel(panelname);
             panelConfigurationDialog.EditPanelSuccess(pagename, "789", "/Car Rental - Mobile/Actions/Car");
             Assert.IsNotNull(mainpage.FindElement(By.XPath("//div[@class='al_lft'][@title='" + panelname + "']")), panelname + " is not existed!!!");
+            
+            //- Clean up TC 46
+            Console.WriteLine("- Clean up TC 46");
+            mainpage.DeletePage("Page TC46").GotoPanelsPage().DeleteAllPanels();
+            
 
         }
     }
