@@ -681,6 +681,7 @@ namespace Group1Project.PageObjects
             this.LnkAdminister.MoveMouse(webDriver);
             CommonMethods.WaitForControl(webDriver, _lnkPanels, Constant.DefaultTimeout);
             this.LnkPanels.Click();
+            CommonMethods.WaitForControl(webDriver, By.XPath("//a[(text()='Add New')]"), Constant.DefaultTimeout);
             return new PanelsPage(webDriver);
         }
 

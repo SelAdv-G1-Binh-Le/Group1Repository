@@ -260,8 +260,8 @@ namespace Group1Project.TestCases
         public void zSandbox()
         {
             Console.WriteLine("sSandbox test case");
-
-
+            LoginPage loginpage = new LoginPage(webDriver).Open();
+            loginpage.FindElement(By.XPath("//diep"));
 
         }
     }

@@ -52,7 +52,7 @@ namespace Group1Project.TestCases
             //Start Firefox browser and maximize window            
                 webDriver = new FirefoxDriver(new FirefoxBinary(), new FirefoxProfile(), TimeSpan.FromSeconds(180)); 
                 webDriver.Manage().Window.Maximize();
-                webDriver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));           
+                //webDriver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(1));           
         }
 
         /// <summary>

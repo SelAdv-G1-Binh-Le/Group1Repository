@@ -49,7 +49,7 @@ namespace Group1Project.PageObjects
         /// <datetime>6/2/2016 - 05:13</datetime>
         public PanelsPage DeletePanel(string panelname)
         {
-            By dynamicXpath = By.XPath("//td[contains(.,'" + panelname + "')]//following::a[contains(.,'Delete')]");
+            By dynamicXpath = By.XPath("//td[contains(.,'" + panelname + "')]//following::a[contains(.,'Delete')][1]");
             MainPage mainpage = new MainPage(webDriver);
             mainpage.GotoPanelsPage().FindElement(dynamicXpath, Constant.DefaultTimeout).Click();
             webDriver.SwitchTo().Alert().Accept();

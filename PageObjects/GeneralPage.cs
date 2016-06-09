@@ -48,24 +48,30 @@ namespace Group1Project.PageObjects
             IWebElement webElement = null;
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
-            try
+            while (timeout > 0)
             {
-                webElement = webDriver.FindElement(by);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception: {0} in {1} milliseconds", ex.Message, stopWatch.ElapsedMilliseconds);
-                if (ex is StaleElementReferenceException || ex is NullReferenceException)
+                try
                 {
-                    webElement = FindElement(by, ((timeout * 1000 - stopWatch.ElapsedMilliseconds) / 1000));
+                    WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+                    wait.Until(ExpectedConditions.ElementExists(by));
+                    webElement = webDriver.FindElement(by);
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception: {0}", ex.Message);
+                    if (ex is StaleElementReferenceException || ex is NullReferenceException || ex is WebDriverTimeoutException || ex is ArgumentNullException || ex is WebDriverException)
+                    {
+                        timeout = timeout - stopWatch.ElapsedMilliseconds / 1000;
+                        webElement = FindElement(by, timeout);
+                    }
                 }
             }
-            if (webElement == null)
-                Console.WriteLine("Element <{0}> is NOT found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
-            else
-            {
-                Console.WriteLine("Element <{0}> is found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
-            }
+
+            if (webElement != null) Console.WriteLine("Element <{0}> is found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds);
+            else if (stopWatch.ElapsedMilliseconds > 0)
+            { Console.WriteLine("Element <{0}> is NOT found in {1} milliseconds!", by.ToString(), stopWatch.ElapsedMilliseconds); }
+
             stopWatch.Stop();
             return webElement;
         }
