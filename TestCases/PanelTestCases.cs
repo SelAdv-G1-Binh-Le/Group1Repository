@@ -289,6 +289,7 @@ namespace Group1Project.TestCases
             Console.WriteLine("- Clean up TC 33");
             addpaneldialog.Close();
             panelspage.DeleteAllPanels();
+           
         }
 
         [TestMethod]
@@ -330,7 +331,8 @@ namespace Group1Project.TestCases
             addPanelDialog.Close();
             PanelsPage panelspage = new PanelsPage(webDriver);
             panelspage.DeleteAllPanels();
-          
+            DataProfilesPage dataProfilesPage = new DataProfilesPage(webDriver);
+            dataProfilesPage.DeleteDataProfile(dataprofilename);
         }
 
         /// <summary>
@@ -657,8 +659,8 @@ namespace Group1Project.TestCases
             //6	Step	Click None radio button for Legend
             //7	VP	Observe the current page
             addpaneldialog.RadLegendsNone.Click();
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -672,8 +674,8 @@ namespace Group1Project.TestCases
             //8	Step	Click Top radio button for Legend
             //9	VP	Observe the current page
             addpaneldialog.RadLegendsTop.Click();
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -687,8 +689,8 @@ namespace Group1Project.TestCases
             //10 Step	Click Right radio button for Legend
             //11 VP	Observe the current page
             addpaneldialog.RadLegendsRight.Click();
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -702,8 +704,8 @@ namespace Group1Project.TestCases
             //12 Step	Click Bottom radio button for Legend
             //13 VP	Observe the current page
             addpaneldialog.RadLegendsBottom.Click();
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -717,8 +719,8 @@ namespace Group1Project.TestCases
             //14 Step	Click Left radio button for Legend
             //15 VP	Observe the current page
             addpaneldialog.RadLegendsLeft.Click();
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -738,8 +740,8 @@ namespace Group1Project.TestCases
             addpaneldialog.AddChartPanelSuccess(panelname).ClickPanel(panelname);
 
             VP.CheckText(panelname, addpaneldialog.TxtDisplayName.GetAttribute("value"));
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -754,8 +756,8 @@ namespace Group1Project.TestCases
             //19 VP	Observe the current page
             addpaneldialog.RadLegendsNone.Click();
             VP.CheckText(panelname, addpaneldialog.TxtDisplayName.GetAttribute("value"));
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -770,8 +772,8 @@ namespace Group1Project.TestCases
             //21 VP	Observe the current page
             addpaneldialog.RadLegendsTop.Click();
             VP.CheckText(panelname, addpaneldialog.TxtDisplayName.GetAttribute("value"));
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -785,8 +787,8 @@ namespace Group1Project.TestCases
             //23 VP	Observe the current page
             addpaneldialog.RadLegendsRight.Click();
             VP.CheckText(panelname, addpaneldialog.TxtDisplayName.GetAttribute("value"));
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -800,8 +802,8 @@ namespace Group1Project.TestCases
             //25 VP	Observe the current page
             addpaneldialog.RadLegendsBottom.Click();
             VP.CheckText(panelname, addpaneldialog.TxtDisplayName.GetAttribute("value"));
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -815,8 +817,8 @@ namespace Group1Project.TestCases
             //27 VP	Observe the current page
             addpaneldialog.RadLegendsLeft.Click();
             VP.CheckText(panelname, addpaneldialog.TxtDisplayName.GetAttribute("value"));
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -952,8 +954,8 @@ namespace Group1Project.TestCases
             //8	Step	Uncheck Series checkbox
 
             addpaneldialog.ChkDataLabelsSeries.Check(true);
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -970,8 +972,8 @@ namespace Group1Project.TestCases
             //10 VP	Observe the current page		All settings are unchange in Add New Panel dialog
             //11 Step	Uncheck Value checkbox		
             addpaneldialog.ChkDataLabelsValue.Check(true);
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -988,8 +990,8 @@ namespace Group1Project.TestCases
             //13 VP	Observe the current page		All settings are unchange in Add New Panel dialog
             //14 Step	Uncheck Percentage checkbox	
             addpaneldialog.ChkDataLabelsPercentage.Check(true);
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -1012,8 +1014,8 @@ namespace Group1Project.TestCases
             //18 VP	Observe the current page		All settings are unchange in Edit New Panel dialog
             //19 Step	Uncheck Series checkbox		
             addpaneldialog.ChkDataLabelsSeries.Check(true);
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -1030,8 +1032,8 @@ namespace Group1Project.TestCases
             //21 VP	Observe the current page		All settings are unchange in Edit New Panel dialog
             //22 Step	Uncheck Value checkbox		
             addpaneldialog.ChkDataLabelsValue.Check(true);
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);
@@ -1047,8 +1049,8 @@ namespace Group1Project.TestCases
             //23 Step	Check Percentage checbox for Data Labels		
             //24 VP	Observe the current page		All settings are unchange in Edit New Panel dialog
             addpaneldialog.ChkDataLabelsPercentage.Check(true);
-            VP.CheckText("Pie", addpaneldialog.CbbChartType.GetSelectedText());
-            VP.CheckText("Action Implementation By Status", addpaneldialog.CbbProfile.GetSelectedText());
+            VP.CheckText(chartype, addpaneldialog.CbbChartType.GetSelectedText());
+            VP.CheckText(dataprofile, addpaneldialog.CbbProfile.GetSelectedText());
             Assert.AreEqual(categoryField, addpaneldialog.CbbCategoryField.Enabled);
             Assert.AreEqual(seriesField, addpaneldialog.CbbSeriesField.Enabled);
             Assert.AreEqual(showtitle, addpaneldialog.ChkShowTitle.Selected);

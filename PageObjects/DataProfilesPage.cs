@@ -26,11 +26,18 @@ namespace Group1Project.PageObjects
         static By _lnkAddNew = By.XPath("//a[(text()='Add New')]");
         static By _txtProfileName = By.XPath("//input[@id='txtProfileName']");
         static By _btnFinish = By.XPath("//input[@value='Finish']");
+        static By _cbbItemType = By.XPath("//select[@id='cbbEntityType']");
+        static By _cbbRelatedData = By.XPath("//select[@id='cbbSubReport']");
 
-
-        //input[@value='Finish']
         #endregion
-
+        public IWebElement CbbRelatedData
+        {
+            get { return FindElement(_cbbRelatedData, Constant.DefaultTimeout); }
+        }
+        public IWebElement CbbItemType
+        {
+            get { return FindElement(_cbbItemType, Constant.DefaultTimeout); }
+        }
         #region Elements
         public IWebElement BtnFinish
         {
@@ -61,11 +68,30 @@ namespace Group1Project.PageObjects
         /// <param name="dataprofilename">The dataprofilename.</param>
         /// <author>Diep Duong</author>
         /// <datetime>6/8/2016 - 20:26</datetime>
-        public DataProfilesPage AddDataProfileSuccess(string dataprofilename)
+        public DataProfilesPage AddDataProfileSuccess(string dataprofilename, string itemtypevalue = "interface entity", string relateddatatext = "Interface elements")
         {
             LnkAddNew.Click();
             TxtProfileName.Set(dataprofilename);
+            CbbItemType.SelectByValue(itemtypevalue);
+            CbbRelatedData.SelectByText(relateddatatext);
             BtnFinish.Click();
+            return this;
+        }
+
+        /// <summary>
+        /// Deletes the data profile.
+        /// </summary>
+        /// <param name="dataprofilename">The dataprofilename.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/9/2016 - 21:07</datetime>
+        public DataProfilesPage DeleteDataProfile(string dataprofilename)
+        {
+            string dynamicXpath = String.Format("//table[@class='GridView']" + CommonMethods.XPathContainGenerate("td", dataprofilename) + "/following-sibling::td[count(//th[text()='Action']/preceding-sibling::th)-1]/a[text()='Delete']", dataprofilename);
+            MainPage mainpage = new MainPage(webDriver);
+            mainpage.GotoDataProfilesPage().FindElement(By.XPath(dynamicXpath), Constant.DefaultTimeout).Click();
+            webDriver.SwitchTo().Alert().Accept();
+            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//table[@class='GridView']"+CommonMethods.XPathContainGenerate("td", dataprofilename)), Constant.DefaultTimeout);
             return this;
         }
 

@@ -49,11 +49,11 @@ namespace Group1Project.PageObjects
         /// <datetime>6/2/2016 - 05:13</datetime>
         public PanelsPage DeletePanel(string panelname)
         {
-            By dynamicXpath = By.XPath("//td[contains(.,'" + panelname + "')]//following::a[contains(.,'Delete')][1]");
+            By dynamicXpath = By.XPath("//table[@class='GridView']//td[contains(.,'" + panelname + "')]/following-sibling::td[count(//th[text()='Action']/preceding-sibling::th)-1]/a[text()='Delete']");
             MainPage mainpage = new MainPage(webDriver);
             mainpage.GotoPanelsPage().FindElement(dynamicXpath, Constant.DefaultTimeout).Click();
             webDriver.SwitchTo().Alert().Accept();
-            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//table[@class='GridView']//a[text()='" + panelname + "']"), Constant.DefaultTimeout);
+            CommonMethods.WaitForControlDisappear(webDriver, By.XPath("//table[@class='GridView']//td[contains(.,'" + panelname + "')]"), Constant.DefaultTimeout);
             return this;
         }
 
