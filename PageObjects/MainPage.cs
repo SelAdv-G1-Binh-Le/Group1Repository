@@ -36,7 +36,7 @@ namespace Group1Project.PageObjects
         static readonly By _cbbPages = By.XPath("//div[@id='div_panelConfigurationDlg']//select[@id='cbbPages']");
         static readonly By _btnCreateNewPanel = By.XPath("//span[text()='Create new panel']");
         static readonly By _divChoosePanelsOpen = By.XPath("//div[@class='ccpanels'][@style='display: block;']");
-        
+
 
         //span[text()='Create new panel']
         #endregion
@@ -294,7 +294,7 @@ namespace Group1Project.PageObjects
                 WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
                 wait.Until(ExpectedConditions.ElementExists(By.XPath("//a[.='" + this.ConvertBlankCharacter(name) + "']")));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -573,10 +573,10 @@ namespace Group1Project.PageObjects
             for (int i = 2; i < totalRow + 1; i++)
             {
                 string xPath1 = string.Format("//table[@class='GridView']//tr[{1}]/td[count(//th[.='{0}']/preceding-sibling::th)+1]", colname, i);
-                string xPath2 = string.Format("//table[@class='GridView']//tr[{1}]/td[count(//th[.='{0}']/preceding-sibling::th)+1]", colname, i+1);
+                string xPath2 = string.Format("//table[@class='GridView']//tr[{1}]/td[count(//th[.='{0}']/preceding-sibling::th)+1]", colname, i + 1);
                 string value1 = webDriver.FindElement(By.XPath(xPath1)).Text;
                 string value2 = webDriver.FindElement(By.XPath(xPath2)).Text;
-                if(value2.CompareTo(value1)>0)
+                if (value2.CompareTo(value1) > 0)
                 {
                     checkSort = true;
                 }
@@ -619,14 +619,14 @@ namespace Group1Project.PageObjects
         /// <returns></returns>
         /// <author>Binh Le</author>
         /// <datetime>6/8/2016 - 2:02 AM</datetime>
-        public MainPage AddDataProfile(string profilename,string clickbutton)
+        public MainPage AddDataProfile(string profilename, string clickbutton)
         {
             this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.CreateProfile);
             this.FindElement(By.XPath("//input[@id='txtProfileName']")).SendKeys(profilename);
-            if(clickbutton!="")
+            if (clickbutton != "")
             {
                 this.FindElement(By.XPath("//input[@class='button' and @value='" + clickbutton + "']")).Click();
-            }  
+            }
             //CommonMethods.WaitForControl(webDriver, By.XPath("//td[.='" + this.ConvertBlankCharacter(profilename) + "']"),Constant.DefaultTimeout);
             return this;
         }
@@ -654,7 +654,7 @@ namespace Group1Project.PageObjects
         public MainPage DeleteDataProfile(string profilename)
         {
             bool isPageExist = CommonMethods.IsElementPresent(webDriver, By.XPath("//table[@class='GridView']"));
-            if(isPageExist!=true)
+            if (isPageExist != true)
             {
                 this.SelectChildMenu(MenuList.MainMenuEnum.Administer, MenuList.ChildMenuEnum.DataProfiles);
             }
@@ -708,7 +708,7 @@ namespace Group1Project.PageObjects
         public MainPage OpenChoosePanels()
         {
             this.BtnChoosepanel.Click();
-            CommonMethods.WaitForControl(webDriver, _divChoosePanelsOpen, Constant.DefaultTimeout);            
+            CommonMethods.WaitForControl(webDriver, _divChoosePanelsOpen, Constant.DefaultTimeout);
             return this;
         }
 
@@ -737,6 +737,22 @@ namespace Group1Project.PageObjects
             this.OpenChoosePanels().FindElement(By.XPath("//a[contains(@onclick,'Dashboard.showPanelConfiguration')][contains(.,'" + panelname.Replace(" ", "\u00A0") + "')]"), Constant.DefaultTimeout).Click();
             return new PanelConfigurationDialog(webDriver); ;
         }
+
+        /// <summary>
+        /// Opens the global setting menu.
+        /// </summary>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/9/2016 - 00:22</datetime>
+        public MainPage OpenGlobalSettingMenu()
+        {
+            MnGlobalSetting.MoveMouse(webDriver);
+            CommonMethods.WaitForControlClickable(webDriver, _lnkAddPanel);
+            return this;
+        }
+
+
+
 
 
         #endregion

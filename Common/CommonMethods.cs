@@ -86,6 +86,27 @@ namespace Group1Project.Common
         }
 
         /// <summary>
+        /// Waits for control clickable.
+        /// </summary>
+        /// <param name="webDriver">The web driver.</param>
+        /// <param name="by">The by.</param>
+        /// <param name="timeout">The timeout.</param>
+        /// <returns></returns>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/9/2016 - 00:25</datetime>
+        public static IWebElement WaitForControlClickable(IWebDriver webDriver, By by, int timeout = Constant.DefaultTimeout)
+        {            
+            Stopwatch sW = new Stopwatch();
+            sW.Start();            
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeout));
+            wait.Until(d => ExpectedConditions.ElementToBeClickable(by));
+            Console.WriteLine("Already waiting for control <{0}> clickable in {1} milliseconds!", by.ToString(), sW.ElapsedMilliseconds);
+            sW.Stop();
+            MainPage mainPage = new MainPage(webDriver);
+            return mainPage.FindElement(by);
+        }
+
+        /// <summary>
         /// Waits for control disappear.
         /// </summary>
         /// <param name="webDriver">The web driver.</param>

@@ -36,8 +36,11 @@ namespace Group1Project.TestCases
             mainpage.ClickAddPage().AddPage(pagename);
 
             //6	Step	Go to Global Setting -> Create Panel
-            mainpage.MnGlobalSetting.Click();
-            mainpage.LnkAddPanel.Click();
+            //mainpage.MnGlobalSetting.Click();
+            //mainpage.LnkAddPanel.Click();
+
+            mainpage.OpenGlobalSettingMenu().LnkAddPanel.Click();
+
 
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
             addpaneldialog.AddChartPanelSuccess(panelname, "name");
@@ -397,8 +400,10 @@ namespace Group1Project.TestCases
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             string pagename = "page_TC36";
             mainpage.ClickAddPage().AddPage(pagename);
-            mainpage.MnGlobalSetting.Click();
-            mainpage.LnkAddPanel.Click();
+            //mainpage.MnGlobalSetting.Click();
+            //mainpage.LnkAddPanel.Click();
+            mainpage.OpenGlobalSettingMenu().LnkAddPanel.Click();
+
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
             addpaneldialog.CbbChartType.Click();
 
@@ -446,8 +451,10 @@ namespace Group1Project.TestCases
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             string pagename = "page_TC37";
             mainpage.ClickAddPage().AddPage(pagename);
-            mainpage.MnGlobalSetting.Click();
-            mainpage.LnkAddPanel.Click();
+            //mainpage.MnGlobalSetting.Click();
+            //mainpage.LnkAddPanel.Click();
+            mainpage.OpenGlobalSettingMenu().LnkAddPanel.Click();
+
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
 
             //11 Step	Select 'Pie' Chart Type
@@ -535,8 +542,10 @@ namespace Group1Project.TestCases
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             string pagename = "page_TC38";
             mainpage.ClickAddPage().AddPage(pagename);
-            mainpage.MnGlobalSetting.Click();
-            mainpage.LnkAddPanel.Click();
+            //mainpage.MnGlobalSetting.Click();
+            //mainpage.LnkAddPanel.Click();
+            mainpage.OpenGlobalSettingMenu().LnkAddPanel.Click();
+
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
 
             addpaneldialog.CbbChartType.SelectByValue("Stacked Bar");
@@ -845,8 +854,10 @@ namespace Group1Project.TestCases
             MainPage mainpage = loginpage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
             string pagename = "page_TC40";
             mainpage.ClickAddPage().AddPage(pagename);
-            mainpage.MnGlobalSetting.Click();
-            mainpage.LnkAddPanel.Click();
+            //mainpage.MnGlobalSetting.Click();
+            //mainpage.LnkAddPanel.Click();
+            mainpage.OpenGlobalSettingMenu().LnkAddPanel.Click();
+
             AddPanelDialog addpaneldialog = new AddPanelDialog(webDriver);
 
             //10 Step	Click 'Chart Type' drop-down menu		
