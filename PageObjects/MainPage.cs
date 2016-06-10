@@ -175,6 +175,7 @@ namespace Group1Project.PageObjects
         public void SelectChildMenu(MenuList.MainMenuEnum main, MenuList.ChildMenuEnum child)
         {
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(20));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main)))));
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main)))));
             IWebElement ParentLink = this.FindElement(By.XPath(String.Format("//{0}", MenuList.returnMainMenu(main))), Constant.DefaultTimeout);
             ParentLink.Click();
