@@ -59,8 +59,6 @@ namespace Group1Project.TestCases
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
 
             //Step3	Go to Global Setting -> Add page
-            mainPage.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.AddPage);
-
             //Step4	Enter Page Name field
             //Step5 Click OK button
             string randomStr = CommonMethods.RandomString();
