@@ -157,10 +157,7 @@ namespace Group1Project.PageObjects
             this.LblRepository.Click();
             IWebElement DynamiclblRepository = webDriver.FindElement(By.XPath("//ul[@id='ulListRepositories']//a[contains(.,'" + repository + "')]"));
             DynamiclblRepository.Click();
-
             CommonMethods.WaitForControl(webDriver, By.XPath("//span[contains(.,'" + repository + "')]"), 5);
-
-
             return this;
         }
 
@@ -620,7 +617,7 @@ namespace Group1Project.PageObjects
         /// <returns></returns>
         /// <author>Binh Le</author>
         /// <datetime>6/8/2016 - 2:02 AM</datetime>
-        public MainPage AddDataProfile(string profilename, string clickbutton)
+        public void AddDataProfile(string profilename, string clickbutton)
         {
             this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.CreateProfile);
             this.FindElement(By.XPath("//input[@id='txtProfileName']")).SendKeys(profilename);
@@ -628,8 +625,49 @@ namespace Group1Project.PageObjects
             {
                 this.FindElement(By.XPath("//input[@class='button' and @value='" + clickbutton + "']")).Click();
             }
-            //CommonMethods.WaitForControl(webDriver, By.XPath("//td[.='" + this.ConvertBlankCharacter(profilename) + "']"),Constant.DefaultTimeout);
-            return this;
+            if (clickbutton == "Finish")
+            {
+                try
+                {
+                    WebDriverWait bwait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(Constant.DefaultTimeout));
+                    bwait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//a[.='" + this.ConvertBlankCharacter(profilename) + "']")));
+                }
+                catch (NoSuchElementException ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+        }
+        public void AddDataProfile(string profilename, string itemtype, string relateddata, string clickbutton)
+        {
+            this.SelectChildMenu(MenuList.MainMenuEnum.GlobalSetting, MenuList.ChildMenuEnum.CreateProfile);
+            DataProfilesPage DataPPage = new DataProfilesPage(webDriver);
+            DataPPage.TxtProfileName.SendKeys(profilename);
+
+            if (itemtype != "")
+            {
+                DataPPage.CbbItemType.SelectByText(itemtype.ToLower());
+            }
+            if (relateddata != "")
+            {
+                DataPPage.CbbRelatedData.SelectByText(relateddata);
+            }
+            if (clickbutton != "")
+            {
+                this.FindElement(By.XPath("//input[@class='button' and @value='" + clickbutton + "']")).Click();
+            }
+            if (clickbutton == "Finish")
+            {
+                try
+                {
+                    WebDriverWait bwait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(Constant.DefaultTimeout));
+                    bwait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//a[.='" + this.ConvertBlankCharacter(profilename) + "']")));
+                }
+                catch (NoSuchElementException ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
         }
 
         /// <summary>
@@ -669,6 +707,30 @@ namespace Group1Project.PageObjects
             webDriver.SwitchTo().DefaultContent();
             CommonMethods.WaitForControlDisappear(webDriver, By.XPath(xPath), 1);
             return this;
+        }
+
+        /// <summary>
+        /// Clicks the text link.
+        /// </summary>
+        /// <param name="linktext">The linktext.</param>
+        /// <author>Binh Le</author>
+        /// <datetime>6/11/2016 - 12:18 PM</datetime>
+        public AddDataProfilePage ClickDataProfileLink(string linktext)
+        {
+            CommonMethods.WaitAndClickControl(webDriver, "a", ".", this.ConvertBlankCharacter(linktext), "");
+            AddDataProfilePage dataPPage = new AddDataProfilePage(webDriver);
+            return dataPPage;
+        }
+
+        /// <summary>
+        /// Clicks the text link.
+        /// </summary>
+        /// <param name="linktext">The linktext.</param>
+        /// <author>Binh Le</author>
+        /// <datetime>6/11/2016 - 2:57 PM</datetime>
+        public void ClickTextLink(string linktext)
+        {
+            this.FindElement(By.XPath("//a[.='" + this.ConvertBlankCharacter(linktext) + "']")).Click();
         }
 
         /// <summary>
@@ -752,10 +814,37 @@ namespace Group1Project.PageObjects
             return this;
         }
 
-
-
-
-
+        /// <summary>
+        /// Deletes all profile page.
+        /// </summary>
+        /// <author>Binh Le</author>
+        /// <datetime>6/11/2016 - 4:41 PM</datetime>
+        public void DeleteAllProfilePage()
+        {
+            bool isPageExist = CommonMethods.IsElementPresent(webDriver, By.XPath("//table[@class='GridView']"));
+            if (isPageExist != true)
+            {
+                this.SelectChildMenu(MenuList.MainMenuEnum.Administer, MenuList.ChildMenuEnum.DataProfiles);
+            }
+            this.FindElement(By.XPath("//a[.='Check All']"), Constant.DefaultTimeout).Click();
+            this.FindElement(By.XPath("//div[@class='panel_tag2']/a[.='Delete']")).Click();
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            IAlert alert = webDriver.SwitchTo().Alert();
+            alert.Accept();
+            webDriver.SwitchTo().DefaultContent();
+            bool isDeleteAllExist = CommonMethods.IsElementPresent(webDriver, By.XPath("//a[.='Check All']"));
+            //if (isDeleteAllExist == true)
+            //{
+            //    this.FindElement(By.XPath("//a[.='Check All']"), Constant.DefaultTimeout).Click();
+            //    this.FindElement(By.XPath("//div[@class='panel_tag2']/a[.='Delete']")).Click();
+            //    WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
+            //    wait.Until(ExpectedConditions.AlertIsPresent());
+            //    IAlert alert = webDriver.SwitchTo().Alert();
+            //    alert.Accept();
+            //    webDriver.SwitchTo().DefaultContent();
+            //}
+        }
         #endregion
 
     }

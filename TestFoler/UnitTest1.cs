@@ -17,17 +17,11 @@ namespace Group1Project.TestFoler
         public void TestMethod1()
         {
             LoginPage loginPage = new LoginPage(webDriver).Open();
-
-            //Step2 Login with valid account
             MainPage mainPage = loginPage.Login(Constant.DefaultUsername, Constant.DefaultPassword, Constant.DefaultRepository);
-
-            //Step3	Go to Global Setting -> Add page
-            mainPage.SelectChildMenu(MenuList.MainMenuEnum.Administer, MenuList.ChildMenuEnum.DataProfiles);
-            //string keke = mainPage.ConvertBlankCharacter("Test Module Execution");
-            string abc = mainPage.GetAllValueOfColumn(1);
-            Console.WriteLine("String get ra duoc la: " + abc);
-
-
+            mainPage.DeleteAllProfilePage();
+            IWebElement ABC = webDriver.FindElement(By.XPath("//a[.='Check All']"));
+            ABC.Click();
+            Console.WriteLine("ABC");
         }
     }
 }

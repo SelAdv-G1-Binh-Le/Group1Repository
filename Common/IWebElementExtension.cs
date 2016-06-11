@@ -43,7 +43,6 @@ namespace Group1Project.Common
             } while (loop < times);
             driver.ExecuteScript(clear, rc);
         }
-
         /// <summary>
         /// Selects the by value.
         /// </summary>
@@ -164,8 +163,6 @@ namespace Group1Project.Common
         {
             return (webElement.FindElements(By.TagName("td")).Count / webElement.FindElements(By.TagName("tr")).Count);
         }
-
-
         /// <summary>
         /// Determines whether [is item exists] [the specified item].
         /// </summary>
