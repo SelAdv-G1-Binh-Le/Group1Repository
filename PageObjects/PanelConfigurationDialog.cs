@@ -121,8 +121,5 @@ namespace Group1Project.PageObjects
 
         #endregion
 
-
-
-
     }
 }

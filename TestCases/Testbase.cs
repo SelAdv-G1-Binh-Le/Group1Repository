@@ -82,9 +82,6 @@ namespace Group1Project.TestCases
             Console.WriteLine("- Run Test Cleanup");
             // CLose browser
             webDriver.Quit();
-
-
-
             //Console.WriteLine("TC finishes in {0} seconds", stopWatch.ElapsedMilliseconds / 1000);
             //stopWatch.Stop();
 

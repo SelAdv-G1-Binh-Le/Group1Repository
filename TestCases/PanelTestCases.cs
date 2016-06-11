@@ -292,6 +292,10 @@ namespace Group1Project.TestCases
            
         }
 
+        /// <summary>
+        /// </summary>
+        /// <author>Diep Duong</author>
+        /// <datetime>6/11/2016 - 21:10</datetime>
         [TestMethod]
         public void TC34()
         {
