@@ -13,7 +13,7 @@ namespace Group1Project.TestFoler
     [TestClass]
     public class UnitTest1:Testbase
     {
-        [TestMethod]
+        //[TestMethod]
         public void TestMethod1()
         {
             LoginPage loginPage = new LoginPage(webDriver).Open();
